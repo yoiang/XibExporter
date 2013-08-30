@@ -1,0 +1,6 @@
+[submodule "Libraries/TouchXML"]
+	path = Libraries/TouchXML
+	url = https://github.com/TouchCode/TouchXML.git
+[submodule "Libraries/SBJson"]
+	path = Libraries/SBJson
+	url = https://github.com/stig/json-framework.git
