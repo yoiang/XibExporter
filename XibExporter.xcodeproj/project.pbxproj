@@ -56,7 +56,7 @@
 		3C96F3D117D0F4D5000FC446 /* CXMLElement+Xib.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F3AF17D0F4D5000FC446 /* CXMLElement+Xib.m */; };
 		3C96F3D317D0F4D5000FC446 /* ViewExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F3B317D0F4D5000FC446 /* ViewExporter.m */; };
 		3C96F3D417D0F4D5000FC446 /* XcodeProjectHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F3B517D0F4D5000FC446 /* XcodeProjectHelper.m */; };
-		3CEA6EFB17D1033500F419A3 /* CodeDefinitions.json in Resources */ = {isa = PBXBuildFile; fileRef = 3CEA6EF917D1033500F419A3 /* CodeDefinitions.json */; };
+		3CEA6EFB17D1033500F419A3 /* ofxGenericDefinition.json in Resources */ = {isa = PBXBuildFile; fileRef = 3CEA6EF917D1033500F419A3 /* ofxGenericDefinition.json */; };
 		3CEA6EFC17D1033500F419A3 /* FontExchange.json in Resources */ = {isa = PBXBuildFile; fileRef = 3CEA6EFA17D1033500F419A3 /* FontExchange.json */; };
 		3CEA6EFF17D1035B00F419A3 /* GeneratedClass.cpp.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3CEA6EFD17D1035B00F419A3 /* GeneratedClass.cpp.txt */; };
 		3CEA6F0017D1035B00F419A3 /* GeneratedClass.h.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3CEA6EFE17D1035B00F419A3 /* GeneratedClass.h.txt */; };
@@ -188,7 +188,7 @@
 		3C96F3B417D0F4D5000FC446 /* XcodeProjectHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XcodeProjectHelper.h; sourceTree = "<group>"; };
 		3C96F3B517D0F4D5000FC446 /* XcodeProjectHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XcodeProjectHelper.m; sourceTree = "<group>"; };
 		3C96F3B617D0F4D5000FC446 /* XibExporter-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XibExporter-Prefix.pch"; sourceTree = "<group>"; };
-		3CEA6EF917D1033500F419A3 /* CodeDefinitions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CodeDefinitions.json; sourceTree = "<group>"; };
+		3CEA6EF917D1033500F419A3 /* ofxGenericDefinition.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ofxGenericDefinition.json; sourceTree = "<group>"; };
 		3CEA6EFA17D1033500F419A3 /* FontExchange.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FontExchange.json; sourceTree = "<group>"; };
 		3CEA6EFD17D1035B00F419A3 /* GeneratedClass.cpp.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GeneratedClass.cpp.txt; sourceTree = "<group>"; };
 		3CEA6EFE17D1035B00F419A3 /* GeneratedClass.h.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GeneratedClass.h.txt; sourceTree = "<group>"; };
@@ -454,7 +454,7 @@
 		3CEA6EF817D1033500F419A3 /* Configs */ = {
 			isa = PBXGroup;
 			children = (
-				3CEA6EF917D1033500F419A3 /* CodeDefinitions.json */,
+				3CEA6EF917D1033500F419A3 /* ofxGenericDefinition.json */,
 				3CEA6EFD17D1035B00F419A3 /* GeneratedClass.cpp.txt */,
 				3CEA6EFE17D1035B00F419A3 /* GeneratedClass.h.txt */,
 				3CEA6EFA17D1033500F419A3 /* FontExchange.json */,
@@ -620,7 +620,7 @@
 				3C7A7F7917D0FC8000C57BE9 /* Icon~iPad@2x.png in Resources */,
 				3C7A7F7517D0FC8000C57BE9 /* Icon-512h.png in Resources */,
 				3C7A7F7817D0FC8000C57BE9 /* Icon~iPad.png in Resources */,
-				3CEA6EFB17D1033500F419A3 /* CodeDefinitions.json in Resources */,
+				3CEA6EFB17D1033500F419A3 /* ofxGenericDefinition.json in Resources */,
 				3C7A7F7217D0FC8000C57BE9 /* Default-568h@2x.png in Resources */,
 				3CEA72E017D112AA00F419A3 /* MainWindow.xib in Resources */,
 				3CEA6EFF17D1035B00F419A3 /* GeneratedClass.cpp.txt in Resources */,

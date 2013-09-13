@@ -566,12 +566,14 @@ static NSMutableDictionary* instanceCounts = nil;
 {
     if (self = [super init])
     {
+        NSString *ofxGenericDefinitionJson = @"ofxGenericDefinition";
+        
         self.exportedData = [NSMutableDictionary dictionary];
         NSError *error = nil;
-        NSString *defFile = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"CodeDefinitions" ofType:@"json"] encoding:NSUTF8StringEncoding error:&error];
+        NSString *defFile = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:ofxGenericDefinitionJson ofType:@"json"] encoding:NSUTF8StringEncoding error:&error];
         if (error)
         {
-            NSLog(@"Couldn't load CodeDefinitions.json file! WTF!");
+            NSLog(@"Couldn't load %@ file!", ofxGenericDefinitionJson);
             self.codeMap = nil;
         }
         else
