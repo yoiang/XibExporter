@@ -36,4 +36,7 @@
 //takes an array of files and removes all ones that have not been modified
 + (NSArray *) trimToOnlyModifiedFiles:(NSArray *)files;
 
+//toggle whether we should add the exported files to the target project
++ (BOOL)addExportsToProject;
+
 @end

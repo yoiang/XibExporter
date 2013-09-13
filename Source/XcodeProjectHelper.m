@@ -106,7 +106,7 @@ const int HEX_LENGTH = 24;
     
     if ( generatedViewsLocation.location == NSNotFound )
     {
-        NSLog( @"Unable to locate GeneratedViews group in the project file." );
+        NSLog( @"Unable to locate GeneratedViews group in the project file, cannot automatically add source file to project." );
         return generatedViewsLocation;
     }
     
@@ -235,6 +235,19 @@ const int HEX_LENGTH = 24;
     }
     
     return files;
+}
+
++ (BOOL)addExportsToProject
+{
+    BOOL result = YES;
+    
+    NSNumber* shouldAdd = [ [ NSBundle mainBundle ] objectForInfoDictionaryKey:@"Add Exports to Project" ];
+    if (shouldAdd)
+    {
+        result = [shouldAdd boolValue];
+    }
+    
+    return result;
 }
 
 @end

@@ -49,8 +49,11 @@
             NSLog(@"Couldn't export json: %@",error);
         }
         
-        //write to the xcodeproj file
-        [XcodeProjectHelper addToXcodeProject:files];
+        if ( [XcodeProjectHelper addExportsToProject] )
+        {
+            //write to the xcodeproj file
+            [XcodeProjectHelper addToXcodeProject:files];
+        }
     }
     
     exit(0);
