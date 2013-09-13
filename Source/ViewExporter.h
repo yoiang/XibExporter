@@ -27,8 +27,6 @@ enum ViewExporterFormat
 @property (strong) NSMutableDictionary *exportedData;
 @property (strong) NSDictionary *codeMap;
 
-+ (ViewExporter *) sharedInstance;
-
 - (void) processAllXibs;
 - (void) processXib:(NSString *)xibName;
 - (NSArray *) exportDataTo:(NSString *)location atomically:(BOOL)flag format:(ViewExporterFormat)format error:(NSError**)error saveMultipleFiles:(BOOL)mult useOnlyModifiedFiles:(BOOL)onlyModified;

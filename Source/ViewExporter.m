@@ -22,7 +22,6 @@
 
 #import "CXMLElement+UIView.h"
 
-static ViewExporter *instance;
 static NSMutableDictionary* instanceCounts = nil;
 
 @implementation ViewExporter
@@ -556,15 +555,6 @@ static NSMutableDictionary* instanceCounts = nil;
 }
 
 #pragma mark Public Methods
-
-+ (ViewExporter *) sharedInstance
-{
-    if (!instance)
-    {
-        instance = [[ViewExporter alloc] init];
-    }
-    return instance;
-}
 
 - (id) init
 {

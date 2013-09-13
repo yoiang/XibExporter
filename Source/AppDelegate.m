@@ -14,12 +14,16 @@
 #import "AccessibilityStarter.h"
 #import "XcodeProjectHelper.h"
 
+#import "ViewExporter.h"
+
 #import "XibResources.h"
 
 @interface AppDelegate()
 {
     XibResources *_xibResources;
 }
+
+@property (nonatomic, strong) ViewExporter *currentExporter;
 
 @end
 
@@ -59,8 +63,10 @@
     _xibResources = [ [XibResources alloc] init];
     
     NSError *error = nil;
-    [[ViewExporter sharedInstance] processAllXibs];
-    NSArray *files = [[ViewExporter sharedInstance] exportDataToProject:YES atomically:NO format:ViewExporterFormatOpenFramework error:&error saveMultipleFiles:YES useOnlyModifiedFiles:YES];
+    self.currentExporter = [ [ViewExporter alloc] init];
+    
+    [self.currentExporter processAllXibs];
+    NSArray *files = [self.currentExporter exportDataToProject:YES atomically:NO format:ViewExporterFormatOpenFramework error:&error saveMultipleFiles:YES useOnlyModifiedFiles:YES];
      
     if (error)
     {
@@ -68,7 +74,7 @@
     }
     else
     {
-        [[ViewExporter sharedInstance] exportDataToProject:NO atomically:NO format:ViewExporterFormatJSON error:&error saveMultipleFiles:NO useOnlyModifiedFiles:NO];
+        [self.currentExporter exportDataToProject:NO atomically:NO format:ViewExporterFormatJSON error:&error saveMultipleFiles:NO useOnlyModifiedFiles:NO];
         
         if (error)
         {
