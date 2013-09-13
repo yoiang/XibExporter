@@ -21,7 +21,6 @@ enum ViewExporterFormat
 
 @interface ViewExporter : NSObject
 {
-    NSMutableDictionary *exportedData;
     NSDictionary *codeMap;
 }
 @property (strong) NSMutableDictionary *exportedData;
