@@ -9,7 +9,8 @@
 #import "UIView+Exports.h"
 #import "UIColor+Exports.h"
 #import "ExportUtility.h"
-#import "ViewExporter.h"
+
+#import "FontExchange.h"
 
 @implementation UILabel (Exports)
 
@@ -48,7 +49,7 @@
     
     if (self.font.fontName)
     {
-        NSString* exchangedFontName = [ [ ViewExporter sharedInstance ] exchangeFont:self.font.fontName ];
+        NSString* exchangedFontName = [ [ FontExchange sharedInstance ] exchangeFont:self.font.fontName ];
         [dict setObject:exchangedFontName forKey:@"fontName"];
     }
     [dict setObject:[NSNumber numberWithFloat:self.font.pointSize] forKey:@"fontSize"];

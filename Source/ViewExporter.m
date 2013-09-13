@@ -23,7 +23,7 @@ static NSMutableDictionary* instanceCounts = nil;
 
 @implementation ViewExporter
 
-@synthesize exportedData, codeMap, fontExchange;
+@synthesize exportedData, codeMap;
 
 #pragma mark Private Methods
 
@@ -609,16 +609,6 @@ static NSMutableDictionary* instanceCounts = nil;
             }
             
         }
-        NSString *fontExchangeSettingsContent = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"FontExchange" ofType:@"json"] encoding:NSUTF8StringEncoding error:&error];
-        if (error)
-        {
-            NSLog(@"Couldn't load FontExchange.json file! WTF!");
-            self.fontExchange = nil;
-        }
-        else
-        {
-            self.fontExchange = [ fontExchangeSettingsContent JSONValue ];
-        }
         return self;
     }
     return nil;
@@ -851,16 +841,6 @@ static NSMutableDictionary* instanceCounts = nil;
     }
     
     return [self exportDataTo:targetFile atomically:flag format:format error:error saveMultipleFiles:mult useOnlyModifiedFiles:onlyModified];
-}
-
--( NSString* )exchangeFont:( NSString* )fontName
-{
-    NSString* exchanged = [ self.fontExchange objectForKey:fontName ];
-    if ( exchanged )
-    {
-        return exchanged;
-    }
-    return fontName;
 }
 
 @end

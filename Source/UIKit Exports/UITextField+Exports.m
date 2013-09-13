@@ -10,7 +10,7 @@
 #import "UIColor+Exports.h"
 #import "ExportUtility.h"
 
-#include "ViewExporter.h"
+#include "FontExchange.h"
 
 @implementation UITextField (Exported)
 
@@ -38,7 +38,7 @@
     }
     if (self.font.fontName)
     {
-        NSString* exchangedFontName = [ [ ViewExporter sharedInstance ] exchangeFont:self.font.fontName ];
+        NSString* exchangedFontName = [ [ FontExchange sharedInstance ] exchangeFont:self.font.fontName ];
         [dict setObject:exchangedFontName forKey:@"fontName"];
     }
     [dict setObject:[NSNumber numberWithFloat:self.font.pointSize] forKey:@"fontSize"];
