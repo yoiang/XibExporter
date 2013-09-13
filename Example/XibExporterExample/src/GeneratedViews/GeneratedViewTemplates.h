@@ -15,7 +15,7 @@ inline ofRectangle getGeneratedViewTemplatesFrame()
 	return ofRectangle(0.0f, 0.0f, 320.0f, 568.0f);
 }
 
-inline void populateGeneratedViewTemplates( ofPtr< ofxGenericView > rootView, ofPtr< ofxGenericTextView > &variableNameLabel, ofPtr< ofxGenericButtonView > &variableNameButton1, ofPtr< ofxGenericButtonView > &variableNameButton2, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericImageView > &variableNameImage )
+inline void populateGeneratedViewTemplates( ofPtr< ofxGenericView > rootView, ofPtr< ofxGenericTextView > &variableNameLabel, ofPtr< ofxGenericButtonView > &variableNameButton1, ofPtr< ofxGenericButtonView > &variableNameButton2, ofPtr< ofxGenericImageView > &variableNameImage, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericTextView > &variableNameLabel2 )
 {
 	rootView->setContentMode( ofxGenericContentModeScaleToFill );
 	rootView->setVisible( true );
@@ -89,6 +89,17 @@ inline void populateGeneratedViewTemplates( ofPtr< ofxGenericView > rootView, of
 	variableNameButton2->setAutoresizingMask( ofxGenericViewAutoresizingRightMargin | ofxGenericViewAutoresizingBottomMargin );
 	rootView->addChildView( variableNameButton2 );
 
+	// Note: no image set for view
+	variableNameImage = ofxGenericImageView::create(  );
+	variableNameImage->setClipSubviews( false );
+	variableNameImage->setVisible( true );
+	variableNameImage->setFrame( ofRectangle( 96.0f, 155.0f, 128.0f, 128.0f ) );
+	variableNameImage->setBackgroundColor( ofColor( 0, 0, 0, 0 ) );
+	variableNameImage->setContentMode( ofxGenericContentModeScaleToFill );
+	variableNameImage->setAutoresizingMask( ofxGenericViewAutoresizingRightMargin | ofxGenericViewAutoresizingBottomMargin );
+	variableNameImage->setAlpha( 1.0f );
+	rootView->addChildView( variableNameImage );
+
 	variableNameView = ofxGenericView::create( );
 	variableNameView->setContentMode( ofxGenericContentModeScaleToFill );
 	variableNameView->setVisible( true );
@@ -97,25 +108,33 @@ inline void populateGeneratedViewTemplates( ofPtr< ofxGenericView > rootView, of
 	variableNameView->setAutoresizingMask( ofxGenericViewAutoresizingRightMargin | ofxGenericViewAutoresizingBottomMargin );
 	variableNameView->setAlpha( 1.0f );
 	variableNameView->setClipSubviews( false );
-	rootView->addChildView( variableNameView );
 
-	variableNameImage = ofxGenericImageView::create(  );
-	variableNameImage->setClipSubviews( false );
-	variableNameImage->setVisible( true );
-	variableNameImage->setFrame( ofRectangle( 96.0f, 155.0f, 128.0f, 128.0f ) );
-	variableNameImage->setBackgroundColor( ofColor( 0, 0, 0, 0 ) );
-	variableNameImage->setImage( "Icon.png" );
-	variableNameImage->setContentMode( ofxGenericContentModeScaleToFill );
-	variableNameImage->setAutoresizingMask( ofxGenericViewAutoresizingRightMargin | ofxGenericViewAutoresizingBottomMargin );
-	variableNameImage->setAlpha( 1.0f );
-	rootView->addChildView( variableNameImage );
+	variableNameLabel2 = ofxGenericTextView::create( );
+	variableNameLabel2->setClipSubviews( true );
+	variableNameLabel2->setVisible( true );
+	variableNameLabel2->setFrame( ofRectangle( 0.0f, 26.0f, 280.0f, 21.0f ) );
+	variableNameLabel2->setAlpha( 1.0f );
+	variableNameLabel2->setTextColor( ofColor( 0, 0, 0, 255 ) );
+	variableNameLabel2->setText( ofxGLocalized( "LabelTextLocalizationKey", "Label within View" ) );
+	variableNameLabel2->setFont( ".HelveticaNeueInterface-M3", variableNameLabel2->getFontSize() );
+	variableNameLabel2->setBackgroundColor( ofColor( 209, 255, 201, 255 ) );
+	variableNameLabel2->setLineBreakMode( ofxGenericTextLinebreakModeTailTruncation );
+	variableNameLabel2->setTextAlignment( ofxGenericTextHorizontalAlignmentCenter );
+	variableNameLabel2->setFont( variableNameLabel2->getFontName(), 17.0f );
+	variableNameLabel2->setContentMode( ofxGenericContentModeLeft );
+	variableNameLabel2->setNumberOfLines( 1 );
+	variableNameLabel2->setAutosizeFontToFitText( false );
+	variableNameLabel2->setMinimumFontSize( 0.0f );
+	variableNameLabel2->setAutoresizingMask( ofxGenericViewAutoresizingRightMargin | ofxGenericViewAutoresizingBottomMargin );
+	variableNameView->addChildView( variableNameLabel2 );
+	rootView->addChildView( variableNameView );
 }
 
-inline void populatePreserveGeneratedViewTemplates( ofPtr< ofxGenericView > rootView, bool preserveTopLeft, bool preserveSize, ofPtr< ofxGenericTextView > &variableNameLabel, ofPtr< ofxGenericButtonView > &variableNameButton1, ofPtr< ofxGenericButtonView > &variableNameButton2, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericImageView > &variableNameImage )
+inline void populatePreserveGeneratedViewTemplates( ofPtr< ofxGenericView > rootView, bool preserveTopLeft, bool preserveSize, ofPtr< ofxGenericTextView > &variableNameLabel, ofPtr< ofxGenericButtonView > &variableNameButton1, ofPtr< ofxGenericButtonView > &variableNameButton2, ofPtr< ofxGenericImageView > &variableNameImage, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericTextView > &variableNameLabel2 )
  { 
 	 ofRectangle preservedFrame = rootView->getFrame(); 
  
- 	 populateGeneratedViewTemplates( rootView, variableNameLabel, variableNameButton1, variableNameButton2, variableNameView, variableNameImage ); 
+ 	 populateGeneratedViewTemplates( rootView, variableNameLabel, variableNameButton1, variableNameButton2, variableNameImage, variableNameView, variableNameLabel2 ); 
  	 ofRectangle generatedFrame = getGeneratedViewTemplatesFrame(); 
  	 if ( !preserveTopLeft ) 
  	 { 
@@ -133,9 +152,9 @@ inline void populatePreserveGeneratedViewTemplates( ofPtr< ofxGenericView > root
  	 } 
  }
 
-inline ofPtr< ofxGenericView > constructGeneratedViewTemplates( ofPtr< ofxGenericTextView > &variableNameLabel, ofPtr< ofxGenericButtonView > &variableNameButton1, ofPtr< ofxGenericButtonView > &variableNameButton2, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericImageView > &variableNameImage )
+inline ofPtr< ofxGenericView > constructGeneratedViewTemplates( ofPtr< ofxGenericTextView > &variableNameLabel, ofPtr< ofxGenericButtonView > &variableNameButton1, ofPtr< ofxGenericButtonView > &variableNameButton2, ofPtr< ofxGenericImageView > &variableNameImage, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericTextView > &variableNameLabel2 )
 {
 	ofPtr< ofxGenericView > rootView = ofxGenericView::create();
-	populateGeneratedViewTemplates( rootView, variableNameLabel, variableNameButton1, variableNameButton2, variableNameView, variableNameImage );
+	populateGeneratedViewTemplates( rootView, variableNameLabel, variableNameButton1, variableNameButton2, variableNameImage, variableNameView, variableNameLabel2 );
 	return rootView;
 }
