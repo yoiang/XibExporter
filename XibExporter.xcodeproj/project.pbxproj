@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3C10DC8C17E2C56600162DBC /* FontExchange.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC8B17E2C56600162DBC /* FontExchange.m */; };
+		3C10DC8F17E2CE4300162DBC /* XibResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC8E17E2CE4300162DBC /* XibResources.m */; };
 		3C65718717D0FF560074B101 /* CXMLDocument_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C656EBF17D0FF550074B101 /* CXMLDocument_CreationExtensions.m */; };
 		3C65718817D0FF560074B101 /* CXMLNode_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C656EC117D0FF550074B101 /* CXMLNode_CreationExtensions.m */; };
 		3C65718917D0FF560074B101 /* CXHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C656EC317D0FF550074B101 /* CXHTMLDocument.m */; };
@@ -86,6 +87,8 @@
 /* Begin PBXFileReference section */
 		3C10DC8A17E2C56600162DBC /* FontExchange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontExchange.h; sourceTree = "<group>"; };
 		3C10DC8B17E2C56600162DBC /* FontExchange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontExchange.m; sourceTree = "<group>"; };
+		3C10DC8D17E2CE4300162DBC /* XibResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XibResources.h; sourceTree = "<group>"; };
+		3C10DC8E17E2CE4300162DBC /* XibResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XibResources.m; sourceTree = "<group>"; };
 		3C656E9217D0FE8D0074B101 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		3C656E9317D0FE8D0074B101 /* MainWindow_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow_iPad.xib; sourceTree = "<group>"; };
 		3C656E9417D0FE8D0074B101 /* ViewTemplates.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewTemplates.xib; sourceTree = "<group>"; };
@@ -401,6 +404,8 @@
 				3C96F3B617D0F4D5000FC446 /* XibExporter-Prefix.pch */,
 				3C10DC8A17E2C56600162DBC /* FontExchange.h */,
 				3C10DC8B17E2C56600162DBC /* FontExchange.m */,
+				3C10DC8D17E2CE4300162DBC /* XibResources.h */,
+				3C10DC8E17E2CE4300162DBC /* XibResources.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -663,6 +668,7 @@
 				3C96F3BC17D0F4D5000FC446 /* main.m in Sources */,
 				3C96F3CB17D0F4D5000FC446 /* UITextField+Exports.m in Sources */,
 				3CEA729617D1093E00F419A3 /* SBJsonStreamParserAccumulator.m in Sources */,
+				3C10DC8F17E2CE4300162DBC /* XibResources.m in Sources */,
 				3C96F3BD17D0F4D5000FC446 /* MainWindowViewController.m in Sources */,
 				3C65719117D0FF560074B101 /* CXMLNode_PrivateExtensions.m in Sources */,
 				3C96F3C217D0F4D5000FC446 /* UIActivityIndicatorView+Exports.m in Sources */,

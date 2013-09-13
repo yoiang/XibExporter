@@ -8,7 +8,9 @@
 
 #import "CXMLElement+UIImage.h"
 #import "CXMLElement+Xib.h"
-#import "ViewExporter.h"
+
+#import "AppDelegate.h"
+#import "XibResources.h"
 
 @implementation CXMLElement (UIImage)
 
@@ -20,11 +22,11 @@
     if ( [ [ self name ] isEqualToString:@"object" ] )
     {
         root = self;
-        [ [ ViewExporter sharedInstance ] addXibResource:self ];
+        [ [ [AppDelegate sharedInstance] xibResources] addXibResource:self];
     } else if ( [ [ self name ] isEqualToString:@"reference" ] )
     {
         NSString* referenceId = [ self attributeRefStringValue ];
-        root = [ [ ViewExporter sharedInstance ] getXibResource:referenceId ];
+        root = [ [ [AppDelegate sharedInstance] xibResources] getXibResource:referenceId ];
     }
     
     CXMLElement* nsResourceName = [ root childWithAttributeValue:@"key" attributeValue:@"NSResourceName" ];

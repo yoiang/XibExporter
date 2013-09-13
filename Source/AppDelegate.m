@@ -14,7 +14,31 @@
 #import "AccessibilityStarter.h"
 #import "XcodeProjectHelper.h"
 
+#import "XibResources.h"
+
+@interface AppDelegate()
+{
+    XibResources *_xibResources;
+}
+
+@end
+
 @implementation AppDelegate
+
+@synthesize xibResources = _xibResources;
+
++(AppDelegate*)sharedInstance
+{
+    AppDelegate* result = nil;
+    
+    id<UIApplicationDelegate> delegate = [ [UIApplication sharedApplication] delegate ];
+    if ( [delegate isKindOfClass:[AppDelegate class] ] )
+    {
+        result = (AppDelegate*)delegate;
+    }
+    
+    return result;
+}
 
 @synthesize window = _window;
 @synthesize mainViewController;
@@ -31,6 +55,8 @@
     [self.window makeKeyAndVisible];
     self.mainViewController = [[MainWindowViewController alloc] initWithNibName:@"MainWindow" bundle:[NSBundle mainBundle]];
     self.window.rootViewController = self.mainViewController;
+
+    _xibResources = [ [XibResources alloc] init];
     
     NSError *error = nil;
     [[ViewExporter sharedInstance] processAllXibs];

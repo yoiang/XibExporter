@@ -23,8 +23,6 @@ enum ViewExporterFormat
 {
     NSMutableDictionary *exportedData;
     NSDictionary *codeMap;
-    
-    NSMutableDictionary* xibResources;
 }
 @property (strong) NSMutableDictionary *exportedData;
 @property (strong) NSDictionary *codeMap;
@@ -43,9 +41,6 @@ enum ViewExporterFormat
 - (void) exportXMLTo:(NSString *)location atomically:(BOOL)flag error:(NSError**)error;
 - (NSArray *) exportCodeTo:(NSString *)location atomically:(BOOL)flag error:(NSError**)error saveMultipleFiles:(BOOL)mult useOnlyModifiedFiles:(BOOL)onlyModified;
 - (void) doCodeExport:(NSString *)location data:(NSDictionary *)data keys:(NSArray *)keys atomically:(BOOL)flag error:(NSError**)error;
-
--( void )addXibResource:( CXMLElement* )element;
--( CXMLElement* )getXibResource:( NSString* )referenceId;
 
 - ( NSArray * ) exportCodeForDict:(NSDictionary *)dict def:(NSDictionary *)def properties:(NSDictionary *)properties;
 

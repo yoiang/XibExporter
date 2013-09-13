@@ -14,9 +14,13 @@
 #import "UIView+Exports.h"
 #import "XcodeProjectHelper.h"
 
-#import "CXMLElement+Xib.h"
 #import "NSArray+NSString.h"
 #import "NSString+Parsing.h"
+
+#import "AppDelegate.h"
+#import "XibResources.h"
+
+#import "CXMLElement+UIView.h"
 
 static ViewExporter *instance;
 static NSMutableDictionary* instanceCounts = nil;
@@ -616,8 +620,6 @@ static NSMutableDictionary* instanceCounts = nil;
 
 - (void) processAllXibs
 {
-    xibResources = [ [ NSMutableDictionary alloc ] init ];
-    
     NSArray* onlyProcessXibs = [ XcodeProjectHelper getProcessOnlyXibs ];
     NSArray* skipXibs = [ XcodeProjectHelper getSkipXibs ];
     
@@ -769,23 +771,10 @@ static NSMutableDictionary* instanceCounts = nil;
     return result;
 }
 
--( void )addXibResource:( CXMLElement* )element
-{
-    if ( [ element attributeIdStringValue ] )
-    {
-        [ xibResources setObject:element forKey:[ element attributeIdStringValue ] ];
-    }
-}
-
--( CXMLElement* )getXibResource:( NSString* )referenceId
-{
-    return [ xibResources objectForKey:referenceId ];
-}
-
 - (void) processXib:(NSString *)xibName
 {
     _uiViewCustomMemberDictionary = [ [ NSMutableDictionary alloc ] init ];
-    [ xibResources removeAllObjects ];
+    [ [ [AppDelegate sharedInstance] xibResources] clearXibResources];
 
     //NSLog( @"Processing xib %@", xibName );
     UIViewController *vc = [[UIViewController alloc] initWithNibName:xibName bundle:[NSBundle mainBundle]];
