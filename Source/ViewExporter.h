@@ -47,4 +47,9 @@ enum ViewExporterFormat
 -( void )addXibResource:( CXMLElement* )element;
 -( CXMLElement* )getXibResource:( NSString* )referenceId;
 
+- ( NSArray * ) exportCodeForDict:(NSDictionary *)dict def:(NSDictionary *)def properties:(NSDictionary *)properties;
+
+- ( NSString * ) translateCodeString:(NSString *)classFile dict:(NSDictionary *)dict withDef:(NSDictionary *)def properties:(NSDictionary *)properties;
+- ( NSString * ) translateSingleObjectCodeString:(NSString *)codeString dict:(NSDictionary *)dict withDef:(NSDictionary *)def properties:(NSDictionary *)properties;
+
 @end

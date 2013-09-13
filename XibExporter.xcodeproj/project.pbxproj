@@ -31,7 +31,6 @@
 		3C7A7F7917D0FC8000C57BE9 /* Icon~iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7A7F7117D0FC8000C57BE9 /* Icon~iPad@2x.png */; };
 		3C96F3B717D0F4D5000FC446 /* AccessibilityStarter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F37917D0F4D5000FC446 /* AccessibilityStarter.m */; };
 		3C96F3B817D0F4D5000FC446 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F37B17D0F4D5000FC446 /* AppDelegate.m */; };
-		3C96F3B917D0F4D5000FC446 /* CodeExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F37E17D0F4D5000FC446 /* CodeExporter.m */; };
 		3C96F3BA17D0F4D5000FC446 /* ExportedViewMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F38017D0F4D5000FC446 /* ExportedViewMap.m */; };
 		3C96F3BB17D0F4D5000FC446 /* ExportUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F38217D0F4D5000FC446 /* ExportUtility.m */; };
 		3C96F3BC17D0F4D5000FC446 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F38317D0F4D5000FC446 /* main.m */; };
@@ -139,8 +138,6 @@
 		3C96F37A17D0F4D5000FC446 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3C96F37B17D0F4D5000FC446 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3C96F37C17D0F4D5000FC446 /* Availability2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Availability2.h; sourceTree = "<group>"; };
-		3C96F37D17D0F4D5000FC446 /* CodeExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeExporter.h; sourceTree = "<group>"; };
-		3C96F37E17D0F4D5000FC446 /* CodeExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeExporter.m; sourceTree = "<group>"; };
 		3C96F37F17D0F4D5000FC446 /* ExportedViewMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportedViewMap.h; sourceTree = "<group>"; };
 		3C96F38017D0F4D5000FC446 /* ExportedViewMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportedViewMap.m; sourceTree = "<group>"; };
 		3C96F38117D0F4D5000FC446 /* ExportUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportUtility.h; sourceTree = "<group>"; };
@@ -382,8 +379,6 @@
 				3C96F37A17D0F4D5000FC446 /* AppDelegate.h */,
 				3C96F37B17D0F4D5000FC446 /* AppDelegate.m */,
 				3C96F37C17D0F4D5000FC446 /* Availability2.h */,
-				3C96F37D17D0F4D5000FC446 /* CodeExporter.h */,
-				3C96F37E17D0F4D5000FC446 /* CodeExporter.m */,
 				3C96F37F17D0F4D5000FC446 /* ExportedViewMap.h */,
 				3C96F38017D0F4D5000FC446 /* ExportedViewMap.m */,
 				3C96F38117D0F4D5000FC446 /* ExportUtility.h */,
@@ -686,7 +681,6 @@
 				3C96F3CD17D0F4D5000FC446 /* UIView+Exports.m in Sources */,
 				3C96F3D117D0F4D5000FC446 /* CXMLElement+Xib.m in Sources */,
 				3CEA729B17D1093E00F419A3 /* SBJsonStreamWriterState.m in Sources */,
-				3C96F3B917D0F4D5000FC446 /* CodeExporter.m in Sources */,
 				3CEA729317D1093E00F419A3 /* NSObject+SBJson.m in Sources */,
 				3C96F3C917D0F4D5000FC446 /* UISwitch+Exports.m in Sources */,
 				3C65718B17D0FF560074B101 /* CXMLDocument_PrivateExtensions.m in Sources */,
