@@ -56,11 +56,6 @@ static int viewId = 0;
 
 -( NSMutableDictionary* )exportToDictionaryUIView:( CXMLElement* )xibElement
 {
-    if ( ![ xibElement doesViewClassMatch:self ] )
-    {
-        xibElement = nil;
-    }
-    
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 
     if ( [self isMarkedForExportingCode:self.accessibilityLabel] )
@@ -111,8 +106,17 @@ static int viewId = 0;
     for (int i = 0; i < [self.subviews count]; i++)
     {
         UIView* subview = [ self.subviews objectAtIndex:i ];
-        CXMLElement* xibSubview = [ xibElement subviewAtIndex:i ];
+        CXMLElement* xibSubview = nil;
 
+        CXMLElement* xibSubviewAtIndex = [xibElement subviewAtIndex:i];
+        if ( [ xibSubviewAtIndex doesViewClassMatch:subview ] )
+        {
+            xibSubview = xibSubviewAtIndex;
+        } else
+        {
+            NSLog(@"Unable to match %@ with xml data, found %@ instead", [subview class], [xibSubviewAtIndex attributeClassStringValue] );
+        }
+        
         [ children addObject:[ subview exportToDictionary:xibSubview ] ];
     }
     
