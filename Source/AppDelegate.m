@@ -12,7 +12,7 @@
 
 #import "UIImageView+Exports.h"
 #import "UIViewController+Exports.h"
-#import "MethodSwizzler.h"
+
 #import "ViewExporter.h"
 #import "AccessibilityStarter.h"
 
@@ -62,8 +62,6 @@
     
     [self registerViewExporters];
 
-    [UIViewController initializeStorage];
-    
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];

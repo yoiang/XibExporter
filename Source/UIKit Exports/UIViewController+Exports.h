@@ -14,10 +14,6 @@ NSMutableDictionary* _uiViewCustomMemberDictionary;
 
 @interface UIViewController (Exports)
 
-+ (void) initializeStorage;
-+ (NSString *) dequeueImageLocation;
-
-- (id) initWithNibNameStored:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 - (NSMutableDictionary *)exportToDictionary:( CXMLElement* )xibNode xibName:( NSString* )xibName;
 
 @end

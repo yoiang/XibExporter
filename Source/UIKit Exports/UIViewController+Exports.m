@@ -7,42 +7,12 @@
 //
 
 #import "UIViewController+Exports.h"
-#import "MethodSwizzler.h"
-#import "UIView+Exports.h"
 
-static NSMutableArray* imageLocations;
+#import "UIView+Exports.h"
 
 @implementation UIViewController (Exports)
 
 #pragma mark Public Functions
-
-+ (void) initializeStorage
-{
-    [MethodSwizzler swizzleInstance:[UIViewController class] methodA:@selector(initWithNibName:bundle:) methodB:@selector(initWithNibNameStored:bundle:)];
-}
-
-+ (NSString *) dequeueImageLocation
-{
-    if ([imageLocations count] > 0)
-    {
-        NSString *str = [imageLocations objectAtIndex:0];
-        [imageLocations removeObjectAtIndex:0];
-        return str;
-    }
-    return nil;
-}
-
-- (id) initWithNibNameStored:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    imageLocations = [NSMutableArray array];
-    
-    if (self = [self initWithNibNameStored:nibNameOrNil bundle:nibBundleOrNil])
-    {
-        return self;
-    }
-    
-    return nil;
-}
 
 - (NSMutableDictionary *)exportToDictionary:( CXMLElement* )xibNode xibName:( NSString* )xibName
 {

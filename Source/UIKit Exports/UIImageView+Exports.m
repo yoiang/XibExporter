@@ -8,7 +8,7 @@
 
 #import "UIImageView+Exports.h"
 #import "UIViewController+Exports.h"
-#import "MethodSwizzler.h"
+
 #import "UIView+Exports.h"
 #import "CXMLElement+Xib.h"
 #import "CXMLElement+UIImage.h"
