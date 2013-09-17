@@ -7,11 +7,15 @@
 //
 
 #import "AppDelegate.h"
+
+#import "AppSettings.h"
+
 #import "UIImageView+Exports.h"
 #import "UIViewController+Exports.h"
 #import "MethodSwizzler.h"
 #import "ViewExporter.h"
 #import "AccessibilityStarter.h"
+
 #import "XcodeProjectHelper.h"
 
 #import "NSArray+NSString.h"
@@ -79,7 +83,7 @@
     }
     else
     {
-        if ( [XcodeProjectHelper addExportsToProject] )
+        if ( [AppSettings addExportsToProject] )
         {
             //write to the xcodeproj file
             [XcodeProjectHelper addToXcodeProject:files];
@@ -93,8 +97,8 @@
 
 - (void) processAllXibs
 {
-    NSArray* onlyProcessXibs = [ XcodeProjectHelper getProcessOnlyXibs ];
-    NSArray* skipXibs = [ XcodeProjectHelper getSkipXibs ];
+    NSArray* onlyProcessXibs = [ AppSettings getProcessOnlyXibs ];
+    NSArray* skipXibs = [ AppSettings getSkipXibs ];
     
     NSError *error = nil;
     NSString *rootFolder = [[[NSBundle mainBundle] pathForResource:@"XibFinder" ofType:@"txt"] stringByDeletingLastPathComponent];

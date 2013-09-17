@@ -10,6 +10,7 @@
 
 #import "SBJson.h"
 
+#import "AppSettings.h"
 #import "XcodeProjectHelper.h"
 
 #import "ViewGraphs.h"
@@ -88,7 +89,7 @@ static NSMutableDictionary* instanceCounts = nil;
     
     if (useProjectDir)
     {
-        targetFile = [[XcodeProjectHelper getGeneratedSourceFolder] stringByAppendingString:@"/ExportedViews.h"];
+        targetFile = [[AppSettings getGeneratedSourceFolder] stringByAppendingString:@"/ExportedViews.h"];
     }
     else
     {
@@ -114,7 +115,7 @@ static NSMutableDictionary* instanceCounts = nil;
     //loop through all the VCs, they'll each go in a separate function
     NSArray *keys = viewGraphs.xibNames;
     
-    if ( ![XcodeProjectHelper forceExportAllXibs] )
+    if ( ![AppSettings forceExportAllXibs] )
     {
         keys = [XcodeProjectHelper trimToOnlyModifiedFiles:keys];
     }

@@ -12,6 +12,7 @@
 		3C10DC9217E2DD9F00162DBC /* ViewGraphData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9117E2DD9F00162DBC /* ViewGraphData.m */; };
 		3C10DC9517E2E22900162DBC /* ViewGraphs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9417E2E22900162DBC /* ViewGraphs.m */; };
 		3C10DC9817E7F2BD00162DBC /* ofxGenericViewExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9717E7F2BD00162DBC /* ofxGenericViewExporter.m */; };
+		3C10DC9B17E7FD0E00162DBC /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9A17E7FD0E00162DBC /* AppSettings.m */; };
 		3C65718717D0FF560074B101 /* CXMLDocument_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C656EBF17D0FF550074B101 /* CXMLDocument_CreationExtensions.m */; };
 		3C65718817D0FF560074B101 /* CXMLNode_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C656EC117D0FF550074B101 /* CXMLNode_CreationExtensions.m */; };
 		3C65718917D0FF560074B101 /* CXHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C656EC317D0FF550074B101 /* CXHTMLDocument.m */; };
@@ -97,6 +98,8 @@
 		3C10DC9417E2E22900162DBC /* ViewGraphs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGraphs.m; sourceTree = "<group>"; };
 		3C10DC9617E7F2BD00162DBC /* ofxGenericViewExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxGenericViewExporter.h; sourceTree = "<group>"; };
 		3C10DC9717E7F2BD00162DBC /* ofxGenericViewExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ofxGenericViewExporter.m; sourceTree = "<group>"; };
+		3C10DC9917E7FD0E00162DBC /* AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSettings.h; sourceTree = "<group>"; };
+		3C10DC9A17E7FD0E00162DBC /* AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSettings.m; sourceTree = "<group>"; };
 		3C656E9217D0FE8D0074B101 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		3C656E9317D0FE8D0074B101 /* MainWindow_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow_iPad.xib; sourceTree = "<group>"; };
 		3C656E9417D0FE8D0074B101 /* ViewTemplates.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewTemplates.xib; sourceTree = "<group>"; };
@@ -384,6 +387,8 @@
 		3C96F37717D0F4D5000FC446 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				3C10DC9917E7FD0E00162DBC /* AppSettings.h */,
+				3C10DC9A17E7FD0E00162DBC /* AppSettings.m */,
 				3C96F37817D0F4D5000FC446 /* AccessibilityStarter.h */,
 				3C96F37917D0F4D5000FC446 /* AccessibilityStarter.m */,
 				3C96F37A17D0F4D5000FC446 /* AppDelegate.h */,
@@ -693,6 +698,7 @@
 				3C10DC9817E7F2BD00162DBC /* ofxGenericViewExporter.m in Sources */,
 				3CEA729D17D1093E00F419A3 /* SBJsonUTF8Stream.m in Sources */,
 				3CEA729717D1093E00F419A3 /* SBJsonStreamParserAdapter.m in Sources */,
+				3C10DC9B17E7FD0E00162DBC /* AppSettings.m in Sources */,
 				3C96F3D017D0F4D5000FC446 /* CXMLElement+UIView.m in Sources */,
 				3C96F3B717D0F4D5000FC446 /* AccessibilityStarter.m in Sources */,
 				3C96F3C817D0F4D5000FC446 /* UIScrollView+Exports.m in Sources */,

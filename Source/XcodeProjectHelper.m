@@ -8,48 +8,15 @@
 
 #import "XcodeProjectHelper.h"
 
+#import "AppSettings.h"
+
 const int HEX_LENGTH = 24;
 
 @implementation XcodeProjectHelper
 
-+ (NSString *) getXcodeProjectFolder
-{
-    return [ [ NSBundle mainBundle ] objectForInfoDictionaryKey:@"XcodeProjectFolder" ];
-}
-
-+ (NSString *) getGeneratedSourceFolder
-{
-    return [ [ XcodeProjectHelper getXcodeProjectFolder ] stringByAppendingString:[ [ NSBundle mainBundle ] objectForInfoDictionaryKey:@"GeneratedSourceRelativeFolder" ] ];
-}
-
-+ (NSString *) getXcodeProjectFile
-{
-    return [ [ XcodeProjectHelper getXcodeProjectFolder ] stringByAppendingString:[ [ NSBundle mainBundle ] objectForInfoDictionaryKey:@"XcodeProjectRelativeFile" ] ];
-}
-
-+ (NSString *) getXIBRoot
-{
-    return [ [ XcodeProjectHelper getXcodeProjectFolder ] stringByAppendingString:[ [ NSBundle mainBundle ] objectForInfoDictionaryKey:@"XIBRootRelativeFolder" ] ];
-}
-
-+ (NSArray *) getSkipXibs
-{
-    return [ [ NSBundle mainBundle ] objectForInfoDictionaryKey:@"SkipXibs" ];
-}
-
-+ (NSArray *) getProcessOnlyXibs
-{
-    return [ [ NSBundle mainBundle ] objectForInfoDictionaryKey:@"ProcessOnlyXibs" ];
-}
-
-+ (BOOL) forceExportAllXibs
-{
-    return [ [ [ NSBundle mainBundle ] objectForInfoDictionaryKey:@"ForceExportAllXibs" ] boolValue ];
-}
-
 +( NSString* )getXcodeProjectFileContents
 {
-    NSString *projectFileLocation = [ XcodeProjectHelper getXcodeProjectFile ];
+    NSString *projectFileLocation = [ AppSettings getXcodeProjectFile ];
     NSError *error = nil;
     NSString *projectFile = [NSString stringWithContentsOfFile:projectFileLocation encoding:NSUTF8StringEncoding error:&error];
     
@@ -63,7 +30,7 @@ const int HEX_LENGTH = 24;
 
 +( void )setXcodeProjectFileContents:( NSString* )contents
 {
-    NSString *projectFileLocation = [ XcodeProjectHelper getXcodeProjectFile ];
+    NSString *projectFileLocation = [ AppSettings getXcodeProjectFile ];
     NSError *error = nil;
     [ contents writeToFile:projectFileLocation atomically:NO encoding:NSUTF8StringEncoding error:&error ];
     if ( error )
@@ -203,7 +170,7 @@ const int HEX_LENGTH = 24;
 {
     //amazingly, even though usedViews.txt gets updated with a preproc script, it gets put into the build directory before thism making it the old
     //file. so just adding it to the xcode project doesn't work. instead, we need to do the same BS file system access...
-    NSString *usedViews = [NSString stringWithFormat:@"%@/tools/Xib-Exporter/XibExporter/usedViews.txt",[XcodeProjectHelper getXcodeProjectFolder]];
+    NSString *usedViews = [NSString stringWithFormat:@"%@/tools/Xib-Exporter/XibExporter/usedViews.txt",[AppSettings getXcodeProjectFolder]];
     NSError *error = nil;
     NSString *contents = [NSString stringWithContentsOfFile:usedViews encoding:NSUTF8StringEncoding error:&error];
     
@@ -235,19 +202,6 @@ const int HEX_LENGTH = 24;
     }
     
     return files;
-}
-
-+ (BOOL)addExportsToProject
-{
-    BOOL result = YES;
-    
-    NSNumber* shouldAdd = [ [ NSBundle mainBundle ] objectForInfoDictionaryKey:@"Add Exports to Project" ];
-    if (shouldAdd)
-    {
-        result = [shouldAdd boolValue];
-    }
-    
-    return result;
 }
 
 @end

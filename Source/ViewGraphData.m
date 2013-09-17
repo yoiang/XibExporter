@@ -8,12 +8,14 @@
 
 #import "ViewGraphData.h"
 
+#import "AppSettings.h"
+
 #import "UIViewController+Exports.h"
 #import "AppDelegate.h"
 #import "XibResources.h"
 #import "CXMLElement+UIView.h"
 #import "ViewExporter.h"
-#import "XcodeProjectHelper.h"
+
 
 @interface ViewGraphData()
 {
@@ -101,7 +103,7 @@
 {
     CXMLElement* result = nil;
     
-    NSString* xibPath = [ ViewGraphData getPathOfFile:[ NSString stringWithFormat:@"%@.xib", xibName ] start:[ XcodeProjectHelper getXIBRoot ] ];
+    NSString* xibPath = [ ViewGraphData getPathOfFile:[ NSString stringWithFormat:@"%@.xib", xibName ] start:[AppSettings getXIBRoot] ];
     if ( xibPath )
     {
         NSData* xmlData = [ NSData dataWithContentsOfFile:xibPath ];
