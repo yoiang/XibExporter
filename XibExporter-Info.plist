@@ -45,6 +45,11 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>Exports</key>
+	<dict>
+		<key>ofxGeneric</key>
+		<true/>
+	</dict>
 	<key>ForceExportAllXibs</key>
 	<false/>
 	<key>GeneratedSourceRelativeFolder</key>

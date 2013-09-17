@@ -33,5 +33,7 @@
 
 //toggle whether we should add the exported files to the target project
 + (BOOL)addExportsToProject;
+// returns a list of exports that are enabled, correlates with ViewExporterFactory's exporter name dictionary
++(NSArray*)getEnabledExports;
 
 @end

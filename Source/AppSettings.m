@@ -41,6 +41,19 @@
     return result;
 }
 
++(NSDictionary*)dictionaryForInfoDictionaryKey:(NSString*)key
+{
+    NSDictionary* result = nil;
+    
+    id object = [self objectForInfoDictionaryKey:key];
+    if ( [object isKindOfClass:[NSDictionary class] ] )
+    {
+        result = (NSDictionary*)object;
+    }
+    
+    return result;
+}
+
 +(BOOL)boolForInfoDictionaryKey:(NSString*)key withDefaultValue:(BOOL)defaultValue
 {
     BOOL result = defaultValue;
@@ -108,15 +121,36 @@
     return [self arrayForInfoDictionaryKey:@"ProcessOnlyXibs" ];
 }
 
-+ (BOOL) forceExportAllXibs
++(BOOL)forceExportAllXibs
 {
     return [self boolForInfoDictionaryKey:@"ForceExportAllXibs" withDefaultValue:NO];
 }
 
-
-+ (BOOL)addExportsToProject
++(BOOL)addExportsToProject
 {
     return [self boolForInfoDictionaryKey:@"Add Exports to Project" withDefaultValue:NO];
+}
+
++(NSDictionary*)getExports
+{
+    return [self dictionaryForInfoDictionaryKey:@"Exports"];
+}
+
++(NSArray*)getEnabledExports
+{
+    NSMutableArray* enabledExports = [ [NSMutableArray alloc] init];
+    
+    NSDictionary* exports = [self getExports];
+    
+    for (NSString* key in [exports allKeys] )
+    {
+        if ( [ [exports objectForKey:key] boolValue] == YES)
+        {
+            [enabledExports addObject:key];
+        }
+    }
+    
+    return enabledExports;
 }
 
 @end

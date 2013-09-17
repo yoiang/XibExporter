@@ -32,6 +32,11 @@ static NSMutableDictionary* instanceCounts = nil;
 
 @implementation ofxGenericViewExporter
 
+-(NSString*)factoryKey
+{
+    return @"ofxGeneric";
+}
+
 - (id) init
 {
     if (self = [super init])

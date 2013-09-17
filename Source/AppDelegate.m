@@ -22,7 +22,9 @@
 
 #import "ViewGraphs.h"
 
+#import "ViewExporter.h"
 #import "ofxGenericViewExporter.h"
+
 #import "XibResources.h"
 
 @interface AppDelegate()
@@ -57,6 +59,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [AccessibilityStarter startAccessibility];
+    
+    // TODO: register list should be in .plist
+    [ViewExporterFactory registerExporter:[ [ofxGenericViewExporter alloc] init] ];
 
     [UIViewController initializeStorage];
     
@@ -73,23 +78,30 @@
     self.viewGraphs = [ [ViewGraphs alloc] init];
     
     [self processAllXibs];
-    
-    ofxGenericViewExporter* ofxGenericExporter = [ [ofxGenericViewExporter alloc] init];
-    NSArray *files = [ofxGenericExporter exportData:self.viewGraphs toProject:YES atomically:NO error:&error saveMultipleFiles:YES useOnlyModifiedFiles:YES];
 
-    if (error)
+    for (NSString* exporterKey in [AppSettings getEnabledExports] )
     {
-        NSLog(@"Couldn't export xibs: %@",error);
-    }
-    else
-    {
-        if ( [AppSettings addExportsToProject] )
+        id<ViewExporter> exporter = [ViewExporterFactory exporterForKey:exporterKey];
+        if (exporter)
         {
-            //write to the xcodeproj file
-            [XcodeProjectHelper addToXcodeProject:files];
+            NSArray *files = [exporter exportData:self.viewGraphs toProject:YES atomically:NO error:&error saveMultipleFiles:YES useOnlyModifiedFiles:YES];
+            if (error)
+            {
+                NSLog(@"Error while exporting xibs with exporter %@: %@", exporterKey, error);
+            } else
+            {
+                if ( [AppSettings addExportsToProject] )
+                {
+                    //write to the xcodeproj file
+                    [XcodeProjectHelper addToXcodeProject:files];
+                }
+            }
+        } else
+        {
+            NSLog(@"Error, could not find exporter for key %@", exporterKey);
         }
     }
-    
+
     exit(0);
     
     return YES;
