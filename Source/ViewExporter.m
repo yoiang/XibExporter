@@ -172,8 +172,18 @@ static NSMutableDictionary* instanceCounts = nil;
     return output;
 }
 
-- (NSDictionary *) getCodeFor:(NSMutableDictionary *)dict isInline:(BOOL)isInline outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
+- (NSDictionary *) getCodeFor:(id)object isInline:(BOOL)isInline outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
 {
+    NSDictionary* dict = nil;
+    if ( [object isKindOfClass:[ViewGraphData class] ] )
+    {
+        ViewGraphData* data = (ViewGraphData*)object;
+        dict = data.data;
+    } else if ( [object isKindOfClass:[NSDictionary class] ] )
+    {
+        dict = object;
+    }
+    
     NSMutableString *code = [NSMutableString string];
     NSString *instanceName = nil;
     BOOL isOutlet = NO;
@@ -341,7 +351,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return [NSMutableDictionary dictionaryWithObjectsAndKeys:code, @"code", instanceName, @"name", outlets, @"outlets", includes, @"includes", properties, @"properties", nil];
 }
 
-- (void) doCodeExport:(NSString *)location data:(NSDictionary *)data keys:(NSArray *)keys atomically:(BOOL)flag error:(NSError**)error
+- (void) doCodeExport:(ViewGraphs*)viewGraphs atLocation:(NSString *)location data:(NSDictionary *)data keys:(NSArray *)keys atomically:(BOOL)flag error:(NSError**)error
 {
     NSMutableString *code = [NSMutableString string];
     
@@ -414,7 +424,7 @@ static NSMutableDictionary* instanceCounts = nil;
                     {
                         NSString *dictPath = [func substringWithRange:NSMakeRange(r.location+1, r2.location-r.location-1)];
                         NSArray *pathComponents = [dictPath componentsSeparatedByString:@"."];
-                        ViewGraphData *viewGraphData = [self.exportedData objectForKey:k];
+                        ViewGraphData *viewGraphData = [viewGraphs dataForXib:k];
                         NSDictionary *subDict = viewGraphData.data;
                         for (int i = 0; i < [pathComponents count]-1; i++)
                         {
@@ -457,20 +467,17 @@ static NSMutableDictionary* instanceCounts = nil;
     [code writeToFile:location atomically:flag encoding:NSUTF8StringEncoding error:error];
 }
 
-- (NSArray *) exportCodeTo:(NSString *)location atomically:(BOOL)flag error:(NSError**)error saveMultipleFiles:(BOOL)mult useOnlyModifiedFiles:(BOOL)onlyModified
+- (NSArray *) exportData:(ViewGraphs*)viewGraphs asCodeTo:(NSString *)location atomically:(BOOL)flag error:(NSError**)error saveMultipleFiles:(BOOL)mult useOnlyModifiedFiles:(BOOL)onlyModified
 {
     NSMutableDictionary *output = [NSMutableDictionary dictionary];
     NSMutableArray *outputFileNames = [NSMutableArray array];
     
     //loop through all the VCs, they'll each go in a separate function
-    NSArray *keys = nil;
+    NSArray *keys = viewGraphs.xibNames;
     
-    if ( [ XcodeProjectHelper forceExportAllXibs ] )
+    if ( ![XcodeProjectHelper forceExportAllXibs] )
     {
-        keys = [ self.exportedData allKeys ];
-    } else
-    {
-        keys = [ XcodeProjectHelper trimToOnlyModifiedFiles:[ self.exportedData allKeys ] ];
+        keys = [XcodeProjectHelper trimToOnlyModifiedFiles:keys];
     }
     
     if ([keys count] <= 0)
@@ -483,7 +490,9 @@ static NSMutableDictionary* instanceCounts = nil;
     
     for (int i = 0; i < [keys count]; i++)
     {
-        ViewGraphData *viewGraphData = [self.exportedData objectForKey:[keys objectAtIndex:i]];
+        NSString* xibName = [keys objectAtIndex:i];
+        
+        ViewGraphData *viewGraphData = [viewGraphs dataForXib:xibName];
         NSMutableDictionary *vc = viewGraphData.data;
         
         if ( !instanceCounts )
@@ -494,7 +503,7 @@ static NSMutableDictionary* instanceCounts = nil;
             [ instanceCounts removeAllObjects ];
         }
         
-        NSDictionary *obj = [self getCodeFor:vc
+        NSDictionary *obj = [self getCodeFor:viewGraphData
                                     isInline:NO
                                      outlets:[NSMutableDictionary dictionaryWithObjectsAndKeys:
                                               [NSMutableArray array], @"stripped",
@@ -540,7 +549,7 @@ static NSMutableDictionary* instanceCounts = nil;
         {
             NSString *k = [keys objectAtIndex:i];
             NSString *fileLocation = [NSString stringWithFormat:@"%@/Generated%@.h",location,k];
-            [self doCodeExport:fileLocation data:output keys:[NSArray arrayWithObject:k] atomically:flag error:error];
+            [self doCodeExport:viewGraphs atLocation:fileLocation data:output keys:[NSArray arrayWithObject:k] atomically:flag error:error];
             
             [outputFileNames addObject:[NSString stringWithFormat:@"Generated%@.h",k]];
             /*if (&error)
@@ -551,7 +560,7 @@ static NSMutableDictionary* instanceCounts = nil;
     }
     else
     {
-        [self doCodeExport:location data:output keys:keys atomically:flag error:error];
+        [self doCodeExport:viewGraphs atLocation:location data:output keys:keys atomically:flag error:error];
         [outputFileNames addObject:[location lastPathComponent]];
     }
     
@@ -566,7 +575,6 @@ static NSMutableDictionary* instanceCounts = nil;
     {
         NSString *ofxGenericDefinitionJson = @"ofxGenericDefinition";
         
-        self.exportedData = [NSMutableDictionary dictionary];
         NSError *error = nil;
         NSString *defFile = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:ofxGenericDefinitionJson ofType:@"json"] encoding:NSUTF8StringEncoding error:&error];
         if (error)
@@ -612,82 +620,34 @@ static NSMutableDictionary* instanceCounts = nil;
     return nil;
 }
 
-- (void) processAllXibs
-{
-    NSArray* onlyProcessXibs = [ XcodeProjectHelper getProcessOnlyXibs ];
-    NSArray* skipXibs = [ XcodeProjectHelper getSkipXibs ];
-    
-    NSError *error = nil;
-    NSString *rootFolder = [[[NSBundle mainBundle] pathForResource:@"XibFinder" ofType:@"txt"] stringByDeletingLastPathComponent];
-    NSArray *dirContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:rootFolder error:&error];
-    
-    if (error)
-    {
-        NSLog(@"Error reading xibs! %@",error);
-    }
-    else
-    {
-        NSPredicate *filter = [NSPredicate predicateWithFormat:@"self ENDSWITH '.nib'"];
-        NSArray *xibs = [dirContents filteredArrayUsingPredicate:filter];
-        
-        for (int i = 0; i < [xibs count]; i++)
-        {
-            NSString *xibName = [[[xibs objectAtIndex:i] lastPathComponent] stringByDeletingPathExtension];
-            
-            if ( [ onlyProcessXibs count ] > 0 )
-            {
-                if ( [ onlyProcessXibs containsString:xibName ] )
-                {
-                    [ self processXib:xibName ];
-                }
-            } else
-            {
-                if ( ![ skipXibs containsString:xibName ] )
-                {
-                    [ self processXib:xibName ];
-                } else
-                {
-                    NSLog( @"Skipping %@", xibName );
-                }
-            }
-        }
-    }
-}
-
-- (void) processXib:(NSString *)xibName
-{
-    ViewGraphData* data = [ [ViewGraphData alloc] initWithXib:xibName];
-    
-    [self.exportedData setObject:data forKey:xibName];
-}
-
-- (NSArray *) exportDataTo:(NSString *)location atomically:(BOOL)flag format:(ViewExporterFormat)format error:(NSError**)error saveMultipleFiles:(BOOL)mult useOnlyModifiedFiles:(BOOL)onlyModified
+- (NSArray *) exportData:(ViewGraphs*)viewGraphs toFile:(NSString *)location atomically:(BOOL)flag format:(ViewExporterFormat)format error:(NSError**)error saveMultipleFiles:(BOOL)mult useOnlyModifiedFiles:(BOOL)onlyModified
 {
     //NSString *exportFolder = [[location stringByDeletingLastPathComponent] stringByReplacingOccurrencesOfString:@" " withString:@"\\ "];
     //NSLog(@"open %@",exportFolder);
     switch (format)
     {
-        case ViewExporterFormatJSON:
+/*        case ViewExporterFormatJSON:
             location = [NSString stringWithFormat:@"%@.json",[location stringByDeletingPathExtension]];
-            [[self.exportedData JSONRepresentation] writeToFile:location atomically:flag encoding:NSUTF8StringEncoding error:error];
+            [[viewGraphs JSONRepresentation] writeToFile:location atomically:flag encoding:NSUTF8StringEncoding error:error];
             break;
         case ViewExporterFormatPlist:
             location = [NSString stringWithFormat:@"%@.plist",[location stringByDeletingPathExtension]];
-            [self.exportedData writeToFile:location atomically:flag];
+            [viewGraphs writeToFile:location atomically:flag];
             break;
         case ViewExporterFormatXML:
             location = [NSString stringWithFormat:@"%@.xml",[location stringByDeletingPathExtension]];
             [self exportXMLTo:location atomically:flag error:error];
             break;
-        case ViewExporterFormatOpenFramework:
+ */
+        case ViewExporterFormatofxGeneric:
             location = [NSString stringWithFormat:@"%@.h",[location stringByDeletingPathExtension]];
-            return [self exportCodeTo:mult ? [location stringByDeletingLastPathComponent] : location atomically:flag error:error saveMultipleFiles:mult useOnlyModifiedFiles:onlyModified];
+            return [self exportData:viewGraphs asCodeTo:mult ? [location stringByDeletingLastPathComponent] : location atomically:flag error:error saveMultipleFiles:mult useOnlyModifiedFiles:onlyModified];
             break;
     }
     return [NSArray arrayWithObject:location];
 }
 
-- (NSArray *) exportDataToProject:(BOOL)useProjectDir atomically:(BOOL)flag format:(ViewExporterFormat)format error:(NSError**)error saveMultipleFiles:(BOOL)mult useOnlyModifiedFiles:(BOOL)onlyModified
+- (NSArray *) exportData:(ViewGraphs*)viewGraphs toProject:(BOOL)useProjectDir atomically:(BOOL)flag format:(ViewExporterFormat)format error:(NSError**)error saveMultipleFiles:(BOOL)mult useOnlyModifiedFiles:(BOOL)onlyModified
 {
     NSString *targetFile = nil;
     
@@ -701,7 +661,7 @@ static NSMutableDictionary* instanceCounts = nil;
         targetFile = [NSString stringWithFormat:@"%@/ExportedViews.h",documentsDirectory];
     }
     
-    return [self exportDataTo:targetFile atomically:flag format:format error:error saveMultipleFiles:mult useOnlyModifiedFiles:onlyModified];
+    return [self exportData:viewGraphs toFile:targetFile atomically:flag format:format error:error saveMultipleFiles:mult useOnlyModifiedFiles:onlyModified];
 }
 
 

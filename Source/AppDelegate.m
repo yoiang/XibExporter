@@ -14,6 +14,10 @@
 #import "AccessibilityStarter.h"
 #import "XcodeProjectHelper.h"
 
+#import "NSArray+NSString.h"
+
+#import "ViewGraphs.h"
+
 #import "ViewExporter.h"
 
 #import "XibResources.h"
@@ -24,6 +28,7 @@
 }
 
 @property (nonatomic, strong) ViewExporter *currentExporter;
+@property (nonatomic, strong) ViewGraphs *viewGraphs;
 
 @end
 
@@ -63,10 +68,12 @@
     _xibResources = [ [XibResources alloc] init];
     
     NSError *error = nil;
-    self.currentExporter = [ [ViewExporter alloc] init];
+    self.viewGraphs = [ [ViewGraphs alloc] init];
     
-    [self.currentExporter processAllXibs];
-    NSArray *files = [self.currentExporter exportDataToProject:YES atomically:NO format:ViewExporterFormatOpenFramework error:&error saveMultipleFiles:YES useOnlyModifiedFiles:YES];
+    [self processAllXibs];
+    
+    self.currentExporter = [ [ViewExporter alloc] init];
+    NSArray *files = [self.currentExporter exportData:self.viewGraphs toProject:YES atomically:NO format:ViewExporterFormatofxGeneric error:&error saveMultipleFiles:YES useOnlyModifiedFiles:YES];
      
     if (error)
     {
@@ -74,7 +81,7 @@
     }
     else
     {
-        [self.currentExporter exportDataToProject:NO atomically:NO format:ViewExporterFormatJSON error:&error saveMultipleFiles:NO useOnlyModifiedFiles:NO];
+//        [self.currentExporter exportDataToProject:NO atomically:NO format:ViewExporterFormatJSON error:&error saveMultipleFiles:NO useOnlyModifiedFiles:NO];
         
         if (error)
         {
@@ -91,6 +98,48 @@
     exit(0);
     
     return YES;
+}
+
+- (void) processAllXibs
+{
+    NSArray* onlyProcessXibs = [ XcodeProjectHelper getProcessOnlyXibs ];
+    NSArray* skipXibs = [ XcodeProjectHelper getSkipXibs ];
+    
+    NSError *error = nil;
+    NSString *rootFolder = [[[NSBundle mainBundle] pathForResource:@"XibFinder" ofType:@"txt"] stringByDeletingLastPathComponent];
+    NSArray *dirContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:rootFolder error:&error];
+    
+    if (error)
+    {
+        NSLog(@"Error reading xibs! %@",error);
+    }
+    else
+    {
+        NSPredicate *filter = [NSPredicate predicateWithFormat:@"self ENDSWITH '.nib'"];
+        NSArray *xibs = [dirContents filteredArrayUsingPredicate:filter];
+        
+        for (int i = 0; i < [xibs count]; i++)
+        {
+            NSString *xibName = [[[xibs objectAtIndex:i] lastPathComponent] stringByDeletingPathExtension];
+            
+            if ( [ onlyProcessXibs count ] > 0 )
+            {
+                if ( [ onlyProcessXibs containsString:xibName ] )
+                {
+                    [ self.viewGraphs processXib:xibName ];
+                }
+            } else
+            {
+                if ( ![ skipXibs containsString:xibName ] )
+                {
+                    [ self.viewGraphs processXib:xibName ];
+                } else
+                {
+                    NSLog( @"Skipping %@", xibName );
+                }
+            }
+        }
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
