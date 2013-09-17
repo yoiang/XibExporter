@@ -60,8 +60,7 @@
 {
     [AccessibilityStarter startAccessibility];
     
-    // TODO: register list should be in .plist
-    [ViewExporterFactory registerExporter:[ [ofxGenericViewExporter alloc] init] ];
+    [self registerViewExporters];
 
     [UIViewController initializeStorage];
     
@@ -105,6 +104,22 @@
     exit(0);
     
     return YES;
+}
+
+-(void)registerViewExporters
+{
+    NSArray* registerExporterClasses = [AppSettings getRegisterExporterClasses];
+    for (NSString* className in registerExporterClasses)
+    {
+        Class class = NSClassFromString(className);
+        if ( [class conformsToProtocol:@protocol(ViewExporter) ] )
+        {
+            [ViewExporterFactory registerExporter:[ [class alloc] init] ];
+        } else
+        {
+            NSLog(@"Unable to register class %@ found in register exporter classes list, does not conform to ViewExporter protocol", className);
+        }
+    }
 }
 
 - (void) processAllXibs

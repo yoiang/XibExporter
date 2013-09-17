@@ -58,6 +58,10 @@
 	<true/>
 	<key>ProcessOnlyXibs</key>
 	<array/>
+	<key>Register Exporter Classes</key>
+	<array>
+		<string>ofxGenericViewExporter</string>
+	</array>
 	<key>SkipXibs</key>
 	<array>
 		<string>MainWindow</string>

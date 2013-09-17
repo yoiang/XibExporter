@@ -131,6 +131,11 @@
     return [self boolForInfoDictionaryKey:@"Add Exports to Project" withDefaultValue:NO];
 }
 
++(NSArray*)getRegisterExporterClasses
+{
+    return [self arrayForInfoDictionaryKey:@"Register Exporter Classes"];
+}
+
 +(NSDictionary*)getExports
 {
     return [self dictionaryForInfoDictionaryKey:@"Exports"];

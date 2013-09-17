@@ -31,6 +31,9 @@
 // returns whether to force exporting all Xibs processed rather than only those that have changed, defined in plist // TODO: move to configuration
 +(BOOL)forceExportAllXibs;
 
+// returns a list of View Exporter classes that should be registered for use
++(NSArray*)getRegisterExporterClasses;
+
 // toggle whether we should add the exported files to the target project
 +(BOOL)addExportsToProject;
 
