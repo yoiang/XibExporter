@@ -13,20 +13,10 @@
 
 #import "ViewGraphs.h"
 
-enum ViewExporterFormat
-{
-    ViewExporterFormatJSON=0,
-    ViewExporterFormatXML,
-    ViewExporterFormatPlist,
-    ViewExporterFormatofxGeneric
-} typedef ViewExporterFormat;
+@protocol ViewExporter <NSObject>
 
-@interface ViewExporter : NSObject
-{
-    NSDictionary *codeMap;
-}
-@property (strong) NSDictionary *codeMap;
+@required
 
-- (NSArray *) exportData:(ViewGraphs*)viewGraphs toProject:(BOOL)useProjectDir atomically:(BOOL)flag format:(ViewExporterFormat)format error:(NSError**)error saveMultipleFiles:(BOOL)mult useOnlyModifiedFiles:(BOOL)onlyModified;
+- (NSArray *)exportData:(ViewGraphs*)viewGraphs toProject:(BOOL)useProjectDir atomically:(BOOL)flag error:(NSError**)error saveMultipleFiles:(BOOL)mult useOnlyModifiedFiles:(BOOL)onlyModified;
 
 @end

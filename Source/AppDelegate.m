@@ -18,8 +18,7 @@
 
 #import "ViewGraphs.h"
 
-#import "ViewExporter.h"
-
+#import "ofxGenericViewExporter.h"
 #import "XibResources.h"
 
 @interface AppDelegate()
@@ -27,7 +26,6 @@
     XibResources *_xibResources;
 }
 
-@property (nonatomic, strong) ViewExporter *currentExporter;
 @property (nonatomic, strong) ViewGraphs *viewGraphs;
 
 @end
@@ -72,22 +70,15 @@
     
     [self processAllXibs];
     
-    self.currentExporter = [ [ViewExporter alloc] init];
-    NSArray *files = [self.currentExporter exportData:self.viewGraphs toProject:YES atomically:NO format:ViewExporterFormatofxGeneric error:&error saveMultipleFiles:YES useOnlyModifiedFiles:YES];
-     
+    ofxGenericViewExporter* ofxGenericExporter = [ [ofxGenericViewExporter alloc] init];
+    NSArray *files = [ofxGenericExporter exportData:self.viewGraphs toProject:YES atomically:NO error:&error saveMultipleFiles:YES useOnlyModifiedFiles:YES];
+
     if (error)
     {
         NSLog(@"Couldn't export xibs: %@",error);
     }
     else
     {
-//        [self.currentExporter exportDataToProject:NO atomically:NO format:ViewExporterFormatJSON error:&error saveMultipleFiles:NO useOnlyModifiedFiles:NO];
-        
-        if (error)
-        {
-            NSLog(@"Couldn't export json: %@",error);
-        }
-        
         if ( [XcodeProjectHelper addExportsToProject] )
         {
             //write to the xcodeproj file

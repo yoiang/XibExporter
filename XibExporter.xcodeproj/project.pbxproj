@@ -11,6 +11,7 @@
 		3C10DC8F17E2CE4300162DBC /* XibResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC8E17E2CE4300162DBC /* XibResources.m */; };
 		3C10DC9217E2DD9F00162DBC /* ViewGraphData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9117E2DD9F00162DBC /* ViewGraphData.m */; };
 		3C10DC9517E2E22900162DBC /* ViewGraphs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9417E2E22900162DBC /* ViewGraphs.m */; };
+		3C10DC9817E7F2BD00162DBC /* ofxGenericViewExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9717E7F2BD00162DBC /* ofxGenericViewExporter.m */; };
 		3C65718717D0FF560074B101 /* CXMLDocument_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C656EBF17D0FF550074B101 /* CXMLDocument_CreationExtensions.m */; };
 		3C65718817D0FF560074B101 /* CXMLNode_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C656EC117D0FF550074B101 /* CXMLNode_CreationExtensions.m */; };
 		3C65718917D0FF560074B101 /* CXHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C656EC317D0FF550074B101 /* CXHTMLDocument.m */; };
@@ -57,7 +58,6 @@
 		3C96F3CF17D0F4D5000FC446 /* CXMLElement+UIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F3AB17D0F4D5000FC446 /* CXMLElement+UIImage.m */; };
 		3C96F3D017D0F4D5000FC446 /* CXMLElement+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F3AD17D0F4D5000FC446 /* CXMLElement+UIView.m */; };
 		3C96F3D117D0F4D5000FC446 /* CXMLElement+Xib.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F3AF17D0F4D5000FC446 /* CXMLElement+Xib.m */; };
-		3C96F3D317D0F4D5000FC446 /* ViewExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F3B317D0F4D5000FC446 /* ViewExporter.m */; };
 		3C96F3D417D0F4D5000FC446 /* XcodeProjectHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F3B517D0F4D5000FC446 /* XcodeProjectHelper.m */; };
 		3CEA6EFB17D1033500F419A3 /* ofxGenericDefinition.json in Resources */ = {isa = PBXBuildFile; fileRef = 3CEA6EF917D1033500F419A3 /* ofxGenericDefinition.json */; };
 		3CEA6EFC17D1033500F419A3 /* FontExchange.json in Resources */ = {isa = PBXBuildFile; fileRef = 3CEA6EFA17D1033500F419A3 /* FontExchange.json */; };
@@ -95,6 +95,8 @@
 		3C10DC9117E2DD9F00162DBC /* ViewGraphData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGraphData.m; sourceTree = "<group>"; };
 		3C10DC9317E2E22900162DBC /* ViewGraphs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGraphs.h; sourceTree = "<group>"; };
 		3C10DC9417E2E22900162DBC /* ViewGraphs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGraphs.m; sourceTree = "<group>"; };
+		3C10DC9617E7F2BD00162DBC /* ofxGenericViewExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxGenericViewExporter.h; sourceTree = "<group>"; };
+		3C10DC9717E7F2BD00162DBC /* ofxGenericViewExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ofxGenericViewExporter.m; sourceTree = "<group>"; };
 		3C656E9217D0FE8D0074B101 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		3C656E9317D0FE8D0074B101 /* MainWindow_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow_iPad.xib; sourceTree = "<group>"; };
 		3C656E9417D0FE8D0074B101 /* ViewTemplates.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewTemplates.xib; sourceTree = "<group>"; };
@@ -193,7 +195,6 @@
 		3C96F3AE17D0F4D5000FC446 /* CXMLElement+Xib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CXMLElement+Xib.h"; sourceTree = "<group>"; };
 		3C96F3AF17D0F4D5000FC446 /* CXMLElement+Xib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CXMLElement+Xib.m"; sourceTree = "<group>"; };
 		3C96F3B217D0F4D5000FC446 /* ViewExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewExporter.h; sourceTree = "<group>"; };
-		3C96F3B317D0F4D5000FC446 /* ViewExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewExporter.m; sourceTree = "<group>"; };
 		3C96F3B417D0F4D5000FC446 /* XcodeProjectHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XcodeProjectHelper.h; sourceTree = "<group>"; };
 		3C96F3B517D0F4D5000FC446 /* XcodeProjectHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XcodeProjectHelper.m; sourceTree = "<group>"; };
 		3C96F3B617D0F4D5000FC446 /* XibExporter-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XibExporter-Prefix.pch"; sourceTree = "<group>"; };
@@ -403,8 +404,6 @@
 				3C96F38B17D0F4D5000FC446 /* NSString+Parsing.m */,
 				3C96F38E17D0F4D5000FC446 /* UIKit Exports */,
 				3C96F3A917D0F4D5000FC446 /* UIKit TouchXML */,
-				3C96F3B217D0F4D5000FC446 /* ViewExporter.h */,
-				3C96F3B317D0F4D5000FC446 /* ViewExporter.m */,
 				3C96F3B417D0F4D5000FC446 /* XcodeProjectHelper.h */,
 				3C96F3B517D0F4D5000FC446 /* XcodeProjectHelper.m */,
 				3C96F3B617D0F4D5000FC446 /* XibExporter-Prefix.pch */,
@@ -416,6 +415,9 @@
 				3C10DC9117E2DD9F00162DBC /* ViewGraphData.m */,
 				3C10DC9317E2E22900162DBC /* ViewGraphs.h */,
 				3C10DC9417E2E22900162DBC /* ViewGraphs.m */,
+				3C96F3B217D0F4D5000FC446 /* ViewExporter.h */,
+				3C10DC9617E7F2BD00162DBC /* ofxGenericViewExporter.h */,
+				3C10DC9717E7F2BD00162DBC /* ofxGenericViewExporter.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -688,6 +690,7 @@
 				3CEA729E17D1093E00F419A3 /* SBJsonWriter.m in Sources */,
 				3C65719317D0FF560074B101 /* CTidy.m in Sources */,
 				3C65718E17D0FF560074B101 /* CXMLElement_ElementTreeExtensions.m in Sources */,
+				3C10DC9817E7F2BD00162DBC /* ofxGenericViewExporter.m in Sources */,
 				3CEA729D17D1093E00F419A3 /* SBJsonUTF8Stream.m in Sources */,
 				3CEA729717D1093E00F419A3 /* SBJsonStreamParserAdapter.m in Sources */,
 				3C96F3D017D0F4D5000FC446 /* CXMLElement+UIView.m in Sources */,
@@ -704,7 +707,6 @@
 				3C65718B17D0FF560074B101 /* CXMLDocument_PrivateExtensions.m in Sources */,
 				3C65718A17D0FF560074B101 /* CXMLDocument.m in Sources */,
 				3C65718F17D0FF560074B101 /* CXMLNamespaceNode.m in Sources */,
-				3C96F3D317D0F4D5000FC446 /* ViewExporter.m in Sources */,
 				3C96F3C517D0F4D5000FC446 /* UIImageView+Exports.m in Sources */,
 				3C96F3CE17D0F4D5000FC446 /* UIViewController+Exports.m in Sources */,
 				3CEA729517D1093E00F419A3 /* SBJsonStreamParser.m in Sources */,
