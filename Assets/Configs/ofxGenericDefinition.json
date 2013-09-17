@@ -1,383 +1,384 @@
 {
-  "UIKeyboardType" : {
-    "_inlineConstructor" : "?$keyboardType$",
-    "_enum" : {
-      "UIKeyboardTypeDefault" : "ofxGenericKeyboardTypeDefault",
-      "UIKeyboardTypeASCIICapable" : "ofxGenericKeyboardTypeASCIICapable",
-      "UIKeyboardTypeNumbersAndPunctuation" : "ofxGenericKeyboardTypeNumbersAndPunctuation",
-      "UIKeyboardTypeURL" : "ofxGenericKeyboardTypeURL",
-      "UIKeyboardTypeNumberPad" : "ofxGenericKeyboardTypeNumberPad",
-      "UIKeyboardTypePhonePad" : "ofxGenericKeyboardTypePhonePad",
-      "UIKeyboardTypeNamePhonePad" : "ofxGenericKeyboardTypeNamePhonePad",
-      "UIKeyboardTypeEmailAddress" : "ofxGenericKeyboardTypeEmailAddress",
-      "UIKeyboardTypeDecimalPad" : "ofxGenericKeyboardTypeDecimalPad",
-      "UIKeyboardTypeTwitter" : "ofxGenericKeyboardTypeTwitter"
+  "Class Definitions": {
+    "UIKeyboardType": {
+      "_inlineConstructor": "?$keyboardType$",
+      "_enum": {
+        "UIKeyboardTypeDefault": "ofxGenericKeyboardTypeDefault",
+        "UIKeyboardTypeASCIICapable": "ofxGenericKeyboardTypeASCIICapable",
+        "UIKeyboardTypeNumbersAndPunctuation": "ofxGenericKeyboardTypeNumbersAndPunctuation",
+        "UIKeyboardTypeURL": "ofxGenericKeyboardTypeURL",
+        "UIKeyboardTypeNumberPad": "ofxGenericKeyboardTypeNumberPad",
+        "UIKeyboardTypePhonePad": "ofxGenericKeyboardTypePhonePad",
+        "UIKeyboardTypeNamePhonePad": "ofxGenericKeyboardTypeNamePhonePad",
+        "UIKeyboardTypeEmailAddress": "ofxGenericKeyboardTypeEmailAddress",
+        "UIKeyboardTypeDecimalPad": "ofxGenericKeyboardTypeDecimalPad",
+        "UIKeyboardTypeTwitter": "ofxGenericKeyboardTypeTwitter"
+      }
+    },
+    "UIReturnKeyType": {
+      "_inlineConstructor": "?$returnKeyType$",
+      "_enum": {
+        "UIReturnKeyDefault": "ofxGenericKeyboardReturnKeyDefault",
+        "UIReturnKeyGo": "ofxGenericKeyboardReturnKeyGo",
+        "UIReturnKeyNext": "ofxGenericKeyboardReturnKeyNext",
+        "UIReturnKeySearch": "ofxGenericKeyboardReturnKeySearch",
+        "UIReturnKeySend": "ofxGenericKeyboardReturnKeySend",
+        "UIReturnKeyDone": "ofxGenericKeyboardReturnKeyDone"
+      }
+    },
+    "UITextAutocapitalizationType": {
+      "_inlineConstructor": "?$autocapitalizationType$",
+      "_enum": {
+        "UITextAutocapitalizationTypeNone": "ofxGenericTextAutoCapitalizationNone",
+        "UITextAutocapitalizationTypeWords": "ofxGenericTextAutoCapitalizationWords",
+        "UITextAutocapitalizationTypeSentences": "ofxGenericTextAutoCapitalizationSentences",
+        "UITextAutocapitalizationTypeAllCharacters": "ofxGenericTextAutoCapitalizationAllCharacters"
+      }
+    },
+    "UITextBorderStyle": {
+      "_inlineConstructor": "?$textBorderStyle$",
+      "_enum": {
+        "UITextBorderStyleNone": "ofxGenericTextViewBorderNone",
+        "UITextBorderStyleLine": "ofxGenericTextViewBorderLine",
+        "UITextBorderStyleBezel": "ofxGenericTextViewBorderBezel",
+        "UITextBorderStyleRoundedRect": "ofxGenericTextViewBorderRoundedRect"
+      }
+    },
+    "CGRect": {
+      "_inlineConstructor": "ofRectangle( $x$, $y$, $width$, $height$ )"
+    },
+    "CGSize": {
+      "_inlineConstructor": "ofPoint( $width$, $height$ )"
+    },
+    "UIActivityIndicatorView": {
+      "_constructor": "ofPtr< ofxGenericActivityView > @ = ofxGenericActivityView::create()",
+      "_inlineConstructor": "ofxGenericActivityView::create()",
+      "_include": [
+        "#include \"ofxGenericActivityView.h\"",
+        "#include \"ofxGenericUtility.h\"",
+        "#include \"ofxGenericLocalization.h\""
+      ],
+      "_parameter": "ofPtr< ofxGenericActivityView > &@",
+      "_super": "UIView",
+      "_variableName": "activityIndicator#",
+      "_declaration": "ofPtr< ofxGenericActivityView >",
+      "hidesWhenStopped": "@->setHidesWhenStoppedAnimating( $hidesWhenStopped$ )",
+      "color": "@->setColor( $color$ )",
+      "activityIndicatorViewStyle": "@->setIndicatorViewStyle( $activityIndicatorViewStyle$ )"
+    },
+    "UIActivityIndicatorViewStyle": {
+      "_enum": {
+        "UIActivityIndicatorViewStyleWhiteLarge": "ofxGenericActivityViewStyleWhiteLarge",
+        "UIActivityIndicatorViewStyleWhite": "ofxGenericActivityViewStyleWhite",
+        "UIActivityIndicatorViewStyleGray": "ofxGenericActivityViewStyleGray"
+      },
+      "_inlineConstructor": "?$indicatorStyle$"
+    },
+    "UIButton": {
+      "localizedTitleKey": "@->setText( ofxGLocalized( $localizedTitleKey$, $localizedTitleDefault$ ) )",
+      "_constructor": "ofPtr< ofxGenericButtonView > @ = ofxGenericButtonView::create( $buttonType$ )",
+      "_include": [
+        "#include \"ofxGenericButtonView.h\"",
+        "#include \"ofxGenericUtility.h\"",
+        "#include \"ofxGenericLocalization.h\""
+      ],
+      "_inlineConstructor": "ofxGenericButtonView::create( $buttonType$ )",
+      "_parameter": "ofPtr< ofxGenericButtonView > &@",
+      "_super": "UIView",
+      "_variableName": "button#",
+      "_declaration": "ofPtr< ofxGenericButtonView >",
+      "backgroundImage": "@->setBackgroundImage( $backgroundImage$ )",
+      "backgroundDownImage": "@->setDownBackgroundImage( $backgroundDownImage$ )",
+      "downTitleColor": "@->setDownTextColor( $downTitleColor$ )",
+      "enabled": "@->setEnabled( $enabled$ )",
+      "localizedTitleKey": "@->setText( ofxGLocalized( $localizedTitleKey$, $localizedTitleDefaultKey$ ) )",
+      "title": "@->setText( $title$ )",
+      "titleLabel.textAlignment": "@->setTextAlignment( $titleLabel.textAlignment$ )",
+      "titleLabel.textColor": "@->setTextColor( $titleLabel.textColor$ )",
+      "titleLabel.lineBreakMode": "@->setLineBreakMode( $titleLabel.lineBreakMode$ )",
+      "titleLabel.numberOfLines": "@->setNumberOfLines( $titleLabel.numberOfLines$ )",
+      "titleLabel.minimumFontSize": "@->setMinimumFontSize( $titleLabel.minimumFontSize$ )",
+      "titleLabel.fontName": "@->setFont( $titleLabel.fontName$, @->getFontSize() )",
+      "titleLabel.fontSize": "@->setFont( @->getFontName(), $titleLabel.fontSize$ )",
+      "rootView": "@->setDelegate( dynamic_pointer_cast< ofxGenericButtonViewDelegate >( rootView ) )"
+    },
+    "UIButtonLabel": {
+      "_super": "UILabel"
+    },
+    "UIButtonType": {
+      "_enum": {
+        "UIButtonTypeCustom": "ofxGenericButtonTypeCustom",
+        "UIButtonTypeRoundedRect": "ofxGenericButtonTypeRoundedRect",
+        "UIButtonTypeDetailDisclosure": "ofxGenericButtonTypeDetailDisclosure",
+        "UIButtonTypeInfoLight": "ofxGenericButtonTypeInfoLight",
+        "UIButtonTypeInfoDark": "ofxGenericButtonTypeInfoDark",
+        "UIButtonTypeContactAdd": "ofxGenericButtonTypeContactAdd"
+      },
+      "_inlineConstructor": "?$buttonType$"
+    },
+    "UITextAlignment": {
+      "_enum": {
+        "UITextAlignmentCenter": "ofxGenericTextHorizontalAlignmentCenter",
+        "UITextAlignmentLeft": "ofxGenericTextHorizontalAlignmentLeft",
+        "UITextAlignmentRight": "ofxGenericTextHorizontalAlignmentRight"
+      },
+      "_inlineConstructor": "?$textAlignment$"
+    },
+    "UIViewContentMode": {
+      "_enum": {
+        "UIViewContentModeScaleToFill": "ofxGenericContentModeScaleToFill",
+        "UIViewContentModeScaleAspectFit": "ofxGenericContentModeScaleAspectFit",
+        "UIViewContentModeScaleAspectFill": "ofxGenericContentModeScaleAspectFill",
+        "UIViewContentModeRedraw": "ofxGenericContentModeRedraw",
+        "UIViewContentModeCenter": "ofxGenericContentModeCenter",
+        "UIViewContentModeTop": "ofxGenericContentModeTop",
+        "UIViewContentModeBottom": "ofxGenericContentModeBottom",
+        "UIViewContentModeLeft": "ofxGenericContentModeLeft",
+        "UIViewContentModeRight": "ofxGenericContentModeRight",
+        "UIViewContentModeTopLeft": "ofxGenericContentModeTopLeft",
+        "UIViewContentModeTopRight": "ofxGenericContentModeTopRight",
+        "UIViewContentModeBottomLeft": "ofxGenericContentModeBottomLeft",
+        "UIViewContentModeBottomRight": "ofxGenericContentModeBottomRight"
+      },
+      "_inlineConstructor": "?$contentMode$"
+    },
+    "UIColor": {
+      "_inlineConstructor": "ofColor( $red$, $green$, $blue$, $alpha$ )"
+    },
+    "UIEdgeInsets": {
+      "_inlineConstructor": ""
+    },
+    "UIImageView": {
+      "_constructor": "ofPtr< ofxGenericImageView > @ = ofxGenericImageView::create( )",
+      "_include": [
+        "#include \"ofxGenericImageView.h\"",
+        "#include \"ofxGenericUtility.h\""
+      ],
+      "_inlineConstructor": "ofxGenericImageView::create(  )",
+      "_parameter": "ofPtr< ofxGenericImageView > &@",
+      "_super": "UIView",
+      "_variableName": "image#",
+      "_declaration": "ofPtr< ofxGenericImageView >",
+      "image": "@->setImage( $image$ )"
+    },
+    "UILabel": {
+      "_constructor": "ofPtr< ofxGenericTextView > @ = ofxGenericTextView::create( )",
+      "_include": [
+        "#include \"ofxGenericTextView.h\"",
+        "#include \"ofxGenericUtility.h\"",
+        "#include \"ofxGenericLocalization.h\""
+      ],
+      "_inlineConstructor": "ofxGenericTextView::create( )",
+      "_parameter": "ofPtr< ofxGenericTextView > &@",
+      "_super": "UIView",
+      "_variableName": "text#",
+      "_declaration": "ofPtr< ofxGenericTextView >",
+      "fontName": "@->setFont( $fontName$, @->getFontSize() )",
+      "fontSize": "@->setFont( @->getFontName(), $fontSize$ )",
+      "minimumFontSize": "@->setMinimumFontSize( $minimumFontSize$ )",
+      "lineBreakMode": "@->setLineBreakMode( $lineBreakMode$ )",
+      "numberOfLines": "@->setNumberOfLines( $numberOfLines$ )",
+      "localizedTextKey": "@->setText( ofxGLocalized( $localizedTextKey$, $localizedDefaultTextKey$ ) )",
+      "text": "@->setText( $text$ )",
+      "textAlignment": "@->setTextAlignment( $textAlignment$ )",
+      "textColor": "@->setTextColor( $textColor$ )",
+      "adjustsFontSizeToFitWidth": "@->setAutosizeFontToFitText( $adjustsFontSizeToFitWidth$ )"
+    },
+    "UILineBreakMode": {
+      "_enum": {
+        "UILineBreakModeCharacterWrap": "ofxGenericTextLinebreakModeCharacterWrap",
+        "UILineBreakModeClip": "ofxGenericTextLinebreakModeClip",
+        "UILineBreakModeHeadTruncation": "ofxGenericTextLinebreakModeHeadTruncation",
+        "UILineBreakModeMiddleTruncation": "ofxGenericTextLinebreakModeMiddleTruncation",
+        "UILineBreakModeTailTruncation": "ofxGenericTextLinebreakModeTailTruncation",
+        "UILineBreakModeWordWrap": "ofxGenericTextLinebreakModeWordWrap"
+      },
+      "_inlineConstructor": "?$lineBreakMode$"
+    },
+    "UIRoundedRectButton": {
+      "_super": "UIButton"
+    },
+    "UIScrollView": {
+      "_constructor": "ofPtr< ofxGenericScrollView > @ = ofxGenericScrollView::create( )",
+      "_include": [
+        "#include \"ofxGenericScrollView.h\"",
+        "#include \"ofxGenericUtility.h\""
+      ],
+      "_inlineConstructor": "ofxGenericScrollView::create( )",
+      "_parameter": "ofPtr< ofxGenericScrollView > &@",
+      "_super": "UIView",
+      "_variableName": "scroll#",
+      "_declaration": "ofPtr< ofxGenericScrollView >",
+      "autoContentSizeToFit": "@->setAutoContentSizeToFit( $autoContentSizeToFit$ )"
+    },
+    "UITableView": {
+      "_constructor": "ofPtr< ofxGenericTableView > @ = ofxGenericTableView::create( )",
+      "_include": [
+        "#include \"ofxGenericTableView.h\"",
+        "#include \"ofxGenericUtility.h\""
+      ],
+      "_inlineConstructor": "ofxGenericTableView::create( )",
+      "_parameter": "ofPtr< ofxGenericTableView > &@",
+      "_super": "UIScrollView",
+      "_variableName": "table#",
+      "_declaration": "ofPtr< ofxGenericTableView >",
+      "rootView": "@->setDelegate( dynamic_pointer_cast< ofxGenericTableViewDelegate >( rootView ) )",
+      "contentInsetBottom": "@->setUsePaddedSeparator( $contentInsetBottom$ )"
+    },
+    "UITextField": {
+      "_constructor": "ofPtr< ofxGenericEditTextView > @ = ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), false )",
+      "_include": [
+        "#include \"ofxGenericEditTextView.h\"",
+        "#include \"ofxGenericUtility.h\"",
+        "#include \"ofxGenericLocalization.h\""
+      ],
+      "_inlineConstructor": "ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), false )",
+      "_parameter": "ofPtr< ofxGenericEditTextView > &@",
+      "_super": "UIView",
+      "_variableName": "editTextView#",
+      "_declaration": "ofPtr< ofxGenericEditTextView >",
+      "autocapitalizationType": "@->setAutoCapitalization( $autocapitalizationType$ )",
+      "autocorrection": "@->setAutoCorrection( $autocorrection$ )",
+      "textBorderStyle": "@->setBorderStyle( $textBorderStyle$ )",
+      "clearsOnBeginEditing": "@->setClearsOnBeginEditing( $clearsOnBeginEditing$ )",
+      "enablesReturnKeyAutomatically": "@->setEnableReturnKeyAutomatically( $enablesReturnKeyAutomatically$ )",
+      "keyboardType": "@->setKeyboard( $keyboardType$ )",
+      "placeholderText": "@->setPlaceholderText( $placeholderText$ )",
+      "returnKeyType": "@->setKeyboardReturnKey( $returnKeyType$ )",
+      "secureText": "@->setSecureText( $secureText$ )",
+      "text": "@->setText( $text$ )",
+      "fontName": "@->setFont( $fontName$, @->getFontSize() )",
+      "fontSize": "@->setFont( @->getFontName(), $fontSize$ )",
+      "textAlignment": "@->setTextAlignment( $textAlignment$ )",
+      "rootView": "@->setDelegate( dynamic_pointer_cast< ofxGenericEditTextViewDelegate >( rootView ) )"
+    },
+    "UITextView": {
+      "_constructor": "ofPtr< ofxGenericEditTextView > @ = ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), true )",
+      "_include": [
+        "#include \"ofxGenericEditTextView.h\"",
+        "#include \"ofxGenericUtility.h\"",
+        "#include \"ofxGenericLocalization.h\""
+      ],
+      "_inlineConstructor": "ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), true )",
+      "_parameter": "ofPtr< ofxGenericEditTextView > &@",
+      "_super": "UIView",
+      "_variableName": "editTextView#",
+      "_declaration": "ofPtr< ofxGenericEditTextView >",
+      "autocapitalizationType": "@->setAutoCapitalization( $autocapitalizationType$ )",
+      "autocorrection": "@->setAutoCorrection( $autocorrection$ )",
+      "enablesReturnKeyAutomatically": "@->setEnableReturnKeyAutomatically( $enablesReturnKeyAutomatically$ )",
+      "keyboardType": "@->setKeyboard( $keyboardType$ )",
+      "returnKeyType": "@->setKeyboardReturnKey( $returnKeyType$ )",
+      "secureText": "@->setSecureText( $secureText$ )",
+      "text": "@->setText( $text$ )",
+      "fontName": "@->setFont( $fontName$, @->getFontSize() )",
+      "fontSize": "@->setFont( @->getFontName(), $fontSize$ )",
+      "textAlignment": "@->setTextAlignment( $textAlignment$ )",
+      "rootView": "@->setDelegate( dynamic_pointer_cast< ofxGenericEditTextViewDelegate >( rootView ) )"
+    },
+    "UIView": {
+      "_addSubview": "@->addChildView( % )",
+      "_constructor": "ofPtr< ofxGenericView > @ = ofxGenericView::create( )",
+      "_include": [
+        "#include \"ofxGenericView.h\"",
+        "#include \"ofxGenericUtility.h\""
+      ],
+      "_inlineConstructor": "ofxGenericView::create( )",
+      "_parameter": "ofPtr< ofxGenericView > &@",
+      "_variableName": "view#",
+      "_declaration": "ofPtr< ofxGenericView >",
+      "alpha": "@->setAlpha( $alpha$ )",
+      "autoresizingMask": "@->setAutoresizingMask( $autoresizingMask$ )",
+      "backgroundColor": "@->setBackgroundColor( $backgroundColor$ )",
+      "frame": "@->setFrame( $frame$ )",
+      "visible": "@->setVisible( $visible$ )",
+      "clipsToBounds": "@->setClipSubviews( $clipsToBounds$ )",
+      "contentMode": "@->setContentMode( $contentMode$ )"
+    },
+    "UIPageControl": {
+      "_constructor": "ofPtr< ofxGenericPageControl > @ = ofxGenericPageControl::create()",
+      "_inlineConstructor": "ofxGenericPageControl::create()",
+      "_include": [
+        "#include \"ofxGenericPageControl.h\"",
+        "#include \"ofxGenericUtility.h\""
+      ],
+      "_parameter": "ofPtr< ofxGenericPageControl > &@",
+      "_super": "UIView",
+      "_variableName": "pageControl#",
+      "_declaration": "ofPtr< ofxGenericPageControl >",
+      "currentPage": "@->setCurrentPage( $currentPage$ )",
+      "numberOfPages": "@->setPageCount( $numberOfPages$ )",
+      "hidesForSinglePage": "@->setHidesForSinglePage( $hidesForSinglePage$ )"
+    },
+    "UISwitch": {
+      "_constructor": "ofPtr< ofxGenericSwitchView > @ = ofxGenericSwitchView::create()",
+      "_inlineConstructor": "ofxGenericSwitchView::create()",
+      "_include": [
+        "#include \"ofxGenericSwitchView.h\""
+      ],
+      "_parameter": "ofPtr< ofxGenericSwitchView > &@",
+      "_super": "UIView",
+      "_variableName": "switchView#",
+      "_declaration": "ofPtr< ofxGenericSwitchView >",
+      "on": "@->setSwitched( $on$, false )",
+      "onTintColor": "@->setTintColor( $onTintColor$ )",
+      "rootView": "@->setDelegate( dynamic_pointer_cast< ofxGenericSwitchViewDelegate >( rootView ) )"
     }
   },
-  "UIReturnKeyType" : {
-    "_inlineConstructor" : "?$returnKeyType$",
-    "_enum" : {
-      "UIReturnKeyDefault" : "ofxGenericKeyboardReturnKeyDefault",
-      "UIReturnKeyGo" : "ofxGenericKeyboardReturnKeyGo",
-      "UIReturnKeyNext" : "ofxGenericKeyboardReturnKeyNext",
-      "UIReturnKeySearch" : "ofxGenericKeyboardReturnKeySearch",
-      "UIReturnKeySend" : "ofxGenericKeyboardReturnKeySend",
-      "UIReturnKeyDone" : "ofxGenericKeyboardReturnKeyDone"
+  "__COMMENTS__": {
+    "All Other Keys": {
+      "Every other key is what code will be added for a particular value. We can add keys as desired to match values exported from the xibs.": ""
+    },
+    "Reserved Replacement Characters": {
+      "#": "Only in the case of _variableName, this is replaced with the view ID # to assure unique autogenerated instance names.",
+      "$xxxx$": "The string in between two $ signs is the key of the exported value that will be inserted there. To see keys, have a look at the exported .json version of the hierarchy.",
+      "%": "This character is replaced with secondary instance names, that is the name of what's being added or referenced. In function definitions, this will NOT include a leading comma.",
+      "?": "When a ? character appears before a $xx$, this is a special case where the value will actually be pulled from a child definition dictionary with the key of _enum. Have a look at UILineBreakMode for an example.",
+      "@": "Occurrences of this character are replaced with instance names - either a generated one or the name of an outlet.",
+      "b": "When a b character appears before a $xx$, this is a value that will be output as a boolean with the string 'true' or 'false'",
+      "ƒ": "Used in function definitions, this represents the guts of the function (all the view data etc). Option-F to type",
+      "∞": "Used in function definitions, this represents the list of outlets without types included and inserts a comma. Option-% to type",
+      "§": "Used in function definitions, this represents the list of outlets without types included and does not insert a comma. Option-^ to type",
+      "ﬁ": "Used in function definitions, this represents the list of outlets with types included and inserts a comma. Option-Shift-% to type.",
+      "∂": "Can use to get stuff in the dictionary hierarchy, like ∂frame.x∂ gives the X of the frame of the root view. Option-D to type."
+    },
+    "Special Nested Keys": {
+      "_addSubview": "When adding a child view, this will be called.",
+      "_constructor": "When a new, non-outleted instance of an object is created, this will be called.",
+      "_enum": "If something in the class has the ?$xx$ syntax, then the _enum dictionary will be looked through for the final thing to output. It uses the value of the $xx$ variable to determine what to use as the key in the lookup in _enum.",
+      "_include": "If this class needs to be included in the ExportedViews.h file, put the include statement here.",
+      "_inlineConstructor": "When another function call requires an instance of this object to be created as a parameter (almost exclusively structs like rects and colors), this will be called. It is also called for outlets, except the outlet also prepends an = .",
+      "_parameter": "If this is an outlet, this value will be placed into the main function as a parameter.",
+      "_super": "Specifies the super class for this object. If there is one, then all code definition values from the super class will be used also. Any like values naturally have the child classes taking precedence.",
+      "_variableName": "If no outlet is provided (Accessibility Label) or accessibility is turned off, all instance names will be autogenerated with this string."
+    },
+    "Special Root Keys": {
+      "_functionDefinitions": "An array of function definitions. All will be placed into the exported results, potentially with identical contents. Use @ to represent the function name, % to represent the outlets, and ƒ to represent the function contents.",
+      "_rootViewInstanceName": "The string name for the root view, will automatically be set to its instance name if it doesn't have one defined. You can use this to make more elaborate constructors.",
+      "_ignoredClasses": "If any of these classes exists they will be ignored, not exported."
     }
   },
-  "UITextAutocapitalizationType" : {
-    "_inlineConstructor" : "?$autocapitalizationType$",
-    "_enum" : {
-      "UITextAutocapitalizationTypeNone" : "ofxGenericTextAutoCapitalizationNone",
-      "UITextAutocapitalizationTypeWords" : "ofxGenericTextAutoCapitalizationWords",
-      "UITextAutocapitalizationTypeSentences" : "ofxGenericTextAutoCapitalizationSentences",
-      "UITextAutocapitalizationTypeAllCharacters" : "ofxGenericTextAutoCapitalizationAllCharacters"
-    }
-  },
-  "UITextBorderStyle" : {
-    "_inlineConstructor" : "?$textBorderStyle$",
-    "_enum" : {
-      "UITextBorderStyleNone" : "ofxGenericTextViewBorderNone",
-      "UITextBorderStyleLine" : "ofxGenericTextViewBorderLine",
-      "UITextBorderStyleBezel" : "ofxGenericTextViewBorderBezel",
-      "UITextBorderStyleRoundedRect" : "ofxGenericTextViewBorderRoundedRect"
-    }
-  },
-  "CGRect" : {
-    "_inlineConstructor" : "ofRectangle( $x$, $y$, $width$, $height$ )"
-  },
-  "CGSize" : {
-    "_inlineConstructor" : "ofPoint( $width$, $height$ )"
-  },
-  "UIActivityIndicatorView" : {
-    "_constructor" : "ofPtr< ofxGenericActivityView > @ = ofxGenericActivityView::create()",
-    "_inlineConstructor" : "ofxGenericActivityView::create()",
-    "_include" : [
-      "#include \"ofxGenericActivityView.h\"",
-      "#include \"ofxGenericUtility.h\"",
-      "#include \"ofxGenericLocalization.h\""
-    ],
-    "_parameter" : "ofPtr< ofxGenericActivityView > &@",
-    "_super" : "UIView",
-    "_variableName" : "activityIndicator#",
-    "_declaration" : "ofPtr< ofxGenericActivityView >",
-    "hidesWhenStopped" : "@->setHidesWhenStoppedAnimating( $hidesWhenStopped$ )",
-    "color" : "@->setColor( $color$ )",
-    "activityIndicatorViewStyle" : "@->setIndicatorViewStyle( $activityIndicatorViewStyle$ )"
-  },
-  "UIActivityIndicatorViewStyle" : {
-    "_enum" : {
-        "UIActivityIndicatorViewStyleWhiteLarge" : "ofxGenericActivityViewStyleWhiteLarge",
-        "UIActivityIndicatorViewStyleWhite" : "ofxGenericActivityViewStyleWhite",
-        "UIActivityIndicatorViewStyleGray" : "ofxGenericActivityViewStyleGray"
-        },
-        "_inlineConstructor" : "?$indicatorStyle$"
-  },
-
-  "UIButton" : {
-    "localizedTitleKey" : "@->setText( ofxGLocalized( $localizedTitleKey$, $localizedTitleDefault$ ) )",
-    "_constructor" : "ofPtr< ofxGenericButtonView > @ = ofxGenericButtonView::create( $buttonType$ )",
-    "_include" : [
-      "#include \"ofxGenericButtonView.h\"",
-      "#include \"ofxGenericUtility.h\"",
-      "#include \"ofxGenericLocalization.h\""
-    ],
-    "_inlineConstructor" : "ofxGenericButtonView::create( $buttonType$ )",
-    "_parameter" : "ofPtr< ofxGenericButtonView > &@",
-    "_super" : "UIView",
-    "_variableName" : "button#",
-    "_declaration" : "ofPtr< ofxGenericButtonView >",
-    "backgroundImage" : "@->setBackgroundImage( $backgroundImage$ )",
-    "backgroundDownImage" : "@->setDownBackgroundImage( $backgroundDownImage$ )",
-    "downTitleColor" : "@->setDownTextColor( $downTitleColor$ )",
-    "enabled" : "@->setEnabled( $enabled$ )",
-    "localizedTitleKey" : "@->setText( ofxGLocalized( $localizedTitleKey$, $localizedTitleDefaultKey$ ) )",
-    "title" : "@->setText( $title$ )",
-    "titleLabel.textAlignment" : "@->setTextAlignment( $titleLabel.textAlignment$ )",
-    "titleLabel.textColor" : "@->setTextColor( $titleLabel.textColor$ )",
-    "titleLabel.lineBreakMode" : "@->setLineBreakMode( $titleLabel.lineBreakMode$ )",
-    "titleLabel.numberOfLines" : "@->setNumberOfLines( $titleLabel.numberOfLines$ )",
-    "titleLabel.minimumFontSize" : "@->setMinimumFontSize( $titleLabel.minimumFontSize$ )",
-    "titleLabel.fontName" : "@->setFont( $titleLabel.fontName$, @->getFontSize() )",
-    "titleLabel.fontSize" : "@->setFont( @->getFontName(), $titleLabel.fontSize$ )",
-    "rootView" : "@->setDelegate( dynamic_pointer_cast< ofxGenericButtonViewDelegate >( rootView ) )"
-  },
-  "UIButtonLabel" : {
-    "_super" : "UILabel"
-  },
-  "UIButtonType" : {
-    "_enum" : {
-      "UIButtonTypeCustom" : "ofxGenericButtonTypeCustom",
-      "UIButtonTypeRoundedRect" : "ofxGenericButtonTypeRoundedRect",
-      "UIButtonTypeDetailDisclosure" : "ofxGenericButtonTypeDetailDisclosure",
-      "UIButtonTypeInfoLight" : "ofxGenericButtonTypeInfoLight",
-      "UIButtonTypeInfoDark" : "ofxGenericButtonTypeInfoDark",
-      "UIButtonTypeContactAdd" : "ofxGenericButtonTypeContactAdd"
-    },
-    "_inlineConstructor" : "?$buttonType$"
-  },
-  "UITextAlignment" : {
-    "_enum" : {
-      "UITextAlignmentCenter" : "ofxGenericTextHorizontalAlignmentCenter",
-      "UITextAlignmentLeft" : "ofxGenericTextHorizontalAlignmentLeft",
-      "UITextAlignmentRight" : "ofxGenericTextHorizontalAlignmentRight"
-    },
-    "_inlineConstructor" : "?$textAlignment$"
-  },
-  "UIViewContentMode" : {
-    "_enum" : {
-      "UIViewContentModeScaleToFill" : "ofxGenericContentModeScaleToFill",
-      "UIViewContentModeScaleAspectFit" : "ofxGenericContentModeScaleAspectFit",
-      "UIViewContentModeScaleAspectFill" : "ofxGenericContentModeScaleAspectFill",
-      "UIViewContentModeRedraw" : "ofxGenericContentModeRedraw",
-      "UIViewContentModeCenter" : "ofxGenericContentModeCenter",
-      "UIViewContentModeTop" : "ofxGenericContentModeTop",
-      "UIViewContentModeBottom" : "ofxGenericContentModeBottom",
-      "UIViewContentModeLeft" : "ofxGenericContentModeLeft",
-      "UIViewContentModeRight" : "ofxGenericContentModeRight",
-      "UIViewContentModeTopLeft" : "ofxGenericContentModeTopLeft",
-      "UIViewContentModeTopRight" : "ofxGenericContentModeTopRight",
-      "UIViewContentModeBottomLeft" : "ofxGenericContentModeBottomLeft",
-      "UIViewContentModeBottomRight" : "ofxGenericContentModeBottomRight"
-    },
-    "_inlineConstructor" : "?$contentMode$"
-  },
-  "UIColor" : {
-    "_inlineConstructor" : "ofColor( $red$, $green$, $blue$, $alpha$ )"
-  },
-  "UIEdgeInsets" : {
-    "_inlineConstructor" : ""
-  },
-  "UIImageView" : {
-    "_constructor" : "ofPtr< ofxGenericImageView > @ = ofxGenericImageView::create( )",
-    "_include" : [
-      "#include \"ofxGenericImageView.h\"",
-      "#include \"ofxGenericUtility.h\""
-    ],
-    "_inlineConstructor" : "ofxGenericImageView::create(  )",
-    "_parameter" : "ofPtr< ofxGenericImageView > &@",
-    "_super" : "UIView",
-    "_variableName" : "image#",
-    "_declaration" : "ofPtr< ofxGenericImageView >",
-    "image" : "@->setImage( $image$ )"
-  },
-  "UILabel" : {
-    "_constructor" : "ofPtr< ofxGenericTextView > @ = ofxGenericTextView::create( )",
-    "_include" : [
-      "#include \"ofxGenericTextView.h\"",
-      "#include \"ofxGenericUtility.h\"",
-      "#include \"ofxGenericLocalization.h\""
-    ],
-    "_inlineConstructor" : "ofxGenericTextView::create( )",
-    "_parameter" : "ofPtr< ofxGenericTextView > &@",
-    "_super" : "UIView",
-    "_variableName" : "text#",
-    "_declaration" : "ofPtr< ofxGenericTextView >",
-    "fontName" : "@->setFont( $fontName$, @->getFontSize() )",
-    "fontSize" : "@->setFont( @->getFontName(), $fontSize$ )",
-    "minimumFontSize" : "@->setMinimumFontSize( $minimumFontSize$ )",
-    "lineBreakMode" : "@->setLineBreakMode( $lineBreakMode$ )",
-    "numberOfLines" : "@->setNumberOfLines( $numberOfLines$ )",
-    "localizedTextKey" : "@->setText( ofxGLocalized( $localizedTextKey$, $localizedDefaultTextKey$ ) )",
-    "text" : "@->setText( $text$ )",
-    "textAlignment" : "@->setTextAlignment( $textAlignment$ )",
-    "textColor" : "@->setTextColor( $textColor$ )",
-    "adjustsFontSizeToFitWidth" : "@->setAutosizeFontToFitText( $adjustsFontSizeToFitWidth$ )"
-  },
-  "UILineBreakMode" : {
-    "_enum" : {
-      "UILineBreakModeCharacterWrap" : "ofxGenericTextLinebreakModeCharacterWrap",
-      "UILineBreakModeClip" : "ofxGenericTextLinebreakModeClip",
-      "UILineBreakModeHeadTruncation" : "ofxGenericTextLinebreakModeHeadTruncation",
-      "UILineBreakModeMiddleTruncation" : "ofxGenericTextLinebreakModeMiddleTruncation",
-      "UILineBreakModeTailTruncation" : "ofxGenericTextLinebreakModeTailTruncation",
-      "UILineBreakModeWordWrap" : "ofxGenericTextLinebreakModeWordWrap"
-    },
-    "_inlineConstructor" : "?$lineBreakMode$"
-  },
-  "UIRoundedRectButton" : {
-    "_super" : "UIButton"
-  },
-  "UIScrollView" : {
-    "_constructor" : "ofPtr< ofxGenericScrollView > @ = ofxGenericScrollView::create( )",
-    "_include" : [
-      "#include \"ofxGenericScrollView.h\"",
-      "#include \"ofxGenericUtility.h\""
-    ],
-    "_inlineConstructor" : "ofxGenericScrollView::create( )",
-    "_parameter" : "ofPtr< ofxGenericScrollView > &@",
-    "_super" : "UIView",
-    "_variableName" : "scroll#",
-    "_declaration" : "ofPtr< ofxGenericScrollView >",
-    "autoContentSizeToFit" : "@->setAutoContentSizeToFit( $autoContentSizeToFit$ )"
-  },
-  "UITableView" : {
-    "_constructor" : "ofPtr< ofxGenericTableView > @ = ofxGenericTableView::create( )",
-    "_include" : [
-      "#include \"ofxGenericTableView.h\"",
-      "#include \"ofxGenericUtility.h\""
-    ],
-    "_inlineConstructor" : "ofxGenericTableView::create( )",
-    "_parameter" : "ofPtr< ofxGenericTableView > &@",
-    "_super" : "UIScrollView",
-    "_variableName" : "table#",
-    "_declaration" : "ofPtr< ofxGenericTableView >",
-    "rootView" : "@->setDelegate( dynamic_pointer_cast< ofxGenericTableViewDelegate >( rootView ) )",
-    "contentInsetBottom" : "@->setUsePaddedSeparator( $contentInsetBottom$ )"
-  },
-  "UITextField" : {
-    "_constructor" : "ofPtr< ofxGenericEditTextView > @ = ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), false )",
-    "_include" : [
-      "#include \"ofxGenericEditTextView.h\"",
-      "#include \"ofxGenericUtility.h\"",
-      "#include \"ofxGenericLocalization.h\""
-    ],
-    "_inlineConstructor" : "ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), false )",
-    "_parameter" : "ofPtr< ofxGenericEditTextView > &@",
-    "_super" : "UIView",
-    "_variableName" : "editTextView#",
-    "_declaration" : "ofPtr< ofxGenericEditTextView >",
-    "autocapitalizationType" : "@->setAutoCapitalization( $autocapitalizationType$ )",
-    "autocorrection" : "@->setAutoCorrection( $autocorrection$ )",
-    "textBorderStyle" : "@->setBorderStyle( $textBorderStyle$ )",
-    "clearsOnBeginEditing" : "@->setClearsOnBeginEditing( $clearsOnBeginEditing$ )",
-    "enablesReturnKeyAutomatically" : "@->setEnableReturnKeyAutomatically( $enablesReturnKeyAutomatically$ )",
-    "keyboardType" : "@->setKeyboard( $keyboardType$ )",
-    "placeholderText" : "@->setPlaceholderText( $placeholderText$ )",
-    "returnKeyType" : "@->setKeyboardReturnKey( $returnKeyType$ )",
-    "secureText" : "@->setSecureText( $secureText$ )",
-    "text" : "@->setText( $text$ )",
-    "fontName" : "@->setFont( $fontName$, @->getFontSize() )",
-    "fontSize" : "@->setFont( @->getFontName(), $fontSize$ )",
-    "textAlignment" : "@->setTextAlignment( $textAlignment$ )",
-    "rootView" : "@->setDelegate( dynamic_pointer_cast< ofxGenericEditTextViewDelegate >( rootView ) )"
-  },
-  "UITextView" : {
-    "_constructor" : "ofPtr< ofxGenericEditTextView > @ = ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), true )",
-    "_include" : [
-      "#include \"ofxGenericEditTextView.h\"",
-      "#include \"ofxGenericUtility.h\"",
-      "#include \"ofxGenericLocalization.h\""
-    ],
-    "_inlineConstructor" : "ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), true )",
-    "_parameter" : "ofPtr< ofxGenericEditTextView > &@",
-    "_super" : "UIView",
-    "_variableName" : "editTextView#",
-    "_declaration" : "ofPtr< ofxGenericEditTextView >",
-    "autocapitalizationType" : "@->setAutoCapitalization( $autocapitalizationType$ )",
-    "autocorrection" : "@->setAutoCorrection( $autocorrection$ )",
-    "enablesReturnKeyAutomatically" : "@->setEnableReturnKeyAutomatically( $enablesReturnKeyAutomatically$ )",
-    "keyboardType" : "@->setKeyboard( $keyboardType$ )",
-    "returnKeyType" : "@->setKeyboardReturnKey( $returnKeyType$ )",
-    "secureText" : "@->setSecureText( $secureText$ )",
-    "text" : "@->setText( $text$ )",
-    "fontName" : "@->setFont( $fontName$, @->getFontSize() )",
-    "fontSize" : "@->setFont( @->getFontName(), $fontSize$ )",
-    "textAlignment" : "@->setTextAlignment( $textAlignment$ )",
-    "rootView" : "@->setDelegate( dynamic_pointer_cast< ofxGenericEditTextViewDelegate >( rootView ) )"
-  },
-  "UIView" : {
-    "_addSubview" : "@->addChildView( % )",
-    "_constructor" : "ofPtr< ofxGenericView > @ = ofxGenericView::create( )",
-    "_include" : [
-      "#include \"ofxGenericView.h\"",
-      "#include \"ofxGenericUtility.h\""
-    ],
-    "_inlineConstructor" : "ofxGenericView::create( )",
-    "_parameter" : "ofPtr< ofxGenericView > &@",
-    "_variableName" : "view#",
-    "_declaration" : "ofPtr< ofxGenericView >",
-    "alpha" : "@->setAlpha( $alpha$ )",
-    "autoresizingMask" : "@->setAutoresizingMask( $autoresizingMask$ )",
-    "backgroundColor" : "@->setBackgroundColor( $backgroundColor$ )",
-    "frame" : "@->setFrame( $frame$ )",
-    "visible" : "@->setVisible( $visible$ )",
-    "clipsToBounds" : "@->setClipSubviews( $clipsToBounds$ )",
-    "contentMode" : "@->setContentMode( $contentMode$ )"
-  },
-  "UIPageControl" : {
-    "_constructor" : "ofPtr< ofxGenericPageControl > @ = ofxGenericPageControl::create()",
-    "_inlineConstructor" : "ofxGenericPageControl::create()",
-    "_include" : [
-      "#include \"ofxGenericPageControl.h\"",
-      "#include \"ofxGenericUtility.h\""
-    ],
-    "_parameter" : "ofPtr< ofxGenericPageControl > &@",
-    "_super" : "UIView",
-    "_variableName" : "pageControl#",
-    "_declaration" : "ofPtr< ofxGenericPageControl >",
-    "currentPage" : "@->setCurrentPage( $currentPage$ )",
-    "numberOfPages" : "@->setPageCount( $numberOfPages$ )",
-    "hidesForSinglePage" : "@->setHidesForSinglePage( $hidesForSinglePage$ )"
-  },
-  "UISwitch" : {
-      "_constructor" : "ofPtr< ofxGenericSwitchView > @ = ofxGenericSwitchView::create()",
-      "_inlineConstructor" : "ofxGenericSwitchView::create()",
-      "_include" : [
-                    "#include \"ofxGenericSwitchView.h\""
-                    ],
-      "_parameter" : "ofPtr< ofxGenericSwitchView > &@",
-      "_super" : "UIView",
-      "_variableName" : "switchView#",
-      "_declaration" : "ofPtr< ofxGenericSwitchView >",
-      "on" : "@->setSwitched( $on$, false )",
-      "onTintColor" : "@->setTintColor( $onTintColor$ )",
-      "rootView" : "@->setDelegate( dynamic_pointer_cast< ofxGenericSwitchViewDelegate >( rootView ) )"
-  },
-  "__COMMENTS__" : {
-    "All Other Keys" : {
-      "Every other key is what code will be added for a particular value. We can add keys as desired to match values exported from the xibs." : ""
-    },
-    "Reserved Replacement Characters" : {
-      "#" : "Only in the case of _variableName, this is replaced with the view ID # to assure unique autogenerated instance names.",
-      "$xxxx$" : "The string in between two $ signs is the key of the exported value that will be inserted there. To see keys, have a look at the exported .json version of the hierarchy.",
-      "%" : "This character is replaced with secondary instance names, that is the name of what's being added or referenced. In function definitions, this will NOT include a leading comma.",
-      "?" : "When a ? character appears before a $xx$, this is a special case where the value will actually be pulled from a child definition dictionary with the key of _enum. Have a look at UILineBreakMode for an example.",
-      "@" : "Occurrences of this character are replaced with instance names - either a generated one or the name of an outlet.",
-      "b" : "When a b character appears before a $xx$, this is a value that will be output as a boolean with the string 'true' or 'false'",
-      "ƒ" : "Used in function definitions, this represents the guts of the function (all the view data etc). Option-F to type",
-      "∞" : "Used in function definitions, this represents the list of outlets without types included and inserts a comma. Option-% to type",
-      "§" : "Used in function definitions, this represents the list of outlets without types included and does not insert a comma. Option-^ to type",
-      "ﬁ" : "Used in function definitions, this represents the list of outlets with types included and inserts a comma. Option-Shift-% to type.",
-      "∂" : "Can use to get stuff in the dictionary hierarchy, like ∂frame.x∂ gives the X of the frame of the root view. Option-D to type."
-    },
-    "Special Nested Keys" : {
-      "_addSubview" : "When adding a child view, this will be called.",
-      "_constructor" : "When a new, non-outleted instance of an object is created, this will be called.",
-      "_enum" : "If something in the class has the ?$xx$ syntax, then the _enum dictionary will be looked through for the final thing to output. It uses the value of the $xx$ variable to determine what to use as the key in the lookup in _enum.",
-      "_include" : "If this class needs to be included in the ExportedViews.h file, put the include statement here.",
-      "_inlineConstructor" : "When another function call requires an instance of this object to be created as a parameter (almost exclusively structs like rects and colors), this will be called. It is also called for outlets, except the outlet also prepends an = .",
-      "_parameter" : "If this is an outlet, this value will be placed into the main function as a parameter.",
-      "_super" : "Specifies the super class for this object. If there is one, then all code definition values from the super class will be used also. Any like values naturally have the child classes taking precedence.",
-      "_variableName" : "If no outlet is provided (Accessibility Label) or accessibility is turned off, all instance names will be autogenerated with this string."
-    },
-    "Special Root Keys" : {
-      "_functionDefinitions" : "An array of function definitions. All will be placed into the exported results, potentially with identical contents. Use @ to represent the function name, % to represent the outlets, and ƒ to represent the function contents.",
-      "_rootViewInstanceName" : "The string name for the root view, will automatically be set to its instance name if it doesn't have one defined. You can use this to make more elaborate constructors.",
-      "_ignoredClasses" : "If any of these classes exists they will be ignored, not exported."
-    }
-  },
-  "_functionDefinitions" : [
+  "_functionDefinitions": [
     "inline ofRectangle getGenerated@Frame()\n{\n\treturn ofRectangle(∂frame.x∂, ∂frame.y∂, ∂frame.width∂, ∂frame.height∂);\n}",
     "inline void populateGenerated@( ofPtr< ofxGenericView > rootViewﬁ )\n{ƒ}",
     "inline void populatePreserveGenerated@( ofPtr< ofxGenericView > rootView, bool preserveTopLeft, bool preserveSizeﬁ )\n { \n\t ofRectangle preservedFrame = rootView->getFrame(); \n \n \t populateGenerated@( rootView∞ ); \n \t ofRectangle generatedFrame = getGenerated@Frame(); \n \t if ( !preserveTopLeft ) \n \t { \n \t\t preservedFrame.x = generatedFrame.x; \n \t\t preservedFrame.y = generatedFrame.y; \n \t } \n \t if ( !preserveSize ) \n \t { \n \t\t preservedFrame.width = generatedFrame.width; \n \t\t preservedFrame.height = generatedFrame.height; \n \t } \n \t if ( preserveTopLeft || preserveSize ) \n \t { \n \t\t rootView->setFrame( preservedFrame ); \n \t } \n }",
     "inline ofPtr< ofxGenericView > constructGenerated@( % )\n{\n\tofPtr< ofxGenericView > rootView = ofxGenericView::create();\n\tpopulateGenerated@( rootView∞ );\n\treturn rootView;\n}"
   ],
-  "_rootViewInstanceName" : "rootView",
-  "_ignoredClasses" : {
-    "_UITableViewSeparatorView" : true
+  "_rootViewInstanceName": "rootView",
+  "_ignoredClasses": {
+    "_UITableViewSeparatorView": true
   },
-  "_asIsStringKeys" : {
-    "autoresizingMask" : true
+  "_asIsStringKeys": {
+    "autoresizingMask": true
   },
-  "_codeExporterFileNames" : [
+  "_codeExporterFileNames": [
     {
-      "inputFile" : "GeneratedClass.h.txt",
-      "extension" : "h"
+      "inputFile": "GeneratedClass.h.txt",
+      "extension": "h"
     },
     {
-      "inputFile" : "GeneratedClass.cpp.txt",
-      "extension" : "cpp"
+      "inputFile": "GeneratedClass.cpp.txt",
+      "extension": "cpp"
     }
   ]
 }

@@ -14,6 +14,7 @@
 		3C10DC9817E7F2BD00162DBC /* ofxGenericViewExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9717E7F2BD00162DBC /* ofxGenericViewExporter.m */; };
 		3C10DC9B17E7FD0E00162DBC /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9A17E7FD0E00162DBC /* AppSettings.m */; };
 		3C10DC9D17E807C800162DBC /* ViewExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9C17E807C800162DBC /* ViewExporter.m */; };
+		3C2772F217E82C7A0069FA98 /* CodeMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2772F117E82C7A0069FA98 /* CodeMap.m */; };
 		3C65718717D0FF560074B101 /* CXMLDocument_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C656EBF17D0FF550074B101 /* CXMLDocument_CreationExtensions.m */; };
 		3C65718817D0FF560074B101 /* CXMLNode_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C656EC117D0FF550074B101 /* CXMLNode_CreationExtensions.m */; };
 		3C65718917D0FF560074B101 /* CXHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C656EC317D0FF550074B101 /* CXHTMLDocument.m */; };
@@ -41,7 +42,6 @@
 		3C96F3BB17D0F4D5000FC446 /* ExportUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F38217D0F4D5000FC446 /* ExportUtility.m */; };
 		3C96F3BC17D0F4D5000FC446 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F38317D0F4D5000FC446 /* main.m */; };
 		3C96F3BD17D0F4D5000FC446 /* MainWindowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F38517D0F4D5000FC446 /* MainWindowViewController.m */; };
-		3C96F3BE17D0F4D5000FC446 /* MethodSwizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F38717D0F4D5000FC446 /* MethodSwizzler.m */; };
 		3C96F3BF17D0F4D5000FC446 /* NSArray+NSString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F38917D0F4D5000FC446 /* NSArray+NSString.m */; };
 		3C96F3C017D0F4D5000FC446 /* NSString+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F38B17D0F4D5000FC446 /* NSString+Parsing.m */; };
 		3C96F3C217D0F4D5000FC446 /* UIActivityIndicatorView+Exports.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F39017D0F4D5000FC446 /* UIActivityIndicatorView+Exports.m */; };
@@ -102,6 +102,8 @@
 		3C10DC9917E7FD0E00162DBC /* AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSettings.h; sourceTree = "<group>"; };
 		3C10DC9A17E7FD0E00162DBC /* AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSettings.m; sourceTree = "<group>"; };
 		3C10DC9C17E807C800162DBC /* ViewExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewExporter.m; sourceTree = "<group>"; };
+		3C2772F017E82C7A0069FA98 /* CodeMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeMap.h; sourceTree = "<group>"; };
+		3C2772F117E82C7A0069FA98 /* CodeMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeMap.m; sourceTree = "<group>"; };
 		3C656E9217D0FE8D0074B101 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		3C656E9317D0FE8D0074B101 /* MainWindow_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow_iPad.xib; sourceTree = "<group>"; };
 		3C656E9417D0FE8D0074B101 /* ViewTemplates.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewTemplates.xib; sourceTree = "<group>"; };
@@ -161,8 +163,6 @@
 		3C96F38317D0F4D5000FC446 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3C96F38417D0F4D5000FC446 /* MainWindowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindowViewController.h; sourceTree = "<group>"; };
 		3C96F38517D0F4D5000FC446 /* MainWindowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainWindowViewController.m; sourceTree = "<group>"; };
-		3C96F38617D0F4D5000FC446 /* MethodSwizzler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodSwizzler.h; sourceTree = "<group>"; };
-		3C96F38717D0F4D5000FC446 /* MethodSwizzler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodSwizzler.m; sourceTree = "<group>"; };
 		3C96F38817D0F4D5000FC446 /* NSArray+NSString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+NSString.h"; sourceTree = "<group>"; };
 		3C96F38917D0F4D5000FC446 /* NSArray+NSString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+NSString.m"; sourceTree = "<group>"; };
 		3C96F38A17D0F4D5000FC446 /* NSString+Parsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Parsing.h"; sourceTree = "<group>"; };
@@ -403,8 +403,6 @@
 				3C96F38317D0F4D5000FC446 /* main.m */,
 				3C96F38417D0F4D5000FC446 /* MainWindowViewController.h */,
 				3C96F38517D0F4D5000FC446 /* MainWindowViewController.m */,
-				3C96F38617D0F4D5000FC446 /* MethodSwizzler.h */,
-				3C96F38717D0F4D5000FC446 /* MethodSwizzler.m */,
 				3C96F38817D0F4D5000FC446 /* NSArray+NSString.h */,
 				3C96F38917D0F4D5000FC446 /* NSArray+NSString.m */,
 				3C96F38A17D0F4D5000FC446 /* NSString+Parsing.h */,
@@ -426,6 +424,8 @@
 				3C10DC9C17E807C800162DBC /* ViewExporter.m */,
 				3C10DC9617E7F2BD00162DBC /* ofxGenericViewExporter.h */,
 				3C10DC9717E7F2BD00162DBC /* ofxGenericViewExporter.m */,
+				3C2772F017E82C7A0069FA98 /* CodeMap.h */,
+				3C2772F117E82C7A0069FA98 /* CodeMap.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -676,7 +676,6 @@
 				3C96F3CF17D0F4D5000FC446 /* CXMLElement+UIImage.m in Sources */,
 				3C65719217D0FF560074B101 /* CXMLNode_XPathExtensions.m in Sources */,
 				3C65719017D0FF560074B101 /* CXMLNode.m in Sources */,
-				3C96F3BE17D0F4D5000FC446 /* MethodSwizzler.m in Sources */,
 				3C96F3BA17D0F4D5000FC446 /* ExportedViewMap.m in Sources */,
 				3CEA729817D1093E00F419A3 /* SBJsonStreamParserState.m in Sources */,
 				3C65718717D0FF560074B101 /* CXMLDocument_CreationExtensions.m in Sources */,
@@ -717,6 +716,7 @@
 				3C65718B17D0FF560074B101 /* CXMLDocument_PrivateExtensions.m in Sources */,
 				3C65718A17D0FF560074B101 /* CXMLDocument.m in Sources */,
 				3C65718F17D0FF560074B101 /* CXMLNamespaceNode.m in Sources */,
+				3C2772F217E82C7A0069FA98 /* CodeMap.m in Sources */,
 				3C96F3C517D0F4D5000FC446 /* UIImageView+Exports.m in Sources */,
 				3C96F3CE17D0F4D5000FC446 /* UIViewController+Exports.m in Sources */,
 				3CEA729517D1093E00F419A3 /* SBJsonStreamParser.m in Sources */,

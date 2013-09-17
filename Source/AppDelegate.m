@@ -99,6 +99,7 @@
         }
     }
 
+    sleep(0.01);
     exit(0);
     
     return YES;

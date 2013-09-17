@@ -8,9 +8,10 @@
 
 #import "ofxGenericViewExporter.h"
 
-#import "SBJson.h"
-
 #import "AppSettings.h"
+
+#import "CodeMap.h"
+
 #import "XcodeProjectHelper.h"
 
 #import "ViewGraphs.h"
@@ -26,7 +27,7 @@ static NSMutableDictionary* instanceCounts = nil;
 
 @interface ofxGenericViewExporter()
 
-@property (nonatomic, strong) NSDictionary* codeMap;
+@property (nonatomic, strong) CodeMap* map;
 
 @end
 
@@ -39,53 +40,12 @@ static NSMutableDictionary* instanceCounts = nil;
 
 - (id) init
 {
-    if (self = [super init])
+    self = [super init];
+    if (self)
     {
-        NSString *ofxGenericDefinitionJson = @"ofxGenericDefinition";
-        
-        NSError *error = nil;
-        NSString *defFile = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:ofxGenericDefinitionJson ofType:@"json"] encoding:NSUTF8StringEncoding error:&error];
-        if (error)
-        {
-            NSLog(@"Couldn't load %@ file!", ofxGenericDefinitionJson);
-            self.codeMap = nil;
-        }
-        else
-        {
-            self.codeMap = [defFile JSONValue];
-            
-            //populate subclasses with the data from their superclasses
-            NSArray *keys = [self.codeMap allKeys];
-            for (int i = 0; i < [keys count]; i++)
-            {
-                id obj = [self.codeMap objectForKey:[keys objectAtIndex:i]];
-                if ([obj isKindOfClass:[NSMutableDictionary class]])
-                {
-                    NSMutableDictionary *def = obj;
-                    while ([def objectForKey:@"_super"])
-                    {
-                        NSDictionary *superDef = [self.codeMap objectForKey:[def objectForKey:@"_super"]];
-                        [def removeObjectForKey:@"_super"];
-                        if (superDef)
-                        {
-                            NSArray *superKeys = [superDef allKeys];
-                            for (int j = 0; j < [superKeys count]; j++)
-                            {
-                                NSString *superKey = [superKeys objectAtIndex:j];
-                                if (![def objectForKey:superKey])
-                                {
-                                    [def setObject:[superDef objectForKey:superKey] forKey:superKey];
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            
-        }
-        return self;
+        self.map = [ [CodeMap alloc] initWithJSONFileName:@"ofxGenericDefinition"];
     }
-    return nil;
+    return self;
 }
 
 - (NSArray *)exportData:(ViewGraphs*)viewGraphs toProject:(BOOL)useProjectDir atomically:(BOOL)flag error:(NSError**)error saveMultipleFiles:(BOOL)mult useOnlyModifiedFiles:(BOOL)onlyModified
@@ -168,13 +128,13 @@ static NSMutableDictionary* instanceCounts = nil;
             if ( [vc objectForKey:@"exportToCode"] )
             {
                 [[obj objectForKey:@"properties"] setObject:[obj objectForKey:@"includes"] forKey:@"includes"];
-                NSArray *codeFiles = [self exportCodeForDict:vc def:self.codeMap properties:[obj objectForKey:@"properties"]];
+                NSArray *codeFiles = [self exportCodeForDict:vc properties:[obj objectForKey:@"properties"]];
                 
                 //TODO this should be moved somewhere else
                 for ( int j = 0; j < [codeFiles count]; j++ )
                 {
                     NSString *code = [codeFiles objectAtIndex:j];
-                    NSString *extension = [[[self.codeMap objectForKey:@"_codeExporterFileNames"] objectAtIndex:j] objectForKey:@"extension"];
+                    NSString *extension = [[self.map.codeExporterFileNames objectAtIndex:j] objectForKey:@"extension"];
                     NSString *loc = [NSString stringWithFormat:@"%@.%@",[keys objectAtIndex:i],extension];
                     loc = [NSString stringWithFormat:@"%@/%@",[location stringByDeletingLastPathComponent],loc];
                     if ( ![[NSFileManager defaultManager] fileExistsAtPath:loc] )
@@ -212,9 +172,9 @@ static NSMutableDictionary* instanceCounts = nil;
     return outputFileNames;
 }
 
-- ( NSArray * ) exportCodeForDict:(NSDictionary *)dict def:(NSDictionary *)def properties:(NSDictionary *)properties
+- ( NSArray * ) exportCodeForDict:(NSDictionary *)dict properties:(NSDictionary *)properties
 {
-    NSArray *files = [def objectForKey:@"_codeExporterFileNames"];
+    NSArray *files = self.map.codeExporterFileNames;
     NSMutableArray *outputArray = [NSMutableArray array];
     
     for ( int i = 0; i < [files count]; i++ )
@@ -232,7 +192,7 @@ static NSMutableDictionary* instanceCounts = nil;
             NSLog( @"Error reading code exporter file %@: %@",[files objectAtIndex:i],error);
         }
         
-        NSString *output = [self translateCodeString:classFile dict:dict withDef:def properties:properties];
+        NSString *output = [self translateCodeString:classFile dict:dict properties:properties];
         [outputArray addObject:output];
     }
     
@@ -250,7 +210,7 @@ static NSMutableDictionary* instanceCounts = nil;
     else if ([v isKindOfClass:[NSString class]])
     {
         NSString* buildFormat = @"\"%@\"";
-        if (![self.codeMap objectForKey:@"_asIsStringKeys"] || [[self.codeMap objectForKey:@"_asIsStringKeys"] objectForKey:key])
+        if (!self.map.asIsStringKeys || [self.map.asIsStringKeys objectForKey:key])
         {
             buildFormat = @"%@";
         }
@@ -377,7 +337,7 @@ static NSMutableDictionary* instanceCounts = nil;
     NSString *class = [dict objectForKey:@"class"];
     if (class)
     {
-        NSDictionary *def = [self.codeMap objectForKey:class];
+        NSDictionary *def = [self.map definitionForClass:class];
         if (def)
         {
             //if we have an include, add that in
@@ -430,9 +390,9 @@ static NSMutableDictionary* instanceCounts = nil;
             {
                 if (![dict objectForKey:@"superview"])
                 {
-                    if ([self.codeMap objectForKey:@"_rootViewInstanceName"])
+                    if (self.map.rootViewInstanceName)
                     {
-                        instanceName = [self.codeMap objectForKey:@"_rootViewInstanceName"];
+                        instanceName = self.map.rootViewInstanceName;
                     }
                     else
                     {
@@ -522,7 +482,7 @@ static NSMutableDictionary* instanceCounts = nil;
         else
         {
             //only show a warning if this one isn't ignored
-            if (![self.codeMap objectForKey:@"_ignoredClasses"] || ![[self.codeMap objectForKey:@"_ignoredClasses"] objectForKey:class])
+            if (!self.map.ignoredClasses || ![self.map.ignoredClasses objectForKey:class])
             {
                 NSLog(@"Warning: No def found for %@!",class);
             }
@@ -588,7 +548,7 @@ static NSMutableDictionary* instanceCounts = nil;
         }
         
         //go through all the function definitions and create them
-        NSArray *funcDefs = [self.codeMap objectForKey:@"_functionDefinitions"];
+        NSArray *funcDefs = self.map.functionDefinitions;
         for (int i = 0; i < [funcDefs count]; i++)
         {
             NSString *func = [[funcDefs objectAtIndex:i] stringByReplacingOccurrencesOfString:@"@" withString:k];
@@ -654,7 +614,7 @@ static NSMutableDictionary* instanceCounts = nil;
                                                                                    }
 
 //translates the entire code string, dict and def are global dictionaries
-- ( NSString * ) translateCodeString:(NSString *)classFile dict:(NSDictionary *)dict withDef:(NSDictionary *)def properties:(NSDictionary *)properties
+- ( NSString * ) translateCodeString:(NSString *)classFile dict:(NSDictionary *)dict properties:(NSDictionary *)properties
 {
     if (!classFile)
     {
@@ -668,7 +628,7 @@ static NSMutableDictionary* instanceCounts = nil;
     output = [output stringByParsingSandwiches:@"©" parseObject:self parseSelector:@selector(parseCopyrightSandwich:properties:) userData:properties];
     
     //expand loops that we have
-    NSDictionary *compoundData = [NSDictionary dictionaryWithObjectsAndKeys:dict, @"dict", def, @"def", properties, @"properties", nil];
+    NSDictionary *compoundData = [NSDictionary dictionaryWithObjectsAndKeys:dict, @"dict", properties, @"properties", nil];
     output = [output stringByParsingSandwiches:@"¬" parseObject:self parseSelector:@selector(parseLooperSandwich:compoundData:) userData:compoundData];
     
     return output;
@@ -716,7 +676,6 @@ static NSMutableDictionary* instanceCounts = nil;
 - (NSString *) parseLooperSandwich:(NSString *)loop compoundData:(NSDictionary *)data
 {
     NSDictionary *properties = [data objectForKey:@"properties"];
-    NSDictionary *def = [data objectForKey:@"def"];
     
     NSMutableString *output = [NSMutableString string];
     
@@ -734,7 +693,7 @@ static NSMutableDictionary* instanceCounts = nil;
                 
                 if ( [obj isKindOfClass:[NSDictionary class]] )
                 {
-                    NSDictionary *subDef = [def objectForKey:[obj objectForKey:@"class"]];
+                    NSDictionary *subDef = [self.map definitionForClass:[obj objectForKey:@"class"]];
                     
                     NSString *result = [self translateSingleObjectCodeString:[loopParts objectAtIndex:1] dict:obj withDef:subDef properties:properties];
                     [output appendFormat:@"%@%@",result,delimiter];
