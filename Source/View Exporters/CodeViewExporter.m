@@ -356,6 +356,14 @@ static NSMutableDictionary* instanceCounts = nil;
     return objectSetup;
 }
 
+-(NSString*)codeForAddSubview:(NSDictionary*)subview instanceName:(NSString*)instanceName def:(NSDictionary*)def
+{
+    NSString *addsub = [def objectForKey:@"_addSubview"];
+    addsub = [addsub stringByReplacingOccurrencesOfString:@"@" withString:instanceName];
+    addsub = [addsub stringByReplacingOccurrencesOfString:@"%" withString:[subview objectForKey:@"name"]];
+    return addsub;
+}
+
 - (NSString *) replaceCodeSymbols:(NSString *)line dict:(NSDictionary *)dict key:(NSString *)key name:(NSString *)name outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes def:(NSDictionary *)def properties:(NSMutableDictionary *)properties
 {
     if (!line)
@@ -540,10 +548,10 @@ static NSMutableDictionary* instanceCounts = nil;
                 if (subview)
                 {
                     [code appendString:[subview objectForKey:@"code"]];
-                    NSString *addsub = [def objectForKey:@"_addSubview"];
-                    addsub = [addsub stringByReplacingOccurrencesOfString:@"@" withString:instanceName];
-                    addsub = [addsub stringByReplacingOccurrencesOfString:@"%" withString:[subview objectForKey:@"name"]];
-                    [code appendFormat:@"\t%@%@\n", addsub, [self.map statementEnd] ];
+                    [code appendFormat:@"\t%@%@\n",
+                     [self codeForAddSubview:subview instanceName:instanceName def:def],
+                     [self.map statementEnd]
+                     ];
                 }
             }
         }
