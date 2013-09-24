@@ -283,7 +283,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return [self.map convertEnum:[enumValue objectForKey:@"class"] value:[enumValue objectForKey:enumValueKey] ];
 }
 
--(NSString*)constructorForClass:(NSString*)class instanceName:(NSString*)instanceName outlets:(NSMutableDictionary*)outlets includes:(NSMutableArray*)includes dict:(NSDictionary*)dict def:(NSDictionary*)def properties:(NSMutableDictionary*)properties isInline:(BOOL)isInline isOutlet:(BOOL)isOutlet
+-(NSString*)codeForClassConstructor:(NSString*)class instanceName:(NSString*)instanceName outlets:(NSMutableDictionary*)outlets includes:(NSMutableArray*)includes dict:(NSDictionary*)dict def:(NSDictionary*)def properties:(NSMutableDictionary*)properties isInline:(BOOL)isInline isOutlet:(BOOL)isOutlet
 {
     NSMutableString* constructor = nil;
     
@@ -333,7 +333,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return constructor;
 }
 
--(NSString*)objectSetup:(NSString*)class instanceName:(NSString*)instanceName outlets:(NSMutableDictionary*)outlets includes:(NSMutableArray*)includes dict:(NSDictionary*)dict def:(NSDictionary*)def properties:(NSMutableDictionary*)properties
+-(NSString*)codeForObjectSetup:(NSString*)class instanceName:(NSString*)instanceName outlets:(NSMutableDictionary*)outlets includes:(NSMutableArray*)includes dict:(NSDictionary*)dict def:(NSDictionary*)def properties:(NSMutableDictionary*)properties
 {
     NSMutableString* objectSetup = [NSMutableString string];
     
@@ -530,13 +530,13 @@ static NSMutableDictionary* instanceCounts = nil;
                 }
             }
             
-            NSString* constructor = [self constructorForClass:class instanceName:instanceName outlets:outlets includes:includes dict:dict def:def properties:properties isInline:isInline isOutlet:isOutlet];
+            NSString* constructor = [self codeForClassConstructor:class instanceName:instanceName outlets:outlets includes:includes dict:dict def:def properties:properties isInline:isInline isOutlet:isOutlet];
             
             [code appendString:constructor];
             
             if (!isInline)
             {
-                NSString* setup = [self objectSetup:class instanceName:instanceName outlets:outlets includes:includes dict:dict def:def properties:properties];
+                NSString* setup = [self codeForObjectSetup:class instanceName:instanceName outlets:outlets includes:includes dict:dict def:def properties:properties];
                 [code appendString:setup];
             }
             
