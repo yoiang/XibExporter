@@ -360,12 +360,12 @@
       "_ignoredClasses": "If any of these classes exists they will be ignored, not exported."
     }
   },
-  "_functionDefinitions": [
-    "inline ofRectangle getGenerated@Frame()\n{\n\treturn ofRectangle(∂frame.x∂, ∂frame.y∂, ∂frame.width∂, ∂frame.height∂);\n}",
-    "inline void populateGenerated@( ofPtr< ofxGenericView > rootViewﬁ )\n{ƒ}",
-    "inline void populatePreserveGenerated@( ofPtr< ofxGenericView > rootView, bool preserveTopLeft, bool preserveSizeﬁ )\n { \n\t ofRectangle preservedFrame = rootView->getFrame(); \n \n \t populateGenerated@( rootView∞ ); \n \t ofRectangle generatedFrame = getGenerated@Frame(); \n \t if ( !preserveTopLeft ) \n \t { \n \t\t preservedFrame.x = generatedFrame.x; \n \t\t preservedFrame.y = generatedFrame.y; \n \t } \n \t if ( !preserveSize ) \n \t { \n \t\t preservedFrame.width = generatedFrame.width; \n \t\t preservedFrame.height = generatedFrame.height; \n \t } \n \t if ( preserveTopLeft || preserveSize ) \n \t { \n \t\t rootView->setFrame( preservedFrame ); \n \t } \n }",
-    "inline ofPtr< ofxGenericView > constructGenerated@( % )\n{\n\tofPtr< ofxGenericView > rootView = ofxGenericView::create();\n\tpopulateGenerated@( rootView∞ );\n\treturn rootView;\n}"
-  ],
+  "_functionDefinitions": {
+    "Get Frame": "inline ofRectangle getGenerated@Frame()\n{\n\treturn ofRectangle(∂frame.x∂, ∂frame.y∂, ∂frame.width∂, ∂frame.height∂);\n}",
+    "Populate": "inline void populateGenerated@( ofPtr< ofxGenericView > rootViewﬁ )\n{ƒ}",
+    "Populate Preserved": "inline void populatePreserveGenerated@( ofPtr< ofxGenericView > rootView, bool preserveTopLeft, bool preserveSizeﬁ )\n { \n\t ofRectangle preservedFrame = rootView->getFrame(); \n \n \t populateGenerated@( rootView∞ ); \n \t ofRectangle generatedFrame = getGenerated@Frame(); \n \t if ( !preserveTopLeft ) \n \t { \n \t\t preservedFrame.x = generatedFrame.x; \n \t\t preservedFrame.y = generatedFrame.y; \n \t } \n \t if ( !preserveSize ) \n \t { \n \t\t preservedFrame.width = generatedFrame.width; \n \t\t preservedFrame.height = generatedFrame.height; \n \t } \n \t if ( preserveTopLeft || preserveSize ) \n \t { \n \t\t rootView->setFrame( preservedFrame ); \n \t } \n }",
+    "Construct": "inline ofPtr< ofxGenericView > constructGenerated@( % )\n{\n\tofPtr< ofxGenericView > rootView = ofxGenericView::create();\n\tpopulateGenerated@( rootView∞ );\n\treturn rootView;\n}"
+  },
   "_rootViewInstanceName": "rootView",
   "_ignoredClasses": {
     "_UITableViewSeparatorView": true

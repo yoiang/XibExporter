@@ -19,7 +19,9 @@
 -(NSMutableDictionary*)definitionForEnum:(NSString*)enumName;
 -(NSString*)convertEnum:(NSString*)enumName value:(NSString*)value;
 
-@property (nonatomic, readonly) NSArray* functionDefinitions;
+-(NSArray*)definedFunctions;
+-(NSString*)functionDefinition:(NSString*)function;
+
 @property (nonatomic, readonly) NSString* rootViewInstanceName;
 @property (nonatomic, readonly) NSDictionary* ignoredClasses;
 @property (nonatomic, readonly) NSDictionary* asIsStringKeys;

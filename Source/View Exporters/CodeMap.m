@@ -101,9 +101,19 @@
     return [ [ [self definitionForEnum:enumName] objectForKey:@"_enum"] objectForKey:value ];
 }
 
--(NSArray*)functionDefinitions
+-(NSDictionary*)functionDefinitions
 {
     return [self.data objectForKey:@"_functionDefinitions"];
+}
+
+-(NSArray*)definedFunctions
+{
+    return [self.functionDefinitions allKeys];
+}
+
+-(NSString*)functionDefinition:(NSString*)function
+{
+    return [self.functionDefinitions objectForKey:function];
 }
 
 -(NSString*)rootViewInstanceName

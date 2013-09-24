@@ -611,11 +611,12 @@ static NSMutableDictionary* instanceCounts = nil;
             strippedParamsComma = [NSString stringWithFormat:@", %@",strippedParams];
         }
         
+        NSArray* functions = [NSArray arrayWithObjects:@"Get Frame", @"Populate", @"Populate Preserved", @"Construct", nil];
         //go through all the function definitions and create them
-        NSArray *funcDefs = self.map.functionDefinitions;
-        for (int i = 0; i < [funcDefs count]; i++)
+        for (NSString* function in functions)
         {
-            NSString *func = [[funcDefs objectAtIndex:i] stringByReplacingOccurrencesOfString:@"@" withString:k];
+            NSString *func = [self.map functionDefinition:function];
+            func = [func stringByReplacingOccurrencesOfString:@"@" withString:k];
             func = [func stringByReplacingOccurrencesOfString:@"%" withString:params];
             func = [func stringByReplacingOccurrencesOfString:@"ƒ" withString:[dict objectForKey:@"code"]];
             func = [func stringByReplacingOccurrencesOfString:@"§" withString:strippedParams];
