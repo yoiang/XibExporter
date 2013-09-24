@@ -126,4 +126,9 @@
     return [self.data objectForKey:@"_codeExporterFileNames"];
 }
 
+-(NSString*)statementEnd
+{
+    return [self.data objectForKey:@"_statementEnd"];
+}
+
 @end

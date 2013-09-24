@@ -320,7 +320,7 @@ static NSMutableDictionary* instanceCounts = nil;
             //only put the constructor in if this is not the root view, because the root view should be handled by surrounding code
             if ([dict objectForKey:@"superview"])
             {
-                [constructor appendString:[NSString stringWithFormat:@"%@;\n",constructorDef]];
+                [constructor appendString:[NSString stringWithFormat:@"%@%@\n", constructorDef,[self.map statementEnd] ] ];
             }
         }
         else
@@ -348,7 +348,7 @@ static NSMutableDictionary* instanceCounts = nil;
             NSString* lineFilledIn = [self replaceCodeSymbols:line dict:dict key:k name:instanceName outlets:outlets includes:includes def:def properties:properties];
             if ( lineFilledIn && [ lineFilledIn length ] > 0 )
             {
-                [objectSetup appendFormat:@"%@;\n",lineFilledIn];
+                [objectSetup appendFormat:@"%@%@\n", lineFilledIn, [self.map statementEnd] ];
             }
         }
     }
@@ -543,7 +543,7 @@ static NSMutableDictionary* instanceCounts = nil;
                     NSString *addsub = [def objectForKey:@"_addSubview"];
                     addsub = [addsub stringByReplacingOccurrencesOfString:@"@" withString:instanceName];
                     addsub = [addsub stringByReplacingOccurrencesOfString:@"%" withString:[subview objectForKey:@"name"]];
-                    [code appendFormat:@"\t%@;\n",addsub];
+                    [code appendFormat:@"\t%@%@\n", addsub, [self.map statementEnd] ];
                 }
             }
         }

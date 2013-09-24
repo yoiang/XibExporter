@@ -25,4 +25,6 @@
 @property (nonatomic, readonly) NSDictionary* asIsStringKeys;
 @property (nonatomic, readonly) NSArray* codeExporterFileNames;
 
+@property (nonatomic, readonly) NSString* statementEnd;
+
 @end

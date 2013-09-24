@@ -382,5 +382,6 @@
       "inputFile": "GeneratedClass.cpp.txt",
       "extension": "cpp"
     }
-  ]
+  ],
+  "_statementEnd": ";"
 }
