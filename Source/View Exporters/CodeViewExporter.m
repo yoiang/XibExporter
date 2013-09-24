@@ -561,6 +561,65 @@ static NSMutableDictionary* instanceCounts = nil;
     return [NSMutableDictionary dictionaryWithObjectsAndKeys:code, @"code", instanceName, @"name", outlets, @"outlets", includes, @"includes", properties, @"properties", nil];
 }
 
+-(NSString*)exportFunctionCode:(NSString*)xibName
+                    viewGraphs:(ViewGraphs*)viewGraphs
+                    parameters:(NSString*)params
+                          dict:(NSDictionary*)dict
+                strippedParams:(NSString*)strippedParams
+           strippedParamsComma:(NSString*)strippedParamsComma
+                   paramsComma:(NSString*)paramsComma
+{
+    NSMutableString* functionCode = [NSMutableString string];
+    
+    NSArray* functions = [NSArray arrayWithObjects:@"Get Frame", @"Populate", @"Populate Preserved", @"Construct", nil];
+    //go through all the function definitions and create them
+    for (NSString* function in functions)
+    {
+        NSString *func = [self.map functionDefinition:function];
+        func = [func stringByReplacingOccurrencesOfString:@"@" withString:xibName];
+        func = [func stringByReplacingOccurrencesOfString:@"%" withString:params];
+        func = [func stringByReplacingOccurrencesOfString:@"ƒ" withString:[dict objectForKey:@"code"]];
+        func = [func stringByReplacingOccurrencesOfString:@"§" withString:strippedParams];
+        func = [func stringByReplacingOccurrencesOfString:@"∞" withString:strippedParamsComma];
+        func = [func stringByReplacingOccurrencesOfString:@"ﬁ" withString:paramsComma];
+        
+        //get everything in between the ∂ signs and replace it with the proper values
+        NSRange r = NSMakeRange(0, [func length]);
+        while (r.location != NSNotFound && r.location < [func length])
+        {
+            r = [func rangeOfString:@"∂" options:NSLiteralSearch range:NSMakeRange(r.location, [func length] - r.location)];
+            if (r.location != NSNotFound)
+            {
+                NSRange r2 = [func rangeOfString:@"∂" options:NSLiteralSearch range:NSMakeRange(r.location+1, [func length] - r.location - 1)];
+                if (r2.location != NSNotFound)
+                {
+                    NSString *dictPath = [func substringWithRange:NSMakeRange(r.location+1, r2.location-r.location-1)];
+                    NSArray *pathComponents = [dictPath componentsSeparatedByString:@"."];
+                    ViewGraphData *viewGraphData = [viewGraphs dataForXib:xibName];
+                    NSDictionary *subDict = viewGraphData.data;
+                    for (int i = 0; i < [pathComponents count]-1; i++)
+                    {
+                        subDict = [subDict objectForKey:[pathComponents objectAtIndex:i]];
+                    }
+                    NSString *value = [subDict objectForKey:[pathComponents objectAtIndex:[pathComponents count]-1]];
+                    value = [self getStringRepresentation:value key:nil outlets:nil includes:nil properties:nil];
+                    
+                    int oldFuncLength = [func length];
+                    int replaceStart = r.location;
+                    int replaceLength = r2.location - r.location + 1;
+                    func = [func stringByReplacingCharactersInRange:NSMakeRange(replaceStart, replaceLength) withString:value];
+                    r2 = NSMakeRange(r2.location + ([func length] - oldFuncLength), 1);
+                }
+                
+                r = NSMakeRange(r2.location+1, 1);
+            }
+        }
+        
+        [functionCode appendFormat:@"\n\n%@",func];
+    }
+    return functionCode;
+}
+
 - (void) doCodeExport:(ViewGraphs*)viewGraphs atLocation:(NSString *)location data:(NSDictionary *)data keys:(NSArray *)keys atomically:(BOOL)flag error:(NSError**)error
 {
     NSMutableString *code = [NSMutableString string];
@@ -611,68 +670,7 @@ static NSMutableDictionary* instanceCounts = nil;
             strippedParamsComma = [NSString stringWithFormat:@", %@",strippedParams];
         }
         
-        NSArray* functions = [NSArray arrayWithObjects:@"Get Frame", @"Populate", @"Populate Preserved", @"Construct", nil];
-        //go through all the function definitions and create them
-        for (NSString* function in functions)
-        {
-            NSString *func = [self.map functionDefinition:function];
-            func = [func stringByReplacingOccurrencesOfString:@"@" withString:k];
-            func = [func stringByReplacingOccurrencesOfString:@"%" withString:params];
-            func = [func stringByReplacingOccurrencesOfString:@"ƒ" withString:[dict objectForKey:@"code"]];
-            func = [func stringByReplacingOccurrencesOfString:@"§" withString:strippedParams];
-            func = [func stringByReplacingOccurrencesOfString:@"∞" withString:strippedParamsComma];
-            func = [func stringByReplacingOccurrencesOfString:@"ﬁ" withString:paramsComma];
-            
-            //get everything in between the ∂ signs and replace it with the proper values
-            NSRange r = NSMakeRange(0, [func length]);
-            while (r.location != NSNotFound && r.location < [func length])
-            {
-                r = [func rangeOfString:@"∂" options:NSLiteralSearch range:NSMakeRange(r.location, [func length] - r.location)];
-                if (r.location != NSNotFound)
-                {
-                    NSRange r2 = [func rangeOfString:@"∂" options:NSLiteralSearch range:NSMakeRange(r.location+1, [func length] - r.location - 1)];
-                    if (r2.location != NSNotFound)
-                    {
-                        NSString *dictPath = [func substringWithRange:NSMakeRange(r.location+1, r2.location-r.location-1)];
-                        NSArray *pathComponents = [dictPath componentsSeparatedByString:@"."];
-                        ViewGraphData *viewGraphData = [viewGraphs dataForXib:k];
-                        NSDictionary *subDict = viewGraphData.data;
-                        for (int i = 0; i < [pathComponents count]-1; i++)
-                        {
-                            subDict = [subDict objectForKey:[pathComponents objectAtIndex:i]];
-                        }
-                        NSString *value = [subDict objectForKey:[pathComponents objectAtIndex:[pathComponents count]-1]];
-                        value = [self getStringRepresentation:value key:nil outlets:nil includes:nil properties:nil];
-                        
-                        int oldFuncLength = [func length];
-                        int replaceStart = r.location;
-                        int replaceLength = r2.location - r.location + 1;
-                        func = [func stringByReplacingCharactersInRange:NSMakeRange(replaceStart, replaceLength) withString:value];
-                        r2 = NSMakeRange(r2.location + ([func length] - oldFuncLength), 1);
-                    }
-                    
-                    r = NSMakeRange(r2.location+1, 1);
-                }
-            }
-            
-            [code appendFormat:@"\n\n%@",func];
-        }
-        
-        /*
-         //get the outlets and write them as pointers into the function signature
-         NSString *func = [[self.codeMap objectForKey:@"_function"] stringByReplacingOccurrencesOfString:@"@" withString:k];
-         NSArray *outlets = [dict objectForKey:@"outlets"];
-         NSString *params = @"";
-         for (int j = 0; j < [outlets count]; j++)
-         {
-         NSString *param = [outlets objectAtIndex:j];
-         params = [params stringByAppendingFormat:@"%@%@",(j > 0 ? @", " : @""),param];
-         }
-         func = [func stringByReplacingOccurrencesOfString:@"%" withString:params];
-         
-         [code appendFormat:@"%@\n{\n",func];
-         NSString *ret = [[self.codeMap objectForKey:@"_return"] stringByReplacingOccurrencesOfString:@"@" withString:[dict objectForKey:@"name"]];
-         [code appendFormat:@"%@\t%@;\n}\n\n",[dict objectForKey:@"code"], ret];*/
+        [code appendString:[self exportFunctionCode:k viewGraphs:viewGraphs parameters:params dict:dict strippedParams:strippedParams strippedParamsComma:strippedParamsComma paramsComma:paramsComma] ];
     }
     
     [code writeToFile:location atomically:flag encoding:NSUTF8StringEncoding error:error];
