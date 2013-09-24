@@ -461,98 +461,95 @@ static NSMutableDictionary* instanceCounts = nil;
             return nil;
         }
 
-//        if (def)
+        //if we have an include, add that in
+        if ([def objectForKey:@"_include"])
         {
-            //if we have an include, add that in
-            if ([def objectForKey:@"_include"])
+            NSMutableArray *allIncludes = [NSMutableArray array];
+            if ([[def objectForKey:@"_include"] isKindOfClass:[NSArray class]])
             {
-                NSMutableArray *allIncludes = [NSMutableArray array];
-                if ([[def objectForKey:@"_include"] isKindOfClass:[NSArray class]])
+                [allIncludes addObjectsFromArray:[def objectForKey:@"_include"]];
+            }
+            else
+            {
+                [allIncludes addObject:[def objectForKey:@"_include"]];
+            }
+            
+            for (int i = 0; i < [allIncludes count]; i++)
+            {
+                if (![includes containsObject:[allIncludes objectAtIndex:i]])
                 {
-                    [allIncludes addObjectsFromArray:[def objectForKey:@"_include"]];
+                    [includes addObject:[allIncludes objectAtIndex:i]];
+                }
+            }
+        }
+        
+        //this is an annoying hack because with a status bar iOS tells us the Y is 0 in app, whereas it's 20 in the XIB
+        if (![dict objectForKey:@"superview"] && [[[dict objectForKey:@"frame"] objectForKey:@"height"] floatValue] == 460.0f)
+        {
+            [[dict objectForKey:@"frame"] setObject:[NSNumber numberWithFloat:20.0f] forKey:@"y"];
+        }
+        
+        //if we have an instance name, pull it out so we can use it later
+        if ([dict objectForKey:@"instanceName"])
+        {
+            instanceName = [dict objectForKey:@"instanceName"];
+            [[outlets objectForKey:@"stripped"] addObject:instanceName];
+            [[outlets objectForKey:@"unstripped"] addObject:[[def objectForKey:@"_parameter"] stringByReplacingOccurrencesOfString:@"@" withString:instanceName]];
+            [[properties objectForKey:@"outlets"] addObject:dict];
+            
+            //add me to the buttons list if I'm a button
+            if ( [class rangeOfString:@"button" options:NSCaseInsensitiveSearch].location != NSNotFound )
+            {
+                [properties setObject:[NSNumber numberWithBool:YES] forKey:@"hasButtons"];
+                [[properties objectForKey:@"buttons"] addObject:dict];
+            }
+            
+            isOutlet = YES;
+        }
+        //the root view is treated special
+        else
+        {
+            if (![dict objectForKey:@"superview"])
+            {
+                if (self.map.rootViewInstanceName)
+                {
+                    instanceName = self.map.rootViewInstanceName;
                 }
                 else
                 {
-                    [allIncludes addObject:[def objectForKey:@"_include"]];
-                }
-                
-                for (int i = 0; i < [allIncludes count]; i++)
-                {
-                    if (![includes containsObject:[allIncludes objectAtIndex:i]])
-                    {
-                        [includes addObject:[allIncludes objectAtIndex:i]];
-                    }
+                    instanceName = @"rootView";
                 }
             }
-            
-            //this is an annoying hack because with a status bar iOS tells us the Y is 0 in app, whereas it's 20 in the XIB
-            if (![dict objectForKey:@"superview"] && [[[dict objectForKey:@"frame"] objectForKey:@"height"] floatValue] == 460.0f)
+            //if it is normal and has no name, autogenerate the name
+            else if ([def objectForKey:@"_variableName"])
             {
-                [[dict objectForKey:@"frame"] setObject:[NSNumber numberWithFloat:20.0f] forKey:@"y"];
+                NSString* variableName = [ def objectForKey:@"_variableName" ];
+                instanceName = [ variableName stringByReplacingOccurrencesOfString:@"#" withString:[NSString stringWithFormat:@"%@", [ self getInstanceCount:variableName ]]];
             }
-            
-            //if we have an instance name, pull it out so we can use it later
-            if ([dict objectForKey:@"instanceName"])
+        }
+        
+        NSString* constructor = [self codeForClassConstructor:class instanceName:instanceName outlets:outlets includes:includes dict:dict def:def properties:properties isInline:isInline isOutlet:isOutlet];
+        
+        [code appendString:constructor];
+        
+        if (!isInline)
+        {
+            NSString* setup = [self codeForObjectSetup:class instanceName:instanceName outlets:outlets includes:includes dict:dict def:def properties:properties];
+            [code appendString:setup];
+        }
+        
+        
+        NSArray *subviews = [dict objectForKey:@"subviews"];
+        for (int i = 0; i < [subviews count]; i++)
+        {
+            NSDictionary *subview = [self getCodeFor:[subviews objectAtIndex:i] isInline:NO outlets:outlets includes:includes properties:properties];
+            if (subview)
             {
-                instanceName = [dict objectForKey:@"instanceName"];
-                [[outlets objectForKey:@"stripped"] addObject:instanceName];
-                [[outlets objectForKey:@"unstripped"] addObject:[[def objectForKey:@"_parameter"] stringByReplacingOccurrencesOfString:@"@" withString:instanceName]];
-                [[properties objectForKey:@"outlets"] addObject:dict];
-                
-                //add me to the buttons list if I'm a button
-                if ( [class rangeOfString:@"button" options:NSCaseInsensitiveSearch].location != NSNotFound )
-                {
-                    [properties setObject:[NSNumber numberWithBool:YES] forKey:@"hasButtons"];
-                    [[properties objectForKey:@"buttons"] addObject:dict];
-                }
-                
-                isOutlet = YES;
-            }
-            //the root view is treated special
-            else
-            {
-                if (![dict objectForKey:@"superview"])
-                {
-                    if (self.map.rootViewInstanceName)
-                    {
-                        instanceName = self.map.rootViewInstanceName;
-                    }
-                    else
-                    {
-                        instanceName = @"rootView";
-                    }
-                }
-                //if it is normal and has no name, autogenerate the name
-                else if ([def objectForKey:@"_variableName"])
-                {
-                    NSString* variableName = [ def objectForKey:@"_variableName" ];
-                    instanceName = [ variableName stringByReplacingOccurrencesOfString:@"#" withString:[NSString stringWithFormat:@"%@", [ self getInstanceCount:variableName ]]];
-                }
-            }
-            
-            NSString* constructor = [self codeForClassConstructor:class instanceName:instanceName outlets:outlets includes:includes dict:dict def:def properties:properties isInline:isInline isOutlet:isOutlet];
-            
-            [code appendString:constructor];
-            
-            if (!isInline)
-            {
-                NSString* setup = [self codeForObjectSetup:class instanceName:instanceName outlets:outlets includes:includes dict:dict def:def properties:properties];
-                [code appendString:setup];
-            }
-            
-            
-            NSArray *subviews = [dict objectForKey:@"subviews"];
-            for (int i = 0; i < [subviews count]; i++)
-            {
-                NSDictionary *subview = [self getCodeFor:[subviews objectAtIndex:i] isInline:NO outlets:outlets includes:includes properties:properties];
-                if (subview)
-                {
-                    [code appendString:[subview objectForKey:@"code"]];
-                    [code appendFormat:@"\t%@%@\n",
-                     [self codeForAddSubview:subview instanceName:instanceName def:def],
-                     [self.map statementEnd]
-                     ];
-                }
+                [code appendString:[subview objectForKey:@"code"]];
+                [code appendFormat:@"\t%@%@\n",
+                 [self codeForAddSubview:subview instanceName:instanceName def:def],
+                 [self.map statementEnd]
+                 ];
             }
         }
     }
@@ -792,49 +789,4 @@ static NSMutableDictionary* instanceCounts = nil;
     return [ NSNumber numberWithUnsignedInt:instanceCount ];
 }
 
-
 @end
-
-/*
- #import "UIViewController+Exports.h"
- #import "SBJson.h"
- #import "UIView+Exports.h"
- #import "XcodeProjectHelper.h"
- 
- #import "NSArray+NSString.h"
- #import "NSString+Parsing.h"
- 
- #import "AppDelegate.h"
- #import "XibResources.h"
- 
- #import "CXMLElement+UIView.h"
- 
- #import "ViewGraphData.h"
- 
- #pragma mark Public Methods
- 
- 
- 
- 
- 
- - (NSArray *) exportData:(ViewGraphs*)viewGraphs toProject:(BOOL)useProjectDir atomically:(BOOL)flag format:(ViewExporterFormat)format error:(NSError**)error saveMultipleFiles:(BOOL)mult useOnlyModifiedFiles:(BOOL)onlyModified
- {
- NSString *targetFile = nil;
- 
- if (useProjectDir)
- {
- targetFile = [[XcodeProjectHelper getGeneratedSourceFolder] stringByAppendingString:@"/ExportedViews.h"];
- }
- else
- {
- NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
- targetFile = [NSString stringWithFormat:@"%@/ExportedViews.h",documentsDirectory];
- }
- 
- return [self exportData:viewGraphs toFile:targetFile atomically:flag format:format error:error saveMultipleFiles:mult useOnlyModifiedFiles:onlyModified];
- }
- 
- 
- 
- @end
- */
