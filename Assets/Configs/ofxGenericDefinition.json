@@ -1,5 +1,16 @@
 {
   "Enum Definitions": {
+    "UIViewAutoresizing": {
+      "_enum": {
+        "UIViewAutoresizingFlexibleLeftMargin": "ofxGenericViewAutoresizingLeftMargin",
+        "UIViewAutoresizingFlexibleWidth": "ofxGenericViewAutoresizingFlexibleWidth",
+        "UIViewAutoresizingFlexibleRightMargin": "ofxGenericViewAutoresizingRightMargin",
+        "UIViewAutoresizingFlexibleTopMargin": "ofxGenericViewAutoresizingTopMargin",
+        "UIViewAutoresizingFlexibleHeight": "ofxGenericViewAutoresizingFlexibleHeight",
+        "UIViewAutoresizingFlexibleBottomMargin": "ofxGenericViewAutoresizingBottomMargin"
+      },
+      "_inlineConstructor": "?$autoresizingMask$"
+    },
     "UILineBreakMode": {
       "_enum": {
         "UILineBreakModeCharacterWrap": "ofxGenericTextLinebreakModeCharacterWrap",

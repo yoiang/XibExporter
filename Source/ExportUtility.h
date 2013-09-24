@@ -51,12 +51,8 @@ return ( type )[ self getCustomMemberValue:@"" #Name "" ]; \
         statement EnumAsString( enumValue ); \
         break;
 
-#define EnumToMask( appendToString, iOSenumValue, ofxGenumValue ) \
-    if ( mask & iOSenumValue ) \
+#define EnumMaskToStringArray( appendToArray, enumValue ) \
+    if ( mask & enumValue ) \
     { \
-        if ( [ appendToString length ] > 0 ) \
-        { \
-            [ result appendString:@" | " ]; \
-        } \
-        [ result appendString:EnumAsString( ofxGenumValue ) ]; \
+        [appendToArray addObject:EnumAsString( enumValue ) ]; \
     }

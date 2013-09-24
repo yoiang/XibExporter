@@ -131,7 +131,7 @@ inline void populateGeneratedViewTemplates( ofPtr< ofxGenericView > rootView, of
 }
 
 inline void populatePreserveGeneratedViewTemplates( ofPtr< ofxGenericView > rootView, bool preserveTopLeft, bool preserveSize, ofPtr< ofxGenericTextView > &variableNameLabel, ofPtr< ofxGenericButtonView > &variableNameButton1, ofPtr< ofxGenericButtonView > &variableNameButton2, ofPtr< ofxGenericImageView > &variableNameImage, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericTextView > &variableNameLabel2 )
- {
+{
     ofRectangle preservedFrame = rootView->getFrame();
 
     populateGeneratedViewTemplates( rootView, variableNameLabel, variableNameButton1, variableNameButton2, variableNameImage, variableNameView, variableNameLabel2 );
@@ -150,8 +150,8 @@ inline void populatePreserveGeneratedViewTemplates( ofPtr< ofxGenericView > root
     if ( preserveTopLeft || preserveSize )
     {
         rootView->setFrame( preservedFrame );
-    } 
- }
+    }
+}
 
 inline ofPtr< ofxGenericView > constructGeneratedViewTemplates( ofPtr< ofxGenericTextView > &variableNameLabel, ofPtr< ofxGenericButtonView > &variableNameButton1, ofPtr< ofxGenericButtonView > &variableNameButton2, ofPtr< ofxGenericImageView > &variableNameImage, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericTextView > &variableNameLabel2 )
 {

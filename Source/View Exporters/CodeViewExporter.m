@@ -210,66 +210,114 @@ static NSMutableDictionary* instanceCounts = nil;
     return outputArray;
 }
 
-- (NSString *) getStringRepresentation:(id)v key:( NSString* )key outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
+-(NSString*)getStringRepresentationForDictionaryValue:(NSDictionary*)value key:(NSString*)key outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
 {
-    NSString *value = nil;
+    if ( [ExportUtility isDictionaryEnum:(NSDictionary*)value] )
+    {
+        return [self valueForEnum:key valueObject:value];
+    } else
+    {
+        return [ [self getCodeFor:value isInline:YES outlets:outlets includes:includes properties:properties] objectForKey:@"code"];
+    }
+}
+
+-(NSString*)getStringRepresentationForArrayValue:(NSArray*)value key:( NSString* )key outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
+{
+    NSMutableString* result = nil;
     
-    if ([v isKindOfClass:[NSDictionary class]] && outlets && includes && properties )
+    for (id individualValue in value)
     {
-        value = [[self getCodeFor:v isInline:YES outlets:outlets includes:includes properties:properties] objectForKey:@"code"];
-    }
-    else if ([v isKindOfClass:[NSString class]])
-    {
-        NSString* buildFormat = @"\"%@\"";
-        if (!self.map.asIsStringKeys || [self.map.asIsStringKeys objectForKey:key])
+        NSString* parsedStringValue = [self getStringRepresentation:individualValue key:key outlets:outlets includes:includes properties:properties];
+        
+        // For now only used for masks
+        if (!result)
         {
-            buildFormat = @"%@";
+            result = [NSMutableString stringWithString:parsedStringValue];
+        } else
+        {
+            [result appendFormat:@" | %@", parsedStringValue];
         }
-        value = [[NSString stringWithFormat:buildFormat,v] stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
-        value = [value stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
     }
-    else if ([v isKindOfClass:[NSNumber class]])
+    return result;
+}
+
+-(NSString*)getStringRepresentationForStringValue:(NSString*)value key:(NSString*)key
+{
+    NSString* result = nil;
+    
+    NSString* buildFormat = @"\"%@\"";
+    if (!self.map.asIsStringKeys || [self.map.asIsStringKeys objectForKey:key])
     {
-        if (strcmp([v objCType], @encode(float)) == 0)
+        buildFormat = @"%@";
+    }
+    result = [ [NSString stringWithFormat:buildFormat, value] stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
+    result = [result stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
+    
+    return result;
+}
+
+-(NSString*)getStringRespresentationForNumberValue:(NSNumber*)value
+{
+    NSString* result = nil;
+    
+    if (strcmp([value objCType], @encode(float)) == 0)
+    {
+        if ([value floatValue] - [value intValue] == 0)
         {
-            if ([v floatValue] - [v intValue] == 0)
-            {
-                value = [NSString stringWithFormat:@"%@.0f",[v stringValue]];
-            }
-            else
-            {
-                value = [NSString stringWithFormat:@"%@f",[v stringValue]];
-            }
-        }
-        else if (strcmp([v objCType], @encode(BOOL)) == 0)
-        {
-            if ( [v boolValue] )
-            {
-                value = @"true";
-            }
-            else
-            {
-                value = @"false";
-            }
+            result = [NSString stringWithFormat:@"%@.0f",[value stringValue]];
         }
         else
         {
-            value = [v stringValue];
+            result = [NSString stringWithFormat:@"%@f",[value stringValue]];
         }
     }
-    
-    if (!value)
+    else if (strcmp([value objCType], @encode(BOOL)) == 0)
     {
-        value = @"0";
+        if ( [value boolValue] )
+        {
+            result = @"true";
+        }
+        else
+        {
+            result = @"false";
+        }
     }
-    
-    return value;
+    else
+    {
+        result = [value stringValue];
+    }
+    return result;
 }
 
--(NSString*)valueForEnum:(NSString*)valueKey dict:(NSDictionary *)dict def:(NSDictionary*)def
+- (NSString *) getStringRepresentation:(id)v key:( NSString* )key outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
 {
-    NSDictionary* enumValue = [dict objectForKey:valueKey];
+    NSString *result = nil;
     
+    if ([v isKindOfClass:[NSDictionary class]] && outlets && includes && properties )
+    {
+        result = [self getStringRepresentationForDictionaryValue:v key:key outlets:outlets includes:includes properties:properties];
+    } else if ( [v isKindOfClass:[NSArray class] ] )
+    {
+        result = [self getStringRepresentationForArrayValue:v key:key outlets:outlets includes:includes properties:properties];
+    } else if ([v isKindOfClass:[NSString class]])
+    {
+        result = [self getStringRepresentationForStringValue:v key:key];
+    }
+    else if ([v isKindOfClass:[NSNumber class]])
+    {
+        result = [self getStringRespresentationForNumberValue:v];
+    }
+    
+    if (!result)
+    {
+        result = @"0";
+    }
+    
+    return result;
+}
+
+-(NSString*)valueForEnum:(NSString*)valueKey valueObject:(NSObject*)valueObject
+{
     NSString* enumValueKey;
     NSRange prefix = [valueKey rangeOfString:@"." options:NSLiteralSearch];
     if (prefix.length == 0)
@@ -280,7 +328,14 @@ static NSMutableDictionary* instanceCounts = nil;
         enumValueKey = [valueKey substringFromIndex:prefix.location + prefix.length];
     }
     
-    return [self.map convertEnum:[enumValue objectForKey:@"class"] value:[enumValue objectForKey:enumValueKey] ];
+    NSString* result = nil;
+    if ( [valueObject isKindOfClass:[NSDictionary class] ] )
+    {
+        NSDictionary* valueDict = (NSDictionary*)valueObject;
+        result = [self.map convertEnum:[valueDict objectForKey:@"class"] value:[valueDict objectForKey:enumValueKey] ];
+    }
+    
+    return result;
 }
 
 -(NSString*)codeForClassConstructor:(NSString*)class instanceName:(NSString*)instanceName outlets:(NSMutableDictionary*)outlets includes:(NSMutableArray*)includes dict:(NSDictionary*)dict def:(NSDictionary*)def properties:(NSMutableDictionary*)properties isInline:(BOOL)isInline isOutlet:(BOOL)isOutlet
@@ -394,11 +449,11 @@ static NSMutableDictionary* instanceCounts = nil;
                 //if we have an enum, then do a lookup in this def's enum table
                 if (isEnum)
                 {
-                    value = [self valueForEnum:valueKey dict:dict def:def];
+                    value = [self valueForEnum:valueKey valueObject:valueObject];
                 }
                 else
                 {
-                    value = [self getStringRepresentation:[dict objectForKey:valueKey] key:valueKey outlets:outlets includes:includes properties:properties];
+                    value = [self getStringRepresentation:valueObject key:valueKey outlets:outlets includes:includes properties:properties];
                 }
                 
                 if ( value && [ value length ] > 0 )

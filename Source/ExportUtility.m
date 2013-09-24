@@ -323,27 +323,38 @@ NSString* UITextBorderStyleToString( UITextBorderStyle type )
     return dict;
 }
 
-NSString* UIViewAutoresizingToString( UIViewAutoresizing mask )
+NSArray* UIViewAutoresizingToArray( UIViewAutoresizing mask )
 {
-    NSMutableString* result = [ NSMutableString string ];
-    EnumToMask( result, UIViewAutoresizingFlexibleLeftMargin, ofxGenericViewAutoresizingLeftMargin );
-    EnumToMask( result, UIViewAutoresizingFlexibleWidth, ofxGenericViewAutoresizingFlexibleWidth );
-    EnumToMask( result, UIViewAutoresizingFlexibleRightMargin, ofxGenericViewAutoresizingRightMargin );
-    EnumToMask( result, UIViewAutoresizingFlexibleTopMargin, ofxGenericViewAutoresizingTopMargin );
-    EnumToMask( result, UIViewAutoresizingFlexibleHeight, ofxGenericViewAutoresizingFlexibleHeight );
-    EnumToMask( result, UIViewAutoresizingFlexibleBottomMargin, ofxGenericViewAutoresizingBottomMargin );
-
-    if ( [ result length ] == 0 )
+    NSMutableArray* result = [NSMutableArray array];
+    EnumMaskToStringArray( result, UIViewAutoresizingFlexibleLeftMargin );
+    EnumMaskToStringArray( result, UIViewAutoresizingFlexibleWidth );
+    EnumMaskToStringArray( result, UIViewAutoresizingFlexibleRightMargin );
+    EnumMaskToStringArray( result, UIViewAutoresizingFlexibleTopMargin );
+    EnumMaskToStringArray( result, UIViewAutoresizingFlexibleHeight );
+    EnumMaskToStringArray( result, UIViewAutoresizingFlexibleBottomMargin );
+    
+    if ( [result count] == 0 )
     {
-        [ result appendString:@"ofxGenericViewAutoresizingNone" ];
+//        EnumToMask(result, UIViewAutoresizingNone); // TODO: Test
+        [result addObject:EnumAsString(UIViewAutoresizingNone) ];
     }
 
     return result;
 }
 
-+( NSString* ) exportUIViewAutoresizing:( UIViewAutoresizing ) mask
++( NSArray* ) exportUIViewAutoresizing:( UIViewAutoresizing ) mask
 {
-    return UIViewAutoresizingToString( mask );
+    NSMutableArray* result = [NSMutableArray array];
+    for (NSString* value in UIViewAutoresizingToArray( mask ) )
+    {
+        NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+        [dict setObject:@"UIViewAutoresizing" forKey:@"class"];
+        [dict setObject:value forKey:@"autoresizingMask"];
+        [self markAsEnumType:dict];
+        
+        [result addObject:dict];
+    }
+    return result;
 }
 
 @end
