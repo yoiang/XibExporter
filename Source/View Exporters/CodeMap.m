@@ -116,6 +116,42 @@
     return [self.functionDefinitions objectForKey:function];
 }
 
+-(NSString*)functionDefinitionFileName
+{
+    return [self.data objectForKey:@"_functionDefinitionFileName"];
+}
+
+// TODO: add order definition to JSON to ensure correct order each time
+-(NSString*)combinedFunctionDefinitions
+{
+    NSMutableString* functionDefinitions = [NSMutableString string];
+    
+    if ([ [self functionDefinitionFileName] length] > 0)
+    {
+        NSString* filePath = [ [NSBundle mainBundle] pathForResource:[self functionDefinitionFileName] ofType:@""];
+        if ( [filePath length] == 0)
+        {
+            NSLog(@"Unabled to find specified Function Definition File %@", [self functionDefinitionFileName] );
+        } else
+        {
+            NSError* error;
+            
+            [functionDefinitions appendFormat:@"\n\n%@",
+             [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error ]
+             ];
+        }
+    }
+    if ( [functionDefinitions length] == 0 && [self.definedFunctions count] > 0)
+    {
+        for (NSString* functionName in self.definedFunctions)
+        {
+            [functionDefinitions appendFormat:@"\n\n%@",[self functionDefinition:functionName] ];
+        }
+    }
+    
+    return functionDefinitions;
+}
+
 -(NSString*)rootViewInstanceName
 {
     return [self.data objectForKey:@"_rootViewInstanceName"];

@@ -569,55 +569,47 @@ static NSMutableDictionary* instanceCounts = nil;
            strippedParamsComma:(NSString*)strippedParamsComma
                    paramsComma:(NSString*)paramsComma
 {
-    NSMutableString* functionCode = [NSMutableString string];
+    NSString *func = [self.map combinedFunctionDefinitions];
     
-    NSArray* functions = [NSArray arrayWithObjects:@"Get Frame", @"Populate", @"Populate Preserved", @"Construct", nil];
-    //go through all the function definitions and create them
-    for (NSString* function in functions)
+    func = [func stringByReplacingOccurrencesOfString:@"@" withString:xibName];
+    func = [func stringByReplacingOccurrencesOfString:@"%" withString:params];
+    func = [func stringByReplacingOccurrencesOfString:@"ƒ" withString:[dict objectForKey:@"code"]];
+    func = [func stringByReplacingOccurrencesOfString:@"§" withString:strippedParams];
+    func = [func stringByReplacingOccurrencesOfString:@"∞" withString:strippedParamsComma];
+    func = [func stringByReplacingOccurrencesOfString:@"ﬁ" withString:paramsComma];
+    
+    //get everything in between the ∂ signs and replace it with the proper values
+    NSRange r = NSMakeRange(0, [func length]);
+    while (r.location != NSNotFound && r.location < [func length])
     {
-        NSString *func = [self.map functionDefinition:function];
-        func = [func stringByReplacingOccurrencesOfString:@"@" withString:xibName];
-        func = [func stringByReplacingOccurrencesOfString:@"%" withString:params];
-        func = [func stringByReplacingOccurrencesOfString:@"ƒ" withString:[dict objectForKey:@"code"]];
-        func = [func stringByReplacingOccurrencesOfString:@"§" withString:strippedParams];
-        func = [func stringByReplacingOccurrencesOfString:@"∞" withString:strippedParamsComma];
-        func = [func stringByReplacingOccurrencesOfString:@"ﬁ" withString:paramsComma];
-        
-        //get everything in between the ∂ signs and replace it with the proper values
-        NSRange r = NSMakeRange(0, [func length]);
-        while (r.location != NSNotFound && r.location < [func length])
+        r = [func rangeOfString:@"∂" options:NSLiteralSearch range:NSMakeRange(r.location, [func length] - r.location)];
+        if (r.location != NSNotFound)
         {
-            r = [func rangeOfString:@"∂" options:NSLiteralSearch range:NSMakeRange(r.location, [func length] - r.location)];
-            if (r.location != NSNotFound)
+            NSRange r2 = [func rangeOfString:@"∂" options:NSLiteralSearch range:NSMakeRange(r.location+1, [func length] - r.location - 1)];
+            if (r2.location != NSNotFound)
             {
-                NSRange r2 = [func rangeOfString:@"∂" options:NSLiteralSearch range:NSMakeRange(r.location+1, [func length] - r.location - 1)];
-                if (r2.location != NSNotFound)
+                NSString *dictPath = [func substringWithRange:NSMakeRange(r.location+1, r2.location-r.location-1)];
+                NSArray *pathComponents = [dictPath componentsSeparatedByString:@"."];
+                ViewGraphData *viewGraphData = [viewGraphs dataForXib:xibName];
+                NSDictionary *subDict = viewGraphData.data;
+                for (int i = 0; i < [pathComponents count]-1; i++)
                 {
-                    NSString *dictPath = [func substringWithRange:NSMakeRange(r.location+1, r2.location-r.location-1)];
-                    NSArray *pathComponents = [dictPath componentsSeparatedByString:@"."];
-                    ViewGraphData *viewGraphData = [viewGraphs dataForXib:xibName];
-                    NSDictionary *subDict = viewGraphData.data;
-                    for (int i = 0; i < [pathComponents count]-1; i++)
-                    {
-                        subDict = [subDict objectForKey:[pathComponents objectAtIndex:i]];
-                    }
-                    NSString *value = [subDict objectForKey:[pathComponents objectAtIndex:[pathComponents count]-1]];
-                    value = [self getStringRepresentation:value key:nil outlets:nil includes:nil properties:nil];
-                    
-                    int oldFuncLength = [func length];
-                    int replaceStart = r.location;
-                    int replaceLength = r2.location - r.location + 1;
-                    func = [func stringByReplacingCharactersInRange:NSMakeRange(replaceStart, replaceLength) withString:value];
-                    r2 = NSMakeRange(r2.location + ([func length] - oldFuncLength), 1);
+                    subDict = [subDict objectForKey:[pathComponents objectAtIndex:i]];
                 }
+                NSString *value = [subDict objectForKey:[pathComponents objectAtIndex:[pathComponents count]-1]];
+                value = [self getStringRepresentation:value key:nil outlets:nil includes:nil properties:nil];
                 
-                r = NSMakeRange(r2.location+1, 1);
+                int oldFuncLength = [func length];
+                int replaceStart = r.location;
+                int replaceLength = r2.location - r.location + 1;
+                func = [func stringByReplacingCharactersInRange:NSMakeRange(replaceStart, replaceLength) withString:value];
+                r2 = NSMakeRange(r2.location + ([func length] - oldFuncLength), 1);
             }
+            
+            r = NSMakeRange(r2.location+1, 1);
         }
-        
-        [functionCode appendFormat:@"\n\n%@",func];
     }
-    return functionCode;
+    return func;
 }
 
 - (void) doCodeExport:(ViewGraphs*)viewGraphs atLocation:(NSString *)location data:(NSDictionary *)data keys:(NSArray *)keys atomically:(BOOL)flag error:(NSError**)error

@@ -62,6 +62,7 @@
 		3CDA1A9A17F141F700A80DEF /* ofxGenericViewExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDA1A9617F141F700A80DEF /* ofxGenericViewExporter.m */; };
 		3CDA1A9B17F141F700A80DEF /* ViewExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDA1A9817F141F700A80DEF /* ViewExporter.m */; };
 		3CDA1AA117F1424B00A80DEF /* CodeViewExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDA1AA017F1424B00A80DEF /* CodeViewExporter.m */; };
+		3CDA1AA317F1729A00A80DEF /* ofxGenericDefinition.h in Resources */ = {isa = PBXBuildFile; fileRef = 3CDA1AA217F1728D00A80DEF /* ofxGenericDefinition.h */; };
 		3CEA6EFB17D1033500F419A3 /* ofxGenericDefinition.json in Resources */ = {isa = PBXBuildFile; fileRef = 3CEA6EF917D1033500F419A3 /* ofxGenericDefinition.json */; };
 		3CEA6EFC17D1033500F419A3 /* FontExchange.json in Resources */ = {isa = PBXBuildFile; fileRef = 3CEA6EFA17D1033500F419A3 /* FontExchange.json */; };
 		3CEA6EFF17D1035B00F419A3 /* GeneratedClass.cpp.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3CEA6EFD17D1035B00F419A3 /* GeneratedClass.cpp.txt */; };
@@ -206,6 +207,7 @@
 		3CDA1A9817F141F700A80DEF /* ViewExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewExporter.m; sourceTree = "<group>"; };
 		3CDA1A9F17F1424B00A80DEF /* CodeViewExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeViewExporter.h; sourceTree = "<group>"; };
 		3CDA1AA017F1424B00A80DEF /* CodeViewExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeViewExporter.m; sourceTree = "<group>"; };
+		3CDA1AA217F1728D00A80DEF /* ofxGenericDefinition.h */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = ofxGenericDefinition.h; sourceTree = "<group>"; };
 		3CEA6EF917D1033500F419A3 /* ofxGenericDefinition.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ofxGenericDefinition.json; sourceTree = "<group>"; };
 		3CEA6EFA17D1033500F419A3 /* FontExchange.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FontExchange.json; sourceTree = "<group>"; };
 		3CEA6EFD17D1035B00F419A3 /* GeneratedClass.cpp.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GeneratedClass.cpp.txt; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 			isa = PBXGroup;
 			children = (
 				3CEA6EF917D1033500F419A3 /* ofxGenericDefinition.json */,
+				3CDA1AA217F1728D00A80DEF /* ofxGenericDefinition.h */,
 				3CEA6EFD17D1035B00F419A3 /* GeneratedClass.cpp.txt */,
 				3CEA6EFE17D1035B00F419A3 /* GeneratedClass.h.txt */,
 				3CEA6EFA17D1033500F419A3 /* FontExchange.json */,
@@ -662,6 +665,7 @@
 				3C7A7F7217D0FC8000C57BE9 /* Default-568h@2x.png in Resources */,
 				3CEA72E017D112AA00F419A3 /* MainWindow.xib in Resources */,
 				3CEA6EFF17D1035B00F419A3 /* GeneratedClass.cpp.txt in Resources */,
+				3CDA1AA317F1729A00A80DEF /* ofxGenericDefinition.h in Resources */,
 				3C7A7F7317D0FC8000C57BE9 /* Default.png in Resources */,
 				3CEA72E117D112AD00F419A3 /* MainWindow_iPad.xib in Resources */,
 				3CEA72E317D112B100F419A3 /* ViewTemplates_iPad.xib in Resources */,

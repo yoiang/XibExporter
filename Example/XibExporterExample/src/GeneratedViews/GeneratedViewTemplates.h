@@ -12,7 +12,7 @@
 
 inline ofRectangle getGeneratedViewTemplatesFrame()
 {
-	return ofRectangle(0.0f, 0.0f, 320.0f, 568.0f);
+    return ofRectangle(0.0f, 0.0f, 320.0f, 568.0f);
 }
 
 inline void populateGeneratedViewTemplates( ofPtr< ofxGenericView > rootView, ofPtr< ofxGenericTextView > &variableNameLabel, ofPtr< ofxGenericButtonView > &variableNameButton1, ofPtr< ofxGenericButtonView > &variableNameButton2, ofPtr< ofxGenericImageView > &variableNameImage, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericTextView > &variableNameLabel2 )
@@ -131,30 +131,31 @@ inline void populateGeneratedViewTemplates( ofPtr< ofxGenericView > rootView, of
 }
 
 inline void populatePreserveGeneratedViewTemplates( ofPtr< ofxGenericView > rootView, bool preserveTopLeft, bool preserveSize, ofPtr< ofxGenericTextView > &variableNameLabel, ofPtr< ofxGenericButtonView > &variableNameButton1, ofPtr< ofxGenericButtonView > &variableNameButton2, ofPtr< ofxGenericImageView > &variableNameImage, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericTextView > &variableNameLabel2 )
- { 
-	 ofRectangle preservedFrame = rootView->getFrame(); 
- 
- 	 populateGeneratedViewTemplates( rootView, variableNameLabel, variableNameButton1, variableNameButton2, variableNameImage, variableNameView, variableNameLabel2 ); 
- 	 ofRectangle generatedFrame = getGeneratedViewTemplatesFrame(); 
- 	 if ( !preserveTopLeft ) 
- 	 { 
- 		 preservedFrame.x = generatedFrame.x; 
- 		 preservedFrame.y = generatedFrame.y; 
- 	 } 
- 	 if ( !preserveSize ) 
- 	 { 
- 		 preservedFrame.width = generatedFrame.width; 
- 		 preservedFrame.height = generatedFrame.height; 
- 	 } 
- 	 if ( preserveTopLeft || preserveSize ) 
- 	 { 
- 		 rootView->setFrame( preservedFrame ); 
- 	 } 
+ {
+    ofRectangle preservedFrame = rootView->getFrame();
+
+    populateGeneratedViewTemplates( rootView, variableNameLabel, variableNameButton1, variableNameButton2, variableNameImage, variableNameView, variableNameLabel2 );
+    ofRectangle generatedFrame = getGeneratedViewTemplatesFrame();
+    if ( !preserveTopLeft )
+    {
+        preservedFrame.x = generatedFrame.x;
+        preservedFrame.y = generatedFrame.y;
+    }
+
+    if ( !preserveSize )
+    {
+        preservedFrame.width = generatedFrame.width;
+        preservedFrame.height = generatedFrame.height;
+    }
+    if ( preserveTopLeft || preserveSize )
+    {
+        rootView->setFrame( preservedFrame );
+    } 
  }
 
 inline ofPtr< ofxGenericView > constructGeneratedViewTemplates( ofPtr< ofxGenericTextView > &variableNameLabel, ofPtr< ofxGenericButtonView > &variableNameButton1, ofPtr< ofxGenericButtonView > &variableNameButton2, ofPtr< ofxGenericImageView > &variableNameImage, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericTextView > &variableNameLabel2 )
 {
-	ofPtr< ofxGenericView > rootView = ofxGenericView::create();
-	populateGeneratedViewTemplates( rootView, variableNameLabel, variableNameButton1, variableNameButton2, variableNameImage, variableNameView, variableNameLabel2 );
-	return rootView;
+    ofPtr< ofxGenericView > rootView = ofxGenericView::create();
+    populateGeneratedViewTemplates( rootView, variableNameLabel, variableNameButton1, variableNameButton2, variableNameImage, variableNameView, variableNameLabel2 );
+    return rootView;
 }
