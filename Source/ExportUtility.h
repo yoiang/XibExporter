@@ -12,6 +12,8 @@
 
 + (NSMutableDictionary *) exportCGSize:(CGSize)size;
 + (NSMutableDictionary *) exportCGRect:(CGRect)rect;
+
++(BOOL)isDictionaryEnum:(NSDictionary*)dictionary;
 + (NSMutableDictionary *) exportUIEdgeInsets:(UIEdgeInsets)insets;
 + (NSMutableDictionary *) exportUILineBreakMode:(UILineBreakMode)mode;
 + (NSMutableDictionary *) exportUIButtonType:(UIButtonType)type;

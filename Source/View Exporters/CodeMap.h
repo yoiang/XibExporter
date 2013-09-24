@@ -14,6 +14,11 @@
 
 @property (nonatomic, readonly) NSArray* definedClasses;
 -(NSMutableDictionary*)definitionForClass:(NSString*)className;
+
+@property (nonatomic, readonly) NSArray* definedEnums;
+-(NSMutableDictionary*)definitionForEnum:(NSString*)enumName;
+-(NSString*)convertEnum:(NSString*)enumName value:(NSString*)value;
+
 @property (nonatomic, readonly) NSArray* functionDefinitions;
 @property (nonatomic, readonly) NSString* rootViewInstanceName;
 @property (nonatomic, readonly) NSDictionary* ignoredClasses;

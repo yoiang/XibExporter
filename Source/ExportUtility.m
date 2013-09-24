@@ -38,6 +38,27 @@
             @"UIEdgeInsets", @"class", nil];
 }
 
++(NSMutableDictionary*)mark:(NSMutableDictionary*)dictionary asType:(NSString*)type
+{
+    [dictionary setObject:type forKey:@"type"];
+    return dictionary;
+}
+
++(NSString*)getType:(NSDictionary*)dictionary
+{
+    return [dictionary objectForKey:@"type"];
+}
+
++(NSMutableDictionary*)markAsEnumType:(NSMutableDictionary*)dictionary
+{
+    return [self mark:dictionary asType:@"enum"];
+}
+
++(BOOL)isDictionaryEnum:(NSDictionary*)dictionary
+{
+    return [ [self getType:dictionary] isEqualToString:@"enum"];
+}
+
 + (NSMutableDictionary *) exportUILineBreakMode:(UILineBreakMode)mode
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -66,6 +87,7 @@
         break;
     }
     [dict setObject:v forKey:@"lineBreakMode"];
+    [self markAsEnumType:dict];
     return dict;
 }
 
@@ -96,6 +118,7 @@
             break;
     }
     [dict setObject:v forKey:@"buttonType"];
+    [self markAsEnumType:dict];
     return dict;
 }
 
@@ -117,6 +140,7 @@
             break;
     }
     [dict setObject:v forKey:@"textAlignment"];
+    [self markAsEnumType:dict];
     return dict;
 }
 
@@ -168,6 +192,7 @@
             break;
     }
     [dict setObject:v forKey:@"contentMode"];
+    [self markAsEnumType:dict];
     return dict;
 }
 
@@ -189,6 +214,7 @@
             break;
     }
     [dict setObject:v forKey:@"indicatorStyle"];
+    [self markAsEnumType:dict];
     return dict;
 }
 
@@ -220,6 +246,7 @@ NSString* UIKeyboardTypeToString( UIKeyboardType type )
     NSMutableDictionary* dict = [ NSMutableDictionary dictionary ];
     [ dict setObject:@"UIKeyboardType" forKey:@"class" ];
     [ dict setObject:UIKeyboardTypeToString( type ) forKey:@"keyboardType" ];
+    [self markAsEnumType:dict];
     return dict;
 }
 
@@ -248,6 +275,7 @@ NSString* UIReturnKeyTypeToString( UIReturnKeyType type )
     NSMutableDictionary* dict = [ NSMutableDictionary dictionary ];
     [ dict setObject:@"UIReturnKeyType" forKey:@"class" ];
     [ dict setObject:UIReturnKeyTypeToString( type ) forKey:@"returnKeyType" ];
+    [self markAsEnumType:dict];
     return dict;
 }
 
@@ -269,6 +297,7 @@ NSString* UITextAutocapitalizationTypeToString( UITextAutocapitalizationType typ
     NSMutableDictionary* dict = [ NSMutableDictionary dictionary ];
     [ dict setObject:@"UITextAutocapitalizationType" forKey:@"class" ];
     [ dict setObject:UITextAutocapitalizationTypeToString( type ) forKey:@"autocapitalizationType" ];
+    [self markAsEnumType:dict];
     return dict;
 }
 
@@ -290,6 +319,7 @@ NSString* UITextBorderStyleToString( UITextBorderStyle type )
     NSMutableDictionary* dict = [ NSMutableDictionary dictionary ];
     [ dict setObject:@"UITextBorderStyle" forKey:@"class" ];
     [ dict setObject:UITextBorderStyleToString( style ) forKey:@"textBorderStyle" ];
+    [self markAsEnumType:dict];
     return dict;
 }
 

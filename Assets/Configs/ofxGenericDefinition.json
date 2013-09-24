@@ -1,5 +1,79 @@
 {
-  "Class Definitions": {
+  "Enum Definitions": {
+    "UILineBreakMode": {
+      "_enum": {
+        "UILineBreakModeCharacterWrap": "ofxGenericTextLinebreakModeCharacterWrap",
+        "UILineBreakModeClip": "ofxGenericTextLinebreakModeClip",
+        "UILineBreakModeHeadTruncation": "ofxGenericTextLinebreakModeHeadTruncation",
+        "UILineBreakModeMiddleTruncation": "ofxGenericTextLinebreakModeMiddleTruncation",
+        "UILineBreakModeTailTruncation": "ofxGenericTextLinebreakModeTailTruncation",
+        "UILineBreakModeWordWrap": "ofxGenericTextLinebreakModeWordWrap"
+      },
+      "_inlineConstructor": "?$lineBreakMode$"
+    },
+    "UITextAlignment": {
+      "_enum": {
+        "UITextAlignmentCenter": "ofxGenericTextHorizontalAlignmentCenter",
+        "UITextAlignmentLeft": "ofxGenericTextHorizontalAlignmentLeft",
+        "UITextAlignmentRight": "ofxGenericTextHorizontalAlignmentRight"
+      },
+      "_inlineConstructor": "?$textAlignment$"
+    },
+    "UIViewContentMode": {
+      "_enum": {
+        "UIViewContentModeScaleToFill": "ofxGenericContentModeScaleToFill",
+        "UIViewContentModeScaleAspectFit": "ofxGenericContentModeScaleAspectFit",
+        "UIViewContentModeScaleAspectFill": "ofxGenericContentModeScaleAspectFill",
+        "UIViewContentModeRedraw": "ofxGenericContentModeRedraw",
+        "UIViewContentModeCenter": "ofxGenericContentModeCenter",
+        "UIViewContentModeTop": "ofxGenericContentModeTop",
+        "UIViewContentModeBottom": "ofxGenericContentModeBottom",
+        "UIViewContentModeLeft": "ofxGenericContentModeLeft",
+        "UIViewContentModeRight": "ofxGenericContentModeRight",
+        "UIViewContentModeTopLeft": "ofxGenericContentModeTopLeft",
+        "UIViewContentModeTopRight": "ofxGenericContentModeTopRight",
+        "UIViewContentModeBottomLeft": "ofxGenericContentModeBottomLeft",
+        "UIViewContentModeBottomRight": "ofxGenericContentModeBottomRight"
+      },
+      "_inlineConstructor": "?$contentMode$"
+    },
+    "UIButtonType": {
+      "_enum": {
+        "UIButtonTypeCustom": "ofxGenericButtonTypeCustom",
+        "UIButtonTypeRoundedRect": "ofxGenericButtonTypeRoundedRect",
+        "UIButtonTypeDetailDisclosure": "ofxGenericButtonTypeDetailDisclosure",
+        "UIButtonTypeInfoLight": "ofxGenericButtonTypeInfoLight",
+        "UIButtonTypeInfoDark": "ofxGenericButtonTypeInfoDark",
+        "UIButtonTypeContactAdd": "ofxGenericButtonTypeContactAdd"
+      },
+      "_inlineConstructor": "?$buttonType$"
+    },
+    "UIActivityIndicatorViewStyle": {
+      "_enum": {
+        "UIActivityIndicatorViewStyleWhiteLarge": "ofxGenericActivityViewStyleWhiteLarge",
+        "UIActivityIndicatorViewStyleWhite": "ofxGenericActivityViewStyleWhite",
+        "UIActivityIndicatorViewStyleGray": "ofxGenericActivityViewStyleGray"
+      },
+      "_inlineConstructor": "?$indicatorStyle$"
+    },
+    "UITextAutocapitalizationType": {
+      "_inlineConstructor": "?$autocapitalizationType$",
+      "_enum": {
+        "UITextAutocapitalizationTypeNone": "ofxGenericTextAutoCapitalizationNone",
+        "UITextAutocapitalizationTypeWords": "ofxGenericTextAutoCapitalizationWords",
+        "UITextAutocapitalizationTypeSentences": "ofxGenericTextAutoCapitalizationSentences",
+        "UITextAutocapitalizationTypeAllCharacters": "ofxGenericTextAutoCapitalizationAllCharacters"
+      }
+    },
+    "UITextBorderStyle": {
+      "_inlineConstructor": "?$textBorderStyle$",
+      "_enum": {
+        "UITextBorderStyleNone": "ofxGenericTextViewBorderNone",
+        "UITextBorderStyleLine": "ofxGenericTextViewBorderLine",
+        "UITextBorderStyleBezel": "ofxGenericTextViewBorderBezel",
+        "UITextBorderStyleRoundedRect": "ofxGenericTextViewBorderRoundedRect"
+      }
+    },
     "UIKeyboardType": {
       "_inlineConstructor": "?$keyboardType$",
       "_enum": {
@@ -25,25 +99,9 @@
         "UIReturnKeySend": "ofxGenericKeyboardReturnKeySend",
         "UIReturnKeyDone": "ofxGenericKeyboardReturnKeyDone"
       }
-    },
-    "UITextAutocapitalizationType": {
-      "_inlineConstructor": "?$autocapitalizationType$",
-      "_enum": {
-        "UITextAutocapitalizationTypeNone": "ofxGenericTextAutoCapitalizationNone",
-        "UITextAutocapitalizationTypeWords": "ofxGenericTextAutoCapitalizationWords",
-        "UITextAutocapitalizationTypeSentences": "ofxGenericTextAutoCapitalizationSentences",
-        "UITextAutocapitalizationTypeAllCharacters": "ofxGenericTextAutoCapitalizationAllCharacters"
-      }
-    },
-    "UITextBorderStyle": {
-      "_inlineConstructor": "?$textBorderStyle$",
-      "_enum": {
-        "UITextBorderStyleNone": "ofxGenericTextViewBorderNone",
-        "UITextBorderStyleLine": "ofxGenericTextViewBorderLine",
-        "UITextBorderStyleBezel": "ofxGenericTextViewBorderBezel",
-        "UITextBorderStyleRoundedRect": "ofxGenericTextViewBorderRoundedRect"
-      }
-    },
+    }
+  },
+  "Class Definitions": {
     "CGRect": {
       "_inlineConstructor": "ofRectangle( $x$, $y$, $width$, $height$ )"
     },
@@ -65,14 +123,6 @@
       "hidesWhenStopped": "@->setHidesWhenStoppedAnimating( $hidesWhenStopped$ )",
       "color": "@->setColor( $color$ )",
       "activityIndicatorViewStyle": "@->setIndicatorViewStyle( $activityIndicatorViewStyle$ )"
-    },
-    "UIActivityIndicatorViewStyle": {
-      "_enum": {
-        "UIActivityIndicatorViewStyleWhiteLarge": "ofxGenericActivityViewStyleWhiteLarge",
-        "UIActivityIndicatorViewStyleWhite": "ofxGenericActivityViewStyleWhite",
-        "UIActivityIndicatorViewStyleGray": "ofxGenericActivityViewStyleGray"
-      },
-      "_inlineConstructor": "?$indicatorStyle$"
     },
     "UIButton": {
       "localizedTitleKey": "@->setText( ofxGLocalized( $localizedTitleKey$, $localizedTitleDefault$ ) )",
@@ -104,43 +154,6 @@
     },
     "UIButtonLabel": {
       "_super": "UILabel"
-    },
-    "UIButtonType": {
-      "_enum": {
-        "UIButtonTypeCustom": "ofxGenericButtonTypeCustom",
-        "UIButtonTypeRoundedRect": "ofxGenericButtonTypeRoundedRect",
-        "UIButtonTypeDetailDisclosure": "ofxGenericButtonTypeDetailDisclosure",
-        "UIButtonTypeInfoLight": "ofxGenericButtonTypeInfoLight",
-        "UIButtonTypeInfoDark": "ofxGenericButtonTypeInfoDark",
-        "UIButtonTypeContactAdd": "ofxGenericButtonTypeContactAdd"
-      },
-      "_inlineConstructor": "?$buttonType$"
-    },
-    "UITextAlignment": {
-      "_enum": {
-        "UITextAlignmentCenter": "ofxGenericTextHorizontalAlignmentCenter",
-        "UITextAlignmentLeft": "ofxGenericTextHorizontalAlignmentLeft",
-        "UITextAlignmentRight": "ofxGenericTextHorizontalAlignmentRight"
-      },
-      "_inlineConstructor": "?$textAlignment$"
-    },
-    "UIViewContentMode": {
-      "_enum": {
-        "UIViewContentModeScaleToFill": "ofxGenericContentModeScaleToFill",
-        "UIViewContentModeScaleAspectFit": "ofxGenericContentModeScaleAspectFit",
-        "UIViewContentModeScaleAspectFill": "ofxGenericContentModeScaleAspectFill",
-        "UIViewContentModeRedraw": "ofxGenericContentModeRedraw",
-        "UIViewContentModeCenter": "ofxGenericContentModeCenter",
-        "UIViewContentModeTop": "ofxGenericContentModeTop",
-        "UIViewContentModeBottom": "ofxGenericContentModeBottom",
-        "UIViewContentModeLeft": "ofxGenericContentModeLeft",
-        "UIViewContentModeRight": "ofxGenericContentModeRight",
-        "UIViewContentModeTopLeft": "ofxGenericContentModeTopLeft",
-        "UIViewContentModeTopRight": "ofxGenericContentModeTopRight",
-        "UIViewContentModeBottomLeft": "ofxGenericContentModeBottomLeft",
-        "UIViewContentModeBottomRight": "ofxGenericContentModeBottomRight"
-      },
-      "_inlineConstructor": "?$contentMode$"
     },
     "UIColor": {
       "_inlineConstructor": "ofColor( $red$, $green$, $blue$, $alpha$ )"
@@ -183,17 +196,6 @@
       "textAlignment": "@->setTextAlignment( $textAlignment$ )",
       "textColor": "@->setTextColor( $textColor$ )",
       "adjustsFontSizeToFitWidth": "@->setAutosizeFontToFitText( $adjustsFontSizeToFitWidth$ )"
-    },
-    "UILineBreakMode": {
-      "_enum": {
-        "UILineBreakModeCharacterWrap": "ofxGenericTextLinebreakModeCharacterWrap",
-        "UILineBreakModeClip": "ofxGenericTextLinebreakModeClip",
-        "UILineBreakModeHeadTruncation": "ofxGenericTextLinebreakModeHeadTruncation",
-        "UILineBreakModeMiddleTruncation": "ofxGenericTextLinebreakModeMiddleTruncation",
-        "UILineBreakModeTailTruncation": "ofxGenericTextLinebreakModeTailTruncation",
-        "UILineBreakModeWordWrap": "ofxGenericTextLinebreakModeWordWrap"
-      },
-      "_inlineConstructor": "?$lineBreakMode$"
     },
     "UIRoundedRectButton": {
       "_super": "UIButton"

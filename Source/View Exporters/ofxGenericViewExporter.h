@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ViewExporter.h"
+#import "CodeViewExporter.h"
 
-@interface ofxGenericViewExporter : NSObject<ViewExporter>
+@interface ofxGenericViewExporter : CodeViewExporter
 
 @end

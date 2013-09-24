@@ -11,10 +11,7 @@
 		3C10DC8F17E2CE4300162DBC /* XibResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC8E17E2CE4300162DBC /* XibResources.m */; };
 		3C10DC9217E2DD9F00162DBC /* ViewGraphData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9117E2DD9F00162DBC /* ViewGraphData.m */; };
 		3C10DC9517E2E22900162DBC /* ViewGraphs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9417E2E22900162DBC /* ViewGraphs.m */; };
-		3C10DC9817E7F2BD00162DBC /* ofxGenericViewExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9717E7F2BD00162DBC /* ofxGenericViewExporter.m */; };
 		3C10DC9B17E7FD0E00162DBC /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9A17E7FD0E00162DBC /* AppSettings.m */; };
-		3C10DC9D17E807C800162DBC /* ViewExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9C17E807C800162DBC /* ViewExporter.m */; };
-		3C2772F217E82C7A0069FA98 /* CodeMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2772F117E82C7A0069FA98 /* CodeMap.m */; };
 		3C65718717D0FF560074B101 /* CXMLDocument_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C656EBF17D0FF550074B101 /* CXMLDocument_CreationExtensions.m */; };
 		3C65718817D0FF560074B101 /* CXMLNode_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C656EC117D0FF550074B101 /* CXMLNode_CreationExtensions.m */; };
 		3C65718917D0FF560074B101 /* CXHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C656EC317D0FF550074B101 /* CXHTMLDocument.m */; };
@@ -61,6 +58,10 @@
 		3C96F3D017D0F4D5000FC446 /* CXMLElement+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F3AD17D0F4D5000FC446 /* CXMLElement+UIView.m */; };
 		3C96F3D117D0F4D5000FC446 /* CXMLElement+Xib.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F3AF17D0F4D5000FC446 /* CXMLElement+Xib.m */; };
 		3C96F3D417D0F4D5000FC446 /* XcodeProjectHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F3B517D0F4D5000FC446 /* XcodeProjectHelper.m */; };
+		3CDA1A9917F141F700A80DEF /* CodeMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDA1A9417F141F700A80DEF /* CodeMap.m */; };
+		3CDA1A9A17F141F700A80DEF /* ofxGenericViewExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDA1A9617F141F700A80DEF /* ofxGenericViewExporter.m */; };
+		3CDA1A9B17F141F700A80DEF /* ViewExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDA1A9817F141F700A80DEF /* ViewExporter.m */; };
+		3CDA1AA117F1424B00A80DEF /* CodeViewExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDA1AA017F1424B00A80DEF /* CodeViewExporter.m */; };
 		3CEA6EFB17D1033500F419A3 /* ofxGenericDefinition.json in Resources */ = {isa = PBXBuildFile; fileRef = 3CEA6EF917D1033500F419A3 /* ofxGenericDefinition.json */; };
 		3CEA6EFC17D1033500F419A3 /* FontExchange.json in Resources */ = {isa = PBXBuildFile; fileRef = 3CEA6EFA17D1033500F419A3 /* FontExchange.json */; };
 		3CEA6EFF17D1035B00F419A3 /* GeneratedClass.cpp.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3CEA6EFD17D1035B00F419A3 /* GeneratedClass.cpp.txt */; };
@@ -97,13 +98,8 @@
 		3C10DC9117E2DD9F00162DBC /* ViewGraphData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGraphData.m; sourceTree = "<group>"; };
 		3C10DC9317E2E22900162DBC /* ViewGraphs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGraphs.h; sourceTree = "<group>"; };
 		3C10DC9417E2E22900162DBC /* ViewGraphs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGraphs.m; sourceTree = "<group>"; };
-		3C10DC9617E7F2BD00162DBC /* ofxGenericViewExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxGenericViewExporter.h; sourceTree = "<group>"; };
-		3C10DC9717E7F2BD00162DBC /* ofxGenericViewExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ofxGenericViewExporter.m; sourceTree = "<group>"; };
 		3C10DC9917E7FD0E00162DBC /* AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSettings.h; sourceTree = "<group>"; };
 		3C10DC9A17E7FD0E00162DBC /* AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSettings.m; sourceTree = "<group>"; };
-		3C10DC9C17E807C800162DBC /* ViewExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewExporter.m; sourceTree = "<group>"; };
-		3C2772F017E82C7A0069FA98 /* CodeMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeMap.h; sourceTree = "<group>"; };
-		3C2772F117E82C7A0069FA98 /* CodeMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeMap.m; sourceTree = "<group>"; };
 		3C656E9217D0FE8D0074B101 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		3C656E9317D0FE8D0074B101 /* MainWindow_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow_iPad.xib; sourceTree = "<group>"; };
 		3C656E9417D0FE8D0074B101 /* ViewTemplates.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewTemplates.xib; sourceTree = "<group>"; };
@@ -199,10 +195,17 @@
 		3C96F3AD17D0F4D5000FC446 /* CXMLElement+UIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CXMLElement+UIView.m"; sourceTree = "<group>"; };
 		3C96F3AE17D0F4D5000FC446 /* CXMLElement+Xib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CXMLElement+Xib.h"; sourceTree = "<group>"; };
 		3C96F3AF17D0F4D5000FC446 /* CXMLElement+Xib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CXMLElement+Xib.m"; sourceTree = "<group>"; };
-		3C96F3B217D0F4D5000FC446 /* ViewExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewExporter.h; sourceTree = "<group>"; };
 		3C96F3B417D0F4D5000FC446 /* XcodeProjectHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XcodeProjectHelper.h; sourceTree = "<group>"; };
 		3C96F3B517D0F4D5000FC446 /* XcodeProjectHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XcodeProjectHelper.m; sourceTree = "<group>"; };
 		3C96F3B617D0F4D5000FC446 /* XibExporter-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XibExporter-Prefix.pch"; sourceTree = "<group>"; };
+		3CDA1A9317F141F700A80DEF /* CodeMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeMap.h; sourceTree = "<group>"; };
+		3CDA1A9417F141F700A80DEF /* CodeMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeMap.m; sourceTree = "<group>"; };
+		3CDA1A9517F141F700A80DEF /* ofxGenericViewExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxGenericViewExporter.h; sourceTree = "<group>"; };
+		3CDA1A9617F141F700A80DEF /* ofxGenericViewExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ofxGenericViewExporter.m; sourceTree = "<group>"; };
+		3CDA1A9717F141F700A80DEF /* ViewExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewExporter.h; sourceTree = "<group>"; };
+		3CDA1A9817F141F700A80DEF /* ViewExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewExporter.m; sourceTree = "<group>"; };
+		3CDA1A9F17F1424B00A80DEF /* CodeViewExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeViewExporter.h; sourceTree = "<group>"; };
+		3CDA1AA017F1424B00A80DEF /* CodeViewExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeViewExporter.m; sourceTree = "<group>"; };
 		3CEA6EF917D1033500F419A3 /* ofxGenericDefinition.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ofxGenericDefinition.json; sourceTree = "<group>"; };
 		3CEA6EFA17D1033500F419A3 /* FontExchange.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FontExchange.json; sourceTree = "<group>"; };
 		3CEA6EFD17D1035B00F419A3 /* GeneratedClass.cpp.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GeneratedClass.cpp.txt; sourceTree = "<group>"; };
@@ -420,12 +423,7 @@
 				3C10DC9117E2DD9F00162DBC /* ViewGraphData.m */,
 				3C10DC9317E2E22900162DBC /* ViewGraphs.h */,
 				3C10DC9417E2E22900162DBC /* ViewGraphs.m */,
-				3C96F3B217D0F4D5000FC446 /* ViewExporter.h */,
-				3C10DC9C17E807C800162DBC /* ViewExporter.m */,
-				3C10DC9617E7F2BD00162DBC /* ofxGenericViewExporter.h */,
-				3C10DC9717E7F2BD00162DBC /* ofxGenericViewExporter.m */,
-				3C2772F017E82C7A0069FA98 /* CodeMap.h */,
-				3C2772F117E82C7A0069FA98 /* CodeMap.m */,
+				3CDA1A9217F141F700A80DEF /* View Exporters */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -474,6 +472,21 @@
 				3C96F3AF17D0F4D5000FC446 /* CXMLElement+Xib.m */,
 			);
 			path = "UIKit TouchXML";
+			sourceTree = "<group>";
+		};
+		3CDA1A9217F141F700A80DEF /* View Exporters */ = {
+			isa = PBXGroup;
+			children = (
+				3CDA1A9317F141F700A80DEF /* CodeMap.h */,
+				3CDA1A9417F141F700A80DEF /* CodeMap.m */,
+				3CDA1A9517F141F700A80DEF /* ofxGenericViewExporter.h */,
+				3CDA1A9617F141F700A80DEF /* ofxGenericViewExporter.m */,
+				3CDA1A9717F141F700A80DEF /* ViewExporter.h */,
+				3CDA1A9817F141F700A80DEF /* ViewExporter.m */,
+				3CDA1A9F17F1424B00A80DEF /* CodeViewExporter.h */,
+				3CDA1AA017F1424B00A80DEF /* CodeViewExporter.m */,
+			);
+			path = "View Exporters";
 			sourceTree = "<group>";
 		};
 		3CEA6EF817D1033500F419A3 /* Configs */ = {
@@ -676,6 +689,7 @@
 				3C96F3CF17D0F4D5000FC446 /* CXMLElement+UIImage.m in Sources */,
 				3C65719217D0FF560074B101 /* CXMLNode_XPathExtensions.m in Sources */,
 				3C65719017D0FF560074B101 /* CXMLNode.m in Sources */,
+				3CDA1A9917F141F700A80DEF /* CodeMap.m in Sources */,
 				3C96F3BA17D0F4D5000FC446 /* ExportedViewMap.m in Sources */,
 				3CEA729817D1093E00F419A3 /* SBJsonStreamParserState.m in Sources */,
 				3C65718717D0FF560074B101 /* CXMLDocument_CreationExtensions.m in Sources */,
@@ -689,6 +703,7 @@
 				3C96F3BC17D0F4D5000FC446 /* main.m in Sources */,
 				3C96F3CB17D0F4D5000FC446 /* UITextField+Exports.m in Sources */,
 				3CEA729617D1093E00F419A3 /* SBJsonStreamParserAccumulator.m in Sources */,
+				3CDA1AA117F1424B00A80DEF /* CodeViewExporter.m in Sources */,
 				3C10DC8F17E2CE4300162DBC /* XibResources.m in Sources */,
 				3C96F3BD17D0F4D5000FC446 /* MainWindowViewController.m in Sources */,
 				3C65719117D0FF560074B101 /* CXMLNode_PrivateExtensions.m in Sources */,
@@ -697,7 +712,7 @@
 				3CEA729E17D1093E00F419A3 /* SBJsonWriter.m in Sources */,
 				3C65719317D0FF560074B101 /* CTidy.m in Sources */,
 				3C65718E17D0FF560074B101 /* CXMLElement_ElementTreeExtensions.m in Sources */,
-				3C10DC9817E7F2BD00162DBC /* ofxGenericViewExporter.m in Sources */,
+				3CDA1A9A17F141F700A80DEF /* ofxGenericViewExporter.m in Sources */,
 				3CEA729D17D1093E00F419A3 /* SBJsonUTF8Stream.m in Sources */,
 				3CEA729717D1093E00F419A3 /* SBJsonStreamParserAdapter.m in Sources */,
 				3C10DC9B17E7FD0E00162DBC /* AppSettings.m in Sources */,
@@ -707,7 +722,7 @@
 				3C65718917D0FF560074B101 /* CXHTMLDocument.m in Sources */,
 				3C65718D17D0FF560074B101 /* CXMLElement_CreationExtensions.m in Sources */,
 				3C96F3C617D0F4D5000FC446 /* UILabel+Exports.m in Sources */,
-				3C10DC9D17E807C800162DBC /* ViewExporter.m in Sources */,
+				3CDA1A9B17F141F700A80DEF /* ViewExporter.m in Sources */,
 				3C96F3CD17D0F4D5000FC446 /* UIView+Exports.m in Sources */,
 				3C96F3D117D0F4D5000FC446 /* CXMLElement+Xib.m in Sources */,
 				3CEA729B17D1093E00F419A3 /* SBJsonStreamWriterState.m in Sources */,
@@ -716,7 +731,6 @@
 				3C65718B17D0FF560074B101 /* CXMLDocument_PrivateExtensions.m in Sources */,
 				3C65718A17D0FF560074B101 /* CXMLDocument.m in Sources */,
 				3C65718F17D0FF560074B101 /* CXMLNamespaceNode.m in Sources */,
-				3C2772F217E82C7A0069FA98 /* CodeMap.m in Sources */,
 				3C96F3C517D0F4D5000FC446 /* UIImageView+Exports.m in Sources */,
 				3C96F3CE17D0F4D5000FC446 /* UIViewController+Exports.m in Sources */,
 				3CEA729517D1093E00F419A3 /* SBJsonStreamParser.m in Sources */,

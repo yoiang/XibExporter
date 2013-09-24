@@ -77,7 +77,28 @@
 
 -(NSMutableDictionary*)definitionForClass:(NSString*)className
 {
-    return [ [self definitionsForClasses] objectForKey:className];
+    return [self.definitionsForClasses objectForKey:className];
+}
+
+-(NSMutableDictionary*)definitionsForEnums
+{
+    return [self.data objectForKey:@"Enum Definitions"];
+}
+
+-(NSArray*)definedEnums
+{
+    return [self.definitionsForEnums allKeys];
+}
+
+-(NSMutableDictionary*)definitionForEnum:(NSString *)enumName
+{
+    return [self.definitionsForEnums objectForKey:enumName];
+}
+
+-(NSString*)convertEnum:(NSString*)enumName value:(NSString*)value
+{
+    // TODO: add debugging logs
+    return [ [ [self definitionForEnum:enumName] objectForKey:@"_enum"] objectForKey:value ];
 }
 
 -(NSArray*)functionDefinitions

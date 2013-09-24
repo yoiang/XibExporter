@@ -1,16 +1,16 @@
 //
-//  ofxGenericViewExporter.m
+//  CodeViewExporter.m
 //  XibExporter
 //
-//  Created by Ian on 9/17/13.
+//  Created by Ian on 9/24/13.
 //
 //
 
-#import "ofxGenericViewExporter.h"
-
-#import "AppSettings.h"
+#import "CodeViewExporter.h"
 
 #import "CodeMap.h"
+
+#import "AppSettings.h"
 
 #import "XcodeProjectHelper.h"
 
@@ -25,17 +25,28 @@
 
 static NSMutableDictionary* instanceCounts = nil;
 
-@interface ofxGenericViewExporter()
+@interface CodeViewExporter()
 
 @property (nonatomic, strong) CodeMap* map;
 
 @end
 
-@implementation ofxGenericViewExporter
+@implementation CodeViewExporter
 
 -(NSString*)factoryKey
 {
-    return @"ofxGeneric";
+    NSException* exception = [ [NSException alloc] initWithName:@"Abstract Method" reason:@"Must override [CodeViewExporter factoryKey] method" userInfo:nil];
+    @throw exception;
+
+    return @"invalid";
+}
+
+-(NSString*)codeMapJSONDefinitionFileName
+{
+    NSException* exception = [ [NSException alloc] initWithName:@"Abstract Method" reason:@"Must override [CodeViewExporter codeMapJSONDefinitionFileName] method" userInfo:nil];
+    @throw exception;
+    
+    return @"invalid";
 }
 
 - (id) init
@@ -43,7 +54,7 @@ static NSMutableDictionary* instanceCounts = nil;
     self = [super init];
     if (self)
     {
-        self.map = [ [CodeMap alloc] initWithJSONFileName:@"ofxGenericDefinition"];
+        self.map = [ [CodeMap alloc] initWithJSONFileName:[self codeMapJSONDefinitionFileName] ];
     }
     return self;
 }
@@ -73,7 +84,7 @@ static NSMutableDictionary* instanceCounts = nil;
 
 -(NSArray*)exportData:(ViewGraphs *)viewGraphs toFile:(NSString*)location atomically:(BOOL)flag error:(NSError **)error saveMultipleFiles:(BOOL)mult useOnlyModifiedFiles:(BOOL)onlyModified
 {
-
+    
     NSMutableDictionary *output = [NSMutableDictionary dictionary];
     NSMutableArray *outputFileNames = [NSMutableArray array];
     
@@ -158,9 +169,9 @@ static NSMutableDictionary* instanceCounts = nil;
             
             [outputFileNames addObject:[NSString stringWithFormat:@"Generated%@.h",k]];
             /*if (&error)
-            {
-                return;
-            }*/
+             {
+             return;
+             }*/
         }
     }
     else
@@ -255,6 +266,96 @@ static NSMutableDictionary* instanceCounts = nil;
     return value;
 }
 
+-(NSString*)valueForEnum:(NSString*)valueKey dict:(NSDictionary *)dict def:(NSDictionary*)def
+{
+    NSDictionary* enumValue = [dict objectForKey:valueKey];
+    
+    NSString* enumValueKey;
+    NSRange prefix = [valueKey rangeOfString:@"." options:NSLiteralSearch];
+    if (prefix.length == 0)
+    {
+        enumValueKey = valueKey;
+    } else
+    {
+        enumValueKey = [valueKey substringFromIndex:prefix.location + prefix.length];
+    }
+    
+    return [self.map convertEnum:[enumValue objectForKey:@"class"] value:[enumValue objectForKey:enumValueKey] ];
+}
+
+-(NSString*)constructorForClass:(NSString*)class instanceName:(NSString*)instanceName outlets:(NSMutableDictionary*)outlets includes:(NSMutableArray*)includes dict:(NSDictionary*)dict def:(NSDictionary*)def properties:(NSMutableDictionary*)properties isInline:(BOOL)isInline isOutlet:(BOOL)isOutlet
+{
+    NSMutableString* constructor = nil;
+    
+    //if this is an inline call, simply return the inline constructor
+    if (isInline)
+    {
+        NSString* constructorDef = [def objectForKey:@"_inlineConstructor"];
+        NSString* inl = [self replaceCodeSymbols:constructorDef dict:dict key:@"_inlineConstructor" name:instanceName outlets:outlets includes:includes def:def properties:properties];
+        constructor = [NSMutableString stringWithString:[inl substringFromIndex:1] ]; //remove the leading tab for an inline
+    } else
+    {
+        
+        NSString* constructorDef = [def objectForKey:@"_constructor"];
+        if (constructorDef)
+        {
+            if (isOutlet)
+            {
+                constructorDef = [self replaceCodeSymbols:[def objectForKey:@"_inlineConstructor"] dict:dict key:@"_inlineConstructor" name:instanceName outlets:outlets includes:includes def:def properties:properties];
+                constructorDef = [NSString stringWithFormat:@"\t%@ = %@",instanceName,[constructorDef substringFromIndex:1]];
+            }
+            else
+            {
+                constructorDef = [self replaceCodeSymbols:constructorDef dict:dict key:@"_constructor" name:instanceName outlets:outlets includes:includes def:def properties:properties];
+            }
+            
+            constructor = [NSMutableString stringWithString:@"\n"];
+            
+            NSString* comments = [ UIView getComments:dict ];
+            if ( comments )
+            {
+                [constructor appendString:comments ];
+            }
+            
+            //only put the constructor in if this is not the root view, because the root view should be handled by surrounding code
+            if ([dict objectForKey:@"superview"])
+            {
+                [constructor appendString:[NSString stringWithFormat:@"%@;\n",constructorDef]];
+            }
+        }
+        else
+        {
+            NSLog(@"Warning: No _constructor found for %@!",class);
+        }
+
+    }
+
+    return constructor;
+}
+
+-(NSString*)objectSetup:(NSString*)class instanceName:(NSString*)instanceName outlets:(NSMutableDictionary*)outlets includes:(NSMutableArray*)includes dict:(NSDictionary*)dict def:(NSDictionary*)def properties:(NSMutableDictionary*)properties
+{
+    NSMutableString* objectSetup = [NSMutableString string];
+    
+    //loop through all keys in the def, and add that code in
+    NSArray *keys = [def allKeys];
+    for (int i = 0; i < [keys count]; i++)
+    {
+        NSString *k = [keys objectAtIndex:i];
+        if ([k length] > 0 && [k characterAtIndex:0] != '_' && [dict objectForKey:k])
+        {
+            NSString *line = [def objectForKey:k];
+            NSString* lineFilledIn = [self replaceCodeSymbols:line dict:dict key:k name:instanceName outlets:outlets includes:includes def:def properties:properties];
+            if ( lineFilledIn && [ lineFilledIn length ] > 0 )
+            {
+                [objectSetup appendFormat:@"%@;\n",lineFilledIn];
+            }
+        }
+    }
+    
+    return objectSetup;
+}
+
 - (NSString *) replaceCodeSymbols:(NSString *)line dict:(NSDictionary *)dict key:(NSString *)key name:(NSString *)name outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes def:(NSDictionary *)def properties:(NSMutableDictionary *)properties
 {
     if (!line)
@@ -262,7 +363,7 @@ static NSMutableDictionary* instanceCounts = nil;
         line = @"";
     }
     
-    NSString *output = [NSString stringWithFormat:@"\t%@",[line stringByReplacingOccurrencesOfString:@"@" withString:name]];
+    NSString* output = [line stringByReplacingOccurrencesOfString:@"@" withString:name];
     
     NSRange r = NSMakeRange(0, [output length]);
     while (r.location != NSNotFound && r.location < [output length])
@@ -270,23 +371,22 @@ static NSMutableDictionary* instanceCounts = nil;
         r = [output rangeOfString:@"$" options:NSLiteralSearch range:NSMakeRange(r.location, [output length] - r.location)];
         if (r.location != NSNotFound)
         {
-            //a BS check for enums - if there is a ? before the $, then we have an enum
-            BOOL isEnum = (r.location > 0 && [output characterAtIndex:r.location-1] == '?');
-            
             NSRange r2 = [output rangeOfString:@"$" options:NSLiteralSearch range:NSMakeRange(r.location+1, [output length] - r.location - 1)];
             if (r2.location != NSNotFound)
             {
                 NSString *valueKey = [output substringWithRange:NSMakeRange(r.location+1, r2.location-r.location-1)];
                 NSString *value = @"";
                 
+                NSObject* valueObject = [dict objectForKey:valueKey];
+                
+                //a BS check for enums - if there is a ? before the $, then we have an enum
+                BOOL isEnum = (r.location > 0 && [output characterAtIndex:r.location-1] == '?') ||
+                              ( [valueObject isKindOfClass:[NSDictionary class] ] && [ExportUtility isDictionaryEnum:(NSDictionary*)valueObject] );
+            
                 //if we have an enum, then do a lookup in this def's enum table
                 if (isEnum)
                 {
-                    NSDictionary *enm = [def objectForKey:@"_enum"];
-                    if (enm)
-                    {
-                        value = [enm objectForKey:[dict objectForKey:valueKey]];
-                    }
+                    value = [self valueForEnum:valueKey dict:dict def:def];
                 }
                 else
                 {
@@ -298,7 +398,7 @@ static NSMutableDictionary* instanceCounts = nil;
                     int oldOutputLength = [output length];
                     int replaceStart = r.location;
                     int replaceLength = r2.location - r.location + 1;
-                    if (isEnum)
+                    if (isEnum && [output characterAtIndex:r.location-1] == '?')
                     {
                         replaceStart--;
                         replaceLength++;
@@ -313,6 +413,11 @@ static NSMutableDictionary* instanceCounts = nil;
             
             r = NSMakeRange(r2.location+1, 1);
         }
+    }
+
+    if ([output length] > 0)
+    {
+        output = [NSString stringWithFormat:@"\t%@", output];
     }
     
     return output;
@@ -338,7 +443,17 @@ static NSMutableDictionary* instanceCounts = nil;
     if (class)
     {
         NSDictionary *def = [self.map definitionForClass:class];
-        if (def)
+        if (!def)
+        {
+            //only show a warning if this one isn't ignored
+            if (!self.map.ignoredClasses || ![self.map.ignoredClasses objectForKey:class])
+            {
+                NSLog(@"Warning: No def found for %@!",class);
+            }
+            return nil;
+        }
+
+//        if (def)
         {
             //if we have an include, add that in
             if ([def objectForKey:@"_include"])
@@ -407,63 +522,16 @@ static NSMutableDictionary* instanceCounts = nil;
                 }
             }
             
-            //if this is an inline call, simply return the inline constructor
-            if (isInline)
+            NSString* constructor = [self constructorForClass:class instanceName:instanceName outlets:outlets includes:includes dict:dict def:def properties:properties isInline:isInline isOutlet:isOutlet];
+            
+            [code appendString:constructor];
+            
+            if (!isInline)
             {
-                NSString *constructor = [def objectForKey:@"_inlineConstructor"];
-                NSString *inl = [self replaceCodeSymbols:constructor dict:dict key:@"_inlineConstructor" name:instanceName outlets:outlets includes:includes def:def properties:properties];
-                inl = [inl substringFromIndex:1]; //remove the leading tab for an inline
-                [code appendString:inl];
+                NSString* setup = [self objectSetup:class instanceName:instanceName outlets:outlets includes:includes dict:dict def:def properties:properties];
+                [code appendString:setup];
             }
-            else
-            {
-                NSString *constructor = [def objectForKey:@"_constructor"];
-                if (constructor)
-                {
-                    if (isOutlet)
-                    {
-                        constructor = [self replaceCodeSymbols:[def objectForKey:@"_inlineConstructor"] dict:dict key:@"_inlineConstructor" name:instanceName outlets:outlets includes:includes def:def properties:properties];
-                        constructor = [NSString stringWithFormat:@"\t%@ = %@",instanceName,[constructor substringFromIndex:1]];
-                    }
-                    else
-                    {
-                        constructor = [self replaceCodeSymbols:constructor dict:dict key:@"_constructor" name:instanceName outlets:outlets includes:includes def:def properties:properties];
-                    }
-                    
-                    [ code appendString:@"\n" ];
-                    NSString* comments = [ UIView getComments:dict ];
-                    if ( comments )
-                    {
-                        [ code appendString:comments ];
-                    }
-                    
-                    //only put the constructor in if this is not the root view, because the root view should be handled by surrounding code
-                    if ([dict objectForKey:@"superview"])
-                    {
-                        [code appendString:[NSString stringWithFormat:@"%@;\n",constructor]];
-                    }
-                    
-                    //loop through all keys in the def, and add that code in
-                    NSArray *keys = [def allKeys];
-                    for (int i = 0; i < [keys count]; i++)
-                    {
-                        NSString *k = [keys objectAtIndex:i];
-                        if ([k length] > 0 && [k characterAtIndex:0] != '_' && [dict objectForKey:k])
-                        {
-                            NSString *line = [def objectForKey:k];
-                            NSString* lineFilledIn = [self replaceCodeSymbols:line dict:dict key:k name:instanceName outlets:outlets includes:includes def:def properties:properties];
-                            if ( lineFilledIn && [ lineFilledIn length ] > 0 )
-                            {
-                                [code appendFormat:@"%@;\n",lineFilledIn];
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    NSLog(@"Warning: No _constructor found for %@!",class);
-                }
-            }
+            
             
             NSArray *subviews = [dict objectForKey:@"subviews"];
             for (int i = 0; i < [subviews count]; i++)
@@ -478,15 +546,6 @@ static NSMutableDictionary* instanceCounts = nil;
                     [code appendFormat:@"\t%@;\n",addsub];
                 }
             }
-        }
-        else
-        {
-            //only show a warning if this one isn't ignored
-            if (!self.map.ignoredClasses || ![self.map.ignoredClasses objectForKey:class])
-            {
-                NSLog(@"Warning: No def found for %@!",class);
-            }
-            return nil;
         }
     }
     else
@@ -608,10 +667,10 @@ static NSMutableDictionary* instanceCounts = nil;
          [code appendFormat:@"%@\n{\n",func];
          NSString *ret = [[self.codeMap objectForKey:@"_return"] stringByReplacingOccurrencesOfString:@"@" withString:[dict objectForKey:@"name"]];
          [code appendFormat:@"%@\t%@;\n}\n\n",[dict objectForKey:@"code"], ret];*/
-                                                                                   }
-                                                                                   
-                                                                                   [code writeToFile:location atomically:flag encoding:NSUTF8StringEncoding error:error];
-                                                                                   }
+    }
+    
+    [code writeToFile:location atomically:flag encoding:NSUTF8StringEncoding error:error];
+}
 
 //translates the entire code string, dict and def are global dictionaries
 - ( NSString * ) translateCodeString:(NSString *)classFile dict:(NSDictionary *)dict properties:(NSDictionary *)properties
@@ -743,31 +802,31 @@ static NSMutableDictionary* instanceCounts = nil;
  #import "CXMLElement+UIView.h"
  
  #import "ViewGraphData.h"
-
-#pragma mark Public Methods
-
-
-
-
-
-- (NSArray *) exportData:(ViewGraphs*)viewGraphs toProject:(BOOL)useProjectDir atomically:(BOOL)flag format:(ViewExporterFormat)format error:(NSError**)error saveMultipleFiles:(BOOL)mult useOnlyModifiedFiles:(BOOL)onlyModified
-{
-    NSString *targetFile = nil;
-    
-    if (useProjectDir)
-    {
-        targetFile = [[XcodeProjectHelper getGeneratedSourceFolder] stringByAppendingString:@"/ExportedViews.h"];
-    }
-    else
-    {
-        NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        targetFile = [NSString stringWithFormat:@"%@/ExportedViews.h",documentsDirectory];
-    }
-    
-    return [self exportData:viewGraphs toFile:targetFile atomically:flag format:format error:error saveMultipleFiles:mult useOnlyModifiedFiles:onlyModified];
-}
-
-
-
-@end
-*/
+ 
+ #pragma mark Public Methods
+ 
+ 
+ 
+ 
+ 
+ - (NSArray *) exportData:(ViewGraphs*)viewGraphs toProject:(BOOL)useProjectDir atomically:(BOOL)flag format:(ViewExporterFormat)format error:(NSError**)error saveMultipleFiles:(BOOL)mult useOnlyModifiedFiles:(BOOL)onlyModified
+ {
+ NSString *targetFile = nil;
+ 
+ if (useProjectDir)
+ {
+ targetFile = [[XcodeProjectHelper getGeneratedSourceFolder] stringByAppendingString:@"/ExportedViews.h"];
+ }
+ else
+ {
+ NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+ targetFile = [NSString stringWithFormat:@"%@/ExportedViews.h",documentsDirectory];
+ }
+ 
+ return [self exportData:viewGraphs toFile:targetFile atomically:flag format:format error:error saveMultipleFiles:mult useOnlyModifiedFiles:onlyModified];
+ }
+ 
+ 
+ 
+ @end
+ */
