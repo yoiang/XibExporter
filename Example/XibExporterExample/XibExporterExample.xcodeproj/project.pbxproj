@@ -74,9 +74,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3CDA1AA617F1CEF800A80DEF /* GeneratedViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = GeneratedViews;
+			sourceTree = "<group>";
+		};
 		3CEA72A517D1119300F419A3 = {
 			isa = PBXGroup;
 			children = (
+				3CDA1AA617F1CEF800A80DEF /* GeneratedViews */,
 				3CEA72B717D1119300F419A3 /* XibExporterExample */,
 				3CEA72D017D1119300F419A3 /* XibExporterExampleTests */,
 				3CEA72B017D1119300F419A3 /* Frameworks */,
@@ -436,6 +444,7 @@
 				3CEA72DC17D1119300F419A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3CEA72DD17D1119300F419A3 /* Build configuration list for PBXNativeTarget "XibExporterExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -444,6 +453,7 @@
 				3CEA72DF17D1119300F419A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
