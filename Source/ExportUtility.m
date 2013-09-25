@@ -306,10 +306,10 @@ NSString* UITextBorderStyleToString( UITextBorderStyle type )
     NSString* result = EnumAsString( UITextBorderStyleNone );
     switch ( type )
     {
-            EnumToStringCase( UITextBorderStyleNone, result = );
-            EnumToStringCase( UITextBorderStyleLine, result = );
-            EnumToStringCase( UITextBorderStyleBezel, result = );
-            EnumToStringCase( UITextBorderStyleRoundedRect, result = );
+        EnumToStringCase( UITextBorderStyleNone, result = );
+        EnumToStringCase( UITextBorderStyleLine, result = );
+        EnumToStringCase( UITextBorderStyleBezel, result = );
+        EnumToStringCase( UITextBorderStyleRoundedRect, result = );
     }
     return result;
 }
