@@ -95,7 +95,8 @@ static int viewId = 0;
     [dict setObject:[NSNumber numberWithBool:self.exclusiveTouch] forKey:@"exclusiveTouch"];
     [dict setObject:[NSNumber numberWithBool:self.autoresizesSubviews] forKey:@"autoresizesSubviews"];
     [dict setObject:[NSNumber numberWithInt:self.tag] forKey:@"tag"];
-    [dict setObject:[NSNumber numberWithBool:!self.hidden] forKey:@"visible"];
+    [dict setObject:[NSNumber numberWithBool:!self.hidden] forKey:@"visible"]; // TODO: way to specific NOT of value in JSON?
+    [dict setObject:[NSNumber numberWithBool:self.hidden] forKey:@"hidden"];
     [ dict setObject:[ ExportUtility exportUIViewAutoresizing:self.autoresizingMask ] forKey:@"autoresizingMask" ]; // TODO: store or translate mask values
     [ dict setObject:[ NSNumber numberWithBool:self.clipsToBounds ] forKey:@"clipsToBounds" ];
     [ dict setObject:[ExportUtility exportUIViewContentMode:self.contentMode] forKey:@"contentMode" ];
