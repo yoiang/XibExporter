@@ -25,6 +25,8 @@
 #import "ofxGenericViewExporter.h"
 
 #import "XibResources.h"
+#import "XibUpdateStatus.h"
+#import "NSData+MD5.h"
 
 @interface AppDelegate()
 {
@@ -32,6 +34,7 @@
 }
 
 @property (nonatomic, strong) ViewGraphs *viewGraphs;
+@property (nonatomic, strong) XibUpdateStatus *xibUpdateStatus;
 
 @end
 
@@ -73,6 +76,8 @@
     NSError *error = nil;
     self.viewGraphs = [ [ViewGraphs alloc] init];
     
+    self.xibUpdateStatus = [ [XibUpdateStatus alloc] init];
+    
     [self processAllXibs];
 
     for (NSString* exporterKey in [AppSettings getEnabledExports] )
@@ -97,7 +102,8 @@
             NSLog(@"Error, could not find exporter for key %@", exporterKey);
         }
     }
-
+    [self.xibUpdateStatus saveCurrentStatus];
+    
     [self performSelector:@selector(exitApplication) withObject:self afterDelay:0.01f];
     
 #else
@@ -173,7 +179,6 @@
     
     NSArray* onlyProcessXibs = [ AppSettings getProcessOnlyXibs ];
     NSArray* skipXibs = [ AppSettings getSkipXibs ];
-    NSArray* changedXibs = [self getChangedViews];
     
     NSError* error = nil;
     NSString* nibPath = [AppSettings getNibPath];
@@ -212,7 +217,11 @@
         // TODO: renamed to clarify that this forces export over Unchanged files, not over Only Process and Skip
         if ( !remove && ![AppSettings forceExportAllXibs] )
         {
-            if ( ![changedXibs containsString:[ NSString stringWithFormat:@"%@.xib", nibFileName] ] )
+            NSString* xibFileNamePath = [NSString stringWithFormat:@"%@/%@.xib", [AppSettings getXIBRoot], nibFileName];
+            NSString* md5 = [NSData stringMD5OfContentsOfFile:xibFileNamePath];
+            [self.xibUpdateStatus updateXib:nibFileName withMD5:md5];
+            
+            if ( ![self.xibUpdateStatus hasXibChanged:nibFileName] )
             {
                 NSLog(@"Skipping unchanged Xib %@", nibFileName);
                 remove = YES;
@@ -231,36 +240,6 @@
     NSLog(@"");
     
     return nibFileNames;
-}
-
--(NSArray*)getChangedViews
-{
-    NSMutableArray* result = nil;
-    
-    //amazingly, even though changedViews.txt gets updated with a preproc script, it gets put into the build directory before thism making it the old
-    //file. so just adding it to the xcode project doesn't work. instead, we need to do the same BS file system access...
-    NSString* changedViewsFileName = [NSString stringWithFormat:@"%@/changedViews.txt",[AppSettings getXIBRoot]];
-    NSError* error = nil;
-    NSString* changedViewsContents = [NSString stringWithContentsOfFile:changedViewsFileName encoding:NSUTF8StringEncoding error:&error];
-    
-    if (error)
-    {
-        NSLog(@"Error while attempting to open changed views file %@", changedViewsFileName);
-    }
-    
-    result = [NSMutableArray arrayWithArray:[changedViewsContents componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" \n"] ] ];
-    
-    if ( [result count] > 0)
-    {
-        NSUInteger lastIndex = [result count] - 1;
-        NSString* lastResult = [result objectAtIndex:lastIndex];
-        if ( [ [lastResult stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "] ] length ] == 0 )
-        {
-            [result removeObjectAtIndex:lastIndex];
-        }
-    }
-    
-    return result;
 }
 
 @end
