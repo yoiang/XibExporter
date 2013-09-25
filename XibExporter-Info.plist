@@ -69,6 +69,7 @@
 	<array>
 		<string>MainWindow</string>
 		<string>MainWindow_iPad</string>
+		<string>OnlyRunInSimulatorNoticeView</string>
 	</array>
 	<key>UIApplicationExitsOnSuspend</key>
 	<true/>
