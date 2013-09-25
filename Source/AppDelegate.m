@@ -98,8 +98,8 @@
         }
     }
 
-    sleep(0.01);
-    exit(0);
+    [self performSelector:@selector(exitApplication) withObject:self afterDelay:0.01f];
+    
 #else
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -108,6 +108,11 @@
     self.window.rootViewController = self.mainViewController;
 #endif
     return YES;
+}
+
+-(void)exitApplication
+{
+    exit(0);
 }
 
 -(void)registerViewExporters
