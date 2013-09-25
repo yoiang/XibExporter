@@ -16,8 +16,4 @@
 //creates a random hex string that can be used as an ID for a file in the XcodeProj file
 + (NSString *) generateRandomHexID;
 
-//takes an array of files and removes all ones that have not been modified
-+ (NSArray *) trimToOnlyModifiedFiles:(NSArray *)files;
-
-
 @end

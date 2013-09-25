@@ -168,6 +168,7 @@
     
     NSArray* onlyProcessXibs = [ AppSettings getProcessOnlyXibs ];
     NSArray* skipXibs = [ AppSettings getSkipXibs ];
+    NSArray* changedXibs = [self getChangedViews];
     
     NSError* error = nil;
     NSString* nibPath = [AppSettings getNibPath];
@@ -203,6 +204,16 @@
             }
         }
         
+        // TODO: renamed to clarify that this forces export over Unchanged files, not over Only Process and Skip
+        if ( !remove && ![AppSettings forceExportAllXibs] )
+        {
+            if ( ![changedXibs containsString:[ NSString stringWithFormat:@"%@.xib", nibFileName] ] )
+            {
+                NSLog(@"Skipping unchanged Xib %@", nibFileName);
+                remove = YES;
+            }
+        }
+        
         if (remove)
         {
             [nibFileNames removeObjectAtIndex:index];
@@ -212,7 +223,39 @@
         }
     }
     
+    NSLog(@"");
+    
     return nibFileNames;
+}
+
+-(NSArray*)getChangedViews
+{
+    NSMutableArray* result = nil;
+    
+    //amazingly, even though changedViews.txt gets updated with a preproc script, it gets put into the build directory before thism making it the old
+    //file. so just adding it to the xcode project doesn't work. instead, we need to do the same BS file system access...
+    NSString* changedViewsFileName = [NSString stringWithFormat:@"%@/changedViews.txt",[AppSettings getXIBRoot]];
+    NSError* error = nil;
+    NSString* changedViewsContents = [NSString stringWithContentsOfFile:changedViewsFileName encoding:NSUTF8StringEncoding error:&error];
+    
+    if (error)
+    {
+        NSLog(@"Error while attempting to open changed views file %@", changedViewsFileName);
+    }
+    
+    result = [NSMutableArray arrayWithArray:[changedViewsContents componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" \n"] ] ];
+    
+    if ( [result count] > 0)
+    {
+        NSUInteger lastIndex = [result count] - 1;
+        NSString* lastResult = [result objectAtIndex:lastIndex];
+        if ( [ [lastResult stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "] ] length ] == 0 )
+        {
+            [result removeObjectAtIndex:lastIndex];
+        }
+    }
+    
+    return result;
 }
 
 @end

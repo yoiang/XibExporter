@@ -103,14 +103,8 @@ static NSMutableDictionary* instanceCounts = nil;
     //loop through all the VCs, they'll each go in a separate function
     NSArray *keys = viewGraphs.xibNames;
     
-    if ( ![AppSettings forceExportAllXibs] )
-    {
-        keys = [XcodeProjectHelper trimToOnlyModifiedFiles:keys];
-    }
-    
     if ([keys count] <= 0)
     {
-        NSLog(@"Not exporting any views because you haven't made any changes to them.\nTo force changes, edit the viewChanges.txt file found in Xib-Exporter/XibExporter/");
         return outputFileNames;
     }
     
