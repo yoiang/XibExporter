@@ -42,6 +42,7 @@
         [dict setObject:exchangedFontName forKey:@"fontName"];
     }
     [dict setObject:[NSNumber numberWithFloat:self.font.pointSize] forKey:@"fontSize"];
+    [dict setObject:@"use fontName and fontSize" forKey:@"font"];
     if ( self.textColor )
     {
         [ dict setObject:[ self.textColor exportToDictionary ] forKey:@"textColor" ];
