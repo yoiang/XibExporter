@@ -170,11 +170,11 @@ const int HEX_LENGTH = 24;
 //takes an array of files and removes all ones that have not been modified
 + (NSArray *) trimToOnlyModifiedFiles:(NSArray *)files
 {
-    //amazingly, even though usedViews.txt gets updated with a preproc script, it gets put into the build directory before thism making it the old
+    //amazingly, even though changedViews.txt gets updated with a preproc script, it gets put into the build directory before thism making it the old
     //file. so just adding it to the xcode project doesn't work. instead, we need to do the same BS file system access...
-    NSString *usedViews = [NSString stringWithFormat:@"%@/tools/Xib-Exporter/XibExporter/usedViews.txt",[AppSettings getXcodeProjectFolder]];
+    NSString *changedViews = [NSString stringWithFormat:@"%@/changedViews.txt",[AppSettings getXIBRoot]];
     NSError *error = nil;
-    NSString *contents = [NSString stringWithContentsOfFile:usedViews encoding:NSUTF8StringEncoding error:&error];
+    NSString *contents = [NSString stringWithContentsOfFile:changedViews encoding:NSUTF8StringEncoding error:&error];
     
     if (!error)
     {
@@ -200,7 +200,7 @@ const int HEX_LENGTH = 24;
     }
     else
     {
-        NSLog(@"Couldn't read usedViews.txt file.");
+        NSLog(@"Couldn't read changedViews.txt file.");
     }
     
     return files;

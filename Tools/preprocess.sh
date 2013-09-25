@@ -6,7 +6,7 @@
 
 #md5 comparisons
 dir="$1";
-output_file="$dir/usedViews.txt";
+output_file="$dir/changedViews.txt";
 change_file="$dir/viewChanges.txt";
 xibs=(`cat $change_file`);
 len=${#xibs[*]};
