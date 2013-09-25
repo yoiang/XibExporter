@@ -245,10 +245,13 @@ static NSMutableDictionary* instanceCounts = nil;
 {
     NSString* result = nil;
     
-    NSString* buildFormat = @"\"%@\"";
+    NSString* buildFormat = nil;
     if (!self.map.asIsStringKeys || [self.map.asIsStringKeys objectForKey:key])
     {
         buildFormat = @"%@";
+    } else
+    {
+        buildFormat = [self.map staticStringDefinition:@"%@"];
     }
     result = [ [NSString stringWithFormat:buildFormat, value] stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
     result = [result stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];

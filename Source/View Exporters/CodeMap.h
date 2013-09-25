@@ -30,6 +30,8 @@
 
 -(NSString*)variableReference:(NSString*)name;
 
+-(NSString*)staticStringDefinition:(NSString*)contents;
+
 @property (nonatomic, readonly) NSString* statementEnd;
 
 @end

@@ -182,6 +182,16 @@
     return [variableReference stringByReplacingOccurrencesOfString:@"@" withString:name];
 }
 
+-(NSString*)staticStringDefinition:(NSString*)contents
+{
+    NSString* staticStringDefinition = [self.data objectForKey:@"_staticStringDefinition"];
+    if ( [staticStringDefinition length] == 0)
+    {
+        staticStringDefinition = @"\"$\"";
+    }
+    return [staticStringDefinition stringByReplacingOccurrencesOfString:@"$" withString:contents];
+}
+
 -(NSString*)statementEnd
 {
     return [self.data objectForKey:@"_statementEnd"];
