@@ -33,7 +33,6 @@
 		3C7A7F7717D0FC8000C57BE9 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7A7F6F17D0FC8000C57BE9 /* Icon@2x.png */; };
 		3C7A7F7817D0FC8000C57BE9 /* Icon~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7A7F7017D0FC8000C57BE9 /* Icon~iPad.png */; };
 		3C7A7F7917D0FC8000C57BE9 /* Icon~iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7A7F7117D0FC8000C57BE9 /* Icon~iPad@2x.png */; };
-		3C96F3B717D0F4D5000FC446 /* AccessibilityStarter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F37917D0F4D5000FC446 /* AccessibilityStarter.m */; };
 		3C96F3B817D0F4D5000FC446 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F37B17D0F4D5000FC446 /* AppDelegate.m */; };
 		3C96F3BA17D0F4D5000FC446 /* ExportedViewMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F38017D0F4D5000FC446 /* ExportedViewMap.m */; };
 		3C96F3BB17D0F4D5000FC446 /* ExportUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96F38217D0F4D5000FC446 /* ExportUtility.m */; };
@@ -151,8 +150,6 @@
 		3C7A7F6F17D0FC8000C57BE9 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		3C7A7F7017D0FC8000C57BE9 /* Icon~iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~iPad.png"; sourceTree = "<group>"; };
 		3C7A7F7117D0FC8000C57BE9 /* Icon~iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~iPad@2x.png"; sourceTree = "<group>"; };
-		3C96F37817D0F4D5000FC446 /* AccessibilityStarter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessibilityStarter.h; sourceTree = "<group>"; };
-		3C96F37917D0F4D5000FC446 /* AccessibilityStarter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessibilityStarter.m; sourceTree = "<group>"; };
 		3C96F37A17D0F4D5000FC446 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3C96F37B17D0F4D5000FC446 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3C96F37C17D0F4D5000FC446 /* Availability2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Availability2.h; sourceTree = "<group>"; };
@@ -403,8 +400,6 @@
 			children = (
 				3C10DC9917E7FD0E00162DBC /* AppSettings.h */,
 				3C10DC9A17E7FD0E00162DBC /* AppSettings.m */,
-				3C96F37817D0F4D5000FC446 /* AccessibilityStarter.h */,
-				3C96F37917D0F4D5000FC446 /* AccessibilityStarter.m */,
 				3C96F37A17D0F4D5000FC446 /* AppDelegate.h */,
 				3C96F37B17D0F4D5000FC446 /* AppDelegate.m */,
 				3C96F37C17D0F4D5000FC446 /* Availability2.h */,
@@ -735,7 +730,6 @@
 				3CEA729717D1093E00F419A3 /* SBJsonStreamParserAdapter.m in Sources */,
 				3C10DC9B17E7FD0E00162DBC /* AppSettings.m in Sources */,
 				3C96F3D017D0F4D5000FC446 /* CXMLElement+UIView.m in Sources */,
-				3C96F3B717D0F4D5000FC446 /* AccessibilityStarter.m in Sources */,
 				3C96F3C817D0F4D5000FC446 /* UIScrollView+Exports.m in Sources */,
 				3C65718917D0FF560074B101 /* CXHTMLDocument.m in Sources */,
 				3C65718D17D0FF560074B101 /* CXMLElement_CreationExtensions.m in Sources */,
