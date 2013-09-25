@@ -89,12 +89,12 @@ inline void populateGeneratedViewTemplates( ofPtr< ofxGenericView > rootView, of
 	variableNameButton2->setAutoresizingMask( ofxGenericViewAutoresizingRightMargin | ofxGenericViewAutoresizingBottomMargin );
 	rootView->addChildView( variableNameButton2 );
 
-	// Note: no image set for view
 	variableNameImage = ofxGenericImageView::create(  );
 	variableNameImage->setClipSubviews( false );
 	variableNameImage->setVisible( true );
 	variableNameImage->setFrame( ofRectangle( 96.0f, 155.0f, 128.0f, 128.0f ) );
 	variableNameImage->setBackgroundColor( ofColor( 0, 0, 0, 0 ) );
+	variableNameImage->setImage( "Icon.png" );
 	variableNameImage->setContentMode( ofxGenericContentModeScaleToFill );
 	variableNameImage->setAutoresizingMask( ofxGenericViewAutoresizingRightMargin | ofxGenericViewAutoresizingBottomMargin );
 	variableNameImage->setAlpha( 1.0f );

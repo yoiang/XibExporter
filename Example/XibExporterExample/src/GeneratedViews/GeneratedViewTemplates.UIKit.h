@@ -50,8 +50,8 @@ inline void populateGeneratedViewTemplates( UIView** rootView, UILabel** variabl
 	[(*variableNameButton2).titleLabel setNumberOfLines:1];
 	[(*rootView) addSubview:(*variableNameButton2)];
 
-	// Note: no image set for view
 	(*variableNameImage) = [ [UIImageView alloc] init];
+	[(*variableNameImage) setImage:@"Icon.png"];
 	[(*rootView) addSubview:(*variableNameImage)];
 
 	(*variableNameView) = [ [UIView alloc] init];
