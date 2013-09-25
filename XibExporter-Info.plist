@@ -48,7 +48,7 @@
 	<key>Exports</key>
 	<dict>
 		<key>UIKit</key>
-		<false/>
+		<true/>
 		<key>ofxGeneric</key>
 		<true/>
 	</dict>
