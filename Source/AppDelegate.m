@@ -134,12 +134,12 @@
     NSArray* skipXibs = [ AppSettings getSkipXibs ];
     
     NSError *error = nil;
-    NSString *rootFolder = [[[NSBundle mainBundle] pathForResource:@"XibFinder" ofType:@"txt"] stringByDeletingLastPathComponent];
-    NSArray *dirContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:rootFolder error:&error];
+    NSString *rootFolder = [AppSettings getNibPath];
+    NSArray *dirContents = [ [NSFileManager defaultManager] contentsOfDirectoryAtPath:rootFolder error:&error];
     
     if (error)
     {
-        NSLog(@"Error reading xibs! %@",error);
+        NSLog(@"Error reading nibs: %@",error);
     }
     else
     {

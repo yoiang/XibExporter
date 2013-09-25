@@ -1,3 +1,0 @@
-THIS FILE MUST BE IN THE SAME FOLDER AS YOUR XIBS
-
-There is no way to locate Xibs through Apple's stuff, because NSBundle ignores them. So I use NSBundle to find this file and then change the path.

@@ -10,6 +10,11 @@
 
 @implementation AppSettings
 
++(NSString*)getNibPath
+{
+    return [ [NSBundle mainBundle] bundlePath];
+}
+
 +(NSObject*)objectForInfoDictionaryKey:(NSString*)key
 {
     return [ [NSBundle mainBundle] objectForInfoDictionaryKey:key];
