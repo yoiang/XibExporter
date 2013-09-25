@@ -28,6 +28,8 @@
 @property (nonatomic, readonly) NSDictionary* asIsStringKeys;
 @property (nonatomic, readonly) NSArray* codeExporterFileNames;
 
+-(NSString*)variableReference:(NSString*)name;
+
 @property (nonatomic, readonly) NSString* statementEnd;
 
 @end

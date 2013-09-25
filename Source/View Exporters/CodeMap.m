@@ -172,6 +172,16 @@
     return [self.data objectForKey:@"_codeExporterFileNames"];
 }
 
+-(NSString*)variableReference:(NSString*)name;
+{
+    NSString* variableReference = [self.data objectForKey:@"_variableReference"];
+    if ( [variableReference length] == 0)
+    {
+        variableReference = @"@";
+    }
+    return [variableReference stringByReplacingOccurrencesOfString:@"@" withString:name];
+}
+
 -(NSString*)statementEnd
 {
     return [self.data objectForKey:@"_statementEnd"];

@@ -357,7 +357,7 @@ static NSMutableDictionary* instanceCounts = nil;
             if (isOutlet)
             {
                 constructorDef = [self replaceCodeSymbols:[def objectForKey:@"_inlineConstructor"] dict:dict key:@"_inlineConstructor" name:instanceName outlets:outlets includes:includes def:def properties:properties];
-                constructorDef = [NSString stringWithFormat:@"\t%@ = %@",instanceName,[constructorDef substringFromIndex:1]];
+                constructorDef = [NSString stringWithFormat:@"\t%@ = %@",[self.map variableReference:instanceName],[constructorDef substringFromIndex:1]];
             }
             else
             {
@@ -414,8 +414,8 @@ static NSMutableDictionary* instanceCounts = nil;
 -(NSString*)codeForAddSubview:(NSDictionary*)subview instanceName:(NSString*)instanceName def:(NSDictionary*)def
 {
     NSString *addsub = [def objectForKey:@"_addSubview"];
-    addsub = [addsub stringByReplacingOccurrencesOfString:@"@" withString:instanceName];
-    addsub = [addsub stringByReplacingOccurrencesOfString:@"%" withString:[subview objectForKey:@"name"]];
+    addsub = [addsub stringByReplacingOccurrencesOfString:@"@" withString:[self.map variableReference:instanceName] ];
+    addsub = [addsub stringByReplacingOccurrencesOfString:@"%" withString:[self.map variableReference:[subview objectForKey:@"name"] ] ];
     return addsub;
 }
 
@@ -426,7 +426,7 @@ static NSMutableDictionary* instanceCounts = nil;
         line = @"";
     }
     
-    NSString* output = [line stringByReplacingOccurrencesOfString:@"@" withString:name];
+    NSString* output = [line stringByReplacingOccurrencesOfString:@"@" withString:[self.map variableReference:name] ];
     
     NSRange r = NSMakeRange(0, [output length]);
     while (r.location != NSNotFound && r.location < [output length])
