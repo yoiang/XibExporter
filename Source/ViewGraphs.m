@@ -30,9 +30,11 @@
 
 -(void)processXib:(NSString*)xibName
 {
+    xibName = [NSString stringWithFormat:@"%@.xib", [xibName stringByDeletingPathExtension] ];
+    
     ViewGraphData* data = [ [ViewGraphData alloc] initWithXib:xibName];
     
-    [self.datas setObject:data forKey:xibName];
+    [self.datas setObject:data forKey:[xibName stringByDeletingPathExtension] ];
 }
 
 -(NSArray*)xibNames

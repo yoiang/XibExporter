@@ -46,6 +46,8 @@
     [ [ [AppDelegate sharedInstance] xibResources] clearXibResources];
     
     //NSLog( @"Processing xib %@", xibName );
+    xibName = [xibName stringByDeletingPathExtension];
+    
     UIViewController *vc = [ [UIViewController alloc] initWithNibName:xibName bundle:[NSBundle mainBundle] ];
     if (vc)
     {
