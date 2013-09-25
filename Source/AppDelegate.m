@@ -58,6 +58,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+#if TARGET_IPHONE_SIMULATOR
     [AccessibilityStarter startAccessibility];
     
     [self registerViewExporters];
@@ -101,7 +102,13 @@
 
     sleep(0.01);
     exit(0);
-    
+#else
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    self.mainViewController = [[MainWindowViewController alloc] initWithNibName:@"OnlyRunInSimulatorNoticeView" bundle:[NSBundle mainBundle]];
+    self.window.rootViewController = self.mainViewController;
+#endif
     return YES;
 }
 
