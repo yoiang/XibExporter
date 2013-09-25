@@ -14,7 +14,6 @@
 #import "UIViewController+Exports.h"
 
 #import "ViewExporter.h"
-#import "AccessibilityStarter.h"
 
 #import "XcodeProjectHelper.h"
 
@@ -59,7 +58,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 #if TARGET_IPHONE_SIMULATOR
-    [AccessibilityStarter startAccessibility];
     
     [self registerViewExporters];
 
@@ -162,7 +160,6 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    [AccessibilityStarter stopAccessibility];
 }
 
 -(NSArray*)getNibFileNamesForProcessing
