@@ -47,6 +47,8 @@
 	<string>1.0</string>
 	<key>Exports</key>
 	<dict>
+		<key>UIKit</key>
+		<false/>
 		<key>ofxGeneric</key>
 		<true/>
 	</dict>
@@ -60,6 +62,7 @@
 	<array/>
 	<key>Register Exporter Classes</key>
 	<array>
+		<string>UIKitViewExporter</string>
 		<string>ofxGenericViewExporter</string>
 	</array>
 	<key>SkipXibs</key>

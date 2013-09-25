@@ -1,0 +1,231 @@
+{
+  "Class Definitions": {
+    "CGRect": {
+      "_inlineConstructor": "CGRectMake( $x$, $y$, $width$, $height$ )"
+    },
+    "CGSize": {
+      "_inlineConstructor": "CGSizeMake( $width$, $height$ )"
+    },
+    "UIActivityIndicatorView": {
+      "_constructor": "UIActivityIndicatorView* @ = [ [UIActivityIndicatorView alloc] init]",
+      "_inlineConstructor": "[ [UIActivityIndicatorView alloc] init]",
+      "_parameter": "UIActivityIndicatorView** @",
+      "_super": "UIActivityIndicatorView",
+      "_variableName": "activityIndicator#",
+      "_declaration": "UIActivityIndicatorView*",
+      "hidesWhenStopped": "[@ setHidesWhenStoppedAnimating:$hidesWhenStopped$]",
+      "color": "[@ setColor:$color$]",
+      "activityIndicatorViewStyle": "[@ setIndicatorViewStyle:?$activityIndicatorViewStyle$]"
+    },
+    "UIButton": {
+      "_constructor": "UIButton* @ = [UIButton buttonWithType:$buttonType$]",
+      "_inlineConstructor": "[UIButton buttonWithType:$buttonType$]",
+      "_parameter": "UIButton** @",
+      "_super": "UIButton",
+      "_variableName": "button#",
+      "_declaration": "UIButton*",
+      "backgroundImage": "[@ setBackgroundImage:[UIImage imageNamed:$backgroundImage$] forState:UIControlStateNormal]",
+      "backgroundDownImage": "[@ setBackgroundImage:[UIImage imageNamed:$backgroundDownImage$] forState:UIControlStateHighlighted]",
+      "titleLabel.textColor": "[@ setTitleColor:$titleLabel.textColor$ forState:UIControlStateNormal]",
+      "downTitleColor": "[@ setTitleColor:$downTitleColor$ forState:UIControlStateHighlighted]",
+      "enabled": "[@ setEnabled:$enabled$]",
+      "--TODO--localizedTitleKey": "@->setText( ofxGLocalized( $localizedTitleKey$, $localizedTitleDefaultKey$ ) )",
+      "--TODO--localizedTitleKey": "@->setText( ofxGLocalized( $localizedTitleKey$, $localizedTitleDefault$ ) )",
+      "title": "[@ setText:$title$]",
+      "titleLabel.textAlignment": "[@ setTextAlignment:$titleLabel.textAlignment$]",
+      "titleLabel.lineBreakMode": "[@ setLineBreakMode:$titleLabel.lineBreakMode$]",
+      "titleLabel.numberOfLines": "[@.titleLabel setNumberOfLines:$titleLabel.numberOfLines$]",
+      "titleLabel.minimumFontSize": "[@.titleLabel setMinimumFontSize:$titleLabel.minimumFontSize$]",
+      "titleLabel.font": "[@.titleLabel setFont:[UIFont fontWithName:$titleLabel.fontName$ size:$titleLabel.fontSize$] ]",
+      "--TODO--rootView": "[@ setDelegate:rootView]"
+    },
+    "UIButtonLabel": {
+      "_super": "UILabel"
+    },
+    "UIColor": {
+      "_inlineConstructor": "[UIColor colorWithRed:$red$ green:$green$ blue:$blue$ alpha:$alpha$]"
+    },
+    "UIEdgeInsets": {
+      "_inlineConstructor": ""
+    },
+    "UIImageView": {
+      "_constructor": "UIImageView* @ = [ [UIImageView alloc] init]",
+      "_inlineConstructor": "[ [UIImageView alloc] init]",
+      "_parameter": "UIImageView** @",
+      "_super": "UIImageView",
+      "_variableName": "*image#",
+      "_declaration": "UIImageView*",
+      "image": "[@ setImage:$image$]"
+    },
+    "UILabel": {
+      "_constructor": "UILabel** @ = &[ [UILabel alloc] init]",
+      "_inlineConstructor": "[ [UILabel alloc] init]",
+      "_parameter": "UILabel** @",
+      "_super": "UILabel",
+      "_variableName": "text#",
+      "_declaration": "UILabel** @",
+      "font": "[@ setFont:[UIFont fontWithName:$fontName$ size:$fontSize$] ]",
+      "minimumFontSize": "[@ setMinimumFontSize:$minimumFontSize$]",
+      "lineBreakMode": "[@ setLineBreakMode:$lineBreakMode$]",
+      "numberOfLines": "[@ setNumberOfLines:$numberOfLines$]",
+      "--TODO--localizedTextKey": "[@ setText:$localizedDefaultTextKey$]",
+      "text": "[@ setText:$text$]",
+      "textAlignment": "[@ setTextAlignment:$textAlignment$]",
+      "textColor": "[@ setTextColor:$textColor$]",
+      "adjustsFontSizeToFitWidth": "[@ setAdjustsFontSizeToFitWidth:$adjustsFontSizeToFitWidth$]"
+    },
+    "UIRoundedRectButton": {
+      "_super": "UIButton"
+    },
+    "UIScrollView": {
+      "_constructor": "ofPtr< ofxGenericScrollView > @ = ofxGenericScrollView::create( )",
+      "_inlineConstructor": "ofxGenericScrollView::create( )",
+      "_parameter": "ofPtr< ofxGenericScrollView > &@",
+      "_super": "UIView",
+      "_variableName": "scroll#",
+      "_declaration": "ofPtr< ofxGenericScrollView >",
+      "autoContentSizeToFit": "@->setAutoContentSizeToFit( $autoContentSizeToFit$ )"
+    },
+    "UITableView": {
+      "_constructor": "ofPtr< ofxGenericTableView > @ = ofxGenericTableView::create( )",
+      "_inlineConstructor": "ofxGenericTableView::create( )",
+      "_parameter": "ofPtr< ofxGenericTableView > &@",
+      "_super": "UIScrollView",
+      "_variableName": "table#",
+      "_declaration": "ofPtr< ofxGenericTableView >",
+      "rootView": "@->setDelegate( dynamic_pointer_cast< ofxGenericTableViewDelegate >( rootView ) )",
+      "contentInsetBottom": "@->setUsePaddedSeparator( $contentInsetBottom$ )"
+    },
+    "UITextField": {
+      "_constructor": "ofPtr< ofxGenericEditTextView > @ = ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), false )",
+      "_inlineConstructor": "ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), false )",
+      "_parameter": "ofPtr< ofxGenericEditTextView > &@",
+      "_super": "UIView",
+      "_variableName": "editTextView#",
+      "_declaration": "ofPtr< ofxGenericEditTextView >",
+      "autocapitalizationType": "@->setAutoCapitalization( $autocapitalizationType$ )",
+      "autocorrection": "@->setAutoCorrection( $autocorrection$ )",
+      "textBorderStyle": "@->setBorderStyle( $textBorderStyle$ )",
+      "clearsOnBeginEditing": "@->setClearsOnBeginEditing( $clearsOnBeginEditing$ )",
+      "enablesReturnKeyAutomatically": "@->setEnableReturnKeyAutomatically( $enablesReturnKeyAutomatically$ )",
+      "keyboardType": "@->setKeyboard( $keyboardType$ )",
+      "placeholderText": "@->setPlaceholderText( $placeholderText$ )",
+      "returnKeyType": "@->setKeyboardReturnKey( $returnKeyType$ )",
+      "secureText": "@->setSecureText( $secureText$ )",
+      "text": "@->setText( $text$ )",
+      "fontName": "@->setFont( $fontName$, @->getFontSize() )",
+      "fontSize": "@->setFont( @->getFontName(), $fontSize$ )",
+      "textAlignment": "@->setTextAlignment( $textAlignment$ )",
+      "rootView": "@->setDelegate( dynamic_pointer_cast< ofxGenericEditTextViewDelegate >( rootView ) )"
+    },
+    "UITextView": {
+      "_constructor": "ofPtr< ofxGenericEditTextView > @ = ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), true )",
+      "_inlineConstructor": "ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), true )",
+      "_parameter": "ofPtr< ofxGenericEditTextView > &@",
+      "_super": "UIView",
+      "_variableName": "editTextView#",
+      "_declaration": "ofPtr< ofxGenericEditTextView >",
+      "autocapitalizationType": "@->setAutoCapitalization( $autocapitalizationType$ )",
+      "autocorrection": "@->setAutoCorrection( $autocorrection$ )",
+      "enablesReturnKeyAutomatically": "@->setEnableReturnKeyAutomatically( $enablesReturnKeyAutomatically$ )",
+      "keyboardType": "@->setKeyboard( $keyboardType$ )",
+      "returnKeyType": "@->setKeyboardReturnKey( $returnKeyType$ )",
+      "secureText": "@->setSecureText( $secureText$ )",
+      "text": "@->setText( $text$ )",
+      "fontName": "@->setFont( $fontName$, @->getFontSize() )",
+      "fontSize": "@->setFont( @->getFontName(), $fontSize$ )",
+      "textAlignment": "@->setTextAlignment( $textAlignment$ )",
+      "rootView": "@->setDelegate( dynamic_pointer_cast< ofxGenericEditTextViewDelegate >( rootView ) )"
+    },
+    "UIView": {
+      "_addSubview": "[@ addSubview:%]",
+      "_constructor": "UIView* @ = [ [UIView alloc] init];",
+      "_inlineConstructor": "[ [UIView alloc] init]",
+      "_parameter": "UIView** @",
+      "_variableName": "view#",
+      "_declaration": "UIView*",
+      "alpha": "[@ setAlpha:$alpha$]",
+      "autoresizingMask": "[@ setAutoresizingMask:$autoresizingMask$]",
+      "backgroundColor": "[@ setBackgroundColor:$backgroundColor$]",
+      "frame": "[@ setFrame:$frame$]",
+      "visible": "[@ setHidden:$hidden$]",
+      "clipsToBounds": "[@ setClipsToBounds:$clipsToBounds$]",
+      "contentMode": "[@ setContentMode:?$contentMode$]"
+    },
+    "UIPageControl": {
+      "_constructor": "ofPtr< ofxGenericPageControl > @ = ofxGenericPageControl::create()",
+      "_inlineConstructor": "ofxGenericPageControl::create()",
+      "_parameter": "ofPtr< ofxGenericPageControl > &@",
+      "_super": "UIView",
+      "_variableName": "pageControl#",
+      "_declaration": "ofPtr< ofxGenericPageControl >",
+      "currentPage": "@->setCurrentPage( $currentPage$ )",
+      "numberOfPages": "@->setPageCount( $numberOfPages$ )",
+      "hidesForSinglePage": "@->setHidesForSinglePage( $hidesForSinglePage$ )"
+    },
+    "UISwitch": {
+      "_constructor": "ofPtr< ofxGenericSwitchView > @ = ofxGenericSwitchView::create()",
+      "_inlineConstructor": "ofxGenericSwitchView::create()",
+      "_parameter": "ofPtr< ofxGenericSwitchView > &@",
+      "_super": "UIView",
+      "_variableName": "switchView#",
+      "_declaration": "ofPtr< ofxGenericSwitchView >",
+      "on": "@->setSwitched( $on$, false )",
+      "onTintColor": "@->setTintColor( $onTintColor$ )",
+      "rootView": "@->setDelegate( dynamic_pointer_cast< ofxGenericSwitchViewDelegate >( rootView ) )"
+    }
+  },
+  "__COMMENTS__": {
+    "All Other Keys": {
+      "Every other key is what code will be added for a particular value. We can add keys as desired to match values exported from the xibs.": ""
+    },
+    "Reserved Replacement Characters": {
+      "#": "Only in the case of _variableName, this is replaced with the view ID # to assure unique autogenerated instance names.",
+      "$xxxx$": "The string in between two $ signs is the key of the exported value that will be inserted there. To see keys, have a look at the exported .json version of the hierarchy.",
+      "%": "This character is replaced with secondary instance names, that is the name of what's being added or referenced. In function definitions, this will NOT include a leading comma.",
+      "?": "When a ? character appears before a $xx$, this is a special case where the value will actually be pulled from a child definition dictionary with the key of _enum. Have a look at UILineBreakMode for an example.",
+      "@": "Occurrences of this character are replaced with instance names - either a generated one or the name of an outlet.",
+      "b": "When a b character appears before a $xx$, this is a value that will be output as a boolean with the string 'true' or 'false'",
+      "ƒ": "Used in function definitions, this represents the guts of the function (all the view data etc). Option-F to type",
+      "∞": "Used in function definitions, this represents the list of outlets without types included and inserts a comma. Option-% to type",
+      "§": "Used in function definitions, this represents the list of outlets without types included and does not insert a comma. Option-^ to type",
+      "ﬁ": "Used in function definitions, this represents the list of outlets with types included and inserts a comma. Option-Shift-% to type.",
+      "∂": "Can use to get stuff in the dictionary hierarchy, like ∂frame.x∂ gives the X of the frame of the root view. Option-D to type."
+    },
+    "Special Nested Keys": {
+      "_addSubview": "When adding a child view, this will be called.",
+      "_constructor": "When a new, non-outleted instance of an object is created, this will be called.",
+      "_include": "If this class needs to be included in the ExportedViews.h file, put the include statement here.",
+      "_inlineConstructor": "When another function call requires an instance of this object to be created as a parameter (almost exclusively structs like rects and colors), this will be called. It is also called for outlets, except the outlet also prepends an = .",
+      "_parameter": "If this is an outlet, this value will be placed into the main function as a parameter.",
+      "_super": "Specifies the super class for this object. If there is one, then all code definition values from the super class will be used also. Any like values naturally have the child classes taking precedence.",
+      "_variableName": "If no outlet is provided (Accessibility Label) or accessibility is turned off, all instance names will be autogenerated with this string."
+    },
+    "Special Root Keys": {
+      "_functionDefinitions": "An array of function definitions. All will be placed into the exported results, potentially with identical contents. Use @ to represent the function name, % to represent the outlets, and ƒ to represent the function contents.",
+      "_rootViewInstanceName": "The string name for the root view, will automatically be set to its instance name if it doesn't have one defined. You can use this to make more elaborate constructors.",
+      "_ignoredClasses": "If any of these classes exists they will be ignored, not exported."
+    }
+  },
+  "_functionDefinitionFileName": "UIKitDefinition.h",
+  "_rootViewInstanceName": "rootView",
+  "_variableReference": "(*@)",
+  "_staticStringDefinition": "@\"$\"",
+  "_ignoredClasses": {
+    "_UITableViewSeparatorView": true
+  },
+  "_asIsStringKeys": {
+    "autoresizingMask": true
+  },
+  "_codeExporterFileNames": [
+    {
+      "inputFile": "GeneratedClass.h.txt",
+      "extension": "h"
+    },
+    {
+      "inputFile": "GeneratedClass.cpp.txt",
+      "extension": "cpp"
+    }
+  ],
+  "_statementEnd": ";"
+}
