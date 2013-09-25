@@ -152,7 +152,6 @@
 		3C7A7F7117D0FC8000C57BE9 /* Icon~iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~iPad@2x.png"; sourceTree = "<group>"; };
 		3C96F37A17D0F4D5000FC446 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3C96F37B17D0F4D5000FC446 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3C96F37C17D0F4D5000FC446 /* Availability2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Availability2.h; sourceTree = "<group>"; };
 		3C96F37F17D0F4D5000FC446 /* ExportedViewMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportedViewMap.h; sourceTree = "<group>"; };
 		3C96F38017D0F4D5000FC446 /* ExportedViewMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportedViewMap.m; sourceTree = "<group>"; };
 		3C96F38117D0F4D5000FC446 /* ExportUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportUtility.h; sourceTree = "<group>"; };
@@ -433,7 +432,6 @@
 				3C10DC9A17E7FD0E00162DBC /* AppSettings.m */,
 				3C96F37A17D0F4D5000FC446 /* AppDelegate.h */,
 				3C96F37B17D0F4D5000FC446 /* AppDelegate.m */,
-				3C96F37C17D0F4D5000FC446 /* Availability2.h */,
 				3C96F37F17D0F4D5000FC446 /* ExportedViewMap.h */,
 				3C96F38017D0F4D5000FC446 /* ExportedViewMap.m */,
 				3C96F38117D0F4D5000FC446 /* ExportUtility.h */,
