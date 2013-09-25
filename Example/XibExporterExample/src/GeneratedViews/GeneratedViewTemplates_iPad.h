@@ -12,7 +12,7 @@
 
 inline ofRectangle getGeneratedViewTemplates_iPadFrame()
 {
-	return ofRectangle(0.0f, 0.0f, 320.0f, 568.0f);
+    return ofRectangle(0.0f, 0.0f, 320.0f, 568.0f);
 }
 
 inline void populateGeneratedViewTemplates_iPad( ofPtr< ofxGenericView > rootView, ofPtr< ofxGenericButtonView > &variableNameButton, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericImageView > &variableNameImage, ofPtr< ofxGenericTextView > &variableNameLabel )
@@ -90,30 +90,31 @@ inline void populateGeneratedViewTemplates_iPad( ofPtr< ofxGenericView > rootVie
 }
 
 inline void populatePreserveGeneratedViewTemplates_iPad( ofPtr< ofxGenericView > rootView, bool preserveTopLeft, bool preserveSize, ofPtr< ofxGenericButtonView > &variableNameButton, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericImageView > &variableNameImage, ofPtr< ofxGenericTextView > &variableNameLabel )
- { 
-	 ofRectangle preservedFrame = rootView->getFrame(); 
- 
- 	 populateGeneratedViewTemplates_iPad( rootView, variableNameButton, variableNameView, variableNameImage, variableNameLabel ); 
- 	 ofRectangle generatedFrame = getGeneratedViewTemplates_iPadFrame(); 
- 	 if ( !preserveTopLeft ) 
- 	 { 
- 		 preservedFrame.x = generatedFrame.x; 
- 		 preservedFrame.y = generatedFrame.y; 
- 	 } 
- 	 if ( !preserveSize ) 
- 	 { 
- 		 preservedFrame.width = generatedFrame.width; 
- 		 preservedFrame.height = generatedFrame.height; 
- 	 } 
- 	 if ( preserveTopLeft || preserveSize ) 
- 	 { 
- 		 rootView->setFrame( preservedFrame ); 
- 	 } 
- }
+{
+    ofRectangle preservedFrame = rootView->getFrame();
+
+    populateGeneratedViewTemplates_iPad( rootView, variableNameButton, variableNameView, variableNameImage, variableNameLabel );
+    ofRectangle generatedFrame = getGeneratedViewTemplates_iPadFrame();
+    if ( !preserveTopLeft )
+    {
+        preservedFrame.x = generatedFrame.x;
+        preservedFrame.y = generatedFrame.y;
+    }
+
+    if ( !preserveSize )
+    {
+        preservedFrame.width = generatedFrame.width;
+        preservedFrame.height = generatedFrame.height;
+    }
+    if ( preserveTopLeft || preserveSize )
+    {
+        rootView->setFrame( preservedFrame );
+    }
+}
 
 inline ofPtr< ofxGenericView > constructGeneratedViewTemplates_iPad( ofPtr< ofxGenericButtonView > &variableNameButton, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericImageView > &variableNameImage, ofPtr< ofxGenericTextView > &variableNameLabel )
 {
-	ofPtr< ofxGenericView > rootView = ofxGenericView::create();
-	populateGeneratedViewTemplates_iPad( rootView, variableNameButton, variableNameView, variableNameImage, variableNameLabel );
-	return rootView;
+    ofPtr< ofxGenericView > rootView = ofxGenericView::create();
+    populateGeneratedViewTemplates_iPad( rootView, variableNameButton, variableNameView, variableNameImage, variableNameLabel );
+    return rootView;
 }
