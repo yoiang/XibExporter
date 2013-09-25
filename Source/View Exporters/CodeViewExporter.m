@@ -88,7 +88,7 @@ static NSMutableDictionary* instanceCounts = nil;
         location = [targetFile stringByDeletingLastPathComponent];
     } else
     {
-        location = [NSString stringWithFormat:[self multipleExportedFilePathFormat],[targetFile stringByDeletingPathExtension]];
+        location = [NSString stringWithFormat:[self multipleExportedFileNameFormat],[targetFile stringByDeletingPathExtension]];
     }
     
     return [self exportData:viewGraphs toFile:location atomically:flag error:error saveMultipleFiles:mult useOnlyModifiedFiles:onlyModified];
