@@ -130,43 +130,10 @@
 
 - (void) processAllXibs
 {
-    NSArray* onlyProcessXibs = [ AppSettings getProcessOnlyXibs ];
-    NSArray* skipXibs = [ AppSettings getSkipXibs ];
-    
-    NSError *error = nil;
-    NSString *rootFolder = [AppSettings getNibPath];
-    NSArray *dirContents = [ [NSFileManager defaultManager] contentsOfDirectoryAtPath:rootFolder error:&error];
-    
-    if (error)
+    NSArray* nibFileNames = [self getNibFileNamesForProcessing];
+    for (NSString* nibFileName in nibFileNames)
     {
-        NSLog(@"Error reading nibs: %@",error);
-    }
-    else
-    {
-        NSPredicate *filter = [NSPredicate predicateWithFormat:@"self ENDSWITH '.nib'"];
-        NSArray *xibs = [dirContents filteredArrayUsingPredicate:filter];
-        
-        for (int i = 0; i < [xibs count]; i++)
-        {
-            NSString *xibName = [[[xibs objectAtIndex:i] lastPathComponent] stringByDeletingPathExtension];
-            
-            if ( [ onlyProcessXibs count ] > 0 )
-            {
-                if ( [ onlyProcessXibs containsString:xibName ] )
-                {
-                    [ self.viewGraphs processXib:xibName ];
-                }
-            } else
-            {
-                if ( ![ skipXibs containsString:xibName ] )
-                {
-                    [ self.viewGraphs processXib:xibName ];
-                } else
-                {
-                    NSLog( @"Skipping %@", xibName );
-                }
-            }
-        }
+        [self.viewGraphs processXib:nibFileName];
     }
 }
 
@@ -196,6 +163,59 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [AccessibilityStarter stopAccessibility];
+}
+
+-(NSArray*)getNibFileNamesForProcessing
+{
+    NSMutableArray* nibFileNames = nil;
+    
+    NSArray* onlyProcessXibs = [ AppSettings getProcessOnlyXibs ];
+    NSArray* skipXibs = [ AppSettings getSkipXibs ];
+    
+    NSError* error = nil;
+    NSString* nibPath = [AppSettings getNibPath];
+    nibFileNames = [NSMutableArray arrayWithArray:[ [NSFileManager defaultManager] contentsOfDirectoryAtPath:nibPath error:&error] ];
+    if (error)
+    {
+        NSLog(@"Error retrieving list of NIBs from %@: %@", nibPath, error);
+    }
+    
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"self ENDSWITH '.nib'"];
+    nibFileNames = [NSMutableArray arrayWithArray:[nibFileNames filteredArrayUsingPredicate:filter] ];
+    
+    NSUInteger index = 0;
+    while (index < [nibFileNames count])
+    {
+        NSString* nibFileName = [nibFileNames objectAtIndex:index];
+        nibFileName = [ [nibFileName lastPathComponent] stringByDeletingPathExtension];
+        
+        BOOL remove = NO;
+        if ( [onlyProcessXibs count] > 0)
+        {
+            if ( ![onlyProcessXibs containsString:nibFileName] )
+            {
+                NSLog(@"Skipping Xib %@, not found in the Only Process Xibs list", nibFileName);
+                remove = YES;
+            }
+        } else
+        {
+            if ( [skipXibs containsString:nibFileName] )
+            {
+                NSLog(@"Skipping Xib %@, found in Skip Xibs list", nibFileName);
+                remove = YES;
+            }
+        }
+        
+        if (remove)
+        {
+            [nibFileNames removeObjectAtIndex:index];
+        } else
+        {
+            index ++;
+        }
+    }
+    
+    return nibFileNames;
 }
 
 @end
