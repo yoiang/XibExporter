@@ -10,6 +10,8 @@
 
 #import "AppSettings.h"
 
+#import "NSArray+NSString.h"
+
 const int HEX_LENGTH = 24;
 
 @implementation XcodeProjectHelper
@@ -179,24 +181,20 @@ const int HEX_LENGTH = 24;
     if (!error)
     {
         NSMutableArray *results = [NSMutableArray array];
-        NSArray *views = [contents componentsSeparatedByString:@" "];
+        NSArray *views = [contents componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" \n"] ];
         
         for (int i = 0; i < [files count]; i++)
         {
-            NSString *n = [NSString stringWithFormat:@"%@.xib",[files objectAtIndex:i]];
-            for (int j = 0; j < [views count]; j++)
+            NSString* fileName = [files objectAtIndex:i];
+            fileName = [ [fileName stringByDeletingPathExtension] stringByAppendingString:@".xib"];
+
+            if ( [views containsString:fileName] )
             {
-                NSString *v = [[views objectAtIndex:j] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                
-                if ([v isEqualToString:n])
-                {
-                    [results addObject:[files objectAtIndex:i]];
-                    break;
-                }
+                [results addObject:[files objectAtIndex:i] ];
             }
         }
         
-    return results;
+        return results;
     }
     else
     {

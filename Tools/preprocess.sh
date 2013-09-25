@@ -45,7 +45,7 @@ do
 	
 	if [ $process_file -eq 1 ]
 	then
-		new_output="$fname $new_output";
+		new_output="$new_output $fname";
 	fi
 	
 	new_change="$fname=$cur_md5\n$new_change";
