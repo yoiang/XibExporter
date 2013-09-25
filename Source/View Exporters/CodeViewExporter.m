@@ -49,6 +49,15 @@ static NSMutableDictionary* instanceCounts = nil;
     return @"invalid";
 }
 
+// TODO: allow subclasses to alter path
+-(NSString*)multipleExportedFileNameFormat
+{
+    NSException* exception = [ [NSException alloc] initWithName:@"Abstract Method" reason:@"Must override [CodeViewExporter multipleExportedFileNameFormat] method" userInfo:nil];
+    @throw exception;
+    
+    return @"invalid";
+}
+
 - (id) init
 {
     self = [super init];
@@ -73,10 +82,13 @@ static NSMutableDictionary* instanceCounts = nil;
         targetFile = [NSString stringWithFormat:@"%@/ExportedViews.h",documentsDirectory];
     }
     
-    NSString* location = [NSString stringWithFormat:@"%@.h",[targetFile stringByDeletingPathExtension]];
+    NSString* location = nil;
     if (mult)
     {
-        location = [location stringByDeletingLastPathComponent];
+        location = [targetFile stringByDeletingLastPathComponent];
+    } else
+    {
+        location = [NSString stringWithFormat:[self multipleExportedFilePathFormat],[targetFile stringByDeletingPathExtension]];
     }
     
     return [self exportData:viewGraphs toFile:location atomically:flag error:error saveMultipleFiles:mult useOnlyModifiedFiles:onlyModified];
@@ -102,7 +114,7 @@ static NSMutableDictionary* instanceCounts = nil;
         return outputFileNames;
     }
     
-    NSLog(@"Exporting code for %d file(s).\n%@",[keys count],keys);
+    NSLog(@"Exporting %@ code for %d file(s).\n%@",[self factoryKey], [keys count], keys );
     
     for (int i = 0; i < [keys count]; i++)
     {
@@ -164,10 +176,17 @@ static NSMutableDictionary* instanceCounts = nil;
         for (int i = 0; i < [keys count]; i++)
         {
             NSString *k = [keys objectAtIndex:i];
-            NSString *fileLocation = [NSString stringWithFormat:@"%@/Generated%@.h",location,k];
+            
+            NSString* exportFileNameFormat = [self multipleExportedFileNameFormat];
+            
+            NSString* baseFileName = [NSString stringWithFormat:@"Generated%@", k];
+            NSString* fileName = [NSString stringWithFormat:exportFileNameFormat, baseFileName];
+            
+            NSString* fileLocation = [NSString stringWithFormat:@"%@/%@", location, fileName];
+            
             [self doCodeExport:viewGraphs atLocation:fileLocation data:output keys:[NSArray arrayWithObject:k] atomically:flag error:error];
             
-            [outputFileNames addObject:[NSString stringWithFormat:@"Generated%@.h",k]];
+            [outputFileNames addObject:fileName];
             /*if (&error)
              {
              return;

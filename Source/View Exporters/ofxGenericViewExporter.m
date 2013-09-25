@@ -20,4 +20,9 @@
     return @"ofxGenericDefinition";
 }
 
+-(NSString*)multipleExportedFileNameFormat
+{
+    return @"%@.ofxGeneric.h";
+}
+
 @end

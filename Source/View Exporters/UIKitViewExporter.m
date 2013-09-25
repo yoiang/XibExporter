@@ -20,6 +20,11 @@
     return @"UIKitDefinition";
 }
 
+-(NSString*)multipleExportedFileNameFormat
+{
+    return @"%@.UIKit.h";
+}
+
 -(NSString*)valueForEnum:(NSString*)valueKey valueObject:(NSObject*)valueObject
 {
     NSString* result = nil;
