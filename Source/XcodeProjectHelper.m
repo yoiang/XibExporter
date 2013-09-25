@@ -78,17 +78,19 @@ const int HEX_LENGTH = 24;
     }
     
     //locate a search range for inserting generated views
-    NSRange searchRange = [ fileString rangeOfString:@"children = (\n" options:NSLiteralSearch range:NSMakeRange(generatedViewsLocation.location, 1000) ];
+    NSRange searchRange = [ fileString rangeOfString:@"children = (" options:NSLiteralSearch range:NSMakeRange(generatedViewsLocation.location, 1000) ];
     searchRange.location = searchRange.location + searchRange.length;
-    searchRange.length = [ fileString rangeOfString:@");" options:NSLiteralSearch range:NSMakeRange(searchRange.location, 100000)].location - searchRange.location;
+    
+    NSRange remainingRange = NSMakeRange(searchRange.location, [fileString length] - searchRange.location );
+    searchRange.length = [fileString rangeOfString:@");" options:NSLiteralSearch range:remainingRange].location - searchRange.location;
     return searchRange;
 }
 
 // TODO: more intimite parsing of project file format
-+( int )findPBXBuildFileInsertLocation:( NSString* )fileString
++(NSRange)findPBXBuildFileInsertLocation:( NSString* )fileString
 {
     //locate an insert location for the views for the PBXBuildFile section
-    return [ fileString rangeOfString:@"\t\t5326AEA810A23A0500278DE6 /* CoreLocation.framework in Frameworks */" options:NSLiteralSearch range:NSMakeRange(0, [ fileString length ] ) ].location;
+    return [ fileString rangeOfString:@"/* Begin PBXBuildFile section */" options:NSLiteralSearch range:NSMakeRange(0, [ fileString length ] ) ];
 }
 
 + (void) addToXcodeProject:(NSArray *)files
@@ -107,7 +109,7 @@ const int HEX_LENGTH = 24;
     }
     
     //locate an insert location for the views for the PBXBuildFile section
-    int pbxBuildLoc = [ XcodeProjectHelper findPBXBuildFileInsertLocation:projectFile ];
+    NSRange pbxBuildLoc = [ XcodeProjectHelper findPBXBuildFileInsertLocation:projectFile ];
     
     //create a new mutable string that represents the output
     NSMutableString *newProjectFile = [NSMutableString stringWithString:projectFile];
@@ -126,12 +128,12 @@ const int HEX_LENGTH = 24;
             NSString *hex = [XcodeProjectHelper generateRandomHexID];
             
             //now put it into the PBXBuildFile section
-            NSString *pbxLine = [ XcodeProjectHelper createXcodeProjectPBXBuildFileString:fileName id:hex ];
-            [ newProjectFile insertString:pbxLine atIndex:pbxBuildLoc ];
+            NSString *pbxLine = [NSString stringWithFormat:@"\n%@", [XcodeProjectHelper createXcodeProjectPBXBuildFileString:fileName id:hex ] ];
+            [ newProjectFile insertString:pbxLine atIndex:pbxBuildLoc.location + pbxBuildLoc.length ];
             
             groupInsertLoc += [pbxLine length]; //increase group insert location, as this occurs after the pbx
             
-            NSString *line = [ XcodeProjectHelper createXcodeProjectGroupFileString:fileName id:hex ];
+            NSString *line = [NSString stringWithFormat:@"\n%@", [ XcodeProjectHelper createXcodeProjectGroupFileString:fileName id:hex ] ];
             [newProjectFile insertString:line atIndex:groupInsertLoc];
             
             madeChange = YES;
