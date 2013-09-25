@@ -7,14 +7,14 @@
 #md5 comparisons
 dir="$1";
 output_file="$dir/changedViews.txt";
-change_file="$dir/viewChanges.txt";
-xibs=(`cat $change_file`);
+md5_file="$dir/viewMD5s.txt";
+xibs=(`cat $md5_file`);
 len=${#xibs[*]};
 new_output="";
 new_change="";
 
 touch $output_file;
-touch $change_file;
+touch $md5_file;
 
 all_xibs=`find $dir -name \*.xib`;
 
@@ -52,5 +52,5 @@ do
 done
 
 echo $new_output > $output_file;
-echo -e $new_change > $change_file;
+echo -e $new_change > $md5_file;
 
