@@ -12,21 +12,28 @@
 
 -( BOOL )containsString:( NSString* )value
 {
-    BOOL result = NO;
+    return [self containsStringAtIndex:value] != NSUIntegerMax;
+}
+
+-( NSUInteger )containsStringAtIndex:( NSString* )value
+{
+    NSUInteger result = NSUIntegerMax;
     
-    for ( NSObject* object in self )
+    for (NSUInteger index = 0; index < [self count]; index++)
     {
+        id object = [self objectAtIndex:index];
         if (
             [ object isKindOfClass:[ NSString class ] ] &&
             [ ( ( NSString* )object ) isEqualToString:value ]
             )
         {
-            result = YES;
+            result = index;
             break;
         }
     }
     
     return result;
 }
+
 
 @end

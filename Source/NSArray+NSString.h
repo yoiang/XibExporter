@@ -11,5 +11,6 @@
 @interface NSArray (NSString)
 
 -( BOOL )containsString:( NSString* )value;
+-( NSUInteger )containsStringAtIndex:( NSString* )value; // returns NSUIntegerMax if string not found
 
 @end
