@@ -36,7 +36,7 @@
 
 -(NSString*)getStatusFileName
 {
-    return @"viewMD5s.txt";
+    return @"XibExporter.viewMD5s.txt";
 }
 
 -(NSString*)getStatusFileNamePath
