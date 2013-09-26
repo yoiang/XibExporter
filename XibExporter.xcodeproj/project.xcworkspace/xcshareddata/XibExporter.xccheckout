@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6F23620C-96BB-4DAC-9B00-782AA2DB680B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>XibExporter</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>03FE4DE6-C03F-444C-92F7-D2FA5F58547E</key>
+		<string>https://github.com/stig/json-framework.git</string>
+		<key>7ADEABA0-05D6-4FDF-BBAE-5364F4222A65</key>
+		<string>ssh://github.com/yoiang/XibExporter.git</string>
+		<key>FEAC0B22-89BD-4A20-9933-C64BF7823A0C</key>
+		<string>https://github.com/TouchCode/TouchXML.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>XibExporter.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>03FE4DE6-C03F-444C-92F7-D2FA5F58547E</key>
+		<string>../../Libraries/SBJson</string>
+		<key>7ADEABA0-05D6-4FDF-BBAE-5364F4222A65</key>
+		<string>../..</string>
+		<key>FEAC0B22-89BD-4A20-9933-C64BF7823A0C</key>
+		<string>../../Libraries/TouchXML</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/yoiang/XibExporter.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>7ADEABA0-05D6-4FDF-BBAE-5364F4222A65</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>03FE4DE6-C03F-444C-92F7-D2FA5F58547E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SBJson</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FEAC0B22-89BD-4A20-9933-C64BF7823A0C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TouchXML</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7ADEABA0-05D6-4FDF-BBAE-5364F4222A65</string>
+			<key>IDESourceControlWCCName</key>
+			<string>XibExporter</string>
+		</dict>
+	</array>
+</dict>
+</plist>
