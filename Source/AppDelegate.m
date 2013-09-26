@@ -28,6 +28,8 @@
 #import "XibUpdateStatus.h"
 #import "NSData+MD5.h"
 
+#import "NSString+CString.h"
+
 @interface AppDelegate()
 {
     XibResources *_xibResources;
@@ -78,6 +80,7 @@
     
     self.xibUpdateStatus = [ [XibUpdateStatus alloc] init];
     
+    [self compileXibsToNibs];
     [self processAllXibs];
 
     for (NSString* exporterKey in [AppSettings getEnabledExports] )
@@ -171,6 +174,45 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(int)compileXib:(NSString*)sourceFileNamePath toNib:(NSString*)destinationFileNamePath
+{
+    NSString* bash = [NSString stringWithFormat:@"/bin/bash"];
+    NSString* script = [NSString stringWithFormat:@"%@/../../../../compileXib.sh", [AppSettings getXIBRoot] ];
+    NSString* param1 = [NSString stringWithFormat:@"\"%@\"", destinationFileNamePath];
+    NSString* param2 = [NSString stringWithFormat:@"\"%@\"", sourceFileNamePath];
+    
+    NSString* command = [NSString stringWithFormat:@"%@ %@ %@", script, param1, param2];
+    NSString* commandWithBash = [NSString stringWithFormat:@"%@ %@ %@ %@", bash, script, param1, param2];
+//    return system( [command cString] );
+    return system( [commandWithBash cString] );
+//    return execl( [bash cString], [script cString], [param1 cString], [param2 cString] );
+//    return execl( [script cString], [param1 cString], [param2 cString] );
+}
+
+-(void)compileXibsToNibs
+{
+    NSError* error = nil;
+
+    NSString* xibPath = [AppSettings getXIBRoot];
+    NSArray* xibFileNamePaths = [ [NSFileManager defaultManager] contentsOfDirectoryAtPath:xibPath error:&error];
+    if (error)
+    {
+        NSLog(@"Error retrieving list of Xibs from %@: %@", xibFileNamePaths, error);
+    }
+    
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"self ENDSWITH '.xib'"];
+    xibFileNamePaths = [xibFileNamePaths filteredArrayUsingPredicate:filter];
+    
+    NSString* nibPath = [AppSettings getNibPath];
+    
+    for (NSString* xibFileName in xibFileNamePaths)
+    {
+        NSString* fileName = [xibFileName stringByDeletingPathExtension];
+        int result = [self compileXib:[NSString stringWithFormat:@"%@/%@.xib", xibPath, fileName] toNib:[NSString stringWithFormat:@"%@/%@.nib", nibPath, fileName] ];
+        NSLog(@"Result: %d",result);
+    }    
 }
 
 -(NSArray*)getNibFileNamesForProcessing
