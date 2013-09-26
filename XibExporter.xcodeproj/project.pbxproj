@@ -12,8 +12,6 @@
 		3C10DC9217E2DD9F00162DBC /* ViewGraphData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9117E2DD9F00162DBC /* ViewGraphData.m */; };
 		3C10DC9517E2E22900162DBC /* ViewGraphs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9417E2E22900162DBC /* ViewGraphs.m */; };
 		3C10DC9B17E7FD0E00162DBC /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9A17E7FD0E00162DBC /* AppSettings.m */; };
-		3C5B8B0A17F2C0D4009C99F2 /* ViewTemplates.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C5B8AEB17F2C0AB009C99F2 /* ViewTemplates.xib */; };
-		3C5B8B0B17F2C0D4009C99F2 /* ViewTemplates_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C5B8AEC17F2C0AB009C99F2 /* ViewTemplates_iPad.xib */; };
 		3C5B8B0E17F3004C009C99F2 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B8B0D17F3004C009C99F2 /* NSString+MD5.m */; };
 		3C5B8B1117F300A3009C99F2 /* NSData+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B8B1017F300A3009C99F2 /* NSData+MD5.m */; };
 		3C5B8B1417F37215009C99F2 /* XibUpdateStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B8B1317F37215009C99F2 /* XibUpdateStatus.m */; };
@@ -105,8 +103,6 @@
 		3C10DC9417E2E22900162DBC /* ViewGraphs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGraphs.m; sourceTree = "<group>"; };
 		3C10DC9917E7FD0E00162DBC /* AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSettings.h; sourceTree = "<group>"; };
 		3C10DC9A17E7FD0E00162DBC /* AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSettings.m; sourceTree = "<group>"; };
-		3C5B8AEB17F2C0AB009C99F2 /* ViewTemplates.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewTemplates.xib; sourceTree = "<group>"; };
-		3C5B8AEC17F2C0AB009C99F2 /* ViewTemplates_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewTemplates_iPad.xib; sourceTree = "<group>"; };
 		3C5B8B0C17F3004C009C99F2 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		3C5B8B0D17F3004C009C99F2 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		3C5B8B0F17F300A3009C99F2 /* NSData+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MD5.h"; sourceTree = "<group>"; };
@@ -281,39 +277,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3C5B8AE717F2C0AB009C99F2 /* Example */ = {
-			isa = PBXGroup;
-			children = (
-				3C5B8AE817F2C0AB009C99F2 /* XibExporterExample */,
-			);
-			path = Example;
-			sourceTree = "<group>";
-		};
-		3C5B8AE817F2C0AB009C99F2 /* XibExporterExample */ = {
-			isa = PBXGroup;
-			children = (
-				3C5B8AE917F2C0AB009C99F2 /* Assets */,
-			);
-			path = XibExporterExample;
-			sourceTree = "<group>";
-		};
-		3C5B8AE917F2C0AB009C99F2 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				3C5B8AEA17F2C0AB009C99F2 /* Xibs */,
-			);
-			path = Assets;
-			sourceTree = "<group>";
-		};
-		3C5B8AEA17F2C0AB009C99F2 /* Xibs */ = {
-			isa = PBXGroup;
-			children = (
-				3C5B8AEB17F2C0AB009C99F2 /* ViewTemplates.xib */,
-				3C5B8AEC17F2C0AB009C99F2 /* ViewTemplates_iPad.xib */,
-			);
-			path = Xibs;
-			sourceTree = "<group>";
-		};
 		3C656E9117D0FE8D0074B101 /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
@@ -611,7 +574,6 @@
 		45E64D58152A3E0800009605 = {
 			isa = PBXGroup;
 			children = (
-				3C5B8AE717F2C0AB009C99F2 /* Example */,
 				3C7A7F6817D0FC8000C57BE9 /* Assets */,
 				3C96F37717D0F4D5000FC446 /* Source */,
 				3C656E9617D0FF550074B101 /* Libraries */,
@@ -651,6 +613,7 @@
 				45E64D5F152A3E0800009605 /* Sources */,
 				45E64D60152A3E0800009605 /* Frameworks */,
 				45E64D61152A3E0800009605 /* Resources */,
+				3C5B8B1517F3C6E1009C99F2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -700,14 +663,12 @@
 				3C7A7F7917D0FC8000C57BE9 /* Icon~iPad@2x.png in Resources */,
 				3C7A7F7517D0FC8000C57BE9 /* Icon-512h.png in Resources */,
 				3C7A7F7817D0FC8000C57BE9 /* Icon~iPad.png in Resources */,
-				3C5B8B0B17F2C0D4009C99F2 /* ViewTemplates_iPad.xib in Resources */,
 				3CEA6EFB17D1033500F419A3 /* ofxGenericDefinition.json in Resources */,
 				3C7A7F7217D0FC8000C57BE9 /* Default-568h@2x.png in Resources */,
 				3CEA72E017D112AA00F419A3 /* MainWindow.xib in Resources */,
 				3CEA6EFF17D1035B00F419A3 /* GeneratedClass.cpp.txt in Resources */,
 				3CDA1AA317F1729A00A80DEF /* ofxGenericDefinition.h in Resources */,
 				3C7A7F7317D0FC8000C57BE9 /* Default.png in Resources */,
-				3C5B8B0A17F2C0D4009C99F2 /* ViewTemplates.xib in Resources */,
 				3CEA72E117D112AD00F419A3 /* MainWindow_iPad.xib in Resources */,
 				3CDA1AA517F1A77800A80DEF /* UIKitDefinition.h in Resources */,
 				3C7A7F7417D0FC8000C57BE9 /* Default@2x.png in Resources */,
@@ -715,6 +676,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3C5B8B1517F3C6E1009C99F2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = $SRCROOT/testManualCompile.sh;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		45E64D5F152A3E0800009605 /* Sources */ = {
