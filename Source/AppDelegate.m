@@ -80,29 +80,36 @@
     
     [self processAllXibs];
 
-    for (NSString* exporterKey in [AppSettings getEnabledExports] )
+    NSArray* enabledExporters = [AppSettings getEnabledExports];
+    if ( [enabledExporters count] != 0)
     {
-        id<ViewExporter> exporter = [ViewExporterFactory exporterForKey:exporterKey];
-        if (exporter)
+        for (NSString* exporterKey in enabledExporters)
         {
-            NSArray *files = [exporter exportData:self.viewGraphs toProject:YES atomically:NO error:&error saveMultipleFiles:YES useOnlyModifiedFiles:YES];
-            if (error)
+            id<ViewExporter> exporter = [ViewExporterFactory exporterForKey:exporterKey];
+            if (exporter)
             {
-                NSLog(@"Error while exporting xibs with exporter %@: %@", exporterKey, error);
+                NSArray *files = [exporter exportData:self.viewGraphs toProject:YES atomically:NO error:&error saveMultipleFiles:YES useOnlyModifiedFiles:YES];
+                if (error)
+                {
+                    NSLog(@"Error while exporting xibs with exporter %@: %@", exporterKey, error);
+                } else
+                {
+                    if ( [AppSettings addExportsToProject] )
+                    {
+                        //write to the xcodeproj file
+                        [XcodeProjectHelper addToXcodeProject:files];
+                    }
+                }
             } else
             {
-                if ( [AppSettings addExportsToProject] )
-                {
-                    //write to the xcodeproj file
-                    [XcodeProjectHelper addToXcodeProject:files];
-                }
+                NSLog(@"Error, could not find exporter for key %@", exporterKey);
             }
-        } else
-        {
-            NSLog(@"Error, could not find exporter for key %@", exporterKey);
         }
+        [self.xibUpdateStatus saveCurrentStatus];
+    } else
+    {
+        NSLog(@"No exporters enabled!");
     }
-    [self.xibUpdateStatus saveCurrentStatus];
     
     [self performSelector:@selector(exitApplication) withObject:self afterDelay:0.01f];
     
