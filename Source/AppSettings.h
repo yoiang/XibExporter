@@ -13,9 +13,6 @@
 // returns a string path to the folder where we can find our valid nib files
 +(NSString*)getNibPath;
 
-// returns a string path to the Xcode project, defined in plist // TODO: move to configuration
-+(NSString*)getXcodeProjectFolder;
-
 // returns a string path to the generated folder, defined relative in plist // TODO: move to configuration
 +(NSString*)getGeneratedSourceFolder;
 

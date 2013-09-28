@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Add Exports to Project</key>
-	<false/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -45,31 +43,42 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
-	<key>Exports</key>
+	<key>Export Settings</key>
 	<dict>
-		<key>UIKit</key>
-		<true/>
-		<key>ofxGeneric</key>
-		<true/>
+		<key>Add Exports to Project</key>
+		<false/>
+		<key>Folder for Exports</key>
+		<string>${SRCROOT}/Example/XibExporterExample/src/GeneratedViews/</string>
+		<key>Force Process Unchanged Xibs</key>
+		<false/>
+		<key>Enabled Exports</key>
+		<dict>
+			<key>UIKit</key>
+			<true/>
+			<key>ofxGeneric</key>
+			<true/>
+		</dict>
+		<key>Add Exports To Project</key>
+		<string>${SRCROOT}/Example/XibExporterExample/XibExporterExample.xcodeproj/project.pbxproj</string>
+		<key>XcodeProjectFolder</key>
+		<string>${SRCROOT}/Example/XibExporterExample/</string>
+		<key>Process Xibs in Folder</key>
+		<string>${SRCROOT}/Example/XibExporterExample/Assets/Xibs/</string>
+		<key>Process Only Xibs</key>
+		<array/>
+		<key>Skip Xibs</key>
+		<array>
+			<string>MainWindow</string>
+			<string>MainWindow_iPad</string>
+			<string>OnlyRunInSimulatorNoticeView</string>
+		</array>
 	</dict>
-	<key>ForceExportAllXibs</key>
-	<false/>
-	<key>GeneratedSourceRelativeFolder</key>
-	<string>src/GeneratedViews/</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>ProcessOnlyXibs</key>
-	<array/>
 	<key>Register Exporter Classes</key>
 	<array>
 		<string>UIKitViewExporter</string>
 		<string>ofxGenericViewExporter</string>
-	</array>
-	<key>SkipXibs</key>
-	<array>
-		<string>MainWindow</string>
-		<string>MainWindow_iPad</string>
-		<string>OnlyRunInSimulatorNoticeView</string>
 	</array>
 	<key>UIApplicationExitsOnSuspend</key>
 	<true/>
@@ -85,11 +94,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>XIBRootRelativeFolder</key>
-	<string>Assets/Xibs/</string>
-	<key>XcodeProjectFolder</key>
-	<string>${SRCROOT}/Example/XibExporterExample/</string>
-	<key>XcodeProjectRelativeFile</key>
-	<string>XibExporterExample.xcodeproj/project.pbxproj</string>
 </dict>
 </plist>

@@ -12,9 +12,7 @@ nibPath=$appPath
 plistBuddy="/usr/libexec/PlistBuddy -c "
 plistFileNamePath="$appPath/Info.plist"
 
-xcodeProjectFolder=$($plistBuddy "Print XcodeProjectFolder" $plistFileNamePath)
-xibRootRelativeFolder=$($plistBuddy "Print XIBRootRelativeFolder" $plistFileNamePath)
-xibRoot="$xcodeProjectFolder/$xibRootRelativeFolder"
+xibRoot=$($plistBuddy "Print 'Export Settings':'Process Xibs in Folder'" $plistFileNamePath)
 
 echo "Xib Root: $xibRoot" > $log
 

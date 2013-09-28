@@ -8,6 +8,8 @@
 
 #import "AppSettings.h"
 
+#import "NSDictionary+TypeForKey.h"
+
 @implementation AppSettings
 
 +(NSString*)getNibPath
@@ -15,135 +17,59 @@
     return [ [NSBundle mainBundle] bundlePath];
 }
 
-+(NSObject*)objectForInfoDictionaryKey:(NSString*)key
++(NSDictionary*)getSettingsDictionary
 {
-    return [ [NSBundle mainBundle] objectForInfoDictionaryKey:key];
+    return [ [NSBundle mainBundle] infoDictionary];
 }
 
-+(NSString*)stringForInfoDictionaryKey:(NSString*)key
++(NSDictionary*)getExportSettingsDictionary
 {
-    NSString* result = nil;
-    
-    id object = [self objectForInfoDictionaryKey:key];
-    if ( [object isKindOfClass:[NSString class] ] )
-    {
-        result = (NSString*)object;
-    }
-    
-    return result;
-}
-
-+(NSArray*)arrayForInfoDictionaryKey:(NSString*)key
-{
-    NSArray* result = nil;
-    
-    id object = [self objectForInfoDictionaryKey:key];
-    if ( [object isKindOfClass:[NSArray class] ] )
-    {
-        result = (NSArray*)object;
-    }
-    
-    return result;
-}
-
-+(NSDictionary*)dictionaryForInfoDictionaryKey:(NSString*)key
-{
-    NSDictionary* result = nil;
-    
-    id object = [self objectForInfoDictionaryKey:key];
-    if ( [object isKindOfClass:[NSDictionary class] ] )
-    {
-        result = (NSDictionary*)object;
-    }
-    
-    return result;
-}
-
-+(BOOL)boolForInfoDictionaryKey:(NSString*)key withDefaultValue:(BOOL)defaultValue
-{
-    BOOL result = defaultValue;
-    
-    id object = [self objectForInfoDictionaryKey:key];
-    if ( [object respondsToSelector:@selector(boolValue) ] )
-    {
-        result = [object boolValue];
-    }
-    
-    return result;
-}
-
-+(NSString*)getXcodeProjectFolder
-{
-    return [self stringForInfoDictionaryKey:@"XcodeProjectFolder"];
-}
-
-+(NSString*)getGeneratedSourceRelativeFolder
-{
-    return [self stringForInfoDictionaryKey:@"GeneratedSourceRelativeFolder"];
-}
-
-+(NSString*)getXcodeProjectRelativeFile
-{
-    return [self stringForInfoDictionaryKey:@"XcodeProjectRelativeFile"];
-}
-
-+(NSString*)getXIBRootRelativeFolder
-{
-    return [self stringForInfoDictionaryKey:@"XIBRootRelativeFolder"];
+    return [ [self getSettingsDictionary] dictionaryForKey:@"Export Settings"];
 }
 
 + (NSString *) getGeneratedSourceFolder
 {
-    return [NSString stringWithFormat:@"%@/%@",
-            [self getXcodeProjectFolder],
-            [self getGeneratedSourceRelativeFolder]
-            ];
+    return [ [self getExportSettingsDictionary] stringForKey:@"Folder for Exports"];
 }
 
 + (NSString *) getXcodeProjectFile
 {
-    return [NSString stringWithFormat:@"%@/%@",
-            [self getXcodeProjectFolder],
-            [self getXcodeProjectRelativeFile]
-            ];
+    return [ [self getExportSettingsDictionary] stringForKey:@"Add Exports To Project" ];
 }
 
 + (NSString *) getXIBRoot
 {
-    return [NSString stringWithFormat:@"%@/%@",
-            [self getXcodeProjectFolder],
-            [self getXIBRootRelativeFolder]
-            ];
+    return [ [self getExportSettingsDictionary] stringForKey:@"Process Xibs in Folder" ];
 }
 
 + (NSArray *) getSkipXibs
 {
-    return [self arrayForInfoDictionaryKey:@"SkipXibs" ];
+    return [ [self getExportSettingsDictionary] arrayForKey:@"Skip Xibs" ];
 }
 
 + (NSArray *) getProcessOnlyXibs
 {
-    return [self arrayForInfoDictionaryKey:@"ProcessOnlyXibs" ];
+    return [ [self getExportSettingsDictionary] arrayForKey:@"Process Only Xibs"];
 }
 
 +(BOOL)forceExportAllXibs
 {
-    return [self boolForInfoDictionaryKey:@"ForceExportAllXibs" withDefaultValue:NO];
+    return [ [self getExportSettingsDictionary] boolForKey:@"Force Process Unchanged Xibs" withDefaultValue:NO];
 }
 
 +(BOOL)addExportsToProject
 {
-    return [self boolForInfoDictionaryKey:@"Add Exports to Project" withDefaultValue:NO];
+    return [ [self getExportSettingsDictionary] boolForKey:@"Add Exports to Project" withDefaultValue:NO];
 }
 
 +(NSArray*)getRegisterExporterClasses
 {
-    return [self arrayForInfoDictionaryKey:@"Register Exporter Classes"];
+    return [ [self getSettingsDictionary] arrayForKey:@"Register Exporter Classes"];
 }
 
 +(NSDictionary*)getExports
 {
-    return [self dictionaryForInfoDictionaryKey:@"Exports"];
+    return [ [self getExportSettingsDictionary] dictionaryForKey:@"Enabled Exports"];
 }
 
 +(NSArray*)getEnabledExports
