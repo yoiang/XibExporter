@@ -4,12 +4,12 @@
 
 
 
-inline CGRect getGeneratedViewTemplatesFrame()
+inline CGRect getGeneratedViewTemplates_Xcode5Frame()
 {
     return CGRectMake(0.0f, 0.0f, 320.0f, 568.0f);
 }
 
-inline void populateGeneratedViewTemplates( UIView** rootView, UILabel** variableNameLabel, UIButton** variableNameButton1, UIButton** variableNameButton2, UIImageView** variableNameImage, UIView** variableNameView, UILabel** variableNameLabel2 )
+inline void populateGeneratedViewTemplates_Xcode5( UIView** rootView, UILabel** variableNameLabel, UIButton** variableNameButton1, UIButton** variableNameButton2, UIImageView** variableNameImage, UIView** variableNameView, UILabel** variableNameLabel2 )
 {
 	[(*rootView) setHidden:false];
 	[(*rootView) setFrame:CGRectMake( 0.0f, 0.0f, 320.0f, 568.0f )];
@@ -29,18 +29,18 @@ inline void populateGeneratedViewTemplates( UIView** rootView, UILabel** variabl
 	[(*rootView) addSubview:(*variableNameLabel)];
 
 	(*variableNameButton1) = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[(*variableNameButton1) setTitleColor:[UIColor colorWithRed:56 green:84 blue:135 alpha:255] forState:UIControlStateNormal];
-	[(*variableNameButton1) setTitleColor:[UIColor colorWithRed:255 green:255 blue:255 alpha:255] forState:UIControlStateHighlighted];
-	[(*variableNameButton1).titleLabel setFont:[UIFont fontWithName:@".HelveticaNeueInterface-MediumP4" size:15.0f] ];
+	[(*variableNameButton1) setTitleColor:[UIColor colorWithRed:0 green:122 blue:255 alpha:255] forState:UIControlStateNormal];
+	[(*variableNameButton1) setTitleColor:[UIColor colorWithRed:0 green:122 blue:255 alpha:255] forState:UIControlStateHighlighted];
+	[(*variableNameButton1).titleLabel setFont:[UIFont fontWithName:@".HelveticaNeueInterface-M3" size:15.0f] ];
 	[(*variableNameButton1) setBackgroundImage:[UIImage imageNamed:@"backgroundImageDown.png"] forState:UIControlStateHighlighted];
 	[(*variableNameButton1) setEnabled:true];
 	[(*variableNameButton1).titleLabel setNumberOfLines:1];
 	[(*rootView) addSubview:(*variableNameButton1)];
 
 	(*variableNameButton2) = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[(*variableNameButton2) setTitleColor:[UIColor colorWithRed:56 green:84 blue:135 alpha:255] forState:UIControlStateNormal];
-	[(*variableNameButton2) setTitleColor:[UIColor colorWithRed:255 green:255 blue:255 alpha:255] forState:UIControlStateHighlighted];
-	[(*variableNameButton2).titleLabel setFont:[UIFont fontWithName:@".HelveticaNeueInterface-MediumP4" size:15.0f] ];
+	[(*variableNameButton2) setTitleColor:[UIColor colorWithRed:0 green:122 blue:255 alpha:255] forState:UIControlStateNormal];
+	[(*variableNameButton2) setTitleColor:[UIColor colorWithRed:0 green:122 blue:255 alpha:255] forState:UIControlStateHighlighted];
+	[(*variableNameButton2).titleLabel setFont:[UIFont fontWithName:@".HelveticaNeueInterface-M3" size:15.0f] ];
 	[(*variableNameButton2) setBackgroundImage:[UIImage imageNamed:@"backgroundImageDown.png"] forState:UIControlStateHighlighted];
 	[(*variableNameButton2) setEnabled:true];
 	[(*variableNameButton2) setBackgroundImage:[UIImage imageNamed:@"Icon.png"] forState:UIControlStateNormal];
@@ -48,7 +48,7 @@ inline void populateGeneratedViewTemplates( UIView** rootView, UILabel** variabl
 	[(*rootView) addSubview:(*variableNameButton2)];
 
 	(*variableNameImage) = [ [UIImageView alloc] init];
-	[(*variableNameImage) setImage:@"Icon.png"];
+	[(*variableNameImage) setImage:[UIImage imageNamed:@"Icon.png"] ];
 	[(*rootView) addSubview:(*variableNameImage)];
 
 	(*variableNameView) = [ [UIView alloc] init];
@@ -71,12 +71,12 @@ inline void populateGeneratedViewTemplates( UIView** rootView, UILabel** variabl
 	[(*rootView) addSubview:(*variableNameView)];
 }
 
-inline void populatePreserveGeneratedViewTemplates( UIView** rootView, bool preserveTopLeft, bool preserveSize, UILabel** variableNameLabel, UIButton** variableNameButton1, UIButton** variableNameButton2, UIImageView** variableNameImage, UIView** variableNameView, UILabel** variableNameLabel2 )
+inline void populatePreserveGeneratedViewTemplates_Xcode5( UIView** rootView, bool preserveTopLeft, bool preserveSize, UILabel** variableNameLabel, UIButton** variableNameButton1, UIButton** variableNameButton2, UIImageView** variableNameImage, UIView** variableNameView, UILabel** variableNameLabel2 )
 {
     CGRect preservedFrame = [ (*rootView) frame];
 
-    populateGeneratedViewTemplates( rootView, variableNameLabel, variableNameButton1, variableNameButton2, variableNameImage, variableNameView, variableNameLabel2 );
-    CGRect generatedFrame = getGeneratedViewTemplatesFrame();
+    populateGeneratedViewTemplates_Xcode5( rootView, variableNameLabel, variableNameButton1, variableNameButton2, variableNameImage, variableNameView, variableNameLabel2 );
+    CGRect generatedFrame = getGeneratedViewTemplates_Xcode5Frame();
     if ( !preserveTopLeft )
     {
     preservedFrame = CGRectMake( 
@@ -102,9 +102,9 @@ inline void populatePreserveGeneratedViewTemplates( UIView** rootView, bool pres
     }
 }
 
-inline UIView* constructGeneratedViewTemplates( UILabel** variableNameLabel, UIButton** variableNameButton1, UIButton** variableNameButton2, UIImageView** variableNameImage, UIView** variableNameView, UILabel** variableNameLabel2 )
+inline UIView* constructGeneratedViewTemplates_Xcode5( UILabel** variableNameLabel, UIButton** variableNameButton1, UIButton** variableNameButton2, UIImageView** variableNameImage, UIView** variableNameView, UILabel** variableNameLabel2 )
 {
     UIView* rootView = [ [UIView alloc] init];
-    populateGeneratedViewTemplates( &rootView, variableNameLabel, variableNameButton1, variableNameButton2, variableNameImage, variableNameView, variableNameLabel2 );
+    populateGeneratedViewTemplates_Xcode5( &rootView, variableNameLabel, variableNameButton1, variableNameButton2, variableNameImage, variableNameView, variableNameLabel2 );
     return rootView;
 }

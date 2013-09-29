@@ -10,12 +10,12 @@
 #include "ofxGenericImageView.h"
 
 
-inline ofRectangle getGeneratedViewTemplatesFrame()
+inline ofRectangle getGeneratedViewTemplates_Xcode4Frame()
 {
     return ofRectangle(0.0f, 0.0f, 320.0f, 568.0f);
 }
 
-inline void populateGeneratedViewTemplates( ofPtr< ofxGenericView > rootView, ofPtr< ofxGenericTextView > &variableNameLabel, ofPtr< ofxGenericButtonView > &variableNameButton1, ofPtr< ofxGenericButtonView > &variableNameButton2, ofPtr< ofxGenericImageView > &variableNameImage, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericTextView > &variableNameLabel2 )
+inline void populateGeneratedViewTemplates_Xcode4( ofPtr< ofxGenericView > rootView, ofPtr< ofxGenericTextView > &variableNameLabel, ofPtr< ofxGenericButtonView > &variableNameButton1, ofPtr< ofxGenericButtonView > &variableNameButton2, ofPtr< ofxGenericImageView > &variableNameImage, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericTextView > &variableNameLabel2 )
 {
 	rootView->setContentMode( ofxGenericContentModeScaleToFill );
 	rootView->setVisible( true );
@@ -126,12 +126,12 @@ inline void populateGeneratedViewTemplates( ofPtr< ofxGenericView > rootView, of
 	rootView->addChildView( variableNameView );
 }
 
-inline void populatePreserveGeneratedViewTemplates( ofPtr< ofxGenericView > rootView, bool preserveTopLeft, bool preserveSize, ofPtr< ofxGenericTextView > &variableNameLabel, ofPtr< ofxGenericButtonView > &variableNameButton1, ofPtr< ofxGenericButtonView > &variableNameButton2, ofPtr< ofxGenericImageView > &variableNameImage, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericTextView > &variableNameLabel2 )
+inline void populatePreserveGeneratedViewTemplates_Xcode4( ofPtr< ofxGenericView > rootView, bool preserveTopLeft, bool preserveSize, ofPtr< ofxGenericTextView > &variableNameLabel, ofPtr< ofxGenericButtonView > &variableNameButton1, ofPtr< ofxGenericButtonView > &variableNameButton2, ofPtr< ofxGenericImageView > &variableNameImage, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericTextView > &variableNameLabel2 )
 {
     ofRectangle preservedFrame = rootView->getFrame();
 
-    populateGeneratedViewTemplates( rootView, variableNameLabel, variableNameButton1, variableNameButton2, variableNameImage, variableNameView, variableNameLabel2 );
-    ofRectangle generatedFrame = getGeneratedViewTemplatesFrame();
+    populateGeneratedViewTemplates_Xcode4( rootView, variableNameLabel, variableNameButton1, variableNameButton2, variableNameImage, variableNameView, variableNameLabel2 );
+    ofRectangle generatedFrame = getGeneratedViewTemplates_Xcode4Frame();
     if ( !preserveTopLeft )
     {
         preservedFrame.x = generatedFrame.x;
@@ -149,9 +149,9 @@ inline void populatePreserveGeneratedViewTemplates( ofPtr< ofxGenericView > root
     }
 }
 
-inline ofPtr< ofxGenericView > constructGeneratedViewTemplates( ofPtr< ofxGenericTextView > &variableNameLabel, ofPtr< ofxGenericButtonView > &variableNameButton1, ofPtr< ofxGenericButtonView > &variableNameButton2, ofPtr< ofxGenericImageView > &variableNameImage, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericTextView > &variableNameLabel2 )
+inline ofPtr< ofxGenericView > constructGeneratedViewTemplates_Xcode4( ofPtr< ofxGenericTextView > &variableNameLabel, ofPtr< ofxGenericButtonView > &variableNameButton1, ofPtr< ofxGenericButtonView > &variableNameButton2, ofPtr< ofxGenericImageView > &variableNameImage, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericTextView > &variableNameLabel2 )
 {
     ofPtr< ofxGenericView > rootView = ofxGenericView::create();
-    populateGeneratedViewTemplates( rootView, variableNameLabel, variableNameButton1, variableNameButton2, variableNameImage, variableNameView, variableNameLabel2 );
+    populateGeneratedViewTemplates_Xcode4( rootView, variableNameLabel, variableNameButton1, variableNameButton2, variableNameImage, variableNameView, variableNameLabel2 );
     return rootView;
 }
