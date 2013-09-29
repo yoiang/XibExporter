@@ -45,11 +45,9 @@
 	<string>1.0</string>
 	<key>Export Settings</key>
 	<dict>
+		<key>Add Exports To Project</key>
+		<string>${SRCROOT}/Example/XibExporterExample/XibExporterExample.xcodeproj/project.pbxproj</string>
 		<key>Add Exports to Project</key>
-		<false/>
-		<key>Folder for Exports</key>
-		<string>${SRCROOT}/Example/XibExporterExample/src/GeneratedViews/</string>
-		<key>Force Process Unchanged Xibs</key>
 		<false/>
 		<key>Enabled Exports</key>
 		<dict>
@@ -58,19 +56,21 @@
 			<key>ofxGeneric</key>
 			<true/>
 		</dict>
-		<key>Add Exports To Project</key>
-		<string>${SRCROOT}/Example/XibExporterExample/XibExporterExample.xcodeproj/project.pbxproj</string>
-		<key>XcodeProjectFolder</key>
-		<string>${SRCROOT}/Example/XibExporterExample/</string>
-		<key>Process Xibs in Folder</key>
-		<string>${SRCROOT}/Example/XibExporterExample/Assets/Xibs/</string>
+		<key>Folder for Exports</key>
+		<string>${SRCROOT}/Example/XibExporterExample/src/GeneratedViews/</string>
+		<key>Force Process Unchanged Xibs</key>
+		<false/>
 		<key>Process Only Xibs</key>
 		<array/>
+		<key>Process Xibs in Folder</key>
+		<string>${SRCROOT}/Example/XibExporterExample/Assets/Xibs/</string>
 		<key>Skip Xibs</key>
 		<array>
 			<string>MainWindow</string>
 			<string>OnlyRunInSimulatorNoticeView</string>
 		</array>
+		<key>XcodeProjectFolder</key>
+		<string>${SRCROOT}/Example/XibExporterExample/</string>
 	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
