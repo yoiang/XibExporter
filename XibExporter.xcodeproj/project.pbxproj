@@ -12,6 +12,7 @@
 		3C10DC8F17E2CE4300162DBC /* XibResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC8E17E2CE4300162DBC /* XibResources.m */; };
 		3C10DC9217E2DD9F00162DBC /* ViewGraphData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9117E2DD9F00162DBC /* ViewGraphData.m */; };
 		3C10DC9B17E7FD0E00162DBC /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9A17E7FD0E00162DBC /* AppSettings.m */; };
+		3C2C58F717F7CF890081D1AE /* CXMLDocument+Xib.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C58F617F7CF890081D1AE /* CXMLDocument+Xib.m */; };
 		3C5B8B0E17F3004C009C99F2 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B8B0D17F3004C009C99F2 /* NSString+MD5.m */; };
 		3C5B8B1117F300A3009C99F2 /* NSData+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B8B1017F300A3009C99F2 /* NSData+MD5.m */; };
 		3C5B8B1417F37215009C99F2 /* XibUpdateStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B8B1317F37215009C99F2 /* XibUpdateStatus.m */; };
@@ -102,6 +103,8 @@
 		3C10DC9117E2DD9F00162DBC /* ViewGraphData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGraphData.m; sourceTree = "<group>"; };
 		3C10DC9917E7FD0E00162DBC /* AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSettings.h; sourceTree = "<group>"; };
 		3C10DC9A17E7FD0E00162DBC /* AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSettings.m; sourceTree = "<group>"; };
+		3C2C58F517F7CF890081D1AE /* CXMLDocument+Xib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CXMLDocument+Xib.h"; sourceTree = "<group>"; };
+		3C2C58F617F7CF890081D1AE /* CXMLDocument+Xib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CXMLDocument+Xib.m"; sourceTree = "<group>"; };
 		3C55943017F432B100F380F7 /* compileAllXibsAndAddToApp.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = compileAllXibsAndAddToApp.sh; sourceTree = "<group>"; };
 		3C5B8B0C17F3004C009C99F2 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		3C5B8B0D17F3004C009C99F2 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
@@ -477,6 +480,8 @@
 				3C96F3AD17D0F4D5000FC446 /* CXMLElement+UIView.m */,
 				3C96F3AE17D0F4D5000FC446 /* CXMLElement+Xib.h */,
 				3C96F3AF17D0F4D5000FC446 /* CXMLElement+Xib.m */,
+				3C2C58F517F7CF890081D1AE /* CXMLDocument+Xib.h */,
+				3C2C58F617F7CF890081D1AE /* CXMLDocument+Xib.m */,
 			);
 			path = "UIKit TouchXML";
 			sourceTree = "<group>";
@@ -751,6 +756,7 @@
 				3CEA729B17D1093E00F419A3 /* SBJsonStreamWriterState.m in Sources */,
 				3CEA729317D1093E00F419A3 /* NSObject+SBJson.m in Sources */,
 				3C96F3C917D0F4D5000FC446 /* UISwitch+Exports.m in Sources */,
+				3C2C58F717F7CF890081D1AE /* CXMLDocument+Xib.m in Sources */,
 				3C65718B17D0FF560074B101 /* CXMLDocument_PrivateExtensions.m in Sources */,
 				3C65718A17D0FF560074B101 /* CXMLDocument.m in Sources */,
 				3C65718F17D0FF560074B101 /* CXMLNamespaceNode.m in Sources */,
