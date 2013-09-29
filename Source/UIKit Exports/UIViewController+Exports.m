@@ -16,21 +16,9 @@
 
 - (NSMutableDictionary *)exportToDictionary:( CXMLElement* )xibNode xibName:( NSString* )xibName
 {
-    /*NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    
-    
-    
-    return dict;*/
-    
-    //TODO add outlets and shit for the vc
     @try
     {
-        UIView *v = self.view;
-        NSMutableDictionary *d = [v exportToDictionary:xibNode ];
-        //this must be set manually in the XIB so I'm currently not actually using it for anything
-        //right now there is a hack where a 460 high view is automatically positioned at 20 Y, this would be the route to replace that if necessary
-        [d setObject:[NSNumber numberWithBool:self.wantsFullScreenLayout] forKey:@"wantsFullScreenLayout"];
-        return d;
+        return [self.view exportToDictionary:xibNode];
     }
     @catch (NSException *exception)
     {
