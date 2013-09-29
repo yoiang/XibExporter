@@ -41,6 +41,14 @@
       },
       "_inlineConstructor": "?$textAlignment$"
     },
+    "NSTextAlignment": {
+      "_enum": {
+        "NSTextAlignmentCenter": "ofxGenericTextHorizontalAlignmentCenter",
+        "NSTextAlignmentLeft": "ofxGenericTextHorizontalAlignmentLeft",
+        "NSTextAlignmentRight": "ofxGenericTextHorizontalAlignmentRight"
+      },
+      "_inlineConstructor": "?$textAlignment$"
+    },
     "UIViewContentMode": {
       "_enum": {
         "UIViewContentModeScaleToFill": "ofxGenericContentModeScaleToFill",
