@@ -91,6 +91,30 @@
     return dict;
 }
 
+NSString* NSLineBreakModeToString( NSLineBreakMode type )
+{
+    NSString* result = EnumAsString( NSLineBreakByWordWrapping );
+    switch ( type )
+    {
+        EnumToStringCase( NSLineBreakByWordWrapping, result = );
+        EnumToStringCase( NSLineBreakByCharWrapping, result = );
+        EnumToStringCase( NSLineBreakByClipping, result = );
+        EnumToStringCase( NSLineBreakByTruncatingHead, result = );
+        EnumToStringCase( NSLineBreakByTruncatingTail, result = );
+        EnumToStringCase( NSLineBreakByTruncatingMiddle, result = );
+    }
+    return result;
+}
+
++ (NSMutableDictionary *) exportNSLineBreakMode:(NSLineBreakMode)mode
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:@"UILineBreakMode" forKey:@"class"];
+    [dict setObject:NSLineBreakModeToString(mode) forKey:@"lineBreakMode"];
+    [self markAsEnumType:dict];
+    return dict;
+}
+
 + (NSMutableDictionary *) exportUIButtonType:(UIButtonType)type
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];

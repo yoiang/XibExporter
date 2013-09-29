@@ -60,7 +60,7 @@
     }
     [dict setObject:[ExportUtility exportNSTextAlignment:self.textAlignment] forKey:@"textAlignment"];
     
-    [dict setObject:[ExportUtility exportUILineBreakMode:self.lineBreakMode] forKey:@"lineBreakMode"];
+    [dict setObject:[ExportUtility exportNSLineBreakMode:self.lineBreakMode] forKey:@"lineBreakMode"];
     [dict setObject:[NSNumber numberWithBool:self.enabled] forKey:@"enabled"];
     [dict setObject:[NSNumber numberWithBool:self.adjustsFontSizeToFitWidth] forKey:@"adjustsFontSizeToFitWidth"];
     [dict setObject:[NSNumber numberWithInt:self.baselineAdjustment] forKey:@"baselineAdjustment"];

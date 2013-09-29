@@ -15,7 +15,8 @@
 
 +(BOOL)isDictionaryEnum:(NSDictionary*)dictionary;
 + (NSMutableDictionary *) exportUIEdgeInsets:(UIEdgeInsets)insets;
-+ (NSMutableDictionary *) exportUILineBreakMode:(UILineBreakMode)mode;
++ (NSMutableDictionary *) exportUILineBreakMode:(UILineBreakMode)mode NS_DEPRECATED_IOS(2_0,6_0);
++ (NSMutableDictionary *) exportNSLineBreakMode:(NSLineBreakMode)mode NS_AVAILABLE_IOS(6_0);
 + (NSMutableDictionary *) exportUIButtonType:(UIButtonType)type;
 + (NSMutableDictionary *) exportUITextAlignment:(UITextAlignment)alignment NS_DEPRECATED_IOS(2_0,6_0);
 + (NSMutableDictionary *) exportNSTextAlignment:(NSTextAlignment)alignment;
