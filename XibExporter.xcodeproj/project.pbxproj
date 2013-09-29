@@ -11,7 +11,6 @@
 		3C10DC8C17E2C56600162DBC /* FontExchange.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC8B17E2C56600162DBC /* FontExchange.m */; };
 		3C10DC8F17E2CE4300162DBC /* XibResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC8E17E2CE4300162DBC /* XibResources.m */; };
 		3C10DC9217E2DD9F00162DBC /* ViewGraphData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9117E2DD9F00162DBC /* ViewGraphData.m */; };
-		3C10DC9517E2E22900162DBC /* ViewGraphs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9417E2E22900162DBC /* ViewGraphs.m */; };
 		3C10DC9B17E7FD0E00162DBC /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9A17E7FD0E00162DBC /* AppSettings.m */; };
 		3C5B8B0E17F3004C009C99F2 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B8B0D17F3004C009C99F2 /* NSString+MD5.m */; };
 		3C5B8B1117F300A3009C99F2 /* NSData+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B8B1017F300A3009C99F2 /* NSData+MD5.m */; };
@@ -102,8 +101,6 @@
 		3C10DC8E17E2CE4300162DBC /* XibResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XibResources.m; sourceTree = "<group>"; };
 		3C10DC9017E2DD9F00162DBC /* ViewGraphData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGraphData.h; sourceTree = "<group>"; };
 		3C10DC9117E2DD9F00162DBC /* ViewGraphData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGraphData.m; sourceTree = "<group>"; };
-		3C10DC9317E2E22900162DBC /* ViewGraphs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGraphs.h; sourceTree = "<group>"; };
-		3C10DC9417E2E22900162DBC /* ViewGraphs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGraphs.m; sourceTree = "<group>"; };
 		3C10DC9917E7FD0E00162DBC /* AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSettings.h; sourceTree = "<group>"; };
 		3C10DC9A17E7FD0E00162DBC /* AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSettings.m; sourceTree = "<group>"; };
 		3C55943017F432B100F380F7 /* compileAllXibsAndAddToApp.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = compileAllXibsAndAddToApp.sh; sourceTree = "<group>"; };
@@ -428,8 +425,6 @@
 				3C10DC8E17E2CE4300162DBC /* XibResources.m */,
 				3C10DC9017E2DD9F00162DBC /* ViewGraphData.h */,
 				3C10DC9117E2DD9F00162DBC /* ViewGraphData.m */,
-				3C10DC9317E2E22900162DBC /* ViewGraphs.h */,
-				3C10DC9417E2E22900162DBC /* ViewGraphs.m */,
 				3CDA1A9217F141F700A80DEF /* View Exporters */,
 				3C5B8B0C17F3004C009C99F2 /* NSString+MD5.h */,
 				3C5B8B0D17F3004C009C99F2 /* NSString+MD5.m */,
@@ -731,7 +726,6 @@
 				3C96F3C717D0F4D5000FC446 /* UIPageControl+Exports.m in Sources */,
 				3C96F3CA17D0F4D5000FC446 /* UITableView+Exports.m in Sources */,
 				3CEA729417D1093E00F419A3 /* SBJsonParser.m in Sources */,
-				3C10DC9517E2E22900162DBC /* ViewGraphs.m in Sources */,
 				3C96F3BC17D0F4D5000FC446 /* main.m in Sources */,
 				3C96F3CB17D0F4D5000FC446 /* UITextField+Exports.m in Sources */,
 				3CEA729617D1093E00F419A3 /* SBJsonStreamParserAccumulator.m in Sources */,

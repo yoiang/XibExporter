@@ -9,15 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "TouchXML.h"
 
-#import "ViewGraphs.h"
+#import "ViewGraphData.h"
 
 @protocol ViewExporter <NSObject>
 
 @required
 
 @property (readonly) NSString* factoryKey;
--(NSArray*)exportData:(ViewGraphs*)viewGraphs toProject:(BOOL)useProjectDir atomically:(BOOL)flag error:(NSError**)error saveMultipleFiles:(BOOL)mult useOnlyModifiedFiles:(BOOL)onlyModified;
-
+-(NSString*)exportData:(ViewGraphData*)viewGraphData atomically:(BOOL)flag error:(NSError**)error;
 
 @end
 

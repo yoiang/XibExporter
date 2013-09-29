@@ -19,7 +19,7 @@
 
 #import "NSArray+NSString.h"
 
-#import "ViewGraphs.h"
+#import "ViewGraphData.h"
 
 #import "ViewExporter.h"
 #import "ofxGenericViewExporter.h"
@@ -33,7 +33,6 @@
     XibResources *_xibResources;
 }
 
-@property (nonatomic, strong) ViewGraphs *viewGraphs;
 @property (nonatomic, strong) XibUpdateStatus *xibUpdateStatus;
 
 @end
@@ -74,37 +73,50 @@
     _xibResources = [ [XibResources alloc] init];
     
     NSError *error = nil;
-    self.viewGraphs = [ [ViewGraphs alloc] init];
     
     self.xibUpdateStatus = [ [XibUpdateStatus alloc] init];
     
-    [self processAllXibs];
-
     NSArray* enabledExporters = [AppSettings getEnabledExports];
     if ( [enabledExporters count] != 0)
     {
-        for (NSString* exporterKey in enabledExporters)
+        NSMutableArray* exportedFileNames = [NSMutableArray array];
+        
+        NSArray* nibFileNames = [self getNibFileNamesForProcessing];
+        for (NSString* nibFileName in nibFileNames)
         {
-            id<ViewExporter> exporter = [ViewExporterFactory exporterForKey:exporterKey];
-            if (exporter)
+            NSString* xibName = [NSString stringWithFormat:@"%@.xib", [nibFileName stringByDeletingPathExtension] ];
+            
+            ViewGraphData* data = [ [ViewGraphData alloc] initWithXib:xibName];
+            
+            for (NSString* exporterKey in enabledExporters)
             {
-                NSArray *files = [exporter exportData:self.viewGraphs toProject:YES atomically:NO error:&error saveMultipleFiles:YES useOnlyModifiedFiles:YES];
-                if (error)
+                id<ViewExporter> exporter = [ViewExporterFactory exporterForKey:exporterKey];
+                if (exporter)
                 {
-                    NSLog(@"Error while exporting xibs with exporter %@: %@", exporterKey, error);
+                    error = nil;
+                    NSString* exportedFileName = [exporter exportData:data atomically:NO error:&error];
+
+                    if (!error)
+                    {
+                        NSLog(@"Exported %@ with exporter %@ to %@", xibName, exporterKey, exportedFileName);
+                        [exportedFileNames addObject:exportedFileName];
+                    } else
+                    {
+                        NSLog(@"Error while exporting %@ with exporter %@: %@", xibName, exporterKey, error);
+                    }
                 } else
                 {
-                    if ( [AppSettings addExportsToProject] )
-                    {
-                        //write to the xcodeproj file
-                        [XcodeProjectHelper addToXcodeProject:files];
-                    }
+                    NSLog(@"Error, could not find exporter for key %@", exporterKey);
                 }
-            } else
-            {
-                NSLog(@"Error, could not find exporter for key %@", exporterKey);
             }
         }
+        
+        if ( [AppSettings addExportsToProject] )
+        {
+            //write to the xcodeproj file
+            [XcodeProjectHelper addToXcodeProject:exportedFileNames];
+        }
+        
         [self.xibUpdateStatus saveCurrentStatus];
     } else
     {
@@ -141,15 +153,6 @@
         {
             NSLog(@"Unable to register class %@ found in register exporter classes list, does not conform to ViewExporter protocol", className);
         }
-    }
-}
-
-- (void) processAllXibs
-{
-    NSArray* nibFileNames = [self getNibFileNamesForProcessing];
-    for (NSString* nibFileName in nibFileNames)
-    {
-        [self.viewGraphs processXib:nibFileName];
     }
 }
 

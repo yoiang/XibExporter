@@ -14,7 +14,6 @@
 
 #import "XcodeProjectHelper.h"
 
-#import "ViewGraphs.h"
 #import "ViewGraphData.h"
 
 #import "UIView+Exports.h"
@@ -68,132 +67,72 @@ static NSMutableDictionary* instanceCounts = nil;
     return self;
 }
 
-- (NSArray *)exportData:(ViewGraphs*)viewGraphs toProject:(BOOL)useProjectDir atomically:(BOOL)flag error:(NSError**)error saveMultipleFiles:(BOOL)mult useOnlyModifiedFiles:(BOOL)onlyModified
+- (NSString *)exportData:(ViewGraphData*)viewGraphData atomically:(BOOL)flag error:(NSError**)error
 {
-    NSString *targetFile = nil;
-    
-    if (useProjectDir)
-    {
-        targetFile = [[AppSettings getGeneratedSourceFolder] stringByAppendingString:@"/ExportedViews.h"];
-    }
-    else
-    {
-        NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        targetFile = [NSString stringWithFormat:@"%@/ExportedViews.h",documentsDirectory];
-    }
-    
-    NSString* location = nil;
-    if (mult)
-    {
-        location = [targetFile stringByDeletingLastPathComponent];
-    } else
-    {
-        location = [NSString stringWithFormat:[self multipleExportedFileNameFormat],[targetFile stringByDeletingPathExtension]];
-    }
-    
-    return [self exportData:viewGraphs toFile:location atomically:flag error:error saveMultipleFiles:mult useOnlyModifiedFiles:onlyModified];
+    return [self exportData:viewGraphData toPath:[AppSettings getGeneratedSourceFolder] atomically:flag error:error];
 }
 
--(NSArray*)exportData:(ViewGraphs *)viewGraphs toFile:(NSString*)location atomically:(BOOL)flag error:(NSError **)error saveMultipleFiles:(BOOL)mult useOnlyModifiedFiles:(BOOL)onlyModified
+-(NSString*)exportData:(ViewGraphData*)viewGraphData toPath:(NSString*)targetPath atomically:(BOOL)flag error:(NSError **)error
 {
+    NSString* exportedFileName = nil;
     
-    NSMutableDictionary *output = [NSMutableDictionary dictionary];
-    NSMutableArray *outputFileNames = [NSMutableArray array];
+    NSString* xibName = [viewGraphData xibName];
     
-    //loop through all the VCs, they'll each go in a separate function
-    NSArray *keys = viewGraphs.xibNames;
-    
-    if ([keys count] <= 0)
+    if ( !instanceCounts )
     {
-        return outputFileNames;
+        instanceCounts = [ [ NSMutableDictionary alloc ] init ];
+    } else
+    {
+        [ instanceCounts removeAllObjects ];
     }
     
-    NSLog(@"Exporting %@ code for %d file(s).\n%@",[self factoryKey], [keys count], keys );
+    NSMutableDictionary* outlets = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                    [NSMutableArray array], @"stripped",
+                                    [NSMutableArray array], @"unstripped", nil];
+    NSMutableArray* includes = [NSMutableArray array];
+    NSMutableDictionary* properties = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                      [NSMutableArray array], @"outlets",
+                                      [NSMutableArray array], @"buttons",
+                                      [NSNumber numberWithBool:NO], @"hasButtons",
+                                       xibName, @"className", nil];
     
-    for (int i = 0; i < [keys count]; i++)
+    NSDictionary* output = [self getCodeFor:viewGraphData isInline:NO outlets:outlets includes:includes properties:properties];
+    
+    NSString* exportFileNameFormat = [self multipleExportedFileNameFormat];
+    
+    NSString* baseFileName = [NSString stringWithFormat:@"Generated%@", xibName];
+    exportedFileName = [NSString stringWithFormat:exportFileNameFormat, baseFileName];
+    
+    NSString* fileNamePath = [NSString stringWithFormat:@"%@/%@", targetPath, exportedFileName];
+    
+    [self doCodeExport:viewGraphData toFileNamePath:fileNamePath data:output xibName:xibName atomically:flag error:error];
+    
+    // TODO: evaluate need and design
+    //create cpp and h files
+/*
+    NSMutableDictionary *vc = viewGraphData.data;
+    if ( [vc objectForKey:@"exportToCode"] )
     {
-        NSString* xibName = [keys objectAtIndex:i];
+        NSMutableDictionary* properties = [output objectForKey:@"properties"];
+        [properties setObject:[output objectForKey:@"includes"] forKey:@"includes"];
+        NSArray *codeFiles = [self exportCodeForDict:vc properties:properties];
         
-        ViewGraphData *viewGraphData = [viewGraphs dataForXib:xibName];
-        NSMutableDictionary *vc = viewGraphData.data;
-        
-        if ( !instanceCounts )
+        //TODO this should be moved somewhere else
+        for ( int j = 0; j < [codeFiles count]; j++ )
         {
-            instanceCounts = [ [ NSMutableDictionary alloc ] init ];
-        } else
-        {
-            [ instanceCounts removeAllObjects ];
-        }
-        
-        NSDictionary *obj = [self getCodeFor:viewGraphData
-                                    isInline:NO
-                                     outlets:[NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                              [NSMutableArray array], @"stripped",
-                                              [NSMutableArray array], @"unstripped", nil]
-                                    includes:[NSMutableArray array]
-                                  properties:[NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                              [NSMutableArray array], @"outlets",
-                                              [NSMutableArray array], @"buttons",
-                                              [NSNumber numberWithBool:NO], @"hasButtons",
-                                              [keys objectAtIndex:i], @"className", nil]
-                             ];
-        if (obj)
-        {
-            [output setObject:obj forKey:[keys objectAtIndex:i]];
-            
-            //create cpp and h files
-            if ( [vc objectForKey:@"exportToCode"] )
+            NSString *code = [codeFiles objectAtIndex:j];
+            NSString *extension = [[self.map.codeExporterFileNames objectAtIndex:j] objectForKey:@"extension"];
+            NSString *loc = [NSString stringWithFormat:@"%@.%@",xibName,extension];
+            loc = [NSString stringWithFormat:@"%@/%@",[location stringByDeletingLastPathComponent],loc];
+            if ( ![[NSFileManager defaultManager] fileExistsAtPath:loc] )
             {
-                [[obj objectForKey:@"properties"] setObject:[obj objectForKey:@"includes"] forKey:@"includes"];
-                NSArray *codeFiles = [self exportCodeForDict:vc properties:[obj objectForKey:@"properties"]];
-                
-                //TODO this should be moved somewhere else
-                for ( int j = 0; j < [codeFiles count]; j++ )
-                {
-                    NSString *code = [codeFiles objectAtIndex:j];
-                    NSString *extension = [[self.map.codeExporterFileNames objectAtIndex:j] objectForKey:@"extension"];
-                    NSString *loc = [NSString stringWithFormat:@"%@.%@",[keys objectAtIndex:i],extension];
-                    loc = [NSString stringWithFormat:@"%@/%@",[location stringByDeletingLastPathComponent],loc];
-                    if ( ![[NSFileManager defaultManager] fileExistsAtPath:loc] )
-                    {
-                        [code writeToFile:loc atomically:flag encoding:NSUTF8StringEncoding error:error];
-                    }
-                    NSLog(@"Exported code file to %@",loc);
-                    //[XcodeProjectHelper addToXcodeProject:codeFiles];
-                }
+                [code writeToFile:loc atomically:flag encoding:NSUTF8StringEncoding error:error];
             }
+            NSLog(@"Exported code file to %@",loc);
         }
-    }
+    }*/
     
-    if (mult)
-    {
-        for (int i = 0; i < [keys count]; i++)
-        {
-            NSString *k = [keys objectAtIndex:i];
-            
-            NSString* exportFileNameFormat = [self multipleExportedFileNameFormat];
-            
-            NSString* baseFileName = [NSString stringWithFormat:@"Generated%@", k];
-            NSString* fileName = [NSString stringWithFormat:exportFileNameFormat, baseFileName];
-            
-            NSString* fileLocation = [NSString stringWithFormat:@"%@/%@", location, fileName];
-            
-            [self doCodeExport:viewGraphs atLocation:fileLocation data:output keys:[NSArray arrayWithObject:k] atomically:flag error:error];
-            
-            [outputFileNames addObject:fileName];
-            /*if (&error)
-             {
-             return;
-             }*/
-        }
-    }
-    else
-    {
-        [self doCodeExport:viewGraphs atLocation:location data:output keys:keys atomically:flag error:error];
-        [outputFileNames addObject:[location lastPathComponent]];
-    }
-    
-    return outputFileNames;
+    return exportedFileName;
 }
 
 - ( NSArray * ) exportCodeForDict:(NSDictionary *)dict properties:(NSDictionary *)properties
@@ -633,7 +572,7 @@ static NSMutableDictionary* instanceCounts = nil;
 }
 
 -(NSString*)exportFunctionCode:(NSString*)xibName
-                    viewGraphs:(ViewGraphs*)viewGraphs
+                    viewGraphData:(ViewGraphData*)viewGraphData
                     parameters:(NSString*)params
                           dict:(NSDictionary*)dict
                 strippedParams:(NSString*)strippedParams
@@ -661,7 +600,6 @@ static NSMutableDictionary* instanceCounts = nil;
             {
                 NSString *dictPath = [func substringWithRange:NSMakeRange(r.location+1, r2.location-r.location-1)];
                 NSArray *pathComponents = [dictPath componentsSeparatedByString:@"."];
-                ViewGraphData *viewGraphData = [viewGraphs dataForXib:xibName];
                 NSDictionary *subDict = viewGraphData.data;
                 for (int i = 0; i < [pathComponents count]-1; i++)
                 {
@@ -683,7 +621,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return func;
 }
 
-- (void) doCodeExport:(ViewGraphs*)viewGraphs atLocation:(NSString *)location data:(NSDictionary *)data keys:(NSArray *)keys atomically:(BOOL)flag error:(NSError**)error
+- (void) doCodeExport:(ViewGraphData*)viewGraphData toFileNamePath:(NSString *)fileNamePath data:(NSDictionary *)data xibName:(NSString *)xibName atomically:(BOOL)flag error:(NSError**)error
 {
     NSMutableString *code = [NSMutableString string];
     
@@ -695,48 +633,29 @@ static NSMutableDictionary* instanceCounts = nil;
     [code appendString:@"#pragma once\n\n"];
     
     //includes
-    NSMutableArray *allIncludes = [NSMutableArray array];
-    for (int i = 0; i < [keys count]; i++)
+    NSArray *includes = [data objectForKey:@"includes"];
+    for (NSObject* include in includes)
     {
-        NSDictionary *dict = [data objectForKey:[keys objectAtIndex:i]];
-        NSArray *includes = [dict objectForKey:@"includes"];
-        for (int j = 0; j < [includes count]; j++)
-        {
-            if (![allIncludes containsObject:[includes objectAtIndex:j]])
-            {
-                [allIncludes addObject:[includes objectAtIndex:j]];
-            }
-        }
-    }
-    for (int i = 0; i < [allIncludes count]; i++)
-    {
-        [code appendFormat:@"%@\n",[allIncludes objectAtIndex:i]];
+        [code appendFormat:@"%@\n", include];
     }
     
-    //code
-    for (int i = 0; i < [keys count]; i++)
+    //construct a string representing all the outlet parameters
+    NSDictionary *outlets = [data objectForKey:@"outlets"];
+    NSString *params = @"";
+    NSString *strippedParams = @"";
+    NSString *paramsComma = @"";
+    NSString *strippedParamsComma = @"";
+    for (int j = 0; j < [[outlets objectForKey:@"unstripped"] count]; j++)
     {
-        NSString *k = [keys objectAtIndex:i];
-        NSDictionary *dict = [data objectForKey:k];
-        
-        //construct a string representing all the outlet parameters
-        NSDictionary *outlets = [dict objectForKey:@"outlets"];
-        NSString *params = @"";
-        NSString *strippedParams = @"";
-        NSString *paramsComma = @"";
-        NSString *strippedParamsComma = @"";
-        for (int j = 0; j < [[outlets objectForKey:@"unstripped"] count]; j++)
-        {
-            params = [params stringByAppendingFormat:@"%@%@",(j > 0 ? @", " : @""),[[outlets objectForKey:@"unstripped"] objectAtIndex:j]];
-            paramsComma = [NSString stringWithFormat:@", %@",params];
-            strippedParams = [strippedParams stringByAppendingFormat:@"%@%@",(j > 0 ? @", " : @""),[[outlets objectForKey:@"stripped"] objectAtIndex:j]];
-            strippedParamsComma = [NSString stringWithFormat:@", %@",strippedParams];
-        }
-        
-        [code appendString:[self exportFunctionCode:k viewGraphs:viewGraphs parameters:params dict:dict strippedParams:strippedParams strippedParamsComma:strippedParamsComma paramsComma:paramsComma] ];
+        params = [params stringByAppendingFormat:@"%@%@",(j > 0 ? @", " : @""),[[outlets objectForKey:@"unstripped"] objectAtIndex:j]];
+        paramsComma = [NSString stringWithFormat:@", %@",params];
+        strippedParams = [strippedParams stringByAppendingFormat:@"%@%@",(j > 0 ? @", " : @""),[[outlets objectForKey:@"stripped"] objectAtIndex:j]];
+        strippedParamsComma = [NSString stringWithFormat:@", %@",strippedParams];
     }
     
-    [code writeToFile:location atomically:flag encoding:NSUTF8StringEncoding error:error];
+    [code appendString:[self exportFunctionCode:xibName viewGraphData:viewGraphData parameters:params dict:data strippedParams:strippedParams strippedParamsComma:strippedParamsComma paramsComma:paramsComma] ];
+    
+    [code writeToFile:fileNamePath atomically:flag encoding:NSUTF8StringEncoding error:error];
 }
 
 //translates the entire code string, dict and def are global dictionaries
