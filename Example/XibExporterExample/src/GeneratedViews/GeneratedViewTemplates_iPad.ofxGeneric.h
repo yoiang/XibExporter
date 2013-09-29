@@ -43,7 +43,6 @@ inline void populateGeneratedViewTemplates_iPad( ofPtr< ofxGenericView > rootVie
 	variableNameButton->setBackgroundColor( ofColor( 0, 0, 0, 0 ) );
 	variableNameButton->setDelegate( dynamic_pointer_cast< ofxGenericButtonViewDelegate >( rootView ) );
 	variableNameButton->setContentMode( ofxGenericContentModeScaleToFill );
-	variableNameButton->setMinimumFontSize( 0.0f );
 	variableNameButton->setClipSubviews( false );
 	variableNameButton->setAutoresizingMask( ofxGenericViewAutoresizingRightMargin | ofxGenericViewAutoresizingBottomMargin );
 	rootView->addChildView( variableNameButton );
@@ -84,7 +83,6 @@ inline void populateGeneratedViewTemplates_iPad( ofPtr< ofxGenericView > rootVie
 	variableNameLabel->setContentMode( ofxGenericContentModeLeft );
 	variableNameLabel->setNumberOfLines( 1 );
 	variableNameLabel->setAutosizeFontToFitText( false );
-	variableNameLabel->setMinimumFontSize( 0.0f );
 	variableNameLabel->setAutoresizingMask( ofxGenericViewAutoresizingRightMargin | ofxGenericViewAutoresizingBottomMargin );
 	rootView->addChildView( variableNameLabel );
 }

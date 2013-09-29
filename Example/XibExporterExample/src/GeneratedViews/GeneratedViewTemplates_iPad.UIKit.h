@@ -26,7 +26,6 @@ inline void populateGeneratedViewTemplates_iPad( UIView** rootView, UIButton** v
 	[(*variableNameButton) setBackgroundImage:[UIImage imageNamed:@"backgroundImageDown.png"] forState:UIControlStateHighlighted];
 	[(*variableNameButton) setEnabled:true];
 	[(*variableNameButton) setBackgroundImage:[UIImage imageNamed:@"backgroundImage.png"] forState:UIControlStateNormal];
-	[(*variableNameButton).titleLabel setMinimumFontSize:0.0f];
 	[(*variableNameButton).titleLabel setNumberOfLines:1];
 	[(*rootView) addSubview:(*variableNameButton)];
 
@@ -45,12 +44,11 @@ inline void populateGeneratedViewTemplates_iPad( UIView** rootView, UIButton** v
 	[(*rootView) addSubview:(*variableNameImage)];
 
 	(*variableNameLabel) = [ [UILabel alloc] init];
-	[(*variableNameLabel) setLineBreakMode:UILineBreakModeTailTruncation];
+	[(*variableNameLabel) setLineBreakMode:NSLineBreakByTruncatingTail];
 	[(*variableNameLabel) setAdjustsFontSizeToFitWidth:false];
 	[(*variableNameLabel) setNumberOfLines:1];
 	[(*variableNameLabel) setFont:[UIFont fontWithName:@".HelveticaNeueInterface-M3" size:17.0f] ];
-	[(*variableNameLabel) setTextAlignment:UITextAlignmentLeft];
-	[(*variableNameLabel) setMinimumFontSize:0.0f];
+	[(*variableNameLabel) setTextAlignment:NSTextAlignmentLeft];
 	[(*variableNameLabel) setTextColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:255]];
 	[(*rootView) addSubview:(*variableNameLabel)];
 }

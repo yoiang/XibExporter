@@ -20,12 +20,11 @@ inline void populateGeneratedViewTemplates( UIView** rootView, UILabel** variabl
 	[(*rootView) setContentMode:UIViewContentModeScaleToFill];
 
 	(*variableNameLabel) = [ [UILabel alloc] init];
-	[(*variableNameLabel) setLineBreakMode:UILineBreakModeTailTruncation];
+	[(*variableNameLabel) setLineBreakMode:NSLineBreakByTruncatingTail];
 	[(*variableNameLabel) setAdjustsFontSizeToFitWidth:false];
 	[(*variableNameLabel) setNumberOfLines:1];
 	[(*variableNameLabel) setFont:[UIFont fontWithName:@".HelveticaNeueInterface-M3" size:17.0f] ];
-	[(*variableNameLabel) setTextAlignment:UITextAlignmentCenter];
-	[(*variableNameLabel) setMinimumFontSize:0.0f];
+	[(*variableNameLabel) setTextAlignment:NSTextAlignmentCenter];
 	[(*variableNameLabel) setTextColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:255]];
 	[(*rootView) addSubview:(*variableNameLabel)];
 
@@ -35,7 +34,6 @@ inline void populateGeneratedViewTemplates( UIView** rootView, UILabel** variabl
 	[(*variableNameButton1).titleLabel setFont:[UIFont fontWithName:@".HelveticaNeueInterface-MediumP4" size:15.0f] ];
 	[(*variableNameButton1) setBackgroundImage:[UIImage imageNamed:@"backgroundImageDown.png"] forState:UIControlStateHighlighted];
 	[(*variableNameButton1) setEnabled:true];
-	[(*variableNameButton1).titleLabel setMinimumFontSize:0.0f];
 	[(*variableNameButton1).titleLabel setNumberOfLines:1];
 	[(*rootView) addSubview:(*variableNameButton1)];
 
@@ -46,7 +44,6 @@ inline void populateGeneratedViewTemplates( UIView** rootView, UILabel** variabl
 	[(*variableNameButton2) setBackgroundImage:[UIImage imageNamed:@"backgroundImageDown.png"] forState:UIControlStateHighlighted];
 	[(*variableNameButton2) setEnabled:true];
 	[(*variableNameButton2) setBackgroundImage:[UIImage imageNamed:@"Icon.png"] forState:UIControlStateNormal];
-	[(*variableNameButton2).titleLabel setMinimumFontSize:0.0f];
 	[(*variableNameButton2).titleLabel setNumberOfLines:1];
 	[(*rootView) addSubview:(*variableNameButton2)];
 
@@ -64,12 +61,11 @@ inline void populateGeneratedViewTemplates( UIView** rootView, UILabel** variabl
 	[(*variableNameView) setContentMode:UIViewContentModeScaleToFill];
 
 	(*variableNameLabel2) = [ [UILabel alloc] init];
-	[(*variableNameLabel2) setLineBreakMode:UILineBreakModeTailTruncation];
+	[(*variableNameLabel2) setLineBreakMode:NSLineBreakByTruncatingTail];
 	[(*variableNameLabel2) setAdjustsFontSizeToFitWidth:false];
 	[(*variableNameLabel2) setNumberOfLines:1];
 	[(*variableNameLabel2) setFont:[UIFont fontWithName:@".HelveticaNeueInterface-M3" size:17.0f] ];
-	[(*variableNameLabel2) setTextAlignment:UITextAlignmentCenter];
-	[(*variableNameLabel2) setMinimumFontSize:0.0f];
+	[(*variableNameLabel2) setTextAlignment:NSTextAlignmentCenter];
 	[(*variableNameLabel2) setTextColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:255]];
 	[(*variableNameView) addSubview:(*variableNameLabel2)];
 	[(*rootView) addSubview:(*variableNameView)];

@@ -40,7 +40,6 @@ inline void populateGeneratedViewTemplates( ofPtr< ofxGenericView > rootView, of
 	variableNameLabel->setContentMode( ofxGenericContentModeLeft );
 	variableNameLabel->setNumberOfLines( 1 );
 	variableNameLabel->setAutosizeFontToFitText( false );
-	variableNameLabel->setMinimumFontSize( 0.0f );
 	variableNameLabel->setAutoresizingMask( ofxGenericViewAutoresizingRightMargin | ofxGenericViewAutoresizingBottomMargin );
 	rootView->addChildView( variableNameLabel );
 
@@ -61,7 +60,6 @@ inline void populateGeneratedViewTemplates( ofPtr< ofxGenericView > rootView, of
 	variableNameButton1->setBackgroundColor( ofColor( 246, 188, 255, 255 ) );
 	variableNameButton1->setDelegate( dynamic_pointer_cast< ofxGenericButtonViewDelegate >( rootView ) );
 	variableNameButton1->setContentMode( ofxGenericContentModeScaleToFill );
-	variableNameButton1->setMinimumFontSize( 0.0f );
 	variableNameButton1->setClipSubviews( false );
 	variableNameButton1->setAutoresizingMask( ofxGenericViewAutoresizingRightMargin | ofxGenericViewAutoresizingBottomMargin );
 	rootView->addChildView( variableNameButton1 );
@@ -84,7 +82,6 @@ inline void populateGeneratedViewTemplates( ofPtr< ofxGenericView > rootView, of
 	variableNameButton2->setBackgroundColor( ofColor( 251, 255, 190, 255 ) );
 	variableNameButton2->setDelegate( dynamic_pointer_cast< ofxGenericButtonViewDelegate >( rootView ) );
 	variableNameButton2->setContentMode( ofxGenericContentModeScaleToFill );
-	variableNameButton2->setMinimumFontSize( 0.0f );
 	variableNameButton2->setClipSubviews( false );
 	variableNameButton2->setAutoresizingMask( ofxGenericViewAutoresizingRightMargin | ofxGenericViewAutoresizingBottomMargin );
 	rootView->addChildView( variableNameButton2 );
@@ -124,7 +121,6 @@ inline void populateGeneratedViewTemplates( ofPtr< ofxGenericView > rootView, of
 	variableNameLabel2->setContentMode( ofxGenericContentModeLeft );
 	variableNameLabel2->setNumberOfLines( 1 );
 	variableNameLabel2->setAutosizeFontToFitText( false );
-	variableNameLabel2->setMinimumFontSize( 0.0f );
 	variableNameLabel2->setAutoresizingMask( ofxGenericViewAutoresizingRightMargin | ofxGenericViewAutoresizingBottomMargin );
 	variableNameView->addChildView( variableNameLabel2 );
 	rootView->addChildView( variableNameView );
