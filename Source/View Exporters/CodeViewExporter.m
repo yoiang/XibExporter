@@ -69,7 +69,7 @@ static NSMutableDictionary* instanceCounts = nil;
 
 - (NSString *)exportData:(ViewGraphData*)viewGraphData atomically:(BOOL)flag error:(NSError**)error
 {
-    return [self exportData:viewGraphData toPath:[AppSettings getGeneratedSourceFolder] atomically:flag error:error];
+    return [self exportData:viewGraphData toPath:[AppSettings getFolderForExports] atomically:flag error:error];
 }
 
 -(NSString*)exportData:(ViewGraphData*)viewGraphData toPath:(NSString*)targetPath atomically:(BOOL)flag error:(NSError **)error

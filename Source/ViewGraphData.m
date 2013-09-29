@@ -105,7 +105,7 @@
 {
     CXMLElement* result = nil;
     
-    NSString* xibPath = [ ViewGraphData getPathOfFile:[ NSString stringWithFormat:@"%@.xib", xibName ] start:[AppSettings getXIBRoot] ];
+    NSString* xibPath = [ ViewGraphData getPathOfFile:[ NSString stringWithFormat:@"%@.xib", xibName ] start:[AppSettings getFolderContainingXibsToProcess] ];
     if ( xibPath )
     {
         NSData* xmlData = [ NSData dataWithContentsOfFile:xibPath ];

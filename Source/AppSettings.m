@@ -12,7 +12,7 @@
 
 @implementation AppSettings
 
-+(NSString*)getNibPath
++(NSString*)getFolderContainingNibsToProcess
 {
     return [ [NSBundle mainBundle] bundlePath];
 }
@@ -27,17 +27,17 @@
     return [ [self getSettingsDictionary] dictionaryForKey:@"Export Settings"];
 }
 
-+ (NSString *) getGeneratedSourceFolder
++ (NSString *) getFolderForExports
 {
     return [ [self getExportSettingsDictionary] stringForKey:@"Folder for Exports"];
 }
 
-+ (NSString *) getXcodeProjectFile
++ (NSString *) getAddExportsToProjectFile
 {
     return [ [self getExportSettingsDictionary] stringForKey:@"Add Exports To Project" ];
 }
 
-+ (NSString *) getXIBRoot
++ (NSString *) getFolderContainingXibsToProcess
 {
     return [ [self getExportSettingsDictionary] stringForKey:@"Process Xibs in Folder" ];
 }
@@ -52,7 +52,7 @@
     return [ [self getExportSettingsDictionary] arrayForKey:@"Process Only Xibs"];
 }
 
-+(BOOL)forceExportAllXibs
++(BOOL)ForceProcessUnchangedXibs
 {
     return [ [self getExportSettingsDictionary] boolForKey:@"Force Process Unchanged Xibs" withDefaultValue:NO];
 }

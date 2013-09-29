@@ -18,7 +18,7 @@ const int HEX_LENGTH = 24;
 
 +( NSString* )getXcodeProjectFileContents
 {
-    NSString *projectFileLocation = [ AppSettings getXcodeProjectFile ];
+    NSString *projectFileLocation = [ AppSettings getAddExportsToProjectFile ];
     NSError *error = nil;
     NSString *projectFile = [NSString stringWithContentsOfFile:projectFileLocation encoding:NSUTF8StringEncoding error:&error];
     
@@ -32,7 +32,7 @@ const int HEX_LENGTH = 24;
 
 +( void )setXcodeProjectFileContents:( NSString* )contents
 {
-    NSString *projectFileLocation = [ AppSettings getXcodeProjectFile ];
+    NSString *projectFileLocation = [ AppSettings getAddExportsToProjectFile ];
     NSError *error = nil;
     [ contents writeToFile:projectFileLocation atomically:NO encoding:NSUTF8StringEncoding error:&error ];
     if ( error )

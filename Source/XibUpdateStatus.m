@@ -31,7 +31,7 @@
 
 -(NSString*)getStatusFilePath
 {
-    return [AppSettings getXIBRoot];
+    return [AppSettings getFolderContainingXibsToProcess];
 }
 
 -(NSString*)getStatusFileName

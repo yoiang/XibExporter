@@ -11,16 +11,16 @@
 @interface AppSettings : NSObject
 
 // returns a string path to the folder where we can find our valid nib files
-+(NSString*)getNibPath;
++(NSString*)getFolderContainingNibsToProcess;
 
 // returns a string path to the generated folder, defined relative in plist // TODO: move to configuration
-+(NSString*)getGeneratedSourceFolder;
++(NSString*)getFolderForExports;
 
 // returns a string path to the Xcode project file, defined relative in plist // TODO: move to configuration
-+(NSString*)getXcodeProjectFile;
++(NSString*)getAddExportsToProjectFile;
 
 // returns a string path to the XIB root folder, defined relative in plist // TODO: move to configuration
-+(NSString*)getXIBRoot;
++(NSString*)getFolderContainingXibsToProcess;
 
 // returns an array of Xib filenames to skip, defined in plist // TODO: move to configuration
 +(NSArray*)getSkipXibs;
@@ -29,7 +29,7 @@
 +(NSArray*)getProcessOnlyXibs;
 
 // returns whether to force exporting all Xibs processed rather than only those that have changed, defined in plist // TODO: move to configuration
-+(BOOL)forceExportAllXibs;
++(BOOL)ForceProcessUnchangedXibs;
 
 // returns a list of View Exporter classes that should be registered for use
 +(NSArray*)getRegisterExporterClasses;

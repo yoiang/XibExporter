@@ -193,7 +193,7 @@
     NSArray* skipXibs = [ AppSettings getSkipXibs ];
     
     NSError* error = nil;
-    NSString* nibPath = [AppSettings getNibPath];
+    NSString* nibPath = [AppSettings getFolderContainingNibsToProcess];
     nibFileNames = [NSMutableArray arrayWithArray:[ [NSFileManager defaultManager] contentsOfDirectoryAtPath:nibPath error:&error] ];
     if (error)
     {
@@ -227,9 +227,9 @@
         }
         
         // TODO: renamed to clarify that this forces export over Unchanged files, not over Only Process and Skip
-        if ( !remove && ![AppSettings forceExportAllXibs] )
+        if ( !remove && ![AppSettings ForceProcessUnchangedXibs] )
         {
-            NSString* xibFileNamePath = [NSString stringWithFormat:@"%@/%@.xib", [AppSettings getXIBRoot], nibFileName];
+            NSString* xibFileNamePath = [NSString stringWithFormat:@"%@/%@.xib", [AppSettings getFolderContainingXibsToProcess], nibFileName];
             NSString* md5 = [NSData stringMD5OfContentsOfFile:xibFileNamePath];
             [self.xibUpdateStatus updateXib:nibFileName withMD5:md5];
             
