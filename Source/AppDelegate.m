@@ -231,11 +231,18 @@
         {
             NSString* xibFileNamePath = [NSString stringWithFormat:@"%@/%@.xib", [AppSettings getFolderContainingXibsToProcess], nibFileName];
             NSString* md5 = [NSData stringMD5OfContentsOfFile:xibFileNamePath];
-            [self.xibUpdateStatus updateXib:nibFileName withMD5:md5];
-            
-            if ( ![self.xibUpdateStatus hasXibChanged:nibFileName] )
+            if (md5)
             {
-                NSLog(@"Skipping unchanged Xib %@", nibFileName);
+                [self.xibUpdateStatus updateXib:nibFileName withMD5:md5];
+            
+                if ( ![self.xibUpdateStatus hasXibChanged:nibFileName] )
+                {
+                    NSLog(@"Skipping unchanged Xib %@", nibFileName);
+                    remove = YES;
+                }
+            } else
+            {
+                NSLog(@"Skipping Nib without matching Xib %@", nibFileName);
                 remove = YES;
             }
         }
