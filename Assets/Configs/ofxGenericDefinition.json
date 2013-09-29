@@ -22,6 +22,17 @@
       },
       "_inlineConstructor": "?$lineBreakMode$"
     },
+    "NSLineBreakMode": {
+      "_enum": {
+        "NSLineBreakByCharWrapping": "ofxGenericTextLinebreakModeCharacterWrap",
+        "NSLineBreakByClipping": "ofxGenericTextLinebreakModeClip",
+        "NSLineBreakByTruncatingHead": "ofxGenericTextLinebreakModeHeadTruncation",
+        "NSLineBreakByTruncatingMiddle": "ofxGenericTextLinebreakModeMiddleTruncation",
+        "NSLineBreakByTruncatingTail": "ofxGenericTextLinebreakModeTailTruncation",
+        "NSLineBreakByWordWrapping": "ofxGenericTextLinebreakModeWordWrap"
+      },
+      "_inlineConstructor": "?$lineBreakMode$"
+    },
     "UITextAlignment": {
       "_enum": {
         "UITextAlignmentCenter": "ofxGenericTextHorizontalAlignmentCenter",
