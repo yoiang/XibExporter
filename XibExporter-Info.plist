@@ -69,7 +69,6 @@
 		<key>Skip Xibs</key>
 		<array>
 			<string>MainWindow</string>
-			<string>MainWindow_iPad</string>
 			<string>OnlyRunInSimulatorNoticeView</string>
 		</array>
 	</dict>

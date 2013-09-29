@@ -86,7 +86,6 @@
 		3CEA729D17D1093E00F419A3 /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA70F717D1093000F419A3 /* SBJsonUTF8Stream.m */; };
 		3CEA729E17D1093E00F419A3 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA70F917D1093000F419A3 /* SBJsonWriter.m */; };
 		3CEA72E017D112AA00F419A3 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C656E9217D0FE8D0074B101 /* MainWindow.xib */; };
-		3CEA72E117D112AD00F419A3 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C656E9317D0FE8D0074B101 /* MainWindow_iPad.xib */; };
 		45E64D68152A3E0800009605 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E64D67152A3E0800009605 /* UIKit.framework */; };
 		45E64D6A152A3E0800009605 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E64D69152A3E0800009605 /* Foundation.framework */; };
 		45E64D6C152A3E0800009605 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E64D6B152A3E0800009605 /* CoreGraphics.framework */; };
@@ -111,7 +110,6 @@
 		3C5B8B1217F37215009C99F2 /* XibUpdateStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XibUpdateStatus.h; sourceTree = "<group>"; };
 		3C5B8B1317F37215009C99F2 /* XibUpdateStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XibUpdateStatus.m; sourceTree = "<group>"; };
 		3C656E9217D0FE8D0074B101 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		3C656E9317D0FE8D0074B101 /* MainWindow_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow_iPad.xib; sourceTree = "<group>"; };
 		3C656EB417D0FF550074B101 /* 1-header-search-paths.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-header-search-paths.png"; sourceTree = "<group>"; };
 		3C656EB517D0FF550074B101 /* 2-other-linker-flags.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2-other-linker-flags.png"; sourceTree = "<group>"; };
 		3C656EB617D0FF550074B101 /* 3-add-existing-files.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3-add-existing-files.png"; sourceTree = "<group>"; };
@@ -282,7 +280,6 @@
 			isa = PBXGroup;
 			children = (
 				3C656E9217D0FE8D0074B101 /* MainWindow.xib */,
-				3C656E9317D0FE8D0074B101 /* MainWindow_iPad.xib */,
 				3CDA1AA717F28D5C00A80DEF /* OnlyRunInSimulatorNoticeView.xib */,
 			);
 			path = Xibs;
@@ -671,7 +668,6 @@
 				3CEA6EFF17D1035B00F419A3 /* GeneratedClass.cpp.txt in Resources */,
 				3CDA1AA317F1729A00A80DEF /* ofxGenericDefinition.h in Resources */,
 				3C7A7F7317D0FC8000C57BE9 /* Default.png in Resources */,
-				3CEA72E117D112AD00F419A3 /* MainWindow_iPad.xib in Resources */,
 				3CDA1AA517F1A77800A80DEF /* UIKitDefinition.h in Resources */,
 				3C7A7F7417D0FC8000C57BE9 /* Default@2x.png in Resources */,
 			);
