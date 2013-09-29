@@ -109,7 +109,7 @@ NSString* NSLineBreakModeToString( NSLineBreakMode type )
 + (NSMutableDictionary *) exportNSLineBreakMode:(NSLineBreakMode)mode
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setObject:@"UILineBreakMode" forKey:@"class"];
+    [dict setObject:@"NSLineBreakMode" forKey:@"class"];
     [dict setObject:NSLineBreakModeToString(mode) forKey:@"lineBreakMode"];
     [self markAsEnumType:dict];
     return dict;
