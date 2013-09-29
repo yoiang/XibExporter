@@ -18,50 +18,9 @@ static int viewId = 0;
 
 @implementation UIView (Exported)
 
--( BOOL )isMarkedForFlattening:( NSString* )accessibilityLabel
-{
-    if ( [ accessibilityLabel isEqualToString:@"_FLATTENED" ] )
-        return YES;
-    if ( [ accessibilityLabel isEqualToString:@"_FLATTEN" ] )
-        return YES;
-    return NO;
-}
-
--( BOOL )isMarkedForExportingCode:( NSString* )accessibilityLabel
-{
-    if ( [ accessibilityLabel isEqualToString:@"_EXPORTED" ] )
-        return YES;
-    if ( [ accessibilityLabel isEqualToString:@"_EXPORT" ] )
-        return YES;
-    return NO;
-}
-
--( NSMutableDictionary* )exportToDictionaryFlattened:( CXMLElement* )xibElement
-{
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    
-    UIView* contentView = [self.subviews objectAtIndex:0];
-    CXMLElement* xibContentView = [ xibElement subviewAtIndex:0 ];
-
-    dict = [ contentView exportToDictionary:xibContentView ];
-    
-    if (self.accessibilityHint && [self.accessibilityHint length] > 0 && !([self.accessibilityHint isEqualToString:self.accessibilityLabel]))
-    {
-        [dict setObject:self.accessibilityHint forKey:@"instanceName"];
-    }
-    [dict setObject:[ExportUtility exportCGRect:self.frame] forKey:@"frame"];
-    
-    return dict;
-}
-
 -( NSMutableDictionary* )exportToDictionaryUIView:( CXMLElement* )xibElement
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-
-    if ( [self isMarkedForExportingCode:self.accessibilityLabel] )
-    {
-        [dict setObject:[NSNumber numberWithBool:YES] forKey:@"exportToCode"];
-    }
     
     //globally defined stuff
     [dict setObject:[NSString stringWithFormat:@"%@",[self class]] forKey:@"class"];
@@ -130,16 +89,7 @@ static int viewId = 0;
 {
     NSMutableDictionary* dict = nil;
     
-    //if our accessibility label is _FLATTENED, then use our first child instead
-    if ( [ self isMarkedForFlattening:self.accessibilityLabel ] && [ self.subviews count ] > 0)
-    {
-        dict = [ self exportToDictionaryFlattened:xibElement ];
-    }
-    else
-    {
-        dict = [ self exportToDictionaryUIView:xibElement ];
-    }
-    
+    dict = [ self exportToDictionaryUIView:xibElement ];
     [ dict setObject:@"TODO: rootView instance" forKey:@"rootView" ];
     
     return dict;
