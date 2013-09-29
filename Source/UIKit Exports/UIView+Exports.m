@@ -110,12 +110,12 @@ static int viewId = 0;
         CXMLElement* xibSubview = nil;
 
         CXMLElement* xibSubviewAtIndex = [xibElement subviewAtIndex:i];
-        if ( [ xibSubviewAtIndex doesViewClassMatch:subview ] )
+        if ( [ [subview class] isSubclassOfClass:[xibSubviewAtIndex classType] ] )
         {
             xibSubview = xibSubviewAtIndex;
         } else
         {
-            NSLog(@"Unable to match %@ with xml data, found %@ instead", [subview class], [xibSubviewAtIndex attributeClassStringValue] );
+            NSLog(@"Unable to match %@ with xml data, found %@ instead", [subview class], [xibSubviewAtIndex classType] );
         }
         
         [ children addObject:[ subview exportToDictionary:xibSubview ] ];

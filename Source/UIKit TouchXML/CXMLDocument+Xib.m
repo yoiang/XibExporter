@@ -95,7 +95,7 @@
                     if ( [ rootArrayNode kind ] == CXMLElementKind )
                     {
                         CXMLElement* rootArrayElement = ( CXMLElement* )rootArrayNode;
-                        if ( [ [ rootArrayElement attributeClassStringValue ] isEqualToString:@"IBUIView" ] )
+                        if ( [ [ rootArrayElement classType ] isSubclassOfClass:[UIView class] ] )
                         {
                             result = rootArrayElement;
                             break;
@@ -136,14 +136,8 @@
 {
     CXMLElement* root = nil;
     
-    XibVersion xibVersion = [self xibVersion];
-    if (xibVersion == XibVersionXcode4)
-    {
-        root = [self uiViewRootForXibVersionXcode4];
-    } else if(xibVersion == XibVersionXcode5)
-    {
-        root = [self uiViewRootForXibVersionXcode5];
-    }
+    XibVersionSelector(XibVersionXcode4, root = [self uiViewRootForXibVersionXcode4] );
+    XibVersionSelector(XibVersionXcode5, root = [self uiViewRootForXibVersionXcode5] );
     
     return root;
 }

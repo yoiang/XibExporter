@@ -8,11 +8,15 @@
 
 #import "TouchXML.h"
 
+#import "CXMLDocument+Xib.h"
+
 @interface CXMLElement (Xib)
 
 -( NSString* )attributeStringValueForName:( NSString* )name;
 -( NSString* )attributeKeyStringValue;
--( NSString* )attributeClassStringValue;
+
+-( Class )classType;
+
 -( NSString* )attributeIdStringValue;
 -( NSString* )attributeRefStringValue;
 
@@ -20,6 +24,6 @@
 
 -( CXMLElement* )childWithAttributeValue:( NSString* )attribute attributeValue:( NSString* )value;
 
--( BOOL )doesViewClassMatch:( UIView* )view;
+-( XibVersion )xibVersion;
 
 @end

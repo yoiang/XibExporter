@@ -11,6 +11,7 @@
 #import "UIButton+Exports.h"
 #import "ExportUtility.h"
 #import "CXMLElement+UIImage.h"
+#import "CXMLElement+UIButton.h"
 
 @implementation UIButton (Exports)
 
@@ -113,21 +114,18 @@
 
     if ([self backgroundImageForState:UIControlStateNormal])
     {
-        CXMLElement* xibUIImage = [ xibElement childWithAttributeValue:@"key" attributeValue:@"IBUINormalBackgroundImage" ];
-        if ( xibUIImage )
+        NSString* imageName = [ xibElement normalBackgroundImageFileName ];
+        if ( imageName )
         {
-            NSString* imageName = [ xibUIImage resourceName ];
-            if ( imageName )
+            [ dict setObject:imageName forKey:@"backgroundImage" ];
+            
+            //TODO: use actual values, not automatic Up and Down
+            //automatically create a highlighted image we set one in the XIB
+            if ( [ self backgroundImageForState:UIControlStateHighlighted ] != [ self backgroundImageForState:UIControlStateNormal ] &&
+                [ imageName rangeOfString:@"Up" ].location != NSNotFound )
             {
-                [ dict setObject:imageName forKey:@"backgroundImage" ];
-                
-                //automatically create a highlighted image we set one in the XIB
-                if ( [ self backgroundImageForState:UIControlStateHighlighted ] != [ self backgroundImageForState:UIControlStateNormal ] &&
-                    [ imageName rangeOfString:@"Up" ].location != NSNotFound )
-                {
-                    NSString *downImageString = [ imageName stringByReplacingOccurrencesOfString:@"Up" withString:@"Down" ];
-                    [ dict setObject:downImageString forKey:@"backgroundDownImage" ];
-                }
+                NSString *downImageString = [ imageName stringByReplacingOccurrencesOfString:@"Up" withString:@"Down" ];
+                [ dict setObject:downImageString forKey:@"backgroundDownImage" ];
             }
         }
     }

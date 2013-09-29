@@ -12,6 +12,7 @@
 #import "UIView+Exports.h"
 #import "CXMLElement+Xib.h"
 #import "CXMLElement+UIImage.h"
+#import "CXMLElement+UIImageView.h"
 
 @implementation UIImageView (Exports)
 
@@ -25,15 +26,11 @@
     
     BOOL hadImage = NO;
     
-    CXMLElement* xibUIImage = [ xibElement childWithAttributeValue:@"key" attributeValue:@"IBUIImage" ];
-    if ( xibUIImage )
+    NSString* imageName = [ xibElement imageFileName ];
+    if ( imageName )
     {
-        NSString* imageName = [ xibUIImage resourceName ];
-        if ( imageName )
-        {
-            [ dict setObject:imageName forKey:@"image" ];
-            hadImage = YES;
-        }
+        [ dict setObject:imageName forKey:@"image" ];
+        hadImage = YES;
     }
     
     if ( !hadImage && self.ImageFile )

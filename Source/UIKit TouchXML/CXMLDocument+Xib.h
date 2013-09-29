@@ -15,6 +15,12 @@ typedef NS_ENUM(NSInteger, XibVersion)
     XibVersionXcode5
 };
 
+#define XibVersionSelector( Version, statement ) \
+    if ( [self xibVersion] == Version ) \
+    { \
+        statement; \
+    }
+
 @interface CXMLDocument (Xib)
 
 -(XibVersion)xibVersion;

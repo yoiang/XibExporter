@@ -27,9 +27,50 @@
     return [ self attributeStringValueForName:@"key" ];
 }
 
--( NSString* )attributeClassStringValue
+-( Class )classTypeForXibVersionXcode4
 {
-    return [ self attributeStringValueForName:@"class" ];
+    NSString* className = [ self attributeStringValueForName:@"class" ];
+    
+    if ( [ [ className substringToIndex:2 ] isEqualToString:@"IB" ] )
+    {
+        className = [ className substringFromIndex:2 ];
+    }
+    
+    return NSClassFromString( className );
+}
+
+-( Class )classTypeForXibVersionXcode5
+{
+    Class result = nil;
+    
+    NSString* name = [self name];
+    if ( [name isEqualToString:@"view"] )
+    {
+        result = [UIView class];
+    } else if ( [name isEqualToString:@"label"] )
+    {
+        result = [UILabel class];
+    } else if ( [name isEqualToString:@"button"] )
+    {
+        result = [UIButton class];
+    } else if ( [name isEqualToString:@"imageView"] )
+    {
+        result = [UIImageView class];
+    } else
+    {
+        NSLog(@"Unsupported class type for name %@", name);
+    }
+    return result;
+}
+
+-( Class )classType
+{
+    Class result = nil;
+
+    XibVersionSelector( XibVersionXcode4, result = [self classTypeForXibVersionXcode4] );
+    XibVersionSelector( XibVersionXcode5, result = [self classTypeForXibVersionXcode5] );
+    
+    return result;
 }
 
 -( NSString* )attributeIdStringValue
@@ -85,27 +126,9 @@
     return result;
 }
 
--( BOOL )doesViewClassMatch:( UIView* )view
+-(XibVersion)xibVersion
 {
-    BOOL result = NO;
-    
-    NSString* className = [ self attributeClassStringValue ];
-    
-    if ( [ [ className substringToIndex:2 ] isEqualToString:@"IB" ] )
-    {
-        className = [ className substringFromIndex:2 ];
-    }
-    
-    Class xibNodeClass = NSClassFromString( className );
-    if ( [ view isKindOfClass:xibNodeClass ] )
-    {
-        result = YES;
-    } else
-    {
-        NSLog( @"Error: xib node (%@) does not match view (%@)", xibNodeClass, [ view class ] );
-    }
-    
-    return result;
+    return [ [self rootDocument] xibVersion];
 }
 
 @end

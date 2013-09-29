@@ -12,7 +12,10 @@
 		3C10DC8F17E2CE4300162DBC /* XibResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC8E17E2CE4300162DBC /* XibResources.m */; };
 		3C10DC9217E2DD9F00162DBC /* ViewGraphData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9117E2DD9F00162DBC /* ViewGraphData.m */; };
 		3C10DC9B17E7FD0E00162DBC /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9A17E7FD0E00162DBC /* AppSettings.m */; };
+		3C25012E17F84E830001C0EF /* CXMLElement+UIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C25012D17F84E830001C0EF /* CXMLElement+UIButton.m */; };
+		3C25013117F853FC0001C0EF /* CXMLElement+UIImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C25013017F853FC0001C0EF /* CXMLElement+UIImageView.m */; };
 		3C2C58F717F7CF890081D1AE /* CXMLDocument+Xib.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C58F617F7CF890081D1AE /* CXMLDocument+Xib.m */; };
+		3C2C58FB17F7D1DE0081D1AE /* NSError+NSLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C58FA17F7D1DE0081D1AE /* NSError+NSLog.m */; };
 		3C5B8B0E17F3004C009C99F2 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B8B0D17F3004C009C99F2 /* NSString+MD5.m */; };
 		3C5B8B1117F300A3009C99F2 /* NSData+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B8B1017F300A3009C99F2 /* NSData+MD5.m */; };
 		3C5B8B1417F37215009C99F2 /* XibUpdateStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B8B1317F37215009C99F2 /* XibUpdateStatus.m */; };
@@ -103,8 +106,14 @@
 		3C10DC9117E2DD9F00162DBC /* ViewGraphData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGraphData.m; sourceTree = "<group>"; };
 		3C10DC9917E7FD0E00162DBC /* AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSettings.h; sourceTree = "<group>"; };
 		3C10DC9A17E7FD0E00162DBC /* AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSettings.m; sourceTree = "<group>"; };
+		3C25012C17F84E830001C0EF /* CXMLElement+UIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CXMLElement+UIButton.h"; sourceTree = "<group>"; };
+		3C25012D17F84E830001C0EF /* CXMLElement+UIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CXMLElement+UIButton.m"; sourceTree = "<group>"; };
+		3C25012F17F853FC0001C0EF /* CXMLElement+UIImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CXMLElement+UIImageView.h"; sourceTree = "<group>"; };
+		3C25013017F853FC0001C0EF /* CXMLElement+UIImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CXMLElement+UIImageView.m"; sourceTree = "<group>"; };
 		3C2C58F517F7CF890081D1AE /* CXMLDocument+Xib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CXMLDocument+Xib.h"; sourceTree = "<group>"; };
 		3C2C58F617F7CF890081D1AE /* CXMLDocument+Xib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CXMLDocument+Xib.m"; sourceTree = "<group>"; };
+		3C2C58F917F7D1DE0081D1AE /* NSError+NSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+NSLog.h"; sourceTree = "<group>"; };
+		3C2C58FA17F7D1DE0081D1AE /* NSError+NSLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+NSLog.m"; sourceTree = "<group>"; };
 		3C55943017F432B100F380F7 /* compileAllXibsAndAddToApp.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = compileAllXibsAndAddToApp.sh; sourceTree = "<group>"; };
 		3C5B8B0C17F3004C009C99F2 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		3C5B8B0D17F3004C009C99F2 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
@@ -434,6 +443,8 @@
 				3C5B8B1317F37215009C99F2 /* XibUpdateStatus.m */,
 				3C07A1B717F6B5240064174E /* NSDictionary+TypeForKey.h */,
 				3C07A1B817F6B5240064174E /* NSDictionary+TypeForKey.m */,
+				3C2C58F917F7D1DE0081D1AE /* NSError+NSLog.h */,
+				3C2C58FA17F7D1DE0081D1AE /* NSError+NSLog.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -482,6 +493,10 @@
 				3C96F3AF17D0F4D5000FC446 /* CXMLElement+Xib.m */,
 				3C2C58F517F7CF890081D1AE /* CXMLDocument+Xib.h */,
 				3C2C58F617F7CF890081D1AE /* CXMLDocument+Xib.m */,
+				3C25012C17F84E830001C0EF /* CXMLElement+UIButton.h */,
+				3C25012D17F84E830001C0EF /* CXMLElement+UIButton.m */,
+				3C25012F17F853FC0001C0EF /* CXMLElement+UIImageView.h */,
+				3C25013017F853FC0001C0EF /* CXMLElement+UIImageView.m */,
 			);
 			path = "UIKit TouchXML";
 			sourceTree = "<group>";
@@ -704,6 +719,7 @@
 				3C96F3CC17D0F4D5000FC446 /* UITextView+Exports.m in Sources */,
 				3C96F3D417D0F4D5000FC446 /* XcodeProjectHelper.m in Sources */,
 				3C5B8B1417F37215009C99F2 /* XibUpdateStatus.m in Sources */,
+				3C2C58FB17F7D1DE0081D1AE /* NSError+NSLog.m in Sources */,
 				3C96F3B817D0F4D5000FC446 /* AppDelegate.m in Sources */,
 				3CEA729A17D1093E00F419A3 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				3C65718C17D0FF560074B101 /* CXMLElement.m in Sources */,
@@ -731,6 +747,7 @@
 				3C96F3CB17D0F4D5000FC446 /* UITextField+Exports.m in Sources */,
 				3CEA729617D1093E00F419A3 /* SBJsonStreamParserAccumulator.m in Sources */,
 				3CDA1AA117F1424B00A80DEF /* CodeViewExporter.m in Sources */,
+				3C25013117F853FC0001C0EF /* CXMLElement+UIImageView.m in Sources */,
 				3C10DC8F17E2CE4300162DBC /* XibResources.m in Sources */,
 				3C96F3BD17D0F4D5000FC446 /* MainWindowViewController.m in Sources */,
 				3C65719117D0FF560074B101 /* CXMLNode_PrivateExtensions.m in Sources */,
@@ -758,6 +775,7 @@
 				3C96F3C917D0F4D5000FC446 /* UISwitch+Exports.m in Sources */,
 				3C2C58F717F7CF890081D1AE /* CXMLDocument+Xib.m in Sources */,
 				3C65718B17D0FF560074B101 /* CXMLDocument_PrivateExtensions.m in Sources */,
+				3C25012E17F84E830001C0EF /* CXMLElement+UIButton.m in Sources */,
 				3C65718A17D0FF560074B101 /* CXMLDocument.m in Sources */,
 				3C65718F17D0FF560074B101 /* CXMLNamespaceNode.m in Sources */,
 				3C96F3C517D0F4D5000FC446 /* UIImageView+Exports.m in Sources */,
