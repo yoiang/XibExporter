@@ -30,8 +30,11 @@
 
 @interface AppDelegate()
 {
+    // TODO: move to individual exporters
     XibResources *_xibResources;
 }
+
+@property (strong) MainWindowViewController* mainViewController;
 
 @property (nonatomic, strong) XibUpdateStatus *xibUpdateStatus;
 
@@ -55,7 +58,6 @@
 }
 
 @synthesize window = _window;
-@synthesize mainViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

@@ -13,13 +13,10 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
-    MainWindowViewController *mainViewController;
 }
 
 +(AppDelegate*)sharedInstance;
 
-@property (strong) MainWindowViewController* mainViewController;
-@property (strong, nonatomic) UIWindow *window;
 @property (strong, readonly) XibResources *xibResources;
 
 @end
