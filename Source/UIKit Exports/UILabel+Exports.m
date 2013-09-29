@@ -64,7 +64,9 @@
     [dict setObject:[NSNumber numberWithBool:self.enabled] forKey:@"enabled"];
     [dict setObject:[NSNumber numberWithBool:self.adjustsFontSizeToFitWidth] forKey:@"adjustsFontSizeToFitWidth"];
     [dict setObject:[NSNumber numberWithInt:self.baselineAdjustment] forKey:@"baselineAdjustment"];
+#if __IPHONE_6_0 <= __IPHONE_OS_VERSION_MIN_ALLOWED
     [dict setObject:[NSNumber numberWithFloat:self.minimumFontSize] forKey:@"minimumFontSize"];
+#endif
     [dict setObject:[NSNumber numberWithInt:self.numberOfLines] forKey:@"numberOfLines"];
     if (self.highlightedTextColor)
     {
