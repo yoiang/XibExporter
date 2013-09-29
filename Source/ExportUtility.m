@@ -260,6 +260,9 @@ NSString* UIKeyboardTypeToString( UIKeyboardType type )
 #if __IPHONE_5_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
             EnumToStringCase( UIKeyboardTypeTwitter, result = );
 #endif
+#if __IPHONE_7_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
+            EnumToStringCase( UIKeyboardTypeWebSearch, result = );
+#endif
     }
     return result;
 }
