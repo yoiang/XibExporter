@@ -58,7 +58,7 @@
     {
         [dict setObject:[self.textColor exportToDictionary] forKey:@"textColor"];
     }
-    [dict setObject:[ExportUtility exportUITextAlignment:self.textAlignment] forKey:@"textAlignment"];
+    [dict setObject:[ExportUtility exportNSTextAlignment:self.textAlignment] forKey:@"textAlignment"];
     
     [dict setObject:[ExportUtility exportUILineBreakMode:self.lineBreakMode] forKey:@"lineBreakMode"];
     [dict setObject:[NSNumber numberWithBool:self.enabled] forKey:@"enabled"];

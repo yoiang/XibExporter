@@ -122,7 +122,7 @@
     return dict;
 }
 
-+ (NSMutableDictionary *) exportUITextAlignment:(UITextAlignment)alignment
++ (NSMutableDictionary *) exportUITextAlignment:(UITextAlignment)alignment 
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:@"UITextAlignment" forKey:@"class"];
@@ -140,6 +140,29 @@
             break;
     }
     [dict setObject:v forKey:@"textAlignment"];
+    [self markAsEnumType:dict];
+    return dict;
+}
+
+NSString* NSTextAlignmentToString( NSTextAlignment type )
+{
+    NSString* result = EnumAsString( NSTextAlignmentLeft );
+    switch ( type )
+    {
+            EnumToStringCase( NSTextAlignmentLeft, result = );
+            EnumToStringCase( NSTextAlignmentCenter, result = );
+            EnumToStringCase( NSTextAlignmentRight, result = );
+            EnumToStringCase( NSTextAlignmentJustified, result = );
+            EnumToStringCase( NSTextAlignmentNatural, result = );
+    }
+    return result;
+}
+
++ (NSMutableDictionary *) exportNSTextAlignment:(NSTextAlignment)alignment
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:@"NSTextAlignment" forKey:@"class"];
+    [dict setObject:NSTextAlignmentToString(alignment) forKey:@"textAlignment"];
     [self markAsEnumType:dict];
     return dict;
 }

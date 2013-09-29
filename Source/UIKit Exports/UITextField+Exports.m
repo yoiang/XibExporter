@@ -48,7 +48,7 @@
         [ dict setObject:[ self.textColor exportToDictionary ] forKey:@"textColor" ];
     }
 //    if ( self.font )
-    [dict setObject:[ExportUtility exportUITextAlignment:self.textAlignment] forKey:@"textAlignment"];
+    [dict setObject:[ExportUtility exportNSTextAlignment:self.textAlignment] forKey:@"textAlignment"];
     [ dict setObject:[ ExportUtility exportUITextBorderStyle:self.borderStyle ] forKey:@"textBorderStyle" ];
     if ( self.placeholder )
     {

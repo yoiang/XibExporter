@@ -17,7 +17,8 @@
 + (NSMutableDictionary *) exportUIEdgeInsets:(UIEdgeInsets)insets;
 + (NSMutableDictionary *) exportUILineBreakMode:(UILineBreakMode)mode;
 + (NSMutableDictionary *) exportUIButtonType:(UIButtonType)type;
-+ (NSMutableDictionary *) exportUITextAlignment:(UITextAlignment)alignment;
++ (NSMutableDictionary *) exportUITextAlignment:(UITextAlignment)alignment NS_DEPRECATED_IOS(2_0,6_0);
++ (NSMutableDictionary *) exportNSTextAlignment:(NSTextAlignment)alignment;
 + (NSMutableDictionary *) exportUIViewContentMode:(UIViewContentMode)contentMode;
 + (NSMutableDictionary *) exportUIActivityIndicatorViewStyle:(UIActivityIndicatorViewStyle) style;
 +( NSMutableDictionary* ) exportUIKeyboardType:( UIKeyboardType ) type;
