@@ -55,7 +55,7 @@
       "_super": "UIImageView",
       "_variableName": "*image#",
       "_declaration": "UIImageView*",
-      "image": "[@ setImage:$image$]"
+      "image": "[@ setImage:[UIImage imageNamed:$image$] ]"
     },
     "UILabel": {
       "_constructor": "UILabel** @ = &[ [UILabel alloc] init]",
