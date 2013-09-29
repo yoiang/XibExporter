@@ -13,9 +13,9 @@
 #import "UIViewController+Exports.h"
 #import "AppDelegate.h"
 #import "XibResources.h"
-#import "CXMLElement+UIView.h"
 #import "ViewExporter.h"
 
+#import "CXMLDocument+Xib.h"
 
 @interface ViewGraphData()
 {
@@ -58,49 +58,6 @@
     }
 }
 
-+( CXMLElement* )getXibUIViewRootForDocument:( CXMLDocument* )document
-{
-    CXMLElement* result = nil;
-    
-    NSError* error = nil;
-    
-    NSArray* dataArrayObjects = [ document nodesForXPath:@"/archive/data/array" error:&error ];
-    if ( error )
-    {
-        NSLog( @"Error trying to find root node: %@", error );
-    } else
-    {
-        for ( CXMLNode* dataArrayNode in dataArrayObjects )
-        {
-            if ( [ dataArrayNode kind ] == CXMLElementKind )
-            {
-                CXMLElement* dataArrayElement = ( CXMLElement* )dataArrayNode;
-                if ( [ [ dataArrayElement attributeKeyStringValue ] isEqualToString:@"IBDocument.RootObjects" ] )
-                {
-                    NSArray* rootArrayObjects = [ dataArrayElement children ];
-                    for ( CXMLNode* rootArrayNode in rootArrayObjects )
-                    {
-                        if ( [ rootArrayNode kind ] == CXMLElementKind )
-                        {
-                            CXMLElement* rootArrayElement = ( CXMLElement* )rootArrayNode;
-                            if ( [ [ rootArrayElement attributeClassStringValue ] isEqualToString:@"IBUIView" ] )
-                            {
-                                result = rootArrayElement;
-                                break;
-                            }
-                        }
-                    }
-                    if ( result )
-                    {
-                        break;
-                    }
-                }
-            }
-        }
-    }
-    return result;
-}
-
 +( CXMLElement* )getXibUIViewRoot:( NSString* )xibName
 {
     CXMLElement* result = nil;
@@ -109,7 +66,8 @@
     if ( xibPath )
     {
         NSData* xmlData = [ NSData dataWithContentsOfFile:xibPath ];
-        result = [ ViewGraphData getXibUIViewRootForDocument:[ [ [ CXMLDocument alloc ] initWithData:xmlData options:0 error:nil ] autorelease ] ];
+        CXMLDocument* xibDocument = [ [ [ CXMLDocument alloc ] initWithData:xmlData options:0 error:nil ] autorelease ];
+        result = [xibDocument uiViewRoot];
     }
     return result;
 }
