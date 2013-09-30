@@ -94,7 +94,7 @@ static NSMutableDictionary* instanceCounts = nil;
     NSMutableArray* includes = [NSMutableArray array];
     NSMutableDictionary* properties = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                       [NSMutableArray array], @"outlets",
-                                       xibName, @"className", nil];
+                                       nil];
     
     NSDictionary* output = [self getCodeFor:viewGraphData isInline:NO outlets:outlets includes:includes properties:properties];
     
