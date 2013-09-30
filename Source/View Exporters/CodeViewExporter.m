@@ -334,25 +334,20 @@ static NSMutableDictionary* instanceCounts = nil;
     
     NSString* output = [line stringByReplacingOccurrencesOfString:@"@" withString:[self.map variableReference:name] ];
 
+    BOOL unparsedMarker = NO;
+    
     NSRange foundMarker = [output rangeOfString:@"$" options:NSLiteralSearch];
     while (foundMarker.location != NSNotFound && foundMarker.length != 0)
     {
+        unparsedMarker = YES;
+        
         NSString *valueKey = [output substringBetweenOccurancesOf:@"$"];
 
         NSString *value = @"";
         
         NSObject* valueObject = [instanceDefinition objectForKey:valueKey];
         
-        //a BS check for enums - if there is a ? before the $, then we have an enum
-        BOOL isEnum = ( [output characterAtIndex:foundMarker.location-1] == '?') ||
-                      ( [valueObject isKindOfClass:[NSDictionary class] ] && [ExportUtility isDictionaryEnum:(NSDictionary*)valueObject] );
-
-        //if we have an enum, then do a lookup in this def's enum table
-        if (isEnum)
-        {
-            value = [self valueForEnum:valueKey valueObject:valueObject];
-        }
-        else
+        if (valueObject)
         {
             value = [self getStringRepresentation:valueObject key:valueKey outlets:outlets includes:includes properties:properties];
         }
@@ -360,7 +355,7 @@ static NSMutableDictionary* instanceCounts = nil;
         if ( value && [ value length ] > 0 )
         {
             NSString* replaceFormat;
-            if (isEnum && [output characterAtIndex:foundMarker.location-1] == '?')
+            if ([output characterAtIndex:foundMarker.location-1] == '?')
             {
                 replaceFormat = @"?$%@$";
             } else
@@ -370,15 +365,21 @@ static NSMutableDictionary* instanceCounts = nil;
             NSRange replaceRange = [output rangeOfString:[NSString stringWithFormat:replaceFormat, valueKey] options:NSLiteralSearch];
 
             output = [output stringByReplacingCharactersInRange:replaceRange withString:value];
+            
+            unparsedMarker = NO;
         } else
         {
-            output = nil;
+            unparsedMarker = YES;
+            break;
         }
         
         foundMarker = [output rangeOfString:@"$" options:NSLiteralSearch];
     }
-
-    if ([output length] > 0)
+    
+    if (unparsedMarker)
+    {
+        output = nil;
+    } else
     {
         output = [NSString stringWithFormat:@"\t%@", output];
     }
