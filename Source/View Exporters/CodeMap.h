@@ -14,6 +14,7 @@
 
 @property (nonatomic, readonly) NSArray* definedClasses;
 -(NSMutableDictionary*)definitionForClass:(NSString*)className;
+-(NSMutableDictionary*)definitionForClassOfInstance:(NSDictionary*)instanceDefinition;
 
 @property (nonatomic, readonly) NSArray* definedEnums;
 -(NSMutableDictionary*)definitionForEnum:(NSString*)enumName;

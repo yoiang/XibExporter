@@ -10,6 +10,8 @@
 
 #import "SBJson.h"
 
+#import "NSDictionary+ClassDefinition.h"
+
 @interface CodeMap()
 
 @property (nonatomic, strong) NSDictionary* data;
@@ -78,6 +80,11 @@
 -(NSMutableDictionary*)definitionForClass:(NSString*)className
 {
     return [self.definitionsForClasses objectForKey:className];
+}
+
+-(NSMutableDictionary*)definitionForClassOfInstance:(NSDictionary*)instanceDefinition
+{
+    return [self definitionForClass:instanceDefinition.className];
 }
 
 -(NSMutableDictionary*)definitionsForEnums
