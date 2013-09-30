@@ -387,6 +387,41 @@ static NSMutableDictionary* instanceCounts = nil;
     return output;
 }
 
+-(NSString*)getInstanceName:(NSDictionary*)dict def:(NSDictionary*)def isOutlet:(BOOL*)isOutlet
+{
+    NSString* result = nil;
+    
+    if ( [dict objectForKey:@"instanceName"] )
+    {
+        result = [dict objectForKey:@"instanceName"];
+        
+        *isOutlet = YES;
+    } else
+    {
+        //the root view is treated special
+        if ( ![dict objectForKey:@"superview"] )
+        {
+            if (self.map.rootViewInstanceName)
+            {
+                result = self.map.rootViewInstanceName;
+            } else
+            {
+                result = @"rootView";
+            }
+        }
+        //if it is normal and has no name, autogenerate the name
+        else if ( [def objectForKey:@"_variableName"] )
+        {
+            NSString* variableName = [def objectForKey:@"_variableName"];
+            result = [variableName stringByReplacingOccurrencesOfString:@"#" withString:[NSString stringWithFormat:@"%@", [self getInstanceCount:variableName] ] ];
+        }
+        
+        *isOutlet = NO;
+    }
+    
+    return result;
+}
+
 - (NSDictionary *) getCodeFor:(id)object isInline:(BOOL)isInline outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
 {
     NSDictionary* dict = nil;
@@ -446,36 +481,13 @@ static NSMutableDictionary* instanceCounts = nil;
             [[dict objectForKey:@"frame"] setObject:[NSNumber numberWithFloat:20.0f] forKey:@"y"];
         }
         
-        //if we have an instance name, pull it out so we can use it later
-        if ([dict objectForKey:@"instanceName"])
+        instanceName = [self getInstanceName:dict def:def isOutlet:&isOutlet];
+        
+        if (isOutlet)
         {
-            instanceName = [dict objectForKey:@"instanceName"];
             [[outlets objectForKey:@"stripped"] addObject:instanceName];
             [[outlets objectForKey:@"unstripped"] addObject:[[def objectForKey:@"_parameter"] stringByReplacingOccurrencesOfString:@"@" withString:instanceName]];
             [[properties objectForKey:@"outlets"] addObject:dict];
-            
-            isOutlet = YES;
-        }
-        else
-        {
-            //the root view is treated special
-            if (![dict objectForKey:@"superview"])
-            {
-                if (self.map.rootViewInstanceName)
-                {
-                    instanceName = self.map.rootViewInstanceName;
-                }
-                else
-                {
-                    instanceName = @"rootView";
-                }
-            }
-            //if it is normal and has no name, autogenerate the name
-            else if ([def objectForKey:@"_variableName"])
-            {
-                NSString* variableName = [ def objectForKey:@"_variableName" ];
-                instanceName = [ variableName stringByReplacingOccurrencesOfString:@"#" withString:[NSString stringWithFormat:@"%@", [ self getInstanceCount:variableName ]]];
-            }
         }
         
         NSString* constructor = [self codeForClassConstructor:class instanceName:instanceName outlets:outlets includes:includes dict:dict def:def properties:properties isInline:isInline isOutlet:isOutlet];
