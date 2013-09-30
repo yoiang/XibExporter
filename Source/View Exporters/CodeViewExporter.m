@@ -439,6 +439,7 @@ static NSMutableDictionary* instanceCounts = nil;
             }
         }
         
+        // TODO: check if this is still necessary
         //this is an annoying hack because with a status bar iOS tells us the Y is 0 in app, whereas it's 20 in the XIB
         if (![dict objectForKey:@"superview"] && [[[dict objectForKey:@"frame"] objectForKey:@"height"] floatValue] == 460.0f)
         {
