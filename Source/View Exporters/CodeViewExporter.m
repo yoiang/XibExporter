@@ -422,6 +422,34 @@ static NSMutableDictionary* instanceCounts = nil;
     return result;
 }
 
+-(void)addIncludes:(NSMutableArray*)includes forClass:(NSString*)className
+{
+    NSDictionary* classDefinition = [self.map definitionForClass:className];
+
+    //if we have an include, add that in
+    if ( [classDefinition objectForKey:@"_include"] )
+    {
+        NSMutableArray *allIncludes = [NSMutableArray array];
+        
+        id classIncludes = [classDefinition objectForKey:@"_include"];
+        if ( [classIncludes isKindOfClass:[NSArray class] ] )
+        {
+            [allIncludes addObjectsFromArray:classIncludes];
+        } else
+        {
+            [allIncludes addObject:classIncludes];
+        }
+        
+        for (NSString* include in allIncludes)
+        {
+            if ( ![includes containsObject:include ] )
+            {
+                [includes addObject:include];
+            }
+        }
+    }
+}
+
 - (NSDictionary *) getCodeFor:(id)object isInline:(BOOL)isInline outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
 {
     NSDictionary* instanceDefinition = nil;
@@ -452,27 +480,7 @@ static NSMutableDictionary* instanceCounts = nil;
             return nil;
         }
 
-        //if we have an include, add that in
-        if ([def objectForKey:@"_include"])
-        {
-            NSMutableArray *allIncludes = [NSMutableArray array];
-            if ([[def objectForKey:@"_include"] isKindOfClass:[NSArray class]])
-            {
-                [allIncludes addObjectsFromArray:[def objectForKey:@"_include"]];
-            }
-            else
-            {
-                [allIncludes addObject:[def objectForKey:@"_include"]];
-            }
-            
-            for (int i = 0; i < [allIncludes count]; i++)
-            {
-                if (![includes containsObject:[allIncludes objectAtIndex:i]])
-                {
-                    [includes addObject:[allIncludes objectAtIndex:i]];
-                }
-            }
-        }
+        [self addIncludes:includes forClass:class];
         
         // TODO: check if this is still necessary
         //this is an annoying hack because with a status bar iOS tells us the Y is 0 in app, whereas it's 20 in the XIB
