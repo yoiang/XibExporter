@@ -23,6 +23,7 @@
 #import "NSString+Parsing.h"
 
 #import "NSDictionary+ClassDefinition.h"
+#import "NSDictionary+InstanceDefinition.h"
 
 static NSMutableDictionary* instanceCounts = nil;
 
@@ -393,45 +394,6 @@ static NSMutableDictionary* instanceCounts = nil;
     return output;
 }
 
--(NSString*)getInstanceNameFromDefinition:(NSDictionary*)instanceDefinition isOutlet:(BOOL*)isOutlet
-{
-    NSString* result = nil;
-    
-    if ( [instanceDefinition objectForKey:@"instanceName"] )
-    {
-        result = [instanceDefinition objectForKey:@"instanceName"];
-        
-        *isOutlet = YES;
-    } else
-    {
-        //the root view is treated special
-        if ( ![instanceDefinition objectForKey:@"superview"] )
-        {
-            if (self.map.rootViewInstanceName)
-            {
-                result = self.map.rootViewInstanceName;
-            } else
-            {
-                result = @"rootView";
-            }
-        }
-        //if it is normal and has no name, autogenerate the name
-        else
-        {
-            NSDictionary* classDefinition = [self.map definitionForClassOfInstance:instanceDefinition];
-            if ( [classDefinition objectForKey:@"_variableName"] )
-            {
-                NSString* variableName = [classDefinition objectForKey:@"_variableName"];
-                result = [variableName stringByReplacingOccurrencesOfString:@"#" withString:[NSString stringWithFormat:@"%@", [self getInstanceCount:variableName] ] ];
-            }
-        }
-        
-        *isOutlet = NO;
-    }
-    
-    return result;
-}
-
 -(void)addIncludes:(NSMutableArray*)includes forClass:(NSString*)className
 {
     NSDictionary* classDefinition = [self.map definitionForClass:className];
@@ -499,7 +461,16 @@ static NSMutableDictionary* instanceCounts = nil;
             [[instanceDefinition objectForKey:@"frame"] setObject:[NSNumber numberWithFloat:20.0f] forKey:@"y"];
         }
         
-        instanceName = [self getInstanceNameFromDefinition:instanceDefinition isOutlet:&isOutlet];
+        instanceName = [instanceDefinition instanceName];
+        if (!instanceName)
+        {
+            if ( [classDefinition objectForKey:@"_variableName"] )
+            {
+                NSString* variableName = [classDefinition objectForKey:@"_variableName"];
+                instanceName = [variableName stringByReplacingOccurrencesOfString:@"#" withString:[NSString stringWithFormat:@"%@", [self getInstanceCount:variableName] ] ];
+            }
+        }
+        isOutlet = [instanceDefinition isOutlet];
         
         if (isOutlet)
         {
