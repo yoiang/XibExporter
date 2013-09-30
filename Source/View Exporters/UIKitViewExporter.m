@@ -31,7 +31,18 @@
     if ( [valueObject isKindOfClass:[NSDictionary class] ] )
     {
         NSDictionary* valueDict = (NSDictionary*)valueObject;
-        result = [self valueForEnum:valueKey valueObject:[valueDict objectForKey:valueKey] ];
+        
+        NSString* enumValueKey = nil;
+        NSRange prefix = [valueKey rangeOfString:@"." options:NSLiteralSearch];
+        if (prefix.length == 0)
+        {
+            enumValueKey = valueKey;
+        } else
+        {
+            enumValueKey = [valueKey substringFromIndex:prefix.location + prefix.length]; // TODO: think about subvalues, shouldn't these be processed in full like anything else?
+        }
+
+        result = [self valueForEnum:enumValueKey valueObject:[valueDict objectForKey:enumValueKey] ];
     } else if ( [valueObject isKindOfClass:[NSString class] ] )
     {
         result = (NSString*)valueObject;
