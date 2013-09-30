@@ -354,15 +354,7 @@ static NSMutableDictionary* instanceCounts = nil;
         
         if ( value && [ value length ] > 0 )
         {
-            NSString* replaceFormat;
-            if ([output characterAtIndex:foundMarker.location-1] == '?')
-            {
-                replaceFormat = @"?$%@$";
-            } else
-            {
-                replaceFormat = @"$%@$";
-            }
-            NSRange replaceRange = [output rangeOfString:[NSString stringWithFormat:replaceFormat, valueKey] options:NSLiteralSearch];
+            NSRange replaceRange = [output rangeOfString:[NSString stringWithFormat:@"$%@$", valueKey] options:NSLiteralSearch];
 
             output = [output stringByReplacingCharactersInRange:replaceRange withString:value];
             
