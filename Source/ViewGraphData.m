@@ -20,14 +20,14 @@
 @interface ViewGraphData()
 {
     NSString *_xibName;
-    NSMutableDictionary *_data;
+    NSMutableDictionary *_instanceDefinitions;
 }
 
 @end
 
 @implementation ViewGraphData
 
-@synthesize xibName = _xibName, data = _data;
+@synthesize xibName = _xibName, rootViewInstanceDefinition = _instanceDefinitions;
 
 -(id)initWithXib:(NSString*)xibName
 {
@@ -54,7 +54,7 @@
         CXMLElement* xibRoot = [ViewGraphData getXibUIViewRoot:xibName];
         
         _xibName = xibName;
-        _data = [vc exportToDictionary:xibRoot xibName:xibName];
+        _instanceDefinitions = [vc exportToDictionary:xibRoot xibName:xibName];
     }
 }
 

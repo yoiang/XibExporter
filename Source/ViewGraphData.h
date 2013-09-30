@@ -12,6 +12,6 @@
 
 -(id)initWithXib:(NSString*)xibName;
 @property (nonatomic, readonly) NSString *xibName;
-@property (nonatomic, readonly) NSMutableDictionary *data;
+@property (nonatomic, readonly) NSMutableDictionary *rootViewInstanceDefinition;
 
 @end

@@ -428,7 +428,7 @@ static NSMutableDictionary* instanceCounts = nil;
     if ( [object isKindOfClass:[ViewGraphData class] ] )
     {
         ViewGraphData* data = (ViewGraphData*)object;
-        instanceDefinition = data.data;
+        instanceDefinition = data.rootViewInstanceDefinition;
     } else if ( [object isKindOfClass:[NSDictionary class] ] )
     {
         instanceDefinition = object;
