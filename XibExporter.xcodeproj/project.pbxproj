@@ -17,6 +17,7 @@
 		3C25013A17F96E0D0001C0EF /* NSDictionary+ClassDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C25013917F96E0D0001C0EF /* NSDictionary+ClassDefinition.m */; };
 		3C25013D17F96F110001C0EF /* NSMutableDictionary+ClassDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C25013C17F96F110001C0EF /* NSMutableDictionary+ClassDefinition.m */; };
 		3C25014017F97DF10001C0EF /* NSDictionary+InstanceDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C25013F17F97DF10001C0EF /* NSDictionary+InstanceDefinition.m */; };
+		3C25014317F983DA0001C0EF /* NSDictionary+Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C25014217F983DA0001C0EF /* NSDictionary+Path.m */; };
 		3C2C58F717F7CF890081D1AE /* CXMLDocument+Xib.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C58F617F7CF890081D1AE /* CXMLDocument+Xib.m */; };
 		3C2C58FB17F7D1DE0081D1AE /* NSError+NSLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C58FA17F7D1DE0081D1AE /* NSError+NSLog.m */; };
 		3C5B8B0E17F3004C009C99F2 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B8B0D17F3004C009C99F2 /* NSString+MD5.m */; };
@@ -117,6 +118,8 @@
 		3C25013C17F96F110001C0EF /* NSMutableDictionary+ClassDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+ClassDefinition.m"; sourceTree = "<group>"; };
 		3C25013E17F97DF10001C0EF /* NSDictionary+InstanceDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+InstanceDefinition.h"; sourceTree = "<group>"; };
 		3C25013F17F97DF10001C0EF /* NSDictionary+InstanceDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+InstanceDefinition.m"; sourceTree = "<group>"; };
+		3C25014117F983DA0001C0EF /* NSDictionary+Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Path.h"; sourceTree = "<group>"; };
+		3C25014217F983DA0001C0EF /* NSDictionary+Path.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Path.m"; sourceTree = "<group>"; };
 		3C2C58F517F7CF890081D1AE /* CXMLDocument+Xib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CXMLDocument+Xib.h"; sourceTree = "<group>"; };
 		3C2C58F617F7CF890081D1AE /* CXMLDocument+Xib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CXMLDocument+Xib.m"; sourceTree = "<group>"; };
 		3C2C58F917F7D1DE0081D1AE /* NSError+NSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+NSLog.h"; sourceTree = "<group>"; };
@@ -450,6 +453,8 @@
 				3C07A1B817F6B5240064174E /* NSDictionary+TypeForKey.m */,
 				3C2C58F917F7D1DE0081D1AE /* NSError+NSLog.h */,
 				3C2C58FA17F7D1DE0081D1AE /* NSError+NSLog.m */,
+				3C25014117F983DA0001C0EF /* NSDictionary+Path.h */,
+				3C25014217F983DA0001C0EF /* NSDictionary+Path.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -778,6 +783,7 @@
 				3C65718D17D0FF560074B101 /* CXMLElement_CreationExtensions.m in Sources */,
 				3C96F3C617D0F4D5000FC446 /* UILabel+Exports.m in Sources */,
 				3CDA1A9B17F141F700A80DEF /* ViewExporter.m in Sources */,
+				3C25014317F983DA0001C0EF /* NSDictionary+Path.m in Sources */,
 				3C96F3CD17D0F4D5000FC446 /* UIView+Exports.m in Sources */,
 				3C96F3D117D0F4D5000FC446 /* CXMLElement+Xib.m in Sources */,
 				3CEA729B17D1093E00F419A3 /* SBJsonStreamWriterState.m in Sources */,
