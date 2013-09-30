@@ -32,8 +32,6 @@
       "--TODO--localizedTitleKey": "@->setText( ofxGLocalized( $localizedTitleKey$, $localizedTitleDefaultKey$ ) )",
       "--TODO--localizedTitleKey": "@->setText( ofxGLocalized( $localizedTitleKey$, $localizedTitleDefault$ ) )",
       "title": "[@ setText:$title$]",
-      "titleLabel.textAlignment": "[@ setTextAlignment:$titleLabel.textAlignment$]",
-      "titleLabel.lineBreakMode": "[@ setLineBreakMode:$titleLabel.lineBreakMode$]",
       "titleLabel.numberOfLines": "[@.titleLabel setNumberOfLines:$titleLabel.numberOfLines$]",
       "titleLabel.minimumFontSize": "[@.titleLabel setMinimumFontSize:$titleLabel.minimumFontSize$]",
       "titleLabel.font": "[@.titleLabel setFont:[UIFont fontWithName:$titleLabel.fontName$ size:$titleLabel.fontSize$] ]",
