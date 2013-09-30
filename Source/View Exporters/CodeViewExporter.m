@@ -466,21 +466,21 @@ static NSMutableDictionary* instanceCounts = nil;
     NSString *instanceName = nil;
     BOOL isOutlet = NO;
     
-    NSString *class = [instanceDefinition objectForKey:@"class"];
-    if (class)
+    NSString* className = [instanceDefinition objectForKey:@"class"];
+    if (className)
     {
-        NSDictionary *def = [self.map definitionForClass:class];
+        NSDictionary *def = [self.map definitionForClass:className];
         if (!def)
         {
             //only show a warning if this one isn't ignored
-            if (!self.map.ignoredClasses || ![self.map.ignoredClasses objectForKey:class])
+            if (!self.map.ignoredClasses || ![self.map.ignoredClasses objectForKey:className])
             {
-                NSLog(@"Warning: No def found for %@!",class);
+                NSLog(@"Warning: No def found for %@!",className);
             }
             return nil;
         }
 
-        [self addIncludes:includes forClass:class];
+        [self addIncludes:includes forClass:className];
         
         // TODO: check if this is still necessary
         //this is an annoying hack because with a status bar iOS tells us the Y is 0 in app, whereas it's 20 in the XIB
@@ -498,13 +498,13 @@ static NSMutableDictionary* instanceCounts = nil;
             [[properties objectForKey:@"outlets"] addObject:instanceDefinition];
         }
         
-        NSString* constructor = [self codeForClassConstructor:class instanceName:instanceName outlets:outlets includes:includes instanceDefinition:instanceDefinition def:def properties:properties isInline:isInline isOutlet:isOutlet];
+        NSString* constructor = [self codeForClassConstructor:className instanceName:instanceName outlets:outlets includes:includes instanceDefinition:instanceDefinition def:def properties:properties isInline:isInline isOutlet:isOutlet];
         
         [code appendString:constructor];
         
         if (!isInline)
         {
-            NSString* setup = [self codeForObjectSetup:class instanceName:instanceName outlets:outlets includes:includes instanceDefinition:instanceDefinition def:def properties:properties];
+            NSString* setup = [self codeForObjectSetup:className instanceName:instanceName outlets:outlets includes:includes instanceDefinition:instanceDefinition def:def properties:properties];
             [code appendString:setup];
         }
         
