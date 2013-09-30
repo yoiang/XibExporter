@@ -583,7 +583,7 @@ static NSMutableDictionary* instanceCounts = nil;
     
     func = [func stringByReplacingOccurrencesOfString:@"@" withString:xibName];
     func = [func stringByReplacingOccurrencesOfString:@"%" withString:params];
-    func = [func stringByReplacingOccurrencesOfString:@"ƒ" withString:[dict objectForKey:@"code"]];
+    func = [func stringByReplacingOccurrencesOfString:@"$GeneratedBody$" withString:[dict objectForKey:@"code"]];
     func = [func stringByReplacingOccurrencesOfString:@"§" withString:strippedParams];
     func = [func stringByReplacingOccurrencesOfString:@"∞" withString:strippedParamsComma];
     func = [func stringByReplacingOccurrencesOfString:@"ﬁ" withString:paramsComma];

@@ -4,7 +4,7 @@ inline ofRectangle getGenerated@Frame()
 }
 
 inline void populateGenerated@( ofPtr< ofxGenericView > rootViewﬁ )
-{ƒ}
+{$GeneratedBody$}
 
 inline void populatePreserveGenerated@( ofPtr< ofxGenericView > rootView, bool preserveTopLeft, bool preserveSizeﬁ )
 {

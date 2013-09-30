@@ -4,7 +4,7 @@ inline CGRect getGenerated@Frame()
 }
 
 inline void populateGenerated@( UIView** rootViewﬁ )
-{ƒ}
+{$GeneratedBody$}
 
 inline void populatePreserveGenerated@( UIView** rootView, bool preserveTopLeft, bool preserveSizeﬁ )
 {
