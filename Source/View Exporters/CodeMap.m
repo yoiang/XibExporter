@@ -159,11 +159,6 @@
     return functionDefinitions;
 }
 
--(NSString*)rootViewInstanceName
-{
-    return [self.data objectForKey:@"_rootViewInstanceName"];
-}
-
 -(NSDictionary*)ignoredClasses
 {
     return [self.data objectForKey:@"_ignoredClasses"];

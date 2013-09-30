@@ -208,7 +208,6 @@
     }
   },
   "_functionDefinitionFileName": "UIKitDefinition.h",
-  "_rootViewInstanceName": "rootView",
   "_variableReference": "(*@)",
   "_staticStringDefinition": "@\"$\"",
   "_ignoredClasses": {

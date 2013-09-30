@@ -24,7 +24,6 @@
 -(NSString*)functionDefinition:(NSString*)function;
 -(NSString*)combinedFunctionDefinitions;
 
-@property (nonatomic, readonly) NSString* rootViewInstanceName;
 @property (nonatomic, readonly) NSDictionary* ignoredClasses;
 @property (nonatomic, readonly) NSDictionary* asIsStringKeys;
 
