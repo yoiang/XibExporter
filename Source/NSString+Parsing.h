@@ -10,4 +10,6 @@
 
 - (NSString *) stringByParsingSandwiches:(NSString *)sandwichString parseObject:(id)object parseSelector:(SEL)selector userData:(id)userData;
 
+-(NSString*)substringBetweenOccurancesOf:(NSString*)find;
+
 @end

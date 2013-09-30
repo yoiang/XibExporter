@@ -48,4 +48,23 @@
     return output;
 }
 
+-(NSString*)substringBetweenOccurancesOf:(NSString*)find
+{
+    NSString* result = nil;
+    
+    NSRange firstOccurance = [self rangeOfString:find options:NSLiteralSearch];
+    if (firstOccurance.location != NSNotFound)
+    {
+        NSUInteger startSecondSearch = firstOccurance.location + firstOccurance.length;
+        NSRange secondOccurance = [self rangeOfString:find options:NSLiteralSearch range:NSMakeRange(startSecondSearch, [self length] - startSecondSearch) ];
+        
+        if (secondOccurance.location != NSNotFound)
+        {
+            result = [self substringWithRange:NSMakeRange(startSecondSearch, secondOccurance.location - startSecondSearch) ];
+        }
+    }
+    
+    return result;
+}
+
 @end
