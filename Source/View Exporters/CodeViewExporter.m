@@ -469,8 +469,8 @@ static NSMutableDictionary* instanceCounts = nil;
     NSString* className = [instanceDefinition objectForKey:@"class"];
     if (className)
     {
-        NSDictionary *def = [self.map definitionForClass:className];
-        if (!def)
+        NSDictionary *classDefinition = [self.map definitionForClass:className];
+        if (!classDefinition)
         {
             //only show a warning if this one isn't ignored
             if (!self.map.ignoredClasses || ![self.map.ignoredClasses objectForKey:className])
@@ -489,22 +489,22 @@ static NSMutableDictionary* instanceCounts = nil;
             [[instanceDefinition objectForKey:@"frame"] setObject:[NSNumber numberWithFloat:20.0f] forKey:@"y"];
         }
         
-        instanceName = [self getInstanceNameFromDefinition:instanceDefinition def:def isOutlet:&isOutlet];
+        instanceName = [self getInstanceNameFromDefinition:instanceDefinition def:classDefinition isOutlet:&isOutlet];
         
         if (isOutlet)
         {
             [[outlets objectForKey:@"stripped"] addObject:instanceName];
-            [[outlets objectForKey:@"unstripped"] addObject:[[def objectForKey:@"_parameter"] stringByReplacingOccurrencesOfString:@"@" withString:instanceName]];
+            [[outlets objectForKey:@"unstripped"] addObject:[[classDefinition objectForKey:@"_parameter"] stringByReplacingOccurrencesOfString:@"@" withString:instanceName]];
             [[properties objectForKey:@"outlets"] addObject:instanceDefinition];
         }
         
-        NSString* constructor = [self codeForClassConstructor:className instanceName:instanceName outlets:outlets includes:includes instanceDefinition:instanceDefinition def:def properties:properties isInline:isInline isOutlet:isOutlet];
+        NSString* constructor = [self codeForClassConstructor:className instanceName:instanceName outlets:outlets includes:includes instanceDefinition:instanceDefinition def:classDefinition properties:properties isInline:isInline isOutlet:isOutlet];
         
         [code appendString:constructor];
         
         if (!isInline)
         {
-            NSString* setup = [self codeForObjectSetup:className instanceName:instanceName outlets:outlets includes:includes instanceDefinition:instanceDefinition def:def properties:properties];
+            NSString* setup = [self codeForObjectSetup:className instanceName:instanceName outlets:outlets includes:includes instanceDefinition:instanceDefinition def:classDefinition properties:properties];
             [code appendString:setup];
         }
         
@@ -517,7 +517,7 @@ static NSMutableDictionary* instanceCounts = nil;
             {
                 [code appendString:[subview objectForKey:@"code"]];
                 [code appendFormat:@"\t%@%@\n",
-                 [self codeForAddSubview:subview instanceName:instanceName def:def],
+                 [self codeForAddSubview:subview instanceName:instanceName def:classDefinition],
                  [self.map statementEnd]
                  ];
             }
