@@ -301,15 +301,12 @@ static NSMutableDictionary* instanceCounts = nil;
     
     NSDictionary* classDefinition = [self.map definitionForClassOfInstance:instanceDefinition];
 
-    //loop through all keys in the def, and add that code in
-    NSArray *keys = [classDefinition allKeys];
-    for (int i = 0; i < [keys count]; i++)
+    for (NSString* classMember in [classDefinition allKeys] )
     {
-        NSString *k = [keys objectAtIndex:i];
-        if ([k length] > 0 && [k characterAtIndex:0] != '_' && [instanceDefinition objectForKey:k])
+        if ( [classDefinition isValidClassMember:classMember] && [instanceDefinition objectForKey:classMember] )
         {
-            NSString *line = [classDefinition objectForKey:k];
-            NSString* lineFilledIn = [self replaceCodeSymbols:line instanceDefinition:instanceDefinition key:k name:instanceName outlets:outlets includes:includes properties:properties];
+            NSString *line = [classDefinition objectForKey:classMember];
+            NSString* lineFilledIn = [self replaceCodeSymbols:line instanceDefinition:instanceDefinition key:classMember name:instanceName outlets:outlets includes:includes properties:properties];
             if ( lineFilledIn && [ lineFilledIn length ] > 0 )
             {
                 [objectSetup appendFormat:@"%@%@\n", lineFilledIn, [self.map statementEnd] ];

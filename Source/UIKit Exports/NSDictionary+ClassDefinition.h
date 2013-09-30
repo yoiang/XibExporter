@@ -13,5 +13,6 @@
 @interface NSDictionary (ClassDefinition)
 
 -(NSString*)className;
+-(BOOL)isValidClassMember:(NSString*)memberName;
 
 @end
