@@ -22,6 +22,8 @@
 
 #import "NSString+Parsing.h"
 
+#import "NSDictionary+ClassDefinition.h"
+
 static NSMutableDictionary* instanceCounts = nil;
 
 @interface CodeViewExporter()
@@ -233,7 +235,7 @@ static NSMutableDictionary* instanceCounts = nil;
     if ( [valueObject isKindOfClass:[NSDictionary class] ] )
     {
         NSDictionary* valueDict = (NSDictionary*)valueObject;
-        result = [self.map convertEnum:[valueDict objectForKey:@"class"] value:[valueDict objectForKey:enumValueKey] ];
+        result = [self.map convertEnum:valueDict.className value:[valueDict objectForKey:enumValueKey] ];
     }
     
     return result;
@@ -466,7 +468,7 @@ static NSMutableDictionary* instanceCounts = nil;
     NSString *instanceName = nil;
     BOOL isOutlet = NO;
     
-    NSString* className = [instanceDefinition objectForKey:@"class"];
+    NSString* className = instanceDefinition.className;
     if (className)
     {
         NSDictionary *classDefinition = [self.map definitionForClass:className];

@@ -10,6 +10,8 @@
 #import "UIView+Exports.h"
 #import "ExportUtility.h"
 
+#import "NSDictionary+ClassDefinition.h"
+
 @implementation UIScrollView (Exports)
 
 - (NSMutableDictionary *) exportToDictionary:( CXMLElement* )xibElement
@@ -21,7 +23,7 @@
     while ( index < [ subviewsArray count ] )
     {
         NSDictionary* subclassDict = ( NSDictionary* )[ subviewsArray objectAtIndex:index ];
-        if ( [ [ NSString stringWithFormat:@"%@", [ UIImageView class ] ] isEqualToString:( NSString* )[ subclassDict objectForKey:@"class" ] ] )
+        if ( [ [ NSString stringWithFormat:@"%@", [ UIImageView class ] ] isEqualToString:subclassDict.className ] )
         {
             [ subviewsArray removeObjectAtIndex:index ];
         } else 

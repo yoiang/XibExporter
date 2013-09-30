@@ -12,6 +12,8 @@
 
 #include "FontExchange.h"
 
+#import "NSDictionary+ClassDefinition.h"
+
 @implementation UITextView (Exported)
 
 -( NSMutableDictionary* )exportToDictionary:( CXMLElement* )xibElement
@@ -23,7 +25,7 @@
     while ( index < [ subviewsArray count ] )
     {
         NSDictionary* subclassDict = ( NSDictionary* )[ subviewsArray objectAtIndex:index ];
-        if ( [ ( NSString* )[ subclassDict objectForKey:@"class" ] isEqualToString:@"UITextFieldRoundedRectBackgroundView" ] )
+        if ( [ subclassDict.className isEqualToString:@"UITextFieldRoundedRectBackgroundView" ] )
         {
             [ subviewsArray removeObjectAtIndex:index ];
         } else 

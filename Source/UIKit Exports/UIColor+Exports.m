@@ -8,12 +8,14 @@
 
 #import "UIColor+Exports.h"
 
+#import "NSMutableDictionary+ClassDefinition.h"
+
 @implementation UIColor (Exports)
 
 - (NSMutableDictionary *)exportToDictionary
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setObject:@"UIColor" forKey:@"class"];
+    dict.className = @"UIColor";
     
     const float* colors = CGColorGetComponents( self.CGColor );
     float r = 0.0f;

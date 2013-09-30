@@ -8,40 +8,50 @@
 
 #import "ExportUtility.h"
 
+#import "NSMutableDictionary+ClassDefinition.h"
+
 @implementation ExportUtility
 
 + (NSMutableDictionary *) exportCGSize:(CGSize)size
 {
-    return [NSMutableDictionary dictionaryWithObjectsAndKeys:
+    NSMutableDictionary* definition = [NSMutableDictionary dictionaryWithObjectsAndKeys:
             [NSNumber numberWithFloat:size.width], @"width",
             [NSNumber numberWithFloat:size.height], @"height",
-            @"CGSize", @"class", nil];
+            nil];
+    
+    definition.className = @"CGSize";
+    return definition;
 }
 
 + (NSMutableDictionary *) exportCGRect:(CGRect)rect
 {
-    return [NSMutableDictionary dictionaryWithObjectsAndKeys:
+    NSMutableDictionary* definition = [NSMutableDictionary dictionaryWithObjectsAndKeys:
             [NSNumber numberWithFloat:rect.origin.x], @"x",
             [NSNumber numberWithFloat:rect.origin.y], @"y",
             [NSNumber numberWithFloat:rect.size.width], @"width",
             [NSNumber numberWithFloat:rect.size.height], @"height",
-            @"CGRect", @"class", nil];
+            nil];
+    
+    definition.className = @"CGRect";
+    return definition;
 }
 
 + (NSMutableDictionary *) exportUIEdgeInsets:(UIEdgeInsets)insets
 {
-    return [NSMutableDictionary dictionaryWithObjectsAndKeys:
+    NSMutableDictionary* definition = [NSMutableDictionary dictionaryWithObjectsAndKeys:
             [NSNumber numberWithFloat:insets.top], @"top",
             [NSNumber numberWithFloat:insets.left], @"left",
             [NSNumber numberWithFloat:insets.right], @"right",
             [NSNumber numberWithFloat:insets.bottom], @"bottom",
-            @"UIEdgeInsets", @"class", nil];
+                                       nil];
+    
+    definition.className = @"UIEdgeInsets";
+    return definition;
 }
 
-+(NSMutableDictionary*)mark:(NSMutableDictionary*)dictionary asType:(NSString*)type
++(void)mark:(NSMutableDictionary*)dictionary asType:(NSString*)type
 {
     [dictionary setObject:type forKey:@"type"];
-    return dictionary;
 }
 
 +(NSString*)getType:(NSDictionary*)dictionary
@@ -49,9 +59,10 @@
     return [dictionary objectForKey:@"type"];
 }
 
-+(NSMutableDictionary*)markAsEnumType:(NSMutableDictionary*)dictionary
++(void)markDefinition:(NSMutableDictionary*)definition asEnum:(NSString*)enumName
 {
-    return [self mark:dictionary asType:@"enum"];
+    definition.className = enumName;
+    [self mark:definition asType:@"enum"];
 }
 
 +(BOOL)isDictionaryEnum:(NSDictionary*)dictionary
@@ -62,7 +73,7 @@
 + (NSMutableDictionary *) exportUILineBreakMode:(UILineBreakMode)mode
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setObject:@"UILineBreakMode" forKey:@"class"];
+    [self markDefinition:dict asEnum:@"UILineBreakMode"];
     NSString *v = @"";
     
     switch (mode)
@@ -87,7 +98,6 @@
         break;
     }
     [dict setObject:v forKey:@"lineBreakMode"];
-    [self markAsEnumType:dict];
     return dict;
 }
 
@@ -109,16 +119,15 @@ NSString* NSLineBreakModeToString( NSLineBreakMode type )
 + (NSMutableDictionary *) exportNSLineBreakMode:(NSLineBreakMode)mode
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setObject:@"NSLineBreakMode" forKey:@"class"];
+    [self markDefinition:dict asEnum:@"NSLineBreakMode"];
     [dict setObject:NSLineBreakModeToString(mode) forKey:@"lineBreakMode"];
-    [self markAsEnumType:dict];
     return dict;
 }
 
 + (NSMutableDictionary *) exportUIButtonType:(UIButtonType)type
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setObject:@"UIButtonType" forKey:@"class"];
+    [self markDefinition:dict asEnum:@"UIButtonType"];
     NSString *v = @"UIButtonTypeRoundedRect";
     switch ( type )
     {
@@ -142,14 +151,13 @@ NSString* NSLineBreakModeToString( NSLineBreakMode type )
             break;
     }
     [dict setObject:v forKey:@"buttonType"];
-    [self markAsEnumType:dict];
     return dict;
 }
 
 + (NSMutableDictionary *) exportUITextAlignment:(UITextAlignment)alignment 
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setObject:@"UITextAlignment" forKey:@"class"];
+    [self markDefinition:dict asEnum:@"UITextAlignment"];
     NSString *v = @"UITextAlignmentLeft";
     switch ( alignment )
     {
@@ -164,7 +172,6 @@ NSString* NSLineBreakModeToString( NSLineBreakMode type )
             break;
     }
     [dict setObject:v forKey:@"textAlignment"];
-    [self markAsEnumType:dict];
     return dict;
 }
 
@@ -185,16 +192,15 @@ NSString* NSTextAlignmentToString( NSTextAlignment type )
 + (NSMutableDictionary *) exportNSTextAlignment:(NSTextAlignment)alignment
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setObject:@"NSTextAlignment" forKey:@"class"];
+    [self markDefinition:dict asEnum:@"NSTextAlignment"];
     [dict setObject:NSTextAlignmentToString(alignment) forKey:@"textAlignment"];
-    [self markAsEnumType:dict];
     return dict;
 }
 
 + (NSMutableDictionary *) exportUIViewContentMode:(UIViewContentMode)contentMode
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setObject:@"UIViewContentMode" forKey:@"class"];
+    [self markDefinition:dict asEnum:@"UIViewContentMode"];
     NSString *v = @"UIViewContentModeScaleToFill";
     switch ( contentMode )
     {
@@ -239,14 +245,13 @@ NSString* NSTextAlignmentToString( NSTextAlignment type )
             break;
     }
     [dict setObject:v forKey:@"contentMode"];
-    [self markAsEnumType:dict];
     return dict;
 }
 
 + (NSMutableDictionary *) exportUIActivityIndicatorViewStyle:(UIActivityIndicatorViewStyle) style
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setObject:@"UIActivityIndicatorViewStyle" forKey:@"class"];
+    [self markDefinition:dict asEnum:@"UIActivityIndicatorViewStyle"];
     NSString *v = @"UIActivityIndicatorViewStyleWhite";
     switch ( style )
     {
@@ -261,7 +266,6 @@ NSString* NSTextAlignmentToString( NSTextAlignment type )
             break;
     }
     [dict setObject:v forKey:@"indicatorStyle"];
-    [self markAsEnumType:dict];
     return dict;
 }
 
@@ -294,9 +298,8 @@ NSString* UIKeyboardTypeToString( UIKeyboardType type )
 +( NSMutableDictionary* ) exportUIKeyboardType:( UIKeyboardType ) type
 {
     NSMutableDictionary* dict = [ NSMutableDictionary dictionary ];
-    [ dict setObject:@"UIKeyboardType" forKey:@"class" ];
+    [self markDefinition:dict asEnum:@"UIKeyboardType"];
     [ dict setObject:UIKeyboardTypeToString( type ) forKey:@"keyboardType" ];
-    [self markAsEnumType:dict];
     return dict;
 }
 
@@ -323,9 +326,8 @@ NSString* UIReturnKeyTypeToString( UIReturnKeyType type )
 +( NSMutableDictionary* ) exportUIReturnKeyType:( UIReturnKeyType ) type
 {
     NSMutableDictionary* dict = [ NSMutableDictionary dictionary ];
-    [ dict setObject:@"UIReturnKeyType" forKey:@"class" ];
+    [self markDefinition:dict asEnum:@"UIReturnKeyType"];
     [ dict setObject:UIReturnKeyTypeToString( type ) forKey:@"returnKeyType" ];
-    [self markAsEnumType:dict];
     return dict;
 }
 
@@ -345,9 +347,9 @@ NSString* UITextAutocapitalizationTypeToString( UITextAutocapitalizationType typ
 +( NSMutableDictionary* ) exportUITextAutocapitalizationType:( UITextAutocapitalizationType ) type
 {
     NSMutableDictionary* dict = [ NSMutableDictionary dictionary ];
-    [ dict setObject:@"UITextAutocapitalizationType" forKey:@"class" ];
+    [self markDefinition:dict asEnum:@"UITextAutocapitalizationType"];
     [ dict setObject:UITextAutocapitalizationTypeToString( type ) forKey:@"autocapitalizationType" ];
-    [self markAsEnumType:dict];
+    
     return dict;
 }
 
@@ -367,9 +369,9 @@ NSString* UITextBorderStyleToString( UITextBorderStyle type )
 +( NSMutableDictionary* ) exportUITextBorderStyle:( UITextBorderStyle ) style
 {
     NSMutableDictionary* dict = [ NSMutableDictionary dictionary ];
-    [ dict setObject:@"UITextBorderStyle" forKey:@"class" ];
+    [self markDefinition:dict asEnum:@"UITextBorderStyle"];
     [ dict setObject:UITextBorderStyleToString( style ) forKey:@"textBorderStyle" ];
-    [self markAsEnumType:dict];
+    
     return dict;
 }
 
@@ -398,9 +400,9 @@ NSArray* UIViewAutoresizingToArray( UIViewAutoresizing mask )
     for (NSString* value in UIViewAutoresizingToArray( mask ) )
     {
         NSMutableDictionary* dict = [NSMutableDictionary dictionary];
-        [dict setObject:@"UIViewAutoresizing" forKey:@"class"];
+        
+        [self markDefinition:dict asEnum:@"UIViewAutoresizing"];
         [dict setObject:value forKey:@"autoresizingMask"];
-        [self markAsEnumType:dict];
         
         [result addObject:dict];
     }

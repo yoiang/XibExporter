@@ -14,6 +14,8 @@
 
 #import "CXMLElement+UIView.h"
 
+#import "NSMutableDictionary+ClassDefinition.h"
+
 static int viewId = 0;
 
 @implementation UIView (Exported)
@@ -23,7 +25,8 @@ static int viewId = 0;
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     
     //globally defined stuff
-    [dict setObject:[NSString stringWithFormat:@"%@",[self class]] forKey:@"class"];
+    dict.className = [NSString stringWithFormat:@"%@", [self class] ];
+    
     [dict setObject:[NSNumber numberWithInt:viewId] forKey:@"viewId"];
     [[ExportedViewMap sharedInstance] setId:viewId forView:self];
     viewId++;
