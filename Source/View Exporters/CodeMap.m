@@ -167,11 +167,6 @@
     return [self.data objectForKey:@"_asIsStringKeys"];
 }
 
--(NSArray*)codeExporterFileNames
-{
-    return [self.data objectForKey:@"_codeExporterFileNames"];
-}
-
 -(NSString*)variableReference:(NSString*)name;
 {
     NSString* variableReference = [self.data objectForKey:@"_variableReference"];

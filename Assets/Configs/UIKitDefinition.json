@@ -217,15 +217,5 @@
   "_asIsStringKeys": {
     "autoresizingMask": true
   },
-  "_codeExporterFileNames": [
-    {
-      "inputFile": "GeneratedClass.h.txt",
-      "extension": "h"
-    },
-    {
-      "inputFile": "GeneratedClass.cpp.txt",
-      "extension": "cpp"
-    }
-  ],
   "_statementEnd": ";"
 }

@@ -26,7 +26,6 @@
 @property (nonatomic, readonly) NSString* rootViewInstanceName;
 @property (nonatomic, readonly) NSDictionary* ignoredClasses;
 @property (nonatomic, readonly) NSDictionary* asIsStringKeys;
-@property (nonatomic, readonly) NSArray* codeExporterFileNames;
 
 -(NSString*)variableReference:(NSString*)name;
 

@@ -92,8 +92,6 @@ static NSMutableDictionary* instanceCounts = nil;
     NSMutableArray* includes = [NSMutableArray array];
     NSMutableDictionary* properties = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                       [NSMutableArray array], @"outlets",
-                                      [NSMutableArray array], @"buttons",
-                                      [NSNumber numberWithBool:NO], @"hasButtons",
                                        xibName, @"className", nil];
     
     NSDictionary* output = [self getCodeFor:viewGraphData isInline:NO outlets:outlets includes:includes properties:properties];
@@ -107,59 +105,7 @@ static NSMutableDictionary* instanceCounts = nil;
     
     [self doCodeExport:viewGraphData toFileNamePath:fileNamePath data:output xibName:xibName atomically:flag error:error];
     
-    // TODO: evaluate need and design
-    //create cpp and h files
-/*
-    NSMutableDictionary *vc = viewGraphData.data;
-    if ( [vc objectForKey:@"exportToCode"] )
-    {
-        NSMutableDictionary* properties = [output objectForKey:@"properties"];
-        [properties setObject:[output objectForKey:@"includes"] forKey:@"includes"];
-        NSArray *codeFiles = [self exportCodeForDict:vc properties:properties];
-        
-        //TODO this should be moved somewhere else
-        for ( int j = 0; j < [codeFiles count]; j++ )
-        {
-            NSString *code = [codeFiles objectAtIndex:j];
-            NSString *extension = [[self.map.codeExporterFileNames objectAtIndex:j] objectForKey:@"extension"];
-            NSString *loc = [NSString stringWithFormat:@"%@.%@",xibName,extension];
-            loc = [NSString stringWithFormat:@"%@/%@",[location stringByDeletingLastPathComponent],loc];
-            if ( ![[NSFileManager defaultManager] fileExistsAtPath:loc] )
-            {
-                [code writeToFile:loc atomically:flag encoding:NSUTF8StringEncoding error:error];
-            }
-            NSLog(@"Exported code file to %@",loc);
-        }
-    }*/
-    
     return exportedFileName;
-}
-
-- ( NSArray * ) exportCodeForDict:(NSDictionary *)dict properties:(NSDictionary *)properties
-{
-    NSArray *files = self.map.codeExporterFileNames;
-    NSMutableArray *outputArray = [NSMutableArray array];
-    
-    for ( int i = 0; i < [files count]; i++ )
-    {
-        NSString *fileName = [[files objectAtIndex:i] objectForKey:@"inputFile"];
-        NSString *fileExtension = [fileName pathExtension];
-        fileName = [fileName stringByDeletingPathExtension];
-        NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:fileExtension];
-        NSError *error = nil;
-        
-        NSString *classFile = [NSMutableString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
-        
-        if ( error )
-        {
-            NSLog( @"Error reading code exporter file %@: %@",[files objectAtIndex:i],error);
-        }
-        
-        NSString *output = [self translateCodeString:classFile dict:dict properties:properties];
-        [outputArray addObject:output];
-    }
-    
-    return outputArray;
 }
 
 -(NSString*)getStringRepresentationForDictionaryValue:(NSDictionary*)value key:(NSString*)key outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
@@ -506,13 +452,6 @@ static NSMutableDictionary* instanceCounts = nil;
             [[outlets objectForKey:@"stripped"] addObject:instanceName];
             [[outlets objectForKey:@"unstripped"] addObject:[[def objectForKey:@"_parameter"] stringByReplacingOccurrencesOfString:@"@" withString:instanceName]];
             [[properties objectForKey:@"outlets"] addObject:dict];
-            
-            //add me to the buttons list if I'm a button
-            if ( [class rangeOfString:@"button" options:NSCaseInsensitiveSearch].location != NSNotFound )
-            {
-                [properties setObject:[NSNumber numberWithBool:YES] forKey:@"hasButtons"];
-                [[properties objectForKey:@"buttons"] addObject:dict];
-            }
             
             isOutlet = YES;
         }
