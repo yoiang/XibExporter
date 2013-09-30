@@ -456,9 +456,9 @@ static NSMutableDictionary* instanceCounts = nil;
             
             isOutlet = YES;
         }
-        //the root view is treated special
         else
         {
+            //the root view is treated special
             if (![dict objectForKey:@"superview"])
             {
                 if (self.map.rootViewInstanceName)
