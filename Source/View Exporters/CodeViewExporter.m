@@ -21,6 +21,7 @@
 #import "NSArray+NSString.h"
 
 #import "NSString+Parsing.h"
+#import "NSDictionary+Path.h"
 
 #import "NSDictionary+ClassDefinition.h"
 #import "NSDictionary+InstanceDefinition.h"
@@ -539,14 +540,9 @@ static NSMutableDictionary* instanceCounts = nil;
             NSRange r2 = [func rangeOfString:@"∂" options:NSLiteralSearch range:NSMakeRange(r.location+1, [func length] - r.location - 1)];
             if (r2.location != NSNotFound)
             {
-                NSString *dictPath = [func substringWithRange:NSMakeRange(r.location+1, r2.location-r.location-1)];
-                NSArray *pathComponents = [dictPath componentsSeparatedByString:@"."];
-                NSDictionary *subDict = viewGraphData.data;
-                for (int i = 0; i < [pathComponents count]-1; i++)
-                {
-                    subDict = [subDict objectForKey:[pathComponents objectAtIndex:i]];
-                }
-                NSString *value = [subDict objectForKey:[pathComponents objectAtIndex:[pathComponents count]-1]];
+                NSString* dictPath = [func substringWithRange:NSMakeRange(r.location+1, r2.location-r.location-1)];
+                
+                NSString *value = [viewGraphData.rootViewInstanceDefinition objectAtPath:dictPath withPathSeparator:@"."];
                 value = [self getStringRepresentation:value key:nil outlets:nil includes:nil properties:nil];
                 
                 int oldFuncLength = [func length];
