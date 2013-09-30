@@ -230,7 +230,7 @@ static NSMutableDictionary* instanceCounts = nil;
         enumValueKey = valueKey;
     } else
     {
-        enumValueKey = [valueKey substringFromIndex:prefix.location + prefix.length];
+        enumValueKey = [valueKey substringFromIndex:prefix.location + prefix.length]; // TODO: think about subvalues, shouldn't these be processed in full like anything else?
     }
     
     NSString* result = nil;
