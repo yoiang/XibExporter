@@ -333,55 +333,49 @@ static NSMutableDictionary* instanceCounts = nil;
     }
     
     NSString* output = [line stringByReplacingOccurrencesOfString:@"@" withString:[self.map variableReference:name] ];
-    
-    NSRange r = NSMakeRange(0, [output length]);
-    while (r.location != NSNotFound && r.location < [output length])
+
+    NSRange foundMarker = [output rangeOfString:@"$" options:NSLiteralSearch];
+    while (foundMarker.location != NSNotFound && foundMarker.length != 0)
     {
-        r = [output rangeOfString:@"$" options:NSLiteralSearch range:NSMakeRange(r.location, [output length] - r.location)];
-        if (r.location != NSNotFound)
+        NSString *valueKey = [output substringBetweenOccurancesOf:@"$"];
+
+        NSString *value = @"";
+        
+        NSObject* valueObject = [instanceDefinition objectForKey:valueKey];
+        
+        //a BS check for enums - if there is a ? before the $, then we have an enum
+        BOOL isEnum = ( [output characterAtIndex:foundMarker.location-1] == '?') ||
+                      ( [valueObject isKindOfClass:[NSDictionary class] ] && [ExportUtility isDictionaryEnum:(NSDictionary*)valueObject] );
+
+        //if we have an enum, then do a lookup in this def's enum table
+        if (isEnum)
         {
-            NSRange r2 = [output rangeOfString:@"$" options:NSLiteralSearch range:NSMakeRange(r.location+1, [output length] - r.location - 1)];
-            if (r2.location != NSNotFound)
-            {
-                NSString *valueKey = [output substringWithRange:NSMakeRange(r.location+1, r2.location-r.location-1)];
-                NSString *value = @"";
-                
-                NSObject* valueObject = [instanceDefinition objectForKey:valueKey];
-                
-                //a BS check for enums - if there is a ? before the $, then we have an enum
-                BOOL isEnum = (r.location > 0 && [output characterAtIndex:r.location-1] == '?') ||
-                              ( [valueObject isKindOfClass:[NSDictionary class] ] && [ExportUtility isDictionaryEnum:(NSDictionary*)valueObject] );
-            
-                //if we have an enum, then do a lookup in this def's enum table
-                if (isEnum)
-                {
-                    value = [self valueForEnum:valueKey valueObject:valueObject];
-                }
-                else
-                {
-                    value = [self getStringRepresentation:valueObject key:valueKey outlets:outlets includes:includes properties:properties];
-                }
-                
-                if ( value && [ value length ] > 0 )
-                {
-                    int oldOutputLength = [output length];
-                    int replaceStart = r.location;
-                    int replaceLength = r2.location - r.location + 1;
-                    if (isEnum && [output characterAtIndex:r.location-1] == '?')
-                    {
-                        replaceStart--;
-                        replaceLength++;
-                    }
-                    output = [output stringByReplacingCharactersInRange:NSMakeRange(replaceStart, replaceLength) withString:value];
-                    r2 = NSMakeRange(r2.location + ([output length] - oldOutputLength), 1);
-                } else
-                {
-                    output = nil;
-                }
-            }
-            
-            r = NSMakeRange(r2.location+1, 1);
+            value = [self valueForEnum:valueKey valueObject:valueObject];
         }
+        else
+        {
+            value = [self getStringRepresentation:valueObject key:valueKey outlets:outlets includes:includes properties:properties];
+        }
+        
+        if ( value && [ value length ] > 0 )
+        {
+            NSString* replaceFormat;
+            if (isEnum && [output characterAtIndex:foundMarker.location-1] == '?')
+            {
+                replaceFormat = @"?$%@$";
+            } else
+            {
+                replaceFormat = @"$%@$";
+            }
+            NSRange replaceRange = [output rangeOfString:[NSString stringWithFormat:replaceFormat, valueKey] options:NSLiteralSearch];
+
+            output = [output stringByReplacingCharactersInRange:replaceRange withString:value];
+        } else
+        {
+            output = nil;
+        }
+        
+        foundMarker = [output rangeOfString:@"$" options:NSLiteralSearch];
     }
 
     if ([output length] > 0)
