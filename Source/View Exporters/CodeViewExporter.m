@@ -312,9 +312,9 @@ static NSMutableDictionary* instanceCounts = nil;
     return objectSetup;
 }
 
--(NSString*)codeForAddSubview:(NSDictionary*)subview instanceName:(NSString*)instanceName def:(NSDictionary*)def
+-(NSString*)codeForAddSubview:(NSDictionary*)subview instanceName:(NSString*)instanceName classDefinition:(NSDictionary*)classDefinition
 {
-    NSString *addsub = [def objectForKey:@"_addSubview"];
+    NSString *addsub = [classDefinition objectForKey:@"_addSubview"];
     addsub = [addsub stringByReplacingOccurrencesOfString:@"@" withString:[self.map variableReference:instanceName] ];
     addsub = [addsub stringByReplacingOccurrencesOfString:@"%" withString:[self.map variableReference:[subview objectForKey:@"name"] ] ];
     return addsub;
@@ -517,7 +517,7 @@ static NSMutableDictionary* instanceCounts = nil;
             {
                 [code appendString:[subview objectForKey:@"code"]];
                 [code appendFormat:@"\t%@%@\n",
-                 [self codeForAddSubview:subview instanceName:instanceName def:classDefinition],
+                 [self codeForAddSubview:subview instanceName:instanceName classDefinition:classDefinition],
                  [self.map statementEnd]
                  ];
             }
