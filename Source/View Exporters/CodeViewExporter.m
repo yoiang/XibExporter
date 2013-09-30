@@ -247,7 +247,7 @@ static NSMutableDictionary* instanceCounts = nil;
     if (isInline)
     {
         NSString* constructorDef = [def objectForKey:@"_inlineConstructor"];
-        NSString* inl = [self replaceCodeSymbols:constructorDef instanceDefinition:instanceDefinition key:@"_inlineConstructor" name:instanceName outlets:outlets includes:includes def:def properties:properties];
+        NSString* inl = [self replaceCodeSymbols:constructorDef instanceDefinition:instanceDefinition key:@"_inlineConstructor" name:instanceName outlets:outlets includes:includes properties:properties];
         constructor = [NSMutableString stringWithString:[inl substringFromIndex:1] ]; //remove the leading tab for an inline
     } else
     {
@@ -257,12 +257,12 @@ static NSMutableDictionary* instanceCounts = nil;
         {
             if (isOutlet)
             {
-                constructorDef = [self replaceCodeSymbols:[def objectForKey:@"_inlineConstructor"] instanceDefinition:instanceDefinition key:@"_inlineConstructor" name:instanceName outlets:outlets includes:includes def:def properties:properties];
+                constructorDef = [self replaceCodeSymbols:[def objectForKey:@"_inlineConstructor"] instanceDefinition:instanceDefinition key:@"_inlineConstructor" name:instanceName outlets:outlets includes:includes properties:properties];
                 constructorDef = [NSString stringWithFormat:@"\t%@ = %@",[self.map variableReference:instanceName],[constructorDef substringFromIndex:1]];
             }
             else
             {
-                constructorDef = [self replaceCodeSymbols:constructorDef instanceDefinition:instanceDefinition key:@"_constructor" name:instanceName outlets:outlets includes:includes def:def properties:properties];
+                constructorDef = [self replaceCodeSymbols:constructorDef instanceDefinition:instanceDefinition key:@"_constructor" name:instanceName outlets:outlets includes:includes properties:properties];
             }
             
             constructor = [NSMutableString stringWithString:@"\n"];
@@ -301,7 +301,7 @@ static NSMutableDictionary* instanceCounts = nil;
         if ([k length] > 0 && [k characterAtIndex:0] != '_' && [instanceDefinition objectForKey:k])
         {
             NSString *line = [def objectForKey:k];
-            NSString* lineFilledIn = [self replaceCodeSymbols:line instanceDefinition:instanceDefinition key:k name:instanceName outlets:outlets includes:includes def:def properties:properties];
+            NSString* lineFilledIn = [self replaceCodeSymbols:line instanceDefinition:instanceDefinition key:k name:instanceName outlets:outlets includes:includes properties:properties];
             if ( lineFilledIn && [ lineFilledIn length ] > 0 )
             {
                 [objectSetup appendFormat:@"%@%@\n", lineFilledIn, [self.map statementEnd] ];
@@ -320,7 +320,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return addsub;
 }
 
-- (NSString *) replaceCodeSymbols:(NSString *)line instanceDefinition:(NSDictionary *)instanceDefinition key:(NSString *)key name:(NSString *)name outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes def:(NSDictionary *)def properties:(NSMutableDictionary *)properties
+- (NSString *) replaceCodeSymbols:(NSString *)line instanceDefinition:(NSDictionary *)instanceDefinition key:(NSString *)key name:(NSString *)name outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
 {
     if (!line)
     {
