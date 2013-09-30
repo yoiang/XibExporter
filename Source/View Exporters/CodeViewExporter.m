@@ -293,7 +293,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return constructor;
 }
 
--(NSString*)codeForObjectSetup:(NSString*)class instanceName:(NSString*)instanceName outlets:(NSMutableDictionary*)outlets includes:(NSMutableArray*)includes instanceDefinition:(NSDictionary*)instanceDefinition properties:(NSMutableDictionary*)properties
+-(NSString*)codeForInstanceSetup:(NSString*)instanceName outlets:(NSMutableDictionary*)outlets includes:(NSMutableArray*)includes instanceDefinition:(NSDictionary*)instanceDefinition properties:(NSMutableDictionary*)properties
 {
     NSMutableString* objectSetup = [NSMutableString string];
     
@@ -514,7 +514,7 @@ static NSMutableDictionary* instanceCounts = nil;
         
         if (!isInline)
         {
-            NSString* setup = [self codeForObjectSetup:className instanceName:instanceName outlets:outlets includes:includes instanceDefinition:instanceDefinition properties:properties];
+            NSString* setup = [self codeForInstanceSetup:instanceName outlets:outlets includes:includes instanceDefinition:instanceDefinition properties:properties];
             [code appendString:setup];
         }
         
