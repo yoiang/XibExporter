@@ -103,7 +103,7 @@ static NSMutableDictionary* instanceCounts = nil;
     
     NSString* fileNamePath = [NSString stringWithFormat:@"%@/%@", targetPath, exportedFileName];
     
-    [self doCodeExport:viewGraphData toFileNamePath:fileNamePath data:output xibName:xibName atomically:flag error:error];
+    [self doCodeExport:viewGraphData toFileNamePath:fileNamePath instanceDefinition:output xibName:xibName atomically:flag error:error];
     
     return exportedFileName;
 }
@@ -239,7 +239,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return result;
 }
 
--(NSString*)codeForClassConstructor:(NSString*)class instanceName:(NSString*)instanceName outlets:(NSMutableDictionary*)outlets includes:(NSMutableArray*)includes dict:(NSDictionary*)dict def:(NSDictionary*)def properties:(NSMutableDictionary*)properties isInline:(BOOL)isInline isOutlet:(BOOL)isOutlet
+-(NSString*)codeForClassConstructor:(NSString*)class instanceName:(NSString*)instanceName outlets:(NSMutableDictionary*)outlets includes:(NSMutableArray*)includes instanceDefinition:(NSDictionary*)instanceDefinition def:(NSDictionary*)def properties:(NSMutableDictionary*)properties isInline:(BOOL)isInline isOutlet:(BOOL)isOutlet
 {
     NSMutableString* constructor = nil;
     
@@ -247,7 +247,7 @@ static NSMutableDictionary* instanceCounts = nil;
     if (isInline)
     {
         NSString* constructorDef = [def objectForKey:@"_inlineConstructor"];
-        NSString* inl = [self replaceCodeSymbols:constructorDef dict:dict key:@"_inlineConstructor" name:instanceName outlets:outlets includes:includes def:def properties:properties];
+        NSString* inl = [self replaceCodeSymbols:constructorDef instanceDefinition:instanceDefinition key:@"_inlineConstructor" name:instanceName outlets:outlets includes:includes def:def properties:properties];
         constructor = [NSMutableString stringWithString:[inl substringFromIndex:1] ]; //remove the leading tab for an inline
     } else
     {
@@ -257,24 +257,24 @@ static NSMutableDictionary* instanceCounts = nil;
         {
             if (isOutlet)
             {
-                constructorDef = [self replaceCodeSymbols:[def objectForKey:@"_inlineConstructor"] dict:dict key:@"_inlineConstructor" name:instanceName outlets:outlets includes:includes def:def properties:properties];
+                constructorDef = [self replaceCodeSymbols:[def objectForKey:@"_inlineConstructor"] instanceDefinition:instanceDefinition key:@"_inlineConstructor" name:instanceName outlets:outlets includes:includes def:def properties:properties];
                 constructorDef = [NSString stringWithFormat:@"\t%@ = %@",[self.map variableReference:instanceName],[constructorDef substringFromIndex:1]];
             }
             else
             {
-                constructorDef = [self replaceCodeSymbols:constructorDef dict:dict key:@"_constructor" name:instanceName outlets:outlets includes:includes def:def properties:properties];
+                constructorDef = [self replaceCodeSymbols:constructorDef instanceDefinition:instanceDefinition key:@"_constructor" name:instanceName outlets:outlets includes:includes def:def properties:properties];
             }
             
             constructor = [NSMutableString stringWithString:@"\n"];
             
-            NSString* comments = [ UIView getComments:dict ];
+            NSString* comments = [ UIView getComments:instanceDefinition ];
             if ( comments )
             {
                 [constructor appendString:comments ];
             }
             
             //only put the constructor in if this is not the root view, because the root view should be handled by surrounding code
-            if ([dict objectForKey:@"superview"])
+            if ([instanceDefinition objectForKey:@"superview"])
             {
                 [constructor appendString:[NSString stringWithFormat:@"%@%@\n", constructorDef,[self.map statementEnd] ] ];
             }
@@ -289,7 +289,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return constructor;
 }
 
--(NSString*)codeForObjectSetup:(NSString*)class instanceName:(NSString*)instanceName outlets:(NSMutableDictionary*)outlets includes:(NSMutableArray*)includes dict:(NSDictionary*)dict def:(NSDictionary*)def properties:(NSMutableDictionary*)properties
+-(NSString*)codeForObjectSetup:(NSString*)class instanceName:(NSString*)instanceName outlets:(NSMutableDictionary*)outlets includes:(NSMutableArray*)includes instanceDefinition:(NSDictionary*)instanceDefinition def:(NSDictionary*)def properties:(NSMutableDictionary*)properties
 {
     NSMutableString* objectSetup = [NSMutableString string];
     
@@ -298,10 +298,10 @@ static NSMutableDictionary* instanceCounts = nil;
     for (int i = 0; i < [keys count]; i++)
     {
         NSString *k = [keys objectAtIndex:i];
-        if ([k length] > 0 && [k characterAtIndex:0] != '_' && [dict objectForKey:k])
+        if ([k length] > 0 && [k characterAtIndex:0] != '_' && [instanceDefinition objectForKey:k])
         {
             NSString *line = [def objectForKey:k];
-            NSString* lineFilledIn = [self replaceCodeSymbols:line dict:dict key:k name:instanceName outlets:outlets includes:includes def:def properties:properties];
+            NSString* lineFilledIn = [self replaceCodeSymbols:line instanceDefinition:instanceDefinition key:k name:instanceName outlets:outlets includes:includes def:def properties:properties];
             if ( lineFilledIn && [ lineFilledIn length ] > 0 )
             {
                 [objectSetup appendFormat:@"%@%@\n", lineFilledIn, [self.map statementEnd] ];
@@ -320,7 +320,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return addsub;
 }
 
-- (NSString *) replaceCodeSymbols:(NSString *)line dict:(NSDictionary *)dict key:(NSString *)key name:(NSString *)name outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes def:(NSDictionary *)def properties:(NSMutableDictionary *)properties
+- (NSString *) replaceCodeSymbols:(NSString *)line instanceDefinition:(NSDictionary *)instanceDefinition key:(NSString *)key name:(NSString *)name outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes def:(NSDictionary *)def properties:(NSMutableDictionary *)properties
 {
     if (!line)
     {
@@ -341,7 +341,7 @@ static NSMutableDictionary* instanceCounts = nil;
                 NSString *valueKey = [output substringWithRange:NSMakeRange(r.location+1, r2.location-r.location-1)];
                 NSString *value = @"";
                 
-                NSObject* valueObject = [dict objectForKey:valueKey];
+                NSObject* valueObject = [instanceDefinition objectForKey:valueKey];
                 
                 //a BS check for enums - if there is a ? before the $, then we have an enum
                 BOOL isEnum = (r.location > 0 && [output characterAtIndex:r.location-1] == '?') ||
@@ -387,19 +387,19 @@ static NSMutableDictionary* instanceCounts = nil;
     return output;
 }
 
--(NSString*)getInstanceName:(NSDictionary*)dict def:(NSDictionary*)def isOutlet:(BOOL*)isOutlet
+-(NSString*)getInstanceNameFromDefinition:(NSDictionary*)instanceDefinition def:(NSDictionary*)def isOutlet:(BOOL*)isOutlet
 {
     NSString* result = nil;
     
-    if ( [dict objectForKey:@"instanceName"] )
+    if ( [instanceDefinition objectForKey:@"instanceName"] )
     {
-        result = [dict objectForKey:@"instanceName"];
+        result = [instanceDefinition objectForKey:@"instanceName"];
         
         *isOutlet = YES;
     } else
     {
         //the root view is treated special
-        if ( ![dict objectForKey:@"superview"] )
+        if ( ![instanceDefinition objectForKey:@"superview"] )
         {
             if (self.map.rootViewInstanceName)
             {
@@ -424,21 +424,21 @@ static NSMutableDictionary* instanceCounts = nil;
 
 - (NSDictionary *) getCodeFor:(id)object isInline:(BOOL)isInline outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
 {
-    NSDictionary* dict = nil;
+    NSDictionary* instanceDefinition = nil;
     if ( [object isKindOfClass:[ViewGraphData class] ] )
     {
         ViewGraphData* data = (ViewGraphData*)object;
-        dict = data.data;
+        instanceDefinition = data.data;
     } else if ( [object isKindOfClass:[NSDictionary class] ] )
     {
-        dict = object;
+        instanceDefinition = object;
     }
     
     NSMutableString *code = [NSMutableString string];
     NSString *instanceName = nil;
     BOOL isOutlet = NO;
     
-    NSString *class = [dict objectForKey:@"class"];
+    NSString *class = [instanceDefinition objectForKey:@"class"];
     if (class)
     {
         NSDictionary *def = [self.map definitionForClass:class];
@@ -476,32 +476,32 @@ static NSMutableDictionary* instanceCounts = nil;
         
         // TODO: check if this is still necessary
         //this is an annoying hack because with a status bar iOS tells us the Y is 0 in app, whereas it's 20 in the XIB
-        if (![dict objectForKey:@"superview"] && [[[dict objectForKey:@"frame"] objectForKey:@"height"] floatValue] == 460.0f)
+        if (![instanceDefinition objectForKey:@"superview"] && [[[instanceDefinition objectForKey:@"frame"] objectForKey:@"height"] floatValue] == 460.0f)
         {
-            [[dict objectForKey:@"frame"] setObject:[NSNumber numberWithFloat:20.0f] forKey:@"y"];
+            [[instanceDefinition objectForKey:@"frame"] setObject:[NSNumber numberWithFloat:20.0f] forKey:@"y"];
         }
         
-        instanceName = [self getInstanceName:dict def:def isOutlet:&isOutlet];
+        instanceName = [self getInstanceNameFromDefinition:instanceDefinition def:def isOutlet:&isOutlet];
         
         if (isOutlet)
         {
             [[outlets objectForKey:@"stripped"] addObject:instanceName];
             [[outlets objectForKey:@"unstripped"] addObject:[[def objectForKey:@"_parameter"] stringByReplacingOccurrencesOfString:@"@" withString:instanceName]];
-            [[properties objectForKey:@"outlets"] addObject:dict];
+            [[properties objectForKey:@"outlets"] addObject:instanceDefinition];
         }
         
-        NSString* constructor = [self codeForClassConstructor:class instanceName:instanceName outlets:outlets includes:includes dict:dict def:def properties:properties isInline:isInline isOutlet:isOutlet];
+        NSString* constructor = [self codeForClassConstructor:class instanceName:instanceName outlets:outlets includes:includes instanceDefinition:instanceDefinition def:def properties:properties isInline:isInline isOutlet:isOutlet];
         
         [code appendString:constructor];
         
         if (!isInline)
         {
-            NSString* setup = [self codeForObjectSetup:class instanceName:instanceName outlets:outlets includes:includes dict:dict def:def properties:properties];
+            NSString* setup = [self codeForObjectSetup:class instanceName:instanceName outlets:outlets includes:includes instanceDefinition:instanceDefinition def:def properties:properties];
             [code appendString:setup];
         }
         
         
-        NSArray *subviews = [dict objectForKey:@"subviews"];
+        NSArray *subviews = [instanceDefinition objectForKey:@"subviews"];
         for (int i = 0; i < [subviews count]; i++)
         {
             NSDictionary *subview = [self getCodeFor:[subviews objectAtIndex:i] isInline:NO outlets:outlets includes:includes properties:properties];
@@ -517,7 +517,7 @@ static NSMutableDictionary* instanceCounts = nil;
     }
     else
     {
-        NSLog(@"Warning: shouldn't be passing a dict with no class into getCode.");
+        NSLog(@"Warning: shouldn't be passing a instance definiton with no class into getCode.");
     }
     
     return [NSMutableDictionary dictionaryWithObjectsAndKeys:code, @"code", instanceName, @"name", outlets, @"outlets", includes, @"includes", properties, @"properties", nil];
@@ -526,7 +526,7 @@ static NSMutableDictionary* instanceCounts = nil;
 -(NSString*)exportFunctionCode:(NSString*)xibName
                     viewGraphData:(ViewGraphData*)viewGraphData
                     parameters:(NSString*)params
-                          dict:(NSDictionary*)dict
+                          instanceDefinition:(NSDictionary*)instanceDefinition
                 strippedParams:(NSString*)strippedParams
            strippedParamsComma:(NSString*)strippedParamsComma
                    paramsComma:(NSString*)paramsComma
@@ -535,7 +535,7 @@ static NSMutableDictionary* instanceCounts = nil;
     
     func = [func stringByReplacingOccurrencesOfString:@"@" withString:xibName];
     func = [func stringByReplacingOccurrencesOfString:@"%" withString:params];
-    func = [func stringByReplacingOccurrencesOfString:@"$GeneratedBody$" withString:[dict objectForKey:@"code"]];
+    func = [func stringByReplacingOccurrencesOfString:@"$GeneratedBody$" withString:[instanceDefinition objectForKey:@"code"]];
     func = [func stringByReplacingOccurrencesOfString:@"§" withString:strippedParams];
     func = [func stringByReplacingOccurrencesOfString:@"∞" withString:strippedParamsComma];
     func = [func stringByReplacingOccurrencesOfString:@"ﬁ" withString:paramsComma];
@@ -573,7 +573,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return func;
 }
 
-- (void) doCodeExport:(ViewGraphData*)viewGraphData toFileNamePath:(NSString *)fileNamePath data:(NSDictionary *)data xibName:(NSString *)xibName atomically:(BOOL)flag error:(NSError**)error
+- (void) doCodeExport:(ViewGraphData*)viewGraphData toFileNamePath:(NSString *)fileNamePath instanceDefinition:(NSDictionary *)instanceDefinition xibName:(NSString *)xibName atomically:(BOOL)flag error:(NSError**)error
 {
     NSMutableString *code = [NSMutableString string];
     
@@ -585,14 +585,14 @@ static NSMutableDictionary* instanceCounts = nil;
     [code appendString:@"#pragma once\n\n"];
     
     //includes
-    NSArray *includes = [data objectForKey:@"includes"];
+    NSArray *includes = [instanceDefinition objectForKey:@"includes"];
     for (NSObject* include in includes)
     {
         [code appendFormat:@"%@\n", include];
     }
     
     //construct a string representing all the outlet parameters
-    NSDictionary *outlets = [data objectForKey:@"outlets"];
+    NSDictionary *outlets = [instanceDefinition objectForKey:@"outlets"];
     NSString *params = @"";
     NSString *strippedParams = @"";
     NSString *paramsComma = @"";
@@ -605,7 +605,7 @@ static NSMutableDictionary* instanceCounts = nil;
         strippedParamsComma = [NSString stringWithFormat:@", %@",strippedParams];
     }
     
-    [code appendString:[self exportFunctionCode:xibName viewGraphData:viewGraphData parameters:params dict:data strippedParams:strippedParams strippedParamsComma:strippedParamsComma paramsComma:paramsComma] ];
+    [code appendString:[self exportFunctionCode:xibName viewGraphData:viewGraphData parameters:params instanceDefinition:instanceDefinition strippedParams:strippedParams strippedParamsComma:strippedParamsComma paramsComma:paramsComma] ];
     
     [code writeToFile:fileNamePath atomically:flag encoding:NSUTF8StringEncoding error:error];
 }
