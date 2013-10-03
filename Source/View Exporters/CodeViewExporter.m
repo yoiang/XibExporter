@@ -325,6 +325,39 @@ static NSMutableDictionary* instanceCounts = nil;
     return addsub;
 }
 
+-(NSString*)replace:(NSString*)string stringBetweenOccurencesOf:(NSString*)find withStringRepresentationFromInstance:(NSDictionary*)instanceDefinition outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
+{
+    NSString* result = string;
+    
+    NSRange foundMarker = [result rangeOfString:find options:NSLiteralSearch];
+    while (foundMarker.location != NSNotFound && foundMarker.length != 0)
+    {
+        NSString *valueKey = [result substringBetweenOccurancesOf:find];
+        
+        NSString *value = @"";
+        
+        NSObject* valueObject = [instanceDefinition objectAtPath:valueKey withPathSeparator:@"."];
+        if (valueObject)
+        {
+            value = [self getStringRepresentation:valueObject key:valueKey outlets:outlets includes:includes properties:properties];
+        }
+        
+        if ( value && [ value length ] > 0 )
+        {
+            NSRange replaceRange = [result rangeOfString:[NSString stringWithFormat:@"%@%@%@", find, valueKey, find] options:NSLiteralSearch];
+            
+            result = [result stringByReplacingCharactersInRange:replaceRange withString:value];
+        } else
+        {
+            break;
+        }
+        
+        foundMarker = [result rangeOfString:find options:NSLiteralSearch];
+    }
+    
+    return result;
+}
+
 - (NSString *) replaceCodeSymbols:(NSString *)line instanceDefinition:(NSDictionary *)instanceDefinition key:(NSString *)key name:(NSString *)name outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
 {
     if (!line)
@@ -333,42 +366,10 @@ static NSMutableDictionary* instanceCounts = nil;
     }
     
     NSString* output = [line stringByReplacingOccurrencesOfString:@"@" withString:[self.map variableReference:name] ];
+    output = [self replace:output stringBetweenOccurencesOf:@"$" withStringRepresentationFromInstance:instanceDefinition outlets:outlets includes:includes properties:properties];
 
-    BOOL unparsedMarker = NO;
-    
     NSRange foundMarker = [output rangeOfString:@"$" options:NSLiteralSearch];
-    while (foundMarker.location != NSNotFound && foundMarker.length != 0)
-    {
-        unparsedMarker = YES;
-        
-        NSString *valueKey = [output substringBetweenOccurancesOf:@"$"];
-
-        NSString *value = @"";
-        
-        NSObject* valueObject = [instanceDefinition objectForKey:valueKey];
-        
-        if (valueObject)
-        {
-            value = [self getStringRepresentation:valueObject key:valueKey outlets:outlets includes:includes properties:properties];
-        }
-        
-        if ( value && [ value length ] > 0 )
-        {
-            NSRange replaceRange = [output rangeOfString:[NSString stringWithFormat:@"$%@$", valueKey] options:NSLiteralSearch];
-
-            output = [output stringByReplacingCharactersInRange:replaceRange withString:value];
-            
-            unparsedMarker = NO;
-        } else
-        {
-            unparsedMarker = YES;
-            break;
-        }
-        
-        foundMarker = [output rangeOfString:@"$" options:NSLiteralSearch];
-    }
-    
-    if (unparsedMarker)
+    if (foundMarker.length != 0) // instance didn't contain all values the definition wanted
     {
         output = nil;
     } else
@@ -514,31 +515,8 @@ static NSMutableDictionary* instanceCounts = nil;
     func = [func stringByReplacingOccurrencesOfString:@"∞" withString:strippedParamsComma];
     func = [func stringByReplacingOccurrencesOfString:@"ﬁ" withString:paramsComma];
     
-    //get everything in between the ∂ signs and replace it with the proper values
-    NSRange r = NSMakeRange(0, [func length]);
-    while (r.location != NSNotFound && r.location < [func length])
-    {
-        r = [func rangeOfString:@"∂" options:NSLiteralSearch range:NSMakeRange(r.location, [func length] - r.location)];
-        if (r.location != NSNotFound)
-        {
-            NSRange r2 = [func rangeOfString:@"∂" options:NSLiteralSearch range:NSMakeRange(r.location+1, [func length] - r.location - 1)];
-            if (r2.location != NSNotFound)
-            {
-                NSString* dictPath = [func substringWithRange:NSMakeRange(r.location+1, r2.location-r.location-1)];
-                
-                NSString *value = [viewGraphData.rootViewInstanceDefinition objectAtPath:dictPath withPathSeparator:@"."];
-                value = [self getStringRepresentation:value key:nil outlets:nil includes:nil properties:nil];
-                
-                int oldFuncLength = [func length];
-                int replaceStart = r.location;
-                int replaceLength = r2.location - r.location + 1;
-                func = [func stringByReplacingCharactersInRange:NSMakeRange(replaceStart, replaceLength) withString:value];
-                r2 = NSMakeRange(r2.location + ([func length] - oldFuncLength), 1);
-            }
-            
-            r = NSMakeRange(r2.location+1, 1);
-        }
-    }
+    func = [self replace:func stringBetweenOccurencesOf:@"∂" withStringRepresentationFromInstance:viewGraphData.rootViewInstanceDefinition outlets:nil includes:nil properties:nil];
+
     return func;
 }
 
