@@ -303,7 +303,7 @@ static NSMutableDictionary* instanceCounts = nil;
 
     for (NSString* classMember in [classDefinition allKeys] )
     {
-        if ( [classDefinition isValidClassMember:classMember] && [instanceDefinition objectForKey:classMember] )
+        if ( [classDefinition isValidClassMember:classMember] && [instanceDefinition hasValueForMember:classMember] )
         {
             NSString *line = [classDefinition objectForKey:classMember];
             NSString* lineFilledIn = [self replaceCodeSymbols:line instanceDefinition:instanceDefinition key:classMember name:instanceName outlets:outlets includes:includes properties:properties];
