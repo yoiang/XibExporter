@@ -8,6 +8,8 @@
 
 #import "NSDictionary+InstanceDefinition.h"
 
+#import "NSDictionary+Path.h"
+
 @implementation NSDictionary (InstanceDefinition)
 
 -(NSString*)instanceName
@@ -44,6 +46,11 @@
     }
     
     return result;
+}
+
+-(BOOL)hasValueForMember:(NSString*)memberName
+{
+    return [self objectAtPath:memberName withPathSeparator:@"."] != nil;
 }
 
 @end

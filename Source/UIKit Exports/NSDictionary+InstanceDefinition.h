@@ -12,5 +12,6 @@
 
 -(NSString*)instanceName;
 -(BOOL)isOutlet;
+-(BOOL)hasValueForMember:(NSString*)memberName;
 
 @end
