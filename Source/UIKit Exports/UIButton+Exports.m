@@ -155,14 +155,8 @@
         [dict setObject:self.ImageDown forKey:@"backgroundDownImage"];
     }
     
-    //copy everything from our title label over as a titleLabelXXX key
-    NSDictionary *titleLabelDict = [self.titleLabel exportToDictionary:nil];
-    NSArray *titleLabelKeys = [titleLabelDict allKeys];
-    for (int i = 0; i < [titleLabelKeys count]; i++)
-    {
-        NSString *k = [titleLabelKeys objectAtIndex:i];
-        [dict setObject:[titleLabelDict objectForKey:k] forKey:[NSString stringWithFormat:@"titleLabel.%@",k]];
-    }
+    
+    [dict setObject:[self.titleLabel exportToDictionary:nil] forKey:@"titleLabel"];
     
     //button subviews just add a whole lot of issues - don't allow any of them
     //these are auto-added by the xib, like a label and an image
