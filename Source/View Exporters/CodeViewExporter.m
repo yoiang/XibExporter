@@ -310,10 +310,7 @@ static NSMutableDictionary* instanceCounts = nil;
 
 -(NSString*)codeForAddSubview:(NSDictionary*)subview instanceName:(NSString*)instanceName classDefinition:(NSDictionary*)classDefinition
 {
-    NSString *addsub = [classDefinition objectForKey:@"_addSubview"];
-    addsub = [addsub stringByReplacingOccurrencesOfString:@"$instanceName$" withString:[self.map variableReference:instanceName] ];
-    addsub = [addsub stringByReplacingOccurrencesOfString:@"%" withString:[self.map variableReference:[subview objectForKey:@"name"] ] ];
-    return addsub;
+    return [classDefinition asAddSubViewWithInstanceName:[self.map variableReference:instanceName] andSubviewInstanceName:[self.map variableReference:[subview objectForKey:@"name"] ] ];
 }
 
 -(NSString*)replace:(NSString*)string stringBetweenOccurencesOf:(NSString*)find withStringRepresentationFromInstance:(NSDictionary*)instanceDefinition properties:(NSMutableDictionary *)properties

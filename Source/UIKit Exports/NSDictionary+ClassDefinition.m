@@ -66,4 +66,24 @@
     return [self stringForKey:@"_constructor"];
 }
 
+-(NSString*)asAddSubviewToParse
+{
+    return [self stringForKey:@"_addSubview"];
+}
+
+-(NSString*)asAddSubViewWithInstanceName:(NSString*)instanceName andSubviewInstance:(NSDictionary*)instanceDefinition
+{
+    return [self asAddSubViewWithInstanceName:instanceName andSubviewInstanceName:[instanceDefinition instanceName] ];
+}
+
+-(NSString*)asAddSubViewWithInstanceName:(NSString*)instanceName andSubviewInstanceName:(NSString*)subviewInstanceName
+{
+    NSMutableString* result = [NSMutableString stringWithString:[self asAddSubviewToParse] ];
+
+    [result replaceOccurrencesOfString:@"$instanceName$" withString:instanceName];
+    [result replaceOccurrencesOfString:@"%" withString:subviewInstanceName];
+    
+    return result;
+}
+
 @end

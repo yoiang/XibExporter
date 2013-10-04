@@ -25,4 +25,8 @@
 -(NSString*)asInlineConstructorToParse;
 -(NSString*)asConstructorToParse;
 
+-(NSString*)asAddSubviewToParse;
+-(NSString*)asAddSubViewWithInstanceName:(NSString*)instanceName andSubviewInstance:(NSDictionary*)instanceDefinition;
+-(NSString*)asAddSubViewWithInstanceName:(NSString*)instanceName andSubviewInstanceName:(NSString*)subviewInstanceName;
+
 @end
