@@ -249,39 +249,30 @@ static NSMutableDictionary* instanceCounts = nil;
         constructor = [NSMutableString stringWithString:[self replaceCodeSymbols:[classDefinition asInlineConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties] ];
     } else
     {
-        
-        NSString* constructorDef = [classDefinition asConstructorToParse];
-        if (constructorDef)
+        NSString* constructorStatement = nil;
+        if (isOutlet)
         {
-            if (isOutlet)
-            {
-                constructorDef = [self replaceCodeSymbols:[classDefinition asInlineConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
-                constructorDef = [NSString stringWithFormat:@"%@ = %@",[self.map variableReference:instanceName], constructorDef];
-            }
-            else
-            {
-                constructorDef = [self replaceCodeSymbols:constructorDef instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
-            }
-            
-            constructor = [NSMutableString stringWithString:@"\n"];
-            
-            NSString* comments = [ UIView getComments:instanceDefinition ];
-            if ( comments )
-            {
-                [constructor appendString:comments ];
-            }
-            
-            //only put the constructor in if this is not the root view, because the root view should be handled by surrounding code
-            if ( ![instanceDefinition isRootView] )
-            {
-                [self appendToCode:constructor statement:constructorDef tabbed:YES];
-            }
+            constructorStatement = [self replaceCodeSymbols:[classDefinition asInlineConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
+            constructorStatement = [NSString stringWithFormat:@"%@ = %@",[self.map variableReference:instanceName], constructorStatement];
         }
         else
         {
-            NSLog(@"Warning: No _constructor found for %@!",class);
+            constructorStatement = [self replaceCodeSymbols:[classDefinition asConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
         }
-
+        
+        constructor = [NSMutableString stringWithString:@"\n"];
+        
+        NSString* comments = [ UIView getComments:instanceDefinition ];
+        if ( comments )
+        {
+            [constructor appendString:comments ];
+        }
+        
+        //only put the constructor in if this is not the root view, because the root view should be handled by surrounding code
+        if ( ![instanceDefinition isRootView] )
+        {
+            [self appendToCode:constructor statement:constructorStatement tabbed:YES];
+        }
     }
 
     return constructor;
