@@ -10,6 +10,8 @@
 
 #define NSDictionary_InstanceDefinition_InstanceNameKey @"instanceName"
 
+#define NSDictionary_InstanceDefinition_SubviewsKey @"subviews"
+
 @interface NSDictionary (InstanceDefinition)
 
 -(NSString*)instanceName;
@@ -17,5 +19,7 @@
 -(BOOL)hasValueForMember:(NSString*)memberName;
 
 -(BOOL)isRootView;
+
+-(NSArray*)subviews;
 
 @end

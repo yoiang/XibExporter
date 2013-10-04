@@ -443,15 +443,14 @@ static NSMutableDictionary* instanceCounts = nil;
         }
         
         
-        NSArray *subviews = [instanceDefinition objectForKey:@"subviews"];
-        for (int i = 0; i < [subviews count]; i++)
+        for (NSDictionary* subViewDefinition in [instanceDefinition subviews] )
         {
-            NSDictionary *subview = [self getCodeFor:[subviews objectAtIndex:i] isInline:NO properties:properties];
-            if (subview)
+            NSDictionary *subviewCode = [self getCodeFor:subViewDefinition isInline:NO properties:properties];
+            if (subviewCode)
             {
-                [code appendString:[subview objectForKey:@"code"]];
+                [code appendString:[subviewCode objectForKey:@"code"]];
                 [code appendFormat:@"\t%@%@\n",
-                 [self codeForAddSubview:subview instanceName:instanceName classDefinition:classDefinition],
+                 [self codeForAddSubview:subviewCode instanceName:instanceName classDefinition:classDefinition],
                  [self.map statementEnd]
                  ];
             }

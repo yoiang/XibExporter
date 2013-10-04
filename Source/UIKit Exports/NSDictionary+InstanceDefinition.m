@@ -65,4 +65,9 @@
     return [self superViewId] == nil;
 }
 
+-(NSArray*)subviews
+{
+    return [self arrayForKey:NSDictionary_InstanceDefinition_SubviewsKey];
+}
+
 @end
