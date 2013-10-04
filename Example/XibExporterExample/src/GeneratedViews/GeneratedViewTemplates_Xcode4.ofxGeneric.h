@@ -12,7 +12,6 @@
 #include "ofxGenericButtonView.h"
 #include "ofxGenericImageView.h"
 
-
 inline ofRectangle getGeneratedViewTemplates_Xcode4Frame()
 {
     return ofRectangle(0.0f, 0.0f, 320.0f, 568.0f);
