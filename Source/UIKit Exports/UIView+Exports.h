@@ -15,9 +15,6 @@
 
 - (NSMutableDictionary *)exportToDictionary:( CXMLElement* )element;
 
-+( void )addToComments:( NSString* )string members:( NSMutableDictionary* )members;
-+( NSString* )getComments:( NSDictionary* )members;
-
 -( NSString* )getKeyForSelf;
 +( NSString* )getKeyForView:( UIView* )view;
 

@@ -15,4 +15,16 @@
     [self setObject:instanceName forKey:NSDictionary_InstanceDefinition_InstanceNameKey];
 }
 
+-(void)addComment:(NSString*)comment
+{
+    NSMutableArray* comments = (NSMutableArray*)[self comments];
+    if (comments == nil)
+    {
+        comments = [NSMutableArray array];
+        [self setObject:comments forKey:NSDictionary_InstanceDefinition_CommentsKey];
+    }
+    
+    [comments addObject:comment];
+}
+
 @end

@@ -10,6 +10,8 @@
 
 #define NSDictionary_InstanceDefinition_InstanceNameKey @"instanceName"
 
+#define NSDictionary_InstanceDefinition_CommentsKey @"comments"
+
 #define NSDictionary_InstanceDefinition_SubviewsKey @"subviews"
 
 @interface NSDictionary (InstanceDefinition)
@@ -17,6 +19,8 @@
 -(NSString*)instanceName;
 -(BOOL)isOutlet;
 -(BOOL)hasValueForMember:(NSString*)memberName;
+
+-(NSArray*)comments;
 
 -(BOOL)isRootView;
 

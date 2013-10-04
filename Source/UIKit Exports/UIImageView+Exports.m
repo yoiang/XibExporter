@@ -14,6 +14,8 @@
 #import "CXMLElement+UIImage.h"
 #import "CXMLElement+UIImageView.h"
 
+#import "NSMutableDictionary+InstanceDefinition.h"
+
 @implementation UIImageView (Exports)
 
 - (NSMutableDictionary *)exportToDictionary:( CXMLElement* )xibElement
@@ -41,7 +43,7 @@
     
     if ( !hadImage )
     {
-        [ UIImageView addToComments:@"Note: no image set for view" members:dict ];
+        [dict addComment:@"Note: no image set for view"];
     }
     
     return dict;

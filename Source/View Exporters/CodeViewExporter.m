@@ -249,28 +249,27 @@ static NSMutableDictionary* instanceCounts = nil;
         constructor = [NSMutableString stringWithString:[self replaceCodeSymbols:[classDefinition asInlineConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties] ];
     } else
     {
-        NSString* constructorStatement = nil;
-        if (isOutlet)
-        {
-            constructorStatement = [self replaceCodeSymbols:[classDefinition asInlineConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
-            constructorStatement = [NSString stringWithFormat:@"%@ = %@",[self.map variableReference:instanceName], constructorStatement];
-        }
-        else
-        {
-            constructorStatement = [self replaceCodeSymbols:[classDefinition asConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
-        }
-        
         constructor = [NSMutableString stringWithString:@"\n"];
         
-        NSString* comments = [ UIView getComments:instanceDefinition ];
-        if ( comments )
+        for (NSString* comment in [instanceDefinition comments] )
         {
-            [constructor appendString:comments ];
+            [self appendToCode:constructor statement:[NSString stringWithFormat:@"// %@", comment] tabbed:YES];
         }
         
         //only put the constructor in if this is not the root view, because the root view should be handled by surrounding code
         if ( ![instanceDefinition isRootView] )
         {
+            NSString* constructorStatement = nil;
+            if (isOutlet)
+            {
+                constructorStatement = [self replaceCodeSymbols:[classDefinition asInlineConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
+                constructorStatement = [NSString stringWithFormat:@"%@ = %@",[self.map variableReference:instanceName], constructorStatement];
+            }
+            else
+            {
+                constructorStatement = [self replaceCodeSymbols:[classDefinition asConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
+            }
+        
             [self appendToCode:constructor statement:constructorStatement tabbed:YES];
         }
     }

@@ -54,6 +54,11 @@
     return [self objectAtPath:memberName withPathSeparator:@"."] != nil;
 }
 
+-(NSArray*)comments
+{
+    return [self arrayForKey:NSDictionary_InstanceDefinition_CommentsKey];
+}
+
 // TODO: why not ref the superview directly
 -(NSNumber*)superViewId
 {

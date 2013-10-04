@@ -14,4 +14,6 @@
 
 -(void)setInstanceName:(NSString*)instanceName;
 
+-(void)addComment:(NSString*)comment;
+
 @end

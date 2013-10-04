@@ -24,7 +24,7 @@ static int viewId = 0;
 -( NSMutableDictionary* )exportToDictionaryUIView:( CXMLElement* )xibElement
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    
+ 
     //globally defined stuff
     dict.className = [NSString stringWithFormat:@"%@", [self class] ];
     
@@ -100,24 +100,6 @@ static int viewId = 0;
 }
 
 #pragma mark Comments
-
-#define CommentsKey @"_comments"
-
-+( void )addToComments:( NSString* )string members:( NSMutableDictionary* )members
-{
-    NSMutableString* comments = [ members objectForKey:CommentsKey ];
-    if ( !comments )
-    {
-        comments = [ NSMutableString string ];
-    }
-    [ comments appendFormat:@"\t// %@\n", string ];
-    [ members setObject:comments forKey:CommentsKey ];    
-}
-
-+( NSString* )getComments:( NSDictionary* )members
-{
-    return [ members objectForKey:CommentsKey ];
-}
 
 -( NSString* )getKeyForSelf
 {
