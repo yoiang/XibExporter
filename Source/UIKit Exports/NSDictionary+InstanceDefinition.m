@@ -23,7 +23,7 @@
     } else
     {
         //the root view is treated special
-        if ( ![self objectForKey:@"superview"] )
+        if ( [self isRootView] )
         {
             result = @"rootView";
         }
@@ -52,6 +52,17 @@
 -(BOOL)hasValueForMember:(NSString*)memberName
 {
     return [self objectAtPath:memberName withPathSeparator:@"."] != nil;
+}
+
+// TODO: why not ref the superview directly
+-(NSNumber*)superViewId
+{
+    return [self numberForKey:@"superview"];
+}
+
+-(BOOL)isRootView
+{
+    return [self superViewId] == nil;
 }
 
 @end

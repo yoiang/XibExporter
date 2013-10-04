@@ -16,4 +16,6 @@
 -(BOOL)isOutlet;
 -(BOOL)hasValueForMember:(NSString*)memberName;
 
+-(BOOL)isRootView;
+
 @end

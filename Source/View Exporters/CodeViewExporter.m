@@ -271,7 +271,7 @@ static NSMutableDictionary* instanceCounts = nil;
             }
             
             //only put the constructor in if this is not the root view, because the root view should be handled by surrounding code
-            if ([instanceDefinition objectForKey:@"superview"])
+            if ( ![instanceDefinition isRootView] )
             {
                 [constructor appendString:[NSString stringWithFormat:@"%@%@\n", constructorDef,[self.map statementEnd] ] ];
             }
@@ -413,7 +413,7 @@ static NSMutableDictionary* instanceCounts = nil;
         
         // TODO: check if this is still necessary
         //this is an annoying hack because with a status bar iOS tells us the Y is 0 in app, whereas it's 20 in the XIB
-        if (![instanceDefinition objectForKey:@"superview"] && [[[instanceDefinition objectForKey:@"frame"] objectForKey:@"height"] floatValue] == 460.0f)
+        if ( [instanceDefinition isRootView] && [[[instanceDefinition objectForKey:@"frame"] objectForKey:@"height"] floatValue] == 460.0f)
         {
             [[instanceDefinition objectForKey:@"frame"] setObject:[NSNumber numberWithFloat:20.0f] forKey:@"y"];
         }
@@ -541,7 +541,6 @@ static NSMutableDictionary* instanceCounts = nil;
     {
         strippedParamsComma = [NSString stringWithFormat:@", %@", strippedParams];
     }
-    
     
     [code replaceOccurrencesOfString:@"%" withString:params];
     [code replaceOccurrencesOfString:@"§" withString:strippedParams];
