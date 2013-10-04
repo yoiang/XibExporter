@@ -61,7 +61,7 @@
       "_parameter": "UILabel** $instanceName$",
       "_super": "UILabel",
       "_variableName": "text#",
-      "_declaration": "UILabel** $instanceName$",
+      "_declaration": "UILabel* $instanceName$",
       "font": "[$instanceName$ setFont:[UIFont fontWithName:$fontName$ size:$fontSize$] ]",
       "minimumFontSize": "[$instanceName$ setMinimumFontSize:$minimumFontSize$]",
       "lineBreakMode": "[$instanceName$ setLineBreakMode:$lineBreakMode$]",
