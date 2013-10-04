@@ -26,8 +26,8 @@ inline void populateGeneratedViewTemplates_Xcode5( UIView** rootView, UILabel** 
 	[(*variableNameLabel) setLineBreakMode:NSLineBreakByTruncatingTail];
 	[(*variableNameLabel) setAdjustsFontSizeToFitWidth:NO];
 	[(*variableNameLabel) setNumberOfLines:1];
-	[(*variableNameLabel) setFont:[UIFont fontWithName:@".HelveticaNeueInterface-M3" size:17.0f] ];
 	[(*variableNameLabel) setTextAlignment:NSTextAlignmentCenter];
+	[(*variableNameLabel) setFont:[UIFont fontWithName:@".HelveticaNeueInterface-M3" size:17.0f] ];
 	[(*variableNameLabel) setTextColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:255]];
 	[(*rootView) addSubview:(*variableNameLabel)];
 
@@ -67,8 +67,8 @@ inline void populateGeneratedViewTemplates_Xcode5( UIView** rootView, UILabel** 
 	[(*variableNameLabel2) setLineBreakMode:NSLineBreakByTruncatingTail];
 	[(*variableNameLabel2) setAdjustsFontSizeToFitWidth:NO];
 	[(*variableNameLabel2) setNumberOfLines:1];
-	[(*variableNameLabel2) setFont:[UIFont fontWithName:@".HelveticaNeueInterface-M3" size:17.0f] ];
 	[(*variableNameLabel2) setTextAlignment:NSTextAlignmentCenter];
+	[(*variableNameLabel2) setFont:[UIFont fontWithName:@".HelveticaNeueInterface-M3" size:17.0f] ];
 	[(*variableNameLabel2) setTextColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:255]];
 	[(*variableNameView) addSubview:(*variableNameLabel2)];
 	[(*rootView) addSubview:(*variableNameView)];

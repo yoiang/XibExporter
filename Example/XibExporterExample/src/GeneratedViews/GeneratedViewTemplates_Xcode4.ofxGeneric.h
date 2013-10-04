@@ -74,8 +74,8 @@ inline void populateGeneratedViewTemplates_Xcode4( ofPtr< ofxGenericView > rootV
 	variableNameButton2->setFont( ".HelveticaNeueInterface-MediumP4", variableNameButton2->getFontSize() );
 	variableNameButton2->setText( ofxGLocalized( "ButtonTitleLocalizationKey", "Button with Image" ) );
 	variableNameButton2->setNumberOfLines( 1 );
-	variableNameButton2->setBackgroundImage( "Icon.png" );
 	variableNameButton2->setFont( variableNameButton2->getFontName(), 15.0f );
+	variableNameButton2->setBackgroundImage( "Icon.png" );
 	variableNameButton2->setEnabled( true );
 	variableNameButton2->setDownBackgroundImage( "backgroundImageDown.png" );
 	variableNameButton2->setLineBreakMode( ofxGenericTextLinebreakModeMiddleTruncation );
