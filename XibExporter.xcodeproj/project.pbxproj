@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3C07A1B917F6B5250064174E /* NSDictionary+TypeForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C07A1B817F6B5240064174E /* NSDictionary+TypeForKey.m */; };
+		3C0C530317FE81FB0057BE15 /* NSMutableString+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0C530217FE81FB0057BE15 /* NSMutableString+Parsing.m */; };
 		3C10DC8C17E2C56600162DBC /* FontExchange.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC8B17E2C56600162DBC /* FontExchange.m */; };
 		3C10DC8F17E2CE4300162DBC /* XibResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC8E17E2CE4300162DBC /* XibResources.m */; };
 		3C10DC9217E2DD9F00162DBC /* ViewGraphData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9117E2DD9F00162DBC /* ViewGraphData.m */; };
@@ -100,6 +101,8 @@
 /* Begin PBXFileReference section */
 		3C07A1B717F6B5240064174E /* NSDictionary+TypeForKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+TypeForKey.h"; sourceTree = "<group>"; };
 		3C07A1B817F6B5240064174E /* NSDictionary+TypeForKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+TypeForKey.m"; sourceTree = "<group>"; };
+		3C0C530117FE81FB0057BE15 /* NSMutableString+Parsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableString+Parsing.h"; sourceTree = "<group>"; };
+		3C0C530217FE81FB0057BE15 /* NSMutableString+Parsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableString+Parsing.m"; sourceTree = "<group>"; };
 		3C10DC8A17E2C56600162DBC /* FontExchange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontExchange.h; sourceTree = "<group>"; };
 		3C10DC8B17E2C56600162DBC /* FontExchange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontExchange.m; sourceTree = "<group>"; };
 		3C10DC8D17E2CE4300162DBC /* XibResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XibResources.h; sourceTree = "<group>"; };
@@ -455,6 +458,8 @@
 				3C2C58FA17F7D1DE0081D1AE /* NSError+NSLog.m */,
 				3C25014117F983DA0001C0EF /* NSDictionary+Path.h */,
 				3C25014217F983DA0001C0EF /* NSDictionary+Path.m */,
+				3C0C530117FE81FB0057BE15 /* NSMutableString+Parsing.h */,
+				3C0C530217FE81FB0057BE15 /* NSMutableString+Parsing.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -747,6 +752,7 @@
 				3C96F3BA17D0F4D5000FC446 /* ExportedViewMap.m in Sources */,
 				3CEA729817D1093E00F419A3 /* SBJsonStreamParserState.m in Sources */,
 				3CDA1A9E17F1421400A80DEF /* UIKitViewExporter.m in Sources */,
+				3C0C530317FE81FB0057BE15 /* NSMutableString+Parsing.m in Sources */,
 				3C65718717D0FF560074B101 /* CXMLDocument_CreationExtensions.m in Sources */,
 				3C5B8B1117F300A3009C99F2 /* NSData+MD5.m in Sources */,
 				3C96F3BF17D0F4D5000FC446 /* NSArray+NSString.m in Sources */,
