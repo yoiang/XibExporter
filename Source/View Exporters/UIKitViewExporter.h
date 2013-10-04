@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-#import "CodeViewExporter.h"
+#import "CLikeCodeViewExporter.h"
 
-@interface UIKitViewExporter : CodeViewExporter
+@interface UIKitViewExporter : CLikeCodeViewExporter
 
 @end

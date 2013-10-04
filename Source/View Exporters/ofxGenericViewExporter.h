@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "CodeViewExporter.h"
+#import "CLikeCodeViewExporter.h"
 
-@interface ofxGenericViewExporter : CodeViewExporter
+@interface ofxGenericViewExporter : CLikeCodeViewExporter
 
 @end
