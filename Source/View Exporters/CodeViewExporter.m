@@ -35,6 +35,8 @@ static NSMutableDictionary* instanceCounts = nil;
 
 @end
 
+// TODO: map from code def and instance def directly to data instead of particular parsing
+
 @implementation CodeViewExporter
 
 -(NSString*)factoryKey
