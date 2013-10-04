@@ -491,7 +491,7 @@ static NSMutableDictionary* instanceCounts = nil;
     
     [code appendString:[self.map combinedFunctionDefinitions] ];
     
-    [code replaceOccurrencesOfString:@"$instanceName$" withString:xibName ]; // TODO: Objective-C strings begin with @, change XibExporter matching @
+    [code replaceOccurrencesOfString:@"$instanceName$" withString:xibName ];
 
     // TODO: exported by whom
     
