@@ -15,6 +15,16 @@ inline ofRectangle getGenerated$instanceName$Frame()
 inline void populateGenerated$instanceName$( ofPtr< ofxGenericView > rootViewﬁ )
 {$GeneratedBody$}
 
+inline void populateGeneratedMapped$instanceName$( ofPtr< ofxGenericView > rootView, ofPtr< ofxGenericValueStore > &outlets )
+{
+$IndividualOutletReferences$
+
+    populateGenerated$instanceName$( rootView$PassForAssign$ );
+
+    outlets = ofxGenericValueStore::create( ofxGenericValueStore::Object );
+$OutletReferencesToMap$
+}
+
 inline void populatePreserveGenerated$instanceName$( ofPtr< ofxGenericView > rootView, bool preserveTopLeft, bool preserveSizeﬁ )
 {
     ofRectangle preservedFrame = rootView->getFrame();

@@ -46,6 +46,16 @@ inline void populatePreserveGenerated$instanceName$( UIView** rootView, bool pre
     }
 }
 
+inline void populateGeneratedMapped$instanceName$( UIView** rootView, NSMutableDictionary** outlets )
+{
+$IndividualOutletReferences$
+
+    populateGenerated$instanceName$( rootView$PassForAssign$ );
+    
+    *outlets = [NSMutableDictionary dictionary];
+$OutletReferencesToMap$
+}
+
 inline UIView* constructGenerated$instanceName$( % )
 {
     UIView* rootView = [ [UIView alloc] init];

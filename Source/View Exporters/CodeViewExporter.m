@@ -287,7 +287,7 @@ static NSMutableDictionary* instanceCounts = nil;
             NSString* lineFilledIn = [self replaceCodeSymbols:line instanceDefinition:instanceDefinition properties:properties];
             if ( lineFilledIn && [ lineFilledIn length ] > 0 )
             {
-                [self appendToCode:objectSetup statement:lineFilledIn tabbed:YES];
+                [self appendToCode:objectSetup statement:lineFilledIn tab:YES];
             }
         }
     }
@@ -413,7 +413,7 @@ static NSMutableDictionary* instanceCounts = nil;
             [code appendString:@"\n"];
             for (NSString* comment in [instanceDefinition comments] )
             {
-                [self appendToCode:code statement:[NSString stringWithFormat:@"// %@", comment] tabbed:YES];
+                [self appendToCode:code statement:[NSString stringWithFormat:@"// %@", comment] tab:YES];
             }
         }
         
@@ -424,7 +424,7 @@ static NSMutableDictionary* instanceCounts = nil;
             [code appendString:constructor];
         } else
         {
-            [self appendToCode:code statement:constructor tabbed:YES];
+            [self appendToCode:code statement:constructor tab:YES];
         }
         
         if (!isInline)
@@ -442,7 +442,7 @@ static NSMutableDictionary* instanceCounts = nil;
                 [code appendString:[subviewCode objectForKey:@"code"]];
                 
                 NSString* addSubviewStatement = [classDefinition asAddSubViewWithInstanceName:[self.map variableReference:[instanceDefinition instanceName] ] andSubviewInstanceName:[self.map variableReference:[subviewCode objectForKey:@"instanceName"] ] ];
-                [self appendToCode:code statement:addSubviewStatement tabbed:YES];
+                [self appendToCode:code statement:addSubviewStatement tab:YES];
             }
         }
     }
@@ -454,18 +454,43 @@ static NSMutableDictionary* instanceCounts = nil;
     return [NSMutableDictionary dictionaryWithObjectsAndKeys:code, @"code", [instanceDefinition instanceName], @"instanceName", nil];
 }
 
--(void)appendToCode:(NSMutableString*)code statement:(NSString*)statement tabbed:(BOOL)tabbed
+-(NSString*)stringOfCodeFromStatement:(NSString*)statement tab:(BOOL)tab endLine:(BOOL)endLine
+{
+    NSMutableString* result = [NSMutableString string];
+    
+    [self appendToCode:result statement:statement tab:tab endLine:endLine];
+    
+    return result;
+}
+
+-(NSString*)stringOfCodeFromStatement:(NSString*)statement tab:(BOOL)tab
+{
+    return [self stringOfCodeFromStatement:statement tab:tab endLine:YES];
+}
+
+-(void)appendToCode:(NSMutableString*)code statement:(NSString*)statement tab:(BOOL)tab endLine:(BOOL)endLine
 {
     if ( [statement length] > 0 )
     {
-        if (tabbed)
+        NSMutableString* format = [NSMutableString string];
+        if (tab)
         {
             // TODO: move to config json
-            [code appendString:@"\t"];
+            [format appendString:@"\t"];
         }
-        
-        [code appendFormat:@"%@%@\n", statement, [self.map statementEnd] ];
+        [format appendString:@"%@%@"];
+        if (endLine)
+        {
+            [format appendString:@"\n"];
+        }
+
+        [code appendFormat:format, statement, [self.map statementEnd] ];
     }
+}
+
+-(void)appendToCode:(NSMutableString*)code statement:(NSString*)statement tab:(BOOL)tab
+{
+    [self appendToCode:code statement:statement tab:tab endLine:YES];
 }
 
 -( NSNumber* )getInstanceCount:( NSString* )type
@@ -507,6 +532,7 @@ static NSMutableDictionary* instanceCounts = nil;
     
     NSDictionary* outlets = [properties objectForKey:@"outlets"];
     [self writeCodeTemplate:code forOutlets:outlets];
+    [self writeCodeTemplate:code forMappedWithOutlets:outlets];
     
     [code replaceOccurrencesOfString:@"$GeneratedBody$" withString:[rootInstanceCodeDefinition objectForKey:@"code"] ];
     
@@ -521,6 +547,7 @@ static NSMutableDictionary* instanceCounts = nil;
     //construct a string representing all the outlet parameters
     NSMutableString* params = [NSMutableString string];
     NSMutableString* strippedParams = [NSMutableString string];
+    NSMutableString* strippedParamsPassForAssign = [NSMutableString string];
     
     for (NSDictionary* instanceDefinition in outlets )
     {
@@ -532,6 +559,7 @@ static NSMutableDictionary* instanceCounts = nil;
         // TODO: C style parameters, support template of other formats
         [params appendString:unstrippedOutlet withNonEmptySeparator:@", "];
         [strippedParams appendString:strippedOutlet withNonEmptySeparator:@", "];
+        [strippedParamsPassForAssign appendString:[self.map localVariablePassing:strippedOutlet] withNonEmptySeparator:@", "];
     }
     
     NSString* paramsFollowingComma = nil;
@@ -546,10 +574,37 @@ static NSMutableDictionary* instanceCounts = nil;
         strippedParamsComma = [NSString stringWithFormat:@", %@", strippedParams];
     }
     
+    NSString* strippedParamsPassForAssignFollowingComma = nil;
+    if ( [strippedParamsPassForAssign length] > 0)
+    {
+        strippedParamsPassForAssignFollowingComma = [NSString stringWithFormat:@", %@", strippedParamsPassForAssign];
+    }
+    
     [code replaceOccurrencesOfString:@"%" withString:params];
     [code replaceOccurrencesOfString:@"§" withString:strippedParams];
     [code replaceOccurrencesOfString:@"∞" withString:strippedParamsComma];
     [code replaceOccurrencesOfString:@"ﬁ" withString:paramsFollowingComma];
+    [code replaceOccurrencesOfString:@"$PassForAssign$" withString:strippedParamsPassForAssignFollowingComma];    
+}
+
+-(void)writeCodeTemplate:(NSMutableString*)code forMappedWithOutlets:(NSDictionary*)outlets
+{
+    NSMutableString* individualOutletReferences = [NSMutableString string];
+    NSMutableString* outletReferencesToMap = [NSMutableString string];
+    
+    for (NSDictionary* instanceDefinition in outlets)
+    {
+        NSDictionary* classDefinition = [self.map definitionForClassOfInstance:instanceDefinition];
+        
+        NSString* declaration = [ NSString stringWithFormat:@"%@ %@", [classDefinition objectForKey:@"_declaration" ], [instanceDefinition instanceName] ];
+        [individualOutletReferences appendString:[self stringOfCodeFromStatement:declaration tab:YES endLine:NO] withNonEmptySeparator:@"\n"];
+        
+        NSString* outletReference = [self.map outletMapAddStatementForInstanceName:[instanceDefinition instanceName] ];
+        [outletReferencesToMap appendString:[self stringOfCodeFromStatement:outletReference tab:YES endLine:NO] withNonEmptySeparator:@"\n"];
+    }
+    
+    [code replaceOccurrencesOfString:@"$IndividualOutletReferences$" withString:individualOutletReferences];
+    [code replaceOccurrencesOfString:@"$OutletReferencesToMap$" withString:outletReferencesToMap];
 }
 
 @end

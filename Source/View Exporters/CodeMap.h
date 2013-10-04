@@ -20,6 +20,9 @@
 -(NSMutableDictionary*)definitionForEnum:(NSString*)enumName;
 -(NSString*)convertEnum:(NSString*)enumName value:(NSString*)value;
 
+-(NSString*)outletMapAddStatement;
+-(NSString*)outletMapAddStatementForInstanceName:(NSString*)instanceName;
+
 -(NSArray*)definedFunctions;
 -(NSString*)functionDefinition:(NSString*)function;
 -(NSString*)combinedFunctionDefinitions;
@@ -28,6 +31,7 @@
 @property (nonatomic, readonly) NSDictionary* asIsStringKeys;
 
 -(NSString*)variableReference:(NSString*)name;
+-(NSString*)localVariablePassing:(NSString*)name;
 
 -(NSString*)staticStringDefinition:(NSString*)contents;
 

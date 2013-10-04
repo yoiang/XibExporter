@@ -1,4 +1,7 @@
 {
+  "Outlet Map Definition": {
+    "addStatement": "[*outlets setObject:$instanceName$ forKey:@\"$instanceName$\"]"
+  },
   "Class Definitions": {
     "CGRect": {
       "_inlineConstructor": "CGRectMake( $x$, $y$, $width$, $height$ )"
@@ -194,6 +197,7 @@
   "_functionDefinitionFileName": "UIKitDefinition.h",
   "_variableReference": "(*$instanceName$)",
   "_staticStringDefinition": "@\"$\"",
+  "_localVariablePassing": "&$instanceName$",
   "_ignoredClasses": {
     "_UITableViewSeparatorView": true
   },

@@ -10,6 +10,8 @@
 
 #import "SBJson.h"
 
+#import "NSDictionary+TypeForKey.h"
+#import "NSMutableString+Parsing.h"
 #import "NSMutableDictionary+ClassDefinition.h"
 
 @interface CodeMap()
@@ -97,6 +99,25 @@
     return [ [ [self definitionForEnum:enumName] objectForKey:@"_enum"] objectForKey:value ];
 }
 
+-(NSDictionary*)outletMap
+{
+    return [ self.data dictionaryForKey:@"Outlet Map Definition" ];
+}
+
+-(NSString*)outletMapAddStatement
+{
+    return [ [self outletMap] stringForKey:@"addStatement"];
+}
+
+-(NSString*)outletMapAddStatementForInstanceName:(NSString*)instanceName
+{
+    NSMutableString* result = [NSMutableString stringWithString:[self outletMapAddStatement] ];
+    
+    [result replaceOccurrencesOfString:@"$instanceName$" withString:instanceName];
+    
+    return result;
+}
+
 -(NSDictionary*)functionDefinitions
 {
     return [self.data objectForKey:@"_functionDefinitions"];
@@ -157,7 +178,7 @@
     return [self.data objectForKey:@"_asIsStringKeys"];
 }
 
--(NSString*)variableReference:(NSString*)name;
+-(NSString*)variableReference:(NSString*)name
 {
     NSString* variableReference = [self.data objectForKey:@"_variableReference"];
     if ( [variableReference length] == 0)
@@ -165,6 +186,16 @@
         variableReference = @"$instanceName$";
     }
     return [variableReference stringByReplacingOccurrencesOfString:@"$instanceName$" withString:name];
+}
+
+-(NSString*)localVariablePassing:(NSString*)name
+{
+    NSString* localVariablePassing = [self.data stringForKey:@"_localVariablePassing"];
+    if ( [localVariablePassing length] == 0)
+    {
+        localVariablePassing = @"$instanceName$";
+    }
+    return [localVariablePassing stringByReplacingOccurrencesOfString:@"$instanceName$" withString:name];
 }
 
 -(NSString*)staticStringDefinition:(NSString*)contents
