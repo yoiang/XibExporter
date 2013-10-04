@@ -239,38 +239,27 @@ static NSMutableDictionary* instanceCounts = nil;
 
 -(NSString*)codeForClassConstructor:(NSString*)class instanceName:(NSString*)instanceName instanceDefinition:(NSDictionary*)instanceDefinition properties:(NSMutableDictionary*)properties isInline:(BOOL)isInline isOutlet:(BOOL)isOutlet
 {
-    NSMutableString* constructor = nil;
+    NSString* constructor = nil;
     
     NSDictionary* classDefinition = [self.map definitionForClassOfInstance:instanceDefinition];
     
     //if this is an inline call, simply return the inline constructor
     if (isInline)
     {
-        constructor = [NSMutableString stringWithString:[self replaceCodeSymbols:[classDefinition asInlineConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties] ];
+        constructor = [self replaceCodeSymbols:[classDefinition asInlineConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
     } else
     {
-        constructor = [NSMutableString stringWithString:@"\n"];
-        
-        for (NSString* comment in [instanceDefinition comments] )
-        {
-            [self appendToCode:constructor statement:[NSString stringWithFormat:@"// %@", comment] tabbed:YES];
-        }
-        
         //only put the constructor in if this is not the root view, because the root view should be handled by surrounding code
         if ( ![instanceDefinition isRootView] )
         {
-            NSString* constructorStatement = nil;
             if (isOutlet)
             {
-                constructorStatement = [self replaceCodeSymbols:[classDefinition asInlineConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
-                constructorStatement = [NSString stringWithFormat:@"%@ = %@",[self.map variableReference:instanceName], constructorStatement];
+                constructor = [NSString stringWithFormat:@"%@ = %@",[self.map variableReference:instanceName], [self codeForClassConstructor:class instanceName:instanceName instanceDefinition:instanceDefinition properties:properties isInline:YES isOutlet:YES] ];
             }
             else
             {
-                constructorStatement = [self replaceCodeSymbols:[classDefinition asConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
+                constructor = [self replaceCodeSymbols:[classDefinition asConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
             }
-        
-            [self appendToCode:constructor statement:constructorStatement tabbed:YES];
         }
     }
 
@@ -416,9 +405,24 @@ static NSMutableDictionary* instanceCounts = nil;
             [[properties objectForKey:@"outlets"] addObject:instanceDefinition];
         }
         
+        if (!isInline)
+        {
+            [code appendString:@"\n"];
+            for (NSString* comment in [instanceDefinition comments] )
+            {
+                [self appendToCode:code statement:[NSString stringWithFormat:@"// %@", comment] tabbed:YES];
+            }
+        }
+        
         NSString* constructor = [self codeForClassConstructor:className instanceName:instanceName instanceDefinition:instanceDefinition properties:properties isInline:isInline isOutlet:isOutlet];
         
-        [code appendString:constructor];
+        if (isInline)
+        {
+            [code appendString:constructor];
+        } else
+        {
+            [self appendToCode:code statement:constructor tabbed:YES];
+        }
         
         if (!isInline)
         {
@@ -449,13 +453,16 @@ static NSMutableDictionary* instanceCounts = nil;
 
 -(void)appendToCode:(NSMutableString*)code statement:(NSString*)statement tabbed:(BOOL)tabbed
 {
-    if (tabbed)
+    if ( [statement length] > 0 )
     {
-        // TODO: move to config json
-        [code appendString:@"\t"];
+        if (tabbed)
+        {
+            // TODO: move to config json
+            [code appendString:@"\t"];
+        }
+        
+        [code appendFormat:@"%@%@\n", statement, [self.map statementEnd] ];
     }
-    
-    [code appendFormat:@"%@%@\n", statement, [self.map statementEnd] ];
 }
 
 -( NSNumber* )getInstanceCount:( NSString* )type
