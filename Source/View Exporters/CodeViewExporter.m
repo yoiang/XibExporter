@@ -509,7 +509,7 @@ static NSMutableDictionary* instanceCounts = nil;
     [code replaceOccurrencesOfString:@"$exportTime$" withString:[NSString stringWithFormat:@"%@", now] options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
     
     //includes
-    NSDictionary* includes = [properties objectForKey:@"includes"];
+    NSArray* includes = [properties objectForKey:@"includes"];
     NSMutableString* includesString = [NSMutableString string];
     for (NSObject* include in includes)
     {
