@@ -86,4 +86,19 @@
     return result;
 }
 
+-(NSArray*)includes
+{
+    NSArray* result = [self arrayForKey:@"_include"];
+    if (!result)
+    {
+        NSString* singleInclude = [self stringForKey:@"_include"];
+        if (singleInclude)
+        {
+            result = [NSArray arrayWithObject:singleInclude];
+        }
+    }
+    
+    return result;
+}
+
 @end

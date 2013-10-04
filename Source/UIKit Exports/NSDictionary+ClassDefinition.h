@@ -29,4 +29,6 @@
 -(NSString*)asAddSubViewWithInstanceName:(NSString*)instanceName andSubviewInstance:(NSDictionary*)instanceDefinition;
 -(NSString*)asAddSubViewWithInstanceName:(NSString*)instanceName andSubviewInstanceName:(NSString*)subviewInstanceName;
 
+-(NSArray*)includes;
+
 @end

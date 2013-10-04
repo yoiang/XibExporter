@@ -370,28 +370,11 @@ static NSMutableDictionary* instanceCounts = nil;
 
 -(void)addIncludes:(NSMutableArray*)includes forClass:(NSString*)className
 {
-    NSDictionary* classDefinition = [self.map definitionForClass:className];
-
-    //if we have an include, add that in
-    if ( [classDefinition objectForKey:@"_include"] )
+    for (NSString* include in [ [self.map definitionForClass:className] includes] )
     {
-        NSMutableArray *allIncludes = [NSMutableArray array];
-        
-        id classIncludes = [classDefinition objectForKey:@"_include"];
-        if ( [classIncludes isKindOfClass:[NSArray class] ] )
+        if ( ![includes containsObject:include ] )
         {
-            [allIncludes addObjectsFromArray:classIncludes];
-        } else
-        {
-            [allIncludes addObject:classIncludes];
-        }
-        
-        for (NSString* include in allIncludes)
-        {
-            if ( ![includes containsObject:include ] )
-            {
-                [includes addObject:include];
-            }
+            [includes addObject:include];
         }
     }
 }
