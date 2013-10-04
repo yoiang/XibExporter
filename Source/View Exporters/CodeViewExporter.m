@@ -160,7 +160,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return result;
 }
 
--(NSString*)getStringRespresentationForNumberValue:(NSNumber*)value
+-(NSString*)stringValueForNumber:(NSNumber*)value
 {
     NSString* result = nil;
     
@@ -193,7 +193,7 @@ static NSMutableDictionary* instanceCounts = nil;
     }
     else if ([v isKindOfClass:[NSNumber class]])
     {
-        result = [self getStringRespresentationForNumberValue:v];
+        result = [self stringValueForNumber:v];
     }
     
     if (!result)
