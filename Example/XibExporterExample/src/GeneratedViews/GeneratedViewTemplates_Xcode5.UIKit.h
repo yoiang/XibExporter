@@ -11,17 +11,17 @@ inline CGRect getGeneratedViewTemplates_Xcode5Frame()
 
 inline void populateGeneratedViewTemplates_Xcode5( UIView** rootView, UILabel** variableNameLabel, UIButton** variableNameButton1, UIButton** variableNameButton2, UIImageView** variableNameImage, UIView** variableNameView, UILabel** variableNameLabel2 )
 {
-	[(*rootView) setHidden:false];
+	[(*rootView) setHidden:NO];
 	[(*rootView) setFrame:CGRectMake( 0.0f, 0.0f, 320.0f, 568.0f )];
 	[(*rootView) setBackgroundColor:[UIColor colorWithRed:255 green:255 blue:255 alpha:255]];
 	[(*rootView) setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 	[(*rootView) setAlpha:1.0f];
-	[(*rootView) setClipsToBounds:false];
+	[(*rootView) setClipsToBounds:NO];
 	[(*rootView) setContentMode:UIViewContentModeScaleToFill];
 
 	(*variableNameLabel) = [ [UILabel alloc] init];
 	[(*variableNameLabel) setLineBreakMode:NSLineBreakByTruncatingTail];
-	[(*variableNameLabel) setAdjustsFontSizeToFitWidth:false];
+	[(*variableNameLabel) setAdjustsFontSizeToFitWidth:NO];
 	[(*variableNameLabel) setNumberOfLines:1];
 	[(*variableNameLabel) setFont:[UIFont fontWithName:@".HelveticaNeueInterface-M3" size:17.0f] ];
 	[(*variableNameLabel) setTextAlignment:NSTextAlignmentCenter];
@@ -33,7 +33,7 @@ inline void populateGeneratedViewTemplates_Xcode5( UIView** rootView, UILabel** 
 	[(*variableNameButton1) setTitleColor:[UIColor colorWithRed:0 green:122 blue:255 alpha:255] forState:UIControlStateHighlighted];
 	[(*variableNameButton1).titleLabel setFont:[UIFont fontWithName:@".HelveticaNeueInterface-M3" size:15.0f] ];
 	[(*variableNameButton1) setBackgroundImage:[UIImage imageNamed:@"backgroundImageDown.png"] forState:UIControlStateHighlighted];
-	[(*variableNameButton1) setEnabled:true];
+	[(*variableNameButton1) setEnabled:YES];
 	[(*variableNameButton1).titleLabel setNumberOfLines:1];
 	[(*rootView) addSubview:(*variableNameButton1)];
 
@@ -42,7 +42,7 @@ inline void populateGeneratedViewTemplates_Xcode5( UIView** rootView, UILabel** 
 	[(*variableNameButton2) setTitleColor:[UIColor colorWithRed:0 green:122 blue:255 alpha:255] forState:UIControlStateHighlighted];
 	[(*variableNameButton2).titleLabel setFont:[UIFont fontWithName:@".HelveticaNeueInterface-M3" size:15.0f] ];
 	[(*variableNameButton2) setBackgroundImage:[UIImage imageNamed:@"backgroundImageDown.png"] forState:UIControlStateHighlighted];
-	[(*variableNameButton2) setEnabled:true];
+	[(*variableNameButton2) setEnabled:YES];
 	[(*variableNameButton2) setBackgroundImage:[UIImage imageNamed:@"Icon.png"] forState:UIControlStateNormal];
 	[(*variableNameButton2).titleLabel setNumberOfLines:1];
 	[(*rootView) addSubview:(*variableNameButton2)];
@@ -52,17 +52,17 @@ inline void populateGeneratedViewTemplates_Xcode5( UIView** rootView, UILabel** 
 	[(*rootView) addSubview:(*variableNameImage)];
 
 	(*variableNameView) = [ [UIView alloc] init];
-	[(*variableNameView) setHidden:false];
+	[(*variableNameView) setHidden:NO];
 	[(*variableNameView) setFrame:CGRectMake( 20.0f, 291.0f, 280.0f, 72.0f )];
 	[(*variableNameView) setBackgroundColor:[UIColor colorWithRed:216 green:204 blue:255 alpha:255]];
 	[(*variableNameView) setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin];
 	[(*variableNameView) setAlpha:1.0f];
-	[(*variableNameView) setClipsToBounds:false];
+	[(*variableNameView) setClipsToBounds:NO];
 	[(*variableNameView) setContentMode:UIViewContentModeScaleToFill];
 
 	(*variableNameLabel2) = [ [UILabel alloc] init];
 	[(*variableNameLabel2) setLineBreakMode:NSLineBreakByTruncatingTail];
-	[(*variableNameLabel2) setAdjustsFontSizeToFitWidth:false];
+	[(*variableNameLabel2) setAdjustsFontSizeToFitWidth:NO];
 	[(*variableNameLabel2) setNumberOfLines:1];
 	[(*variableNameLabel2) setFont:[UIFont fontWithName:@".HelveticaNeueInterface-M3" size:17.0f] ];
 	[(*variableNameLabel2) setTextAlignment:NSTextAlignmentCenter];
