@@ -73,10 +73,6 @@ static NSMutableDictionary* instanceCounts = nil;
 
 -(NSString*)exportData:(ViewGraphData*)viewGraphData toPath:(NSString*)targetPath error:(NSError **)error
 {
-    NSString* exportedFileName = nil;
-    
-    NSString* xibName = [viewGraphData xibName];
-    
     if ( !instanceCounts )
     {
         instanceCounts = [ [ NSMutableDictionary alloc ] init ];
@@ -86,22 +82,27 @@ static NSMutableDictionary* instanceCounts = nil;
     }
     
     NSMutableDictionary* properties = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                      [NSMutableArray array], @"outlets",
+                                       [NSMutableArray array], @"outlets",
                                        [NSMutableArray array], @"includes",
                                        nil];
     
-    NSDictionary* instanceDefinition = [self getCodeFor:viewGraphData isInline:NO properties:properties];
-    
+    NSDictionary* rootInstanceDefinition = [self getCodeFor:viewGraphData isInline:NO properties:properties];
+
+    NSString* xibName = [viewGraphData xibName];
+
+    NSString *code = [self exportCodeTemplate:xibName viewGraphData:viewGraphData rootInstanceDefinition:rootInstanceDefinition properties:properties];
+
     NSString* exportFileNameFormat = [self multipleExportedFileNameFormat];
     
+    NSString* exportedFileName = nil;
+
     NSString* baseFileName = [NSString stringWithFormat:@"Generated%@", xibName];
     exportedFileName = [NSString stringWithFormat:exportFileNameFormat, baseFileName];
     
     NSString* fileNamePath = [NSString stringWithFormat:@"%@/%@", targetPath, exportedFileName];
     
-    NSString *code = [self exportCodeTemplate:xibName viewGraphData:viewGraphData rootInstanceDefinition:instanceDefinition properties:properties];
-    
     [code writeToFile:fileNamePath atomically:NO encoding:NSUTF8StringEncoding error:error];
+    
     return exportedFileName;
 }
 
