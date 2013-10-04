@@ -310,11 +310,6 @@ static NSMutableDictionary* instanceCounts = nil;
     return objectSetup;
 }
 
--(NSString*)codeForAddSubview:(NSDictionary*)subview instanceName:(NSString*)instanceName classDefinition:(NSDictionary*)classDefinition
-{
-    return [classDefinition asAddSubViewWithInstanceName:[self.map variableReference:instanceName] andSubviewInstanceName:[self.map variableReference:[subview objectForKey:@"name"] ] ];
-}
-
 -(NSString*)replace:(NSString*)string stringBetweenOccurencesOf:(NSString*)find withStringRepresentationFromInstance:(NSDictionary*)instanceDefinition properties:(NSMutableDictionary *)properties
 {
     NSString* result = string;
@@ -449,10 +444,9 @@ static NSMutableDictionary* instanceCounts = nil;
             if (subviewCode)
             {
                 [code appendString:[subviewCode objectForKey:@"code"]];
-                [code appendFormat:@"\t%@%@\n",
-                 [self codeForAddSubview:subviewCode instanceName:instanceName classDefinition:classDefinition],
-                 [self.map statementEnd]
-                 ];
+                
+                NSString* addSubviewStatement = [classDefinition asAddSubViewWithInstanceName:[self.map variableReference:instanceName] andSubviewInstanceName:[self.map variableReference:[subviewCode objectForKey:@"name"] ] ];
+                [self appendToCode:code statement:addSubviewStatement tabbed:YES];
             }
         }
     }
@@ -462,6 +456,17 @@ static NSMutableDictionary* instanceCounts = nil;
     }
     
     return [NSMutableDictionary dictionaryWithObjectsAndKeys:code, @"code", instanceName, @"name", properties, @"properties", nil];
+}
+
+-(void)appendToCode:(NSMutableString*)code statement:(NSString*)statement tabbed:(BOOL)tabbed
+{
+    if (tabbed)
+    {
+        // TODO: move to config json
+        [code appendString:@"\t"];
+    }
+    
+    [code appendFormat:@"%@%@\n", statement, [self.map statementEnd] ];
 }
 
 -( NSNumber* )getInstanceCount:( NSString* )type
