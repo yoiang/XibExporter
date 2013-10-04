@@ -124,20 +124,13 @@ static NSMutableDictionary* instanceCounts = nil;
 
 -(NSString*)getStringRepresentationForArrayValue:(NSArray*)value key:( NSString* )key properties:(NSMutableDictionary *)properties
 {
-    NSMutableString* result = nil;
+    NSMutableString* result = [NSMutableString string];
     
+    // For now only used for masks
     for (id individualValue in value)
     {
         NSString* parsedStringValue = [self getStringRepresentation:individualValue key:key properties:properties];
-        
-        // For now only used for masks
-        if (!result)
-        {
-            result = [NSMutableString stringWithString:parsedStringValue];
-        } else
-        {
-            [result appendFormat:@" | %@", parsedStringValue];
-        }
+        [result appendString:parsedStringValue withNonEmptySeparator:@" | "];
     }
     return result;
 }
@@ -544,16 +537,8 @@ static NSMutableDictionary* instanceCounts = nil;
         NSString* unstrippedOutlet = [ [classDefinition objectForKey:@"_parameter"] stringByReplacingOccurrencesOfString:@"$instanceName$" withString:strippedOutlet];
         
         // TODO: C style parameters, support template of other formats
-        NSString* paramsFormat = nil;
-        if ( [params length] == 0)
-        {
-            paramsFormat = @"%@";
-        } else
-        {
-            paramsFormat = @", %@";
-        }
-        [params appendFormat:paramsFormat, unstrippedOutlet];
-        [strippedParams appendFormat:paramsFormat, strippedOutlet];
+        [params appendString:unstrippedOutlet withNonEmptySeparator:@", "];
+        [strippedParams appendString:strippedOutlet withNonEmptySeparator:@", "];
     }
     
     NSString* paramsFollowingComma = nil;
