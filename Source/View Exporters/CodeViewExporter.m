@@ -503,7 +503,10 @@ static NSMutableDictionary* instanceCounts = nil;
     
     [code appendString:[self.map combinedFunctionDefinitions] ];
     
-    // TODO: include date and time of export and by whom
+    // TODO: exported by whom
+    
+    NSDate* now = [NSDate date];
+    [code replaceOccurrencesOfString:@"$exportTime$" withString:[NSString stringWithFormat:@"%@", now] options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
     
     //includes
     NSDictionary* includes = [properties objectForKey:@"includes"];
