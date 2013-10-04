@@ -173,9 +173,9 @@
     NSString* variableReference = [self.data objectForKey:@"_variableReference"];
     if ( [variableReference length] == 0)
     {
-        variableReference = @"@";
+        variableReference = @"$instanceName$";
     }
-    return [variableReference stringByReplacingOccurrencesOfString:@"@" withString:name];
+    return [variableReference stringByReplacingOccurrencesOfString:@"$instanceName$" withString:name];
 }
 
 -(NSString*)staticStringDefinition:(NSString*)contents

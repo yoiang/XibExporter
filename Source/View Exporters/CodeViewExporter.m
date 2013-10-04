@@ -21,6 +21,7 @@
 #import "NSArray+NSString.h"
 
 #import "NSString+Parsing.h"
+#import "NSMutableString+Parsing.h"
 #import "NSDictionary+Path.h"
 
 #import "NSDictionary+ClassDefinition.h"
@@ -318,7 +319,7 @@ static NSMutableDictionary* instanceCounts = nil;
 -(NSString*)codeForAddSubview:(NSDictionary*)subview instanceName:(NSString*)instanceName classDefinition:(NSDictionary*)classDefinition
 {
     NSString *addsub = [classDefinition objectForKey:@"_addSubview"];
-    addsub = [addsub stringByReplacingOccurrencesOfString:@"@" withString:[self.map variableReference:instanceName] ];
+    addsub = [addsub stringByReplacingOccurrencesOfString:@"$instanceName$" withString:[self.map variableReference:instanceName] ];
     addsub = [addsub stringByReplacingOccurrencesOfString:@"%" withString:[self.map variableReference:[subview objectForKey:@"name"] ] ];
     return addsub;
 }
@@ -363,7 +364,7 @@ static NSMutableDictionary* instanceCounts = nil;
         line = @"";
     }
     
-    NSString* output = [line stringByReplacingOccurrencesOfString:@"@" withString:[self.map variableReference:name] ];
+    NSString* output = [line stringByReplacingOccurrencesOfString:@"$instanceName$" withString:[self.map variableReference:name] ];
     output = [self replace:output stringBetweenOccurencesOf:@"$" withStringRepresentationFromInstance:instanceDefinition properties:properties];
 
     NSRange foundMarker = [output rangeOfString:@"$" options:NSLiteralSearch];
@@ -540,7 +541,7 @@ static NSMutableDictionary* instanceCounts = nil;
         NSDictionary* classDefinition = [self.map definitionForClassOfInstance:instanceDefinition];
         
         NSString* strippedOutlet = [instanceDefinition instanceName];
-        NSString* unstrippedOutlet = [ [classDefinition objectForKey:@"_parameter"] stringByReplacingOccurrencesOfString:@"@" withString:strippedOutlet];
+        NSString* unstrippedOutlet = [ [classDefinition objectForKey:@"_parameter"] stringByReplacingOccurrencesOfString:@"$instanceName$" withString:strippedOutlet];
         
         // TODO: C style parameters, support template of other formats
         NSString* paramsFormat = nil;
@@ -567,7 +568,7 @@ static NSMutableDictionary* instanceCounts = nil;
         strippedParamsComma = [NSString stringWithFormat:@", %@", strippedParams];
     }
     
-    [code replaceOccurrencesOfString:@"@" withString:xibName options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
+    [code replaceOccurrencesOfString:@"$instanceName$" withString:xibName options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
     [code replaceOccurrencesOfString:@"%" withString:params options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
     [code replaceOccurrencesOfString:@"§" withString:strippedParams options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
     [code replaceOccurrencesOfString:@"∞" withString:strippedParamsComma options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];

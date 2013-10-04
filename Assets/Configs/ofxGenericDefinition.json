@@ -139,48 +139,48 @@
       "_inlineConstructor": "ofPoint( $width$, $height$ )"
     },
     "UIActivityIndicatorView": {
-      "_constructor": "ofPtr< ofxGenericActivityView > @ = ofxGenericActivityView::create()",
+      "_constructor": "ofPtr< ofxGenericActivityView > $instanceName$ = ofxGenericActivityView::create()",
       "_inlineConstructor": "ofxGenericActivityView::create()",
       "_include": [
         "#include \"ofxGenericActivityView.h\"",
         "#include \"ofxGenericUtility.h\"",
         "#include \"ofxGenericLocalization.h\""
       ],
-      "_parameter": "ofPtr< ofxGenericActivityView > &@",
+      "_parameter": "ofPtr< ofxGenericActivityView > &$instanceName$",
       "_super": "UIView",
       "_variableName": "activityIndicator#",
       "_declaration": "ofPtr< ofxGenericActivityView >",
-      "hidesWhenStopped": "@->setHidesWhenStoppedAnimating( $hidesWhenStopped$ )",
-      "color": "@->setColor( $color$ )",
-      "activityIndicatorViewStyle": "@->setIndicatorViewStyle( $activityIndicatorViewStyle$ )"
+      "hidesWhenStopped": "$instanceName$->setHidesWhenStoppedAnimating( $hidesWhenStopped$ )",
+      "color": "$instanceName$->setColor( $color$ )",
+      "activityIndicatorViewStyle": "$instanceName$->setIndicatorViewStyle( $activityIndicatorViewStyle$ )"
     },
     "UIButton": {
-      "localizedTitleKey": "@->setText( ofxGLocalized( $localizedTitleKey$, $localizedTitleDefault$ ) )",
-      "_constructor": "ofPtr< ofxGenericButtonView > @ = ofxGenericButtonView::create( $buttonType$ )",
+      "localizedTitleKey": "$instanceName$->setText( ofxGLocalized( $localizedTitleKey$, $localizedTitleDefault$ ) )",
+      "_constructor": "ofPtr< ofxGenericButtonView > $instanceName$ = ofxGenericButtonView::create( $buttonType$ )",
       "_include": [
         "#include \"ofxGenericButtonView.h\"",
         "#include \"ofxGenericUtility.h\"",
         "#include \"ofxGenericLocalization.h\""
       ],
       "_inlineConstructor": "ofxGenericButtonView::create( $buttonType$ )",
-      "_parameter": "ofPtr< ofxGenericButtonView > &@",
+      "_parameter": "ofPtr< ofxGenericButtonView > &$instanceName$",
       "_super": "UIView",
       "_variableName": "button#",
       "_declaration": "ofPtr< ofxGenericButtonView >",
-      "backgroundImage": "@->setBackgroundImage( $backgroundImage$ )",
-      "backgroundDownImage": "@->setDownBackgroundImage( $backgroundDownImage$ )",
-      "downTitleColor": "@->setDownTextColor( $downTitleColor$ )",
-      "enabled": "@->setEnabled( $enabled$ )",
-      "localizedTitleKey": "@->setText( ofxGLocalized( $localizedTitleKey$, $localizedTitleDefaultKey$ ) )",
-      "title": "@->setText( $title$ )",
-      "titleLabel.textAlignment": "@->setTextAlignment( $titleLabel.textAlignment$ )",
-      "titleLabel.textColor": "@->setTextColor( $titleLabel.textColor$ )",
-      "titleLabel.lineBreakMode": "@->setLineBreakMode( $titleLabel.lineBreakMode$ )",
-      "titleLabel.numberOfLines": "@->setNumberOfLines( $titleLabel.numberOfLines$ )",
-      "titleLabel.minimumFontSize": "@->setMinimumFontSize( $titleLabel.minimumFontSize$ )",
-      "titleLabel.fontName": "@->setFont( $titleLabel.fontName$, @->getFontSize() )",
-      "titleLabel.fontSize": "@->setFont( @->getFontName(), $titleLabel.fontSize$ )",
-      "rootView": "@->setDelegate( dynamic_pointer_cast< ofxGenericButtonViewDelegate >( rootView ) )"
+      "backgroundImage": "$instanceName$->setBackgroundImage( $backgroundImage$ )",
+      "backgroundDownImage": "$instanceName$->setDownBackgroundImage( $backgroundDownImage$ )",
+      "downTitleColor": "$instanceName$->setDownTextColor( $downTitleColor$ )",
+      "enabled": "$instanceName$->setEnabled( $enabled$ )",
+      "localizedTitleKey": "$instanceName$->setText( ofxGLocalized( $localizedTitleKey$, $localizedTitleDefaultKey$ ) )",
+      "title": "$instanceName$->setText( $title$ )",
+      "titleLabel.textAlignment": "$instanceName$->setTextAlignment( $titleLabel.textAlignment$ )",
+      "titleLabel.textColor": "$instanceName$->setTextColor( $titleLabel.textColor$ )",
+      "titleLabel.lineBreakMode": "$instanceName$->setLineBreakMode( $titleLabel.lineBreakMode$ )",
+      "titleLabel.numberOfLines": "$instanceName$->setNumberOfLines( $titleLabel.numberOfLines$ )",
+      "titleLabel.minimumFontSize": "$instanceName$->setMinimumFontSize( $titleLabel.minimumFontSize$ )",
+      "titleLabel.fontName": "$instanceName$->setFont( $titleLabel.fontName$, $instanceName$->getFontSize() )",
+      "titleLabel.fontSize": "$instanceName$->setFont( $instanceName$->getFontName(), $titleLabel.fontSize$ )",
+      "rootView": "$instanceName$->setDelegate( dynamic_pointer_cast< ofxGenericButtonViewDelegate >( rootView ) )"
     },
     "UIButtonLabel": {
       "_super": "UILabel"
@@ -192,169 +192,169 @@
       "_inlineConstructor": ""
     },
     "UIImageView": {
-      "_constructor": "ofPtr< ofxGenericImageView > @ = ofxGenericImageView::create( )",
+      "_constructor": "ofPtr< ofxGenericImageView > $instanceName$ = ofxGenericImageView::create( )",
       "_include": [
         "#include \"ofxGenericImageView.h\"",
         "#include \"ofxGenericUtility.h\""
       ],
       "_inlineConstructor": "ofxGenericImageView::create(  )",
-      "_parameter": "ofPtr< ofxGenericImageView > &@",
+      "_parameter": "ofPtr< ofxGenericImageView > &$instanceName$",
       "_super": "UIView",
       "_variableName": "image#",
       "_declaration": "ofPtr< ofxGenericImageView >",
-      "image": "@->setImage( $image$ )"
+      "image": "$instanceName$->setImage( $image$ )"
     },
     "UILabel": {
-      "_constructor": "ofPtr< ofxGenericTextView > @ = ofxGenericTextView::create( )",
+      "_constructor": "ofPtr< ofxGenericTextView > $instanceName$ = ofxGenericTextView::create( )",
       "_include": [
         "#include \"ofxGenericTextView.h\"",
         "#include \"ofxGenericUtility.h\"",
         "#include \"ofxGenericLocalization.h\""
       ],
       "_inlineConstructor": "ofxGenericTextView::create( )",
-      "_parameter": "ofPtr< ofxGenericTextView > &@",
+      "_parameter": "ofPtr< ofxGenericTextView > &$instanceName$",
       "_super": "UIView",
       "_variableName": "text#",
       "_declaration": "ofPtr< ofxGenericTextView >",
-      "fontName": "@->setFont( $fontName$, @->getFontSize() )",
-      "fontSize": "@->setFont( @->getFontName(), $fontSize$ )",
-      "minimumFontSize": "@->setMinimumFontSize( $minimumFontSize$ )",
-      "lineBreakMode": "@->setLineBreakMode( $lineBreakMode$ )",
-      "numberOfLines": "@->setNumberOfLines( $numberOfLines$ )",
-      "localizedTextKey": "@->setText( ofxGLocalized( $localizedTextKey$, $localizedDefaultTextKey$ ) )",
-      "text": "@->setText( $text$ )",
-      "textAlignment": "@->setTextAlignment( $textAlignment$ )",
-      "textColor": "@->setTextColor( $textColor$ )",
-      "adjustsFontSizeToFitWidth": "@->setAutosizeFontToFitText( $adjustsFontSizeToFitWidth$ )"
+      "fontName": "$instanceName$->setFont( $fontName$, $instanceName$->getFontSize() )",
+      "fontSize": "$instanceName$->setFont( $instanceName$->getFontName(), $fontSize$ )",
+      "minimumFontSize": "$instanceName$->setMinimumFontSize( $minimumFontSize$ )",
+      "lineBreakMode": "$instanceName$->setLineBreakMode( $lineBreakMode$ )",
+      "numberOfLines": "$instanceName$->setNumberOfLines( $numberOfLines$ )",
+      "localizedTextKey": "$instanceName$->setText( ofxGLocalized( $localizedTextKey$, $localizedDefaultTextKey$ ) )",
+      "text": "$instanceName$->setText( $text$ )",
+      "textAlignment": "$instanceName$->setTextAlignment( $textAlignment$ )",
+      "textColor": "$instanceName$->setTextColor( $textColor$ )",
+      "adjustsFontSizeToFitWidth": "$instanceName$->setAutosizeFontToFitText( $adjustsFontSizeToFitWidth$ )"
     },
     "UIRoundedRectButton": {
       "_super": "UIButton"
     },
     "UIScrollView": {
-      "_constructor": "ofPtr< ofxGenericScrollView > @ = ofxGenericScrollView::create( )",
+      "_constructor": "ofPtr< ofxGenericScrollView > $instanceName$ = ofxGenericScrollView::create( )",
       "_include": [
         "#include \"ofxGenericScrollView.h\"",
         "#include \"ofxGenericUtility.h\""
       ],
       "_inlineConstructor": "ofxGenericScrollView::create( )",
-      "_parameter": "ofPtr< ofxGenericScrollView > &@",
+      "_parameter": "ofPtr< ofxGenericScrollView > &$instanceName$",
       "_super": "UIView",
       "_variableName": "scroll#",
       "_declaration": "ofPtr< ofxGenericScrollView >",
-      "autoContentSizeToFit": "@->setAutoContentSizeToFit( $autoContentSizeToFit$ )"
+      "autoContentSizeToFit": "$instanceName$->setAutoContentSizeToFit( $autoContentSizeToFit$ )"
     },
     "UITableView": {
-      "_constructor": "ofPtr< ofxGenericTableView > @ = ofxGenericTableView::create( )",
+      "_constructor": "ofPtr< ofxGenericTableView > $instanceName$ = ofxGenericTableView::create( )",
       "_include": [
         "#include \"ofxGenericTableView.h\"",
         "#include \"ofxGenericUtility.h\""
       ],
       "_inlineConstructor": "ofxGenericTableView::create( )",
-      "_parameter": "ofPtr< ofxGenericTableView > &@",
+      "_parameter": "ofPtr< ofxGenericTableView > &$instanceName$",
       "_super": "UIScrollView",
       "_variableName": "table#",
       "_declaration": "ofPtr< ofxGenericTableView >",
-      "rootView": "@->setDelegate( dynamic_pointer_cast< ofxGenericTableViewDelegate >( rootView ) )",
-      "contentInsetBottom": "@->setUsePaddedSeparator( $contentInsetBottom$ )"
+      "rootView": "$instanceName$->setDelegate( dynamic_pointer_cast< ofxGenericTableViewDelegate >( rootView ) )",
+      "contentInsetBottom": "$instanceName$->setUsePaddedSeparator( $contentInsetBottom$ )"
     },
     "UITextField": {
-      "_constructor": "ofPtr< ofxGenericEditTextView > @ = ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), false )",
+      "_constructor": "ofPtr< ofxGenericEditTextView > $instanceName$ = ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), false )",
       "_include": [
         "#include \"ofxGenericEditTextView.h\"",
         "#include \"ofxGenericUtility.h\"",
         "#include \"ofxGenericLocalization.h\""
       ],
       "_inlineConstructor": "ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), false )",
-      "_parameter": "ofPtr< ofxGenericEditTextView > &@",
+      "_parameter": "ofPtr< ofxGenericEditTextView > &$instanceName$",
       "_super": "UIView",
       "_variableName": "editTextView#",
       "_declaration": "ofPtr< ofxGenericEditTextView >",
-      "autocapitalizationType": "@->setAutoCapitalization( $autocapitalizationType$ )",
-      "autocorrection": "@->setAutoCorrection( $autocorrection$ )",
-      "textBorderStyle": "@->setBorderStyle( $textBorderStyle$ )",
-      "clearsOnBeginEditing": "@->setClearsOnBeginEditing( $clearsOnBeginEditing$ )",
-      "enablesReturnKeyAutomatically": "@->setEnableReturnKeyAutomatically( $enablesReturnKeyAutomatically$ )",
-      "keyboardType": "@->setKeyboard( $keyboardType$ )",
-      "placeholderText": "@->setPlaceholderText( $placeholderText$ )",
-      "returnKeyType": "@->setKeyboardReturnKey( $returnKeyType$ )",
-      "secureText": "@->setSecureText( $secureText$ )",
-      "text": "@->setText( $text$ )",
-      "fontName": "@->setFont( $fontName$, @->getFontSize() )",
-      "fontSize": "@->setFont( @->getFontName(), $fontSize$ )",
-      "textAlignment": "@->setTextAlignment( $textAlignment$ )",
-      "rootView": "@->setDelegate( dynamic_pointer_cast< ofxGenericEditTextViewDelegate >( rootView ) )"
+      "autocapitalizationType": "$instanceName$->setAutoCapitalization( $autocapitalizationType$ )",
+      "autocorrection": "$instanceName$->setAutoCorrection( $autocorrection$ )",
+      "textBorderStyle": "$instanceName$->setBorderStyle( $textBorderStyle$ )",
+      "clearsOnBeginEditing": "$instanceName$->setClearsOnBeginEditing( $clearsOnBeginEditing$ )",
+      "enablesReturnKeyAutomatically": "$instanceName$->setEnableReturnKeyAutomatically( $enablesReturnKeyAutomatically$ )",
+      "keyboardType": "$instanceName$->setKeyboard( $keyboardType$ )",
+      "placeholderText": "$instanceName$->setPlaceholderText( $placeholderText$ )",
+      "returnKeyType": "$instanceName$->setKeyboardReturnKey( $returnKeyType$ )",
+      "secureText": "$instanceName$->setSecureText( $secureText$ )",
+      "text": "$instanceName$->setText( $text$ )",
+      "fontName": "$instanceName$->setFont( $fontName$, $instanceName$->getFontSize() )",
+      "fontSize": "$instanceName$->setFont( $instanceName$->getFontName(), $fontSize$ )",
+      "textAlignment": "$instanceName$->setTextAlignment( $textAlignment$ )",
+      "rootView": "$instanceName$->setDelegate( dynamic_pointer_cast< ofxGenericEditTextViewDelegate >( rootView ) )"
     },
     "UITextView": {
-      "_constructor": "ofPtr< ofxGenericEditTextView > @ = ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), true )",
+      "_constructor": "ofPtr< ofxGenericEditTextView > $instanceName$ = ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), true )",
       "_include": [
         "#include \"ofxGenericEditTextView.h\"",
         "#include \"ofxGenericUtility.h\"",
         "#include \"ofxGenericLocalization.h\""
       ],
       "_inlineConstructor": "ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), true )",
-      "_parameter": "ofPtr< ofxGenericEditTextView > &@",
+      "_parameter": "ofPtr< ofxGenericEditTextView > &$instanceName$",
       "_super": "UIView",
       "_variableName": "editTextView#",
       "_declaration": "ofPtr< ofxGenericEditTextView >",
-      "autocapitalizationType": "@->setAutoCapitalization( $autocapitalizationType$ )",
-      "autocorrection": "@->setAutoCorrection( $autocorrection$ )",
-      "enablesReturnKeyAutomatically": "@->setEnableReturnKeyAutomatically( $enablesReturnKeyAutomatically$ )",
-      "keyboardType": "@->setKeyboard( $keyboardType$ )",
-      "returnKeyType": "@->setKeyboardReturnKey( $returnKeyType$ )",
-      "secureText": "@->setSecureText( $secureText$ )",
-      "text": "@->setText( $text$ )",
-      "fontName": "@->setFont( $fontName$, @->getFontSize() )",
-      "fontSize": "@->setFont( @->getFontName(), $fontSize$ )",
-      "textAlignment": "@->setTextAlignment( $textAlignment$ )",
-      "rootView": "@->setDelegate( dynamic_pointer_cast< ofxGenericEditTextViewDelegate >( rootView ) )"
+      "autocapitalizationType": "$instanceName$->setAutoCapitalization( $autocapitalizationType$ )",
+      "autocorrection": "$instanceName$->setAutoCorrection( $autocorrection$ )",
+      "enablesReturnKeyAutomatically": "$instanceName$->setEnableReturnKeyAutomatically( $enablesReturnKeyAutomatically$ )",
+      "keyboardType": "$instanceName$->setKeyboard( $keyboardType$ )",
+      "returnKeyType": "$instanceName$->setKeyboardReturnKey( $returnKeyType$ )",
+      "secureText": "$instanceName$->setSecureText( $secureText$ )",
+      "text": "$instanceName$->setText( $text$ )",
+      "fontName": "$instanceName$->setFont( $fontName$, $instanceName$->getFontSize() )",
+      "fontSize": "$instanceName$->setFont( $instanceName$->getFontName(), $fontSize$ )",
+      "textAlignment": "$instanceName$->setTextAlignment( $textAlignment$ )",
+      "rootView": "$instanceName$->setDelegate( dynamic_pointer_cast< ofxGenericEditTextViewDelegate >( rootView ) )"
     },
     "UIView": {
-      "_addSubview": "@->addChildView( % )",
-      "_constructor": "ofPtr< ofxGenericView > @ = ofxGenericView::create( )",
+      "_addSubview": "$instanceName$->addChildView( % )",
+      "_constructor": "ofPtr< ofxGenericView > $instanceName$ = ofxGenericView::create( )",
       "_include": [
         "#include \"ofxGenericView.h\"",
         "#include \"ofxGenericUtility.h\""
       ],
       "_inlineConstructor": "ofxGenericView::create( )",
-      "_parameter": "ofPtr< ofxGenericView > &@",
+      "_parameter": "ofPtr< ofxGenericView > &$instanceName$",
       "_variableName": "view#",
       "_declaration": "ofPtr< ofxGenericView >",
-      "alpha": "@->setAlpha( $alpha$ )",
-      "autoresizingMask": "@->setAutoresizingMask( $autoresizingMask$ )",
-      "backgroundColor": "@->setBackgroundColor( $backgroundColor$ )",
-      "frame": "@->setFrame( $frame$ )",
-      "visible": "@->setVisible( $visible$ )",
-      "clipsToBounds": "@->setClipSubviews( $clipsToBounds$ )",
-      "contentMode": "@->setContentMode( $contentMode$ )"
+      "alpha": "$instanceName$->setAlpha( $alpha$ )",
+      "autoresizingMask": "$instanceName$->setAutoresizingMask( $autoresizingMask$ )",
+      "backgroundColor": "$instanceName$->setBackgroundColor( $backgroundColor$ )",
+      "frame": "$instanceName$->setFrame( $frame$ )",
+      "visible": "$instanceName$->setVisible( $visible$ )",
+      "clipsToBounds": "$instanceName$->setClipSubviews( $clipsToBounds$ )",
+      "contentMode": "$instanceName$->setContentMode( $contentMode$ )"
     },
     "UIPageControl": {
-      "_constructor": "ofPtr< ofxGenericPageControl > @ = ofxGenericPageControl::create()",
+      "_constructor": "ofPtr< ofxGenericPageControl > $instanceName$ = ofxGenericPageControl::create()",
       "_inlineConstructor": "ofxGenericPageControl::create()",
       "_include": [
         "#include \"ofxGenericPageControl.h\"",
         "#include \"ofxGenericUtility.h\""
       ],
-      "_parameter": "ofPtr< ofxGenericPageControl > &@",
+      "_parameter": "ofPtr< ofxGenericPageControl > &$instanceName$",
       "_super": "UIView",
       "_variableName": "pageControl#",
       "_declaration": "ofPtr< ofxGenericPageControl >",
-      "currentPage": "@->setCurrentPage( $currentPage$ )",
-      "numberOfPages": "@->setPageCount( $numberOfPages$ )",
-      "hidesForSinglePage": "@->setHidesForSinglePage( $hidesForSinglePage$ )"
+      "currentPage": "$instanceName$->setCurrentPage( $currentPage$ )",
+      "numberOfPages": "$instanceName$->setPageCount( $numberOfPages$ )",
+      "hidesForSinglePage": "$instanceName$->setHidesForSinglePage( $hidesForSinglePage$ )"
     },
     "UISwitch": {
-      "_constructor": "ofPtr< ofxGenericSwitchView > @ = ofxGenericSwitchView::create()",
+      "_constructor": "ofPtr< ofxGenericSwitchView > $instanceName$ = ofxGenericSwitchView::create()",
       "_inlineConstructor": "ofxGenericSwitchView::create()",
       "_include": [
         "#include \"ofxGenericSwitchView.h\""
       ],
-      "_parameter": "ofPtr< ofxGenericSwitchView > &@",
+      "_parameter": "ofPtr< ofxGenericSwitchView > &$instanceName$",
       "_super": "UIView",
       "_variableName": "switchView#",
       "_declaration": "ofPtr< ofxGenericSwitchView >",
-      "on": "@->setSwitched( $on$, false )",
-      "onTintColor": "@->setTintColor( $onTintColor$ )",
-      "rootView": "@->setDelegate( dynamic_pointer_cast< ofxGenericSwitchViewDelegate >( rootView ) )"
+      "on": "$instanceName$->setSwitched( $on$, false )",
+      "onTintColor": "$instanceName$->setTintColor( $onTintColor$ )",
+      "rootView": "$instanceName$->setDelegate( dynamic_pointer_cast< ofxGenericSwitchViewDelegate >( rootView ) )"
     }
   },
   "__COMMENTS__": {
@@ -365,7 +365,7 @@
       "#": "Only in the case of _variableName, this is replaced with the view ID # to assure unique autogenerated instance names.",
       "$xxxx$": "The string in between two $ signs is the key of the exported value that will be inserted there. To see keys, have a look at the exported .json version of the hierarchy.",
       "%": "This character is replaced with secondary instance names, that is the name of what's being added or referenced. In function definitions, this will NOT include a leading comma.",
-      "@": "Occurrences of this character are replaced with instance names - either a generated one or the name of an outlet.",
+      "$instanceName$": "Occurrences of this character are replaced with instance names - either a generated one or the name of an outlet.",
       "b": "When a b character appears before a $xx$, this is a value that will be output as a boolean with the string 'true' or 'false'",
       "ƒ": "Used in function definitions, this represents the guts of the function (all the view data etc). Option-F to type",
       "∞": "Used in function definitions, this represents the list of outlets without types included and inserts a comma. Option-% to type",
@@ -384,7 +384,7 @@
       "_variableName": "If no outlet is provided (Accessibility Label) or accessibility is turned off, all instance names will be autogenerated with this string."
     },
     "Special Root Keys": {
-      "_functionDefinitions": "An array of function definitions. All will be placed into the exported results, potentially with identical contents. Use @ to represent the function name, % to represent the outlets, and ƒ to represent the function contents.",
+      "_functionDefinitions": "An array of function definitions. All will be placed into the exported results, potentially with identical contents. Use $instanceName$ to represent the function name, % to represent the outlets, and ƒ to represent the function contents.",
       "_rootViewInstanceName": "The string name for the root view, will automatically be set to its instance name if it doesn't have one defined. You can use this to make more elaborate constructors.",
       "_ignoredClasses": "If any of these classes exists they will be ignored, not exported."
     }
