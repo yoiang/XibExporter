@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define NSDictionary_ClassDefinition_ClassNameKey @"class"
+#define NSDictionary_ClassDefinition_ClassNameKey @"className"
 
 @interface NSDictionary (ClassDefinition)
 
