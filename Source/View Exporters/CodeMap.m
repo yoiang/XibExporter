@@ -143,8 +143,7 @@
         {
             NSError* error;
             
-            [functionDefinitions appendFormat:@"\n\n%@",
-             [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error ]
+            [functionDefinitions appendString:[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error ]
              ];
         }
     }
