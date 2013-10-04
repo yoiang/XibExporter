@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "NSString+Parsing.h"
+
 @interface NSMutableString (Parsing)
 
 -(NSUInteger)replaceOccurrencesOfString:(NSString *)target withString:(NSString *)replacement options:(NSStringCompareOptions)options;
