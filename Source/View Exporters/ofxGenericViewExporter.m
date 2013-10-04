@@ -25,4 +25,19 @@
     return @"%@.ofxGeneric.h";
 }
 
+-(NSString*)stringValueForBoolean:(BOOL)value
+{
+    NSString* result = nil;
+    
+    if (value)
+    {
+        result = @"true";
+    } else
+    {
+        result = @"false";
+    }
+    
+    return result;
+}
+
 @end

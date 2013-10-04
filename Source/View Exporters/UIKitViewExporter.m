@@ -51,4 +51,19 @@
     return result;
 }
 
+-(NSString*)stringValueForBoolean:(BOOL)value
+{
+    NSString* result = nil;
+    
+    if (value)
+    {
+        result = @"YES";
+    } else
+    {
+        result = @"NO";
+    }
+    
+    return result;
+}
+
 @end

@@ -174,19 +174,10 @@ static NSMutableDictionary* instanceCounts = nil;
         {
             result = [NSString stringWithFormat:@"%@f",[value stringValue]];
         }
-    }
-    else if (strcmp([value objCType], @encode(BOOL)) == 0)
+    } else if (strcmp([value objCType], @encode(BOOL)) == 0)
     {
-        if ( [value boolValue] )
-        {
-            result = @"true";
-        }
-        else
-        {
-            result = @"false";
-        }
-    }
-    else
+        result = [self stringValueForBoolean:[value boolValue] ];
+    } else
     {
         result = [value stringValue];
     }
@@ -240,6 +231,14 @@ static NSMutableDictionary* instanceCounts = nil;
     }
     
     return result;
+}
+
+-(NSString*)stringValueForBoolean:(BOOL)value
+{
+    NSException* exception = [ [NSException alloc] initWithName:@"Abstract Method" reason:@"Must override [CodeViewExporter stringValueForBoolean] method" userInfo:nil];
+    @throw exception;
+    
+    return @"invalid";
 }
 
 -(NSString*)codeForClassConstructor:(NSString*)class instanceName:(NSString*)instanceName outlets:(NSMutableDictionary*)outlets includes:(NSMutableArray*)includes instanceDefinition:(NSDictionary*)instanceDefinition properties:(NSMutableDictionary*)properties isInline:(BOOL)isInline isOutlet:(BOOL)isOutlet
