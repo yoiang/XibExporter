@@ -166,14 +166,7 @@ static NSMutableDictionary* instanceCounts = nil;
     
     if (strcmp([value objCType], @encode(float)) == 0)
     {
-        if ([value floatValue] - [value intValue] == 0)
-        {
-            result = [NSString stringWithFormat:@"%@.0f",[value stringValue]];
-        }
-        else
-        {
-            result = [NSString stringWithFormat:@"%@f",[value stringValue]];
-        }
+        result = [self stringValueForFloat:[value floatValue] ];
     } else if (strcmp([value objCType], @encode(BOOL)) == 0)
     {
         result = [self stringValueForBoolean:[value boolValue] ];
@@ -231,6 +224,14 @@ static NSMutableDictionary* instanceCounts = nil;
     }
     
     return result;
+}
+
+-(NSString*)stringValueForFloat:(float)value
+{
+    NSException* exception = [ [NSException alloc] initWithName:@"Abstract Method" reason:@"Must override [CodeViewExporter stringValueForFloat] method" userInfo:nil];
+    @throw exception;
+    
+    return @"invalid";
 }
 
 -(NSString*)stringValueForBoolean:(BOOL)value

@@ -51,6 +51,23 @@
     return result;
 }
 
+-(NSString*)stringValueForFloat:(float)value
+{
+    NSString* result = nil;
+    
+    int intValue = floor(value);
+    if (value - intValue == 0)
+    {
+        result = [NSString stringWithFormat:@"%d.0f",intValue];
+    }
+    else
+    {
+        result = [NSString stringWithFormat:@"%ff",value];
+    }
+    
+    return result;
+}
+
 -(NSString*)stringValueForBoolean:(BOOL)value
 {
     NSString* result = nil;
