@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define NSDictionary_ClassDefinition_ClassNameKey @"className"
+#define NSDictionary_ClassDefinition_SuperClassKey @"_super"
 
 @interface NSDictionary (ClassDefinition)
 
@@ -18,5 +19,10 @@
 -(NSString*)asParameterToParse;
 -(NSString*)asParameterWithInstance:(NSDictionary*)instanceDefinition;
 -(NSString*)asParameterWithInstanceName:(NSString*)instanceName;
+
+-(NSString*)superClassName;
+
+-(NSString*)asInlineConstructorToParse;
+-(NSString*)asConstructorToParse;
 
 @end

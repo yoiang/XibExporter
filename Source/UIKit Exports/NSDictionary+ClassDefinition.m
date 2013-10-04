@@ -51,4 +51,19 @@
     return [ [self asParameterToParse] stringByReplacingOccurrencesOfString:@"$instanceName$" withString:instanceName];
 }
 
+-(NSString*)superClassName
+{
+    return [self stringForKey:NSDictionary_ClassDefinition_SuperClassKey];
+}
+
+-(NSString*)asInlineConstructorToParse
+{
+    return [self stringForKey:@"_inlineConstructor"];
+}
+
+-(NSString*)asConstructorToParse
+{
+    return [self stringForKey:@"_constructor"];
+}
+
 @end

@@ -10,7 +10,7 @@
 
 #import "SBJson.h"
 
-#import "NSDictionary+ClassDefinition.h"
+#import "NSMutableDictionary+ClassDefinition.h"
 
 @interface CodeMap()
 
@@ -46,23 +46,12 @@
 -(void)copySuperProperties
 {
     //populate subclasses with the data from their superclasses
-    for (NSString* className in self.definedClasses )
+    for (NSString* className in self.definedClasses)
     {
         NSMutableDictionary *classDef = [self definitionForClass:className];
-        while ( [classDef objectForKey:@"_super"] )
+        while ( [classDef superClassName] )
         {
-            NSDictionary *superDef = [self definitionForClass:[classDef objectForKey:@"_super"] ];
-            [classDef removeObjectForKey:@"_super"];
-            if (superDef)
-            {
-                for (NSString* superMemberName in [superDef allKeys] )
-                {
-                    if ( ![classDef objectForKey:superMemberName] && [superDef objectForKey:superMemberName] )
-                    {
-                        [classDef setObject:[superDef objectForKey:superMemberName] forKey:superMemberName];
-                    }
-                }
-            }
+            [classDef replaceSuperClassWithProperties:[self definitionForClass:[classDef superClassName] ] ];
         }
     }
 }

@@ -15,4 +15,16 @@
     [self setObject:className forKey:NSDictionary_ClassDefinition_ClassNameKey];
 }
 
+-(void)replaceSuperClassWithProperties:(NSDictionary*)superClassDefinition
+{
+    [self removeObjectForKey:NSDictionary_ClassDefinition_SuperClassKey];
+    for (NSString* superMemberName in [superClassDefinition allKeys] )
+    {
+        if ( ![self objectForKey:superMemberName] )
+        {
+            [self setObject:[superClassDefinition objectForKey:superMemberName] forKey:superMemberName];
+        }
+    }
+}
+
 @end

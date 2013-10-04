@@ -244,23 +244,22 @@ static NSMutableDictionary* instanceCounts = nil;
     //if this is an inline call, simply return the inline constructor
     if (isInline)
     {
-        NSString* constructorDef = [classDefinition objectForKey:@"_inlineConstructor"];
-        NSString* inl = [self replaceCodeSymbols:constructorDef instanceDefinition:instanceDefinition key:@"_inlineConstructor" name:instanceName properties:properties];
+        NSString* inl = [self replaceCodeSymbols:[classDefinition asInlineConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
         constructor = [NSMutableString stringWithString:[inl substringFromIndex:1] ]; //remove the leading tab for an inline
     } else
     {
         
-        NSString* constructorDef = [classDefinition objectForKey:@"_constructor"];
+        NSString* constructorDef = [classDefinition asConstructorToParse];
         if (constructorDef)
         {
             if (isOutlet)
             {
-                constructorDef = [self replaceCodeSymbols:[classDefinition objectForKey:@"_inlineConstructor"] instanceDefinition:instanceDefinition key:@"_inlineConstructor" name:instanceName properties:properties];
+                constructorDef = [self replaceCodeSymbols:[classDefinition asInlineConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
                 constructorDef = [NSString stringWithFormat:@"\t%@ = %@",[self.map variableReference:instanceName],[constructorDef substringFromIndex:1]];
             }
             else
             {
-                constructorDef = [self replaceCodeSymbols:constructorDef instanceDefinition:instanceDefinition key:@"_constructor" name:instanceName properties:properties];
+                constructorDef = [self replaceCodeSymbols:constructorDef instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
             }
             
             constructor = [NSMutableString stringWithString:@"\n"];
@@ -298,7 +297,7 @@ static NSMutableDictionary* instanceCounts = nil;
         if ( [classDefinition isValidClassMember:classMember] && [instanceDefinition hasValueForMember:classMember] )
         {
             NSString *line = [classDefinition objectForKey:classMember];
-            NSString* lineFilledIn = [self replaceCodeSymbols:line instanceDefinition:instanceDefinition key:classMember name:instanceName properties:properties];
+            NSString* lineFilledIn = [self replaceCodeSymbols:line instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
             if ( lineFilledIn && [ lineFilledIn length ] > 0 )
             {
                 [objectSetup appendFormat:@"%@%@\n", lineFilledIn, [self.map statementEnd] ];
@@ -350,14 +349,14 @@ static NSMutableDictionary* instanceCounts = nil;
     return result;
 }
 
-- (NSString *) replaceCodeSymbols:(NSString *)line instanceDefinition:(NSDictionary *)instanceDefinition key:(NSString *)key name:(NSString *)name properties:(NSMutableDictionary *)properties
+- (NSString *) replaceCodeSymbols:(NSString *)line instanceDefinition:(NSDictionary *)instanceDefinition instanceName:(NSString *)instanceName properties:(NSMutableDictionary *)properties
 {
     if (!line)
     {
         line = @"";
     }
     
-    NSString* output = [line stringByReplacingOccurrencesOfString:@"$instanceName$" withString:[self.map variableReference:name] ];
+    NSString* output = [line stringByReplacingOccurrencesOfString:@"$instanceName$" withString:[self.map variableReference:instanceName] ];
     output = [self replace:output stringBetweenOccurencesOf:@"$" withStringRepresentationFromInstance:instanceDefinition properties:properties];
 
     NSRange foundMarker = [output rangeOfString:@"$" options:NSLiteralSearch];

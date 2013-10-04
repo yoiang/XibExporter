@@ -14,4 +14,7 @@
 
 -(void)setClassName:(NSString *)className;
 
+// TODO: hacky way of compiling all members together for export, fix export to traverse super at export time
+-(void)replaceSuperClassWithProperties:(NSDictionary*)superClassDefinition;
+
 @end
