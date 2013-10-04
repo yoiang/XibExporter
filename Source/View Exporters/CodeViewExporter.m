@@ -527,12 +527,7 @@ static NSMutableDictionary* instanceCounts = nil;
     
     //includes
     NSArray* includes = [properties objectForKey:@"includes"];
-    NSMutableString* includesString = [NSMutableString string];
-    for (NSObject* include in includes)
-    {
-        [includesString appendFormat:@"%@\n", include];
-    }
-    [code replaceOccurrencesOfString:@"$includes$" withString:includesString options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
+    [code replaceOccurrencesOfString:@"$includes$" withString:[includes componentsJoinedByString:@"\n"] options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
     
     NSDictionary* outlets = [properties objectForKey:@"outlets"];
     
