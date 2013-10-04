@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3C07A1B917F6B5250064174E /* NSDictionary+TypeForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C07A1B817F6B5240064174E /* NSDictionary+TypeForKey.m */; };
 		3C0C530317FE81FB0057BE15 /* NSMutableString+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0C530217FE81FB0057BE15 /* NSMutableString+Parsing.m */; };
+		3C0C530C17FEDD820057BE15 /* NSMutableDictionary+InstanceDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0C530B17FEDD820057BE15 /* NSMutableDictionary+InstanceDefinition.m */; };
 		3C10DC8C17E2C56600162DBC /* FontExchange.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC8B17E2C56600162DBC /* FontExchange.m */; };
 		3C10DC8F17E2CE4300162DBC /* XibResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC8E17E2CE4300162DBC /* XibResources.m */; };
 		3C10DC9217E2DD9F00162DBC /* ViewGraphData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9117E2DD9F00162DBC /* ViewGraphData.m */; };
@@ -103,6 +104,8 @@
 		3C07A1B817F6B5240064174E /* NSDictionary+TypeForKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+TypeForKey.m"; sourceTree = "<group>"; };
 		3C0C530117FE81FB0057BE15 /* NSMutableString+Parsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableString+Parsing.h"; sourceTree = "<group>"; };
 		3C0C530217FE81FB0057BE15 /* NSMutableString+Parsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableString+Parsing.m"; sourceTree = "<group>"; };
+		3C0C530A17FEDD820057BE15 /* NSMutableDictionary+InstanceDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+InstanceDefinition.h"; sourceTree = "<group>"; };
+		3C0C530B17FEDD820057BE15 /* NSMutableDictionary+InstanceDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+InstanceDefinition.m"; sourceTree = "<group>"; };
 		3C10DC8A17E2C56600162DBC /* FontExchange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontExchange.h; sourceTree = "<group>"; };
 		3C10DC8B17E2C56600162DBC /* FontExchange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontExchange.m; sourceTree = "<group>"; };
 		3C10DC8D17E2CE4300162DBC /* XibResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XibResources.h; sourceTree = "<group>"; };
@@ -499,6 +502,8 @@
 				3C25013C17F96F110001C0EF /* NSMutableDictionary+ClassDefinition.m */,
 				3C25013E17F97DF10001C0EF /* NSDictionary+InstanceDefinition.h */,
 				3C25013F17F97DF10001C0EF /* NSDictionary+InstanceDefinition.m */,
+				3C0C530A17FEDD820057BE15 /* NSMutableDictionary+InstanceDefinition.h */,
+				3C0C530B17FEDD820057BE15 /* NSMutableDictionary+InstanceDefinition.m */,
 			);
 			path = "UIKit Exports";
 			sourceTree = "<group>";
@@ -802,6 +807,7 @@
 				3C65718F17D0FF560074B101 /* CXMLNamespaceNode.m in Sources */,
 				3C96F3C517D0F4D5000FC446 /* UIImageView+Exports.m in Sources */,
 				3C96F3CE17D0F4D5000FC446 /* UIViewController+Exports.m in Sources */,
+				3C0C530C17FEDD820057BE15 /* NSMutableDictionary+InstanceDefinition.m in Sources */,
 				3CEA729517D1093E00F419A3 /* SBJsonStreamParser.m in Sources */,
 				3C10DC8C17E2C56600162DBC /* FontExchange.m in Sources */,
 			);

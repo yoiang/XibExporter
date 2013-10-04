@@ -9,6 +9,7 @@
 #import "NSDictionary+InstanceDefinition.h"
 
 #import "NSDictionary+Path.h"
+#import "NSDictionary+TypeForKey.h"
 
 @implementation NSDictionary (InstanceDefinition)
 
@@ -16,9 +17,9 @@
 {
     NSString* result = nil;
     
-    if ( [self objectForKey:@"instanceName"] )
+    if ( [self objectForKey:NSDictionary_InstanceDefinition_InstanceNameKey] )
     {
-        result = [self objectForKey:@"instanceName"];
+        result = [self stringForKey:NSDictionary_InstanceDefinition_InstanceNameKey];
     } else
     {
         //the root view is treated special
@@ -40,7 +41,7 @@
 {
     BOOL result = NO;
     
-    if ( [self objectForKey:@"instanceName"] )
+    if ( [self stringForKey:NSDictionary_InstanceDefinition_InstanceNameKey] )
     {
         result = YES;
     }

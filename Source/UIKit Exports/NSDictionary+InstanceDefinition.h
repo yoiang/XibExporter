@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define NSDictionary_InstanceDefinition_InstanceNameKey @"instanceName"
+
 @interface NSDictionary (InstanceDefinition)
 
 -(NSString*)instanceName;

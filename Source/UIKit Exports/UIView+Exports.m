@@ -15,6 +15,7 @@
 #import "CXMLElement+UIView.h"
 
 #import "NSMutableDictionary+ClassDefinition.h"
+#import "NSMutableDictionary+InstanceDefinition.h"
 
 static int viewId = 0;
 
@@ -38,7 +39,7 @@ static int viewId = 0;
     
     if ( self.Outlet )
     {
-        [dict setObject:self.Outlet forKey:@"instanceName"];
+        dict.instanceName = self.Outlet;
     }
     
     //UIView specific stuff
