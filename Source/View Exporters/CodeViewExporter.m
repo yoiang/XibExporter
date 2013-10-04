@@ -548,7 +548,7 @@ static NSMutableDictionary* instanceCounts = nil;
         NSDictionary* classDefinition = [self.map definitionForClassOfInstance:instanceDefinition];
         
         NSString* strippedOutlet = [instanceDefinition instanceName];
-        NSString* unstrippedOutlet = [ [classDefinition objectForKey:@"_parameter"] stringByReplacingOccurrencesOfString:@"$instanceName$" withString:strippedOutlet];
+        NSString* unstrippedOutlet = [classDefinition asParameterWithInstanceName:strippedOutlet];
         
         // TODO: C style parameters, support template of other formats
         [params appendString:unstrippedOutlet withNonEmptySeparator:@", "];

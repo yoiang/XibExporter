@@ -8,6 +8,10 @@
 
 #import "NSDictionary+ClassDefinition.h"
 
+#import "NSDictionary+TypeForKey.h"
+#import "NSDictionary+InstanceDefinition.h"
+#import "NSMutableString+Parsing.h"
+
 @implementation NSDictionary (ClassDefinition)
 
 -(NSString*)className
@@ -30,6 +34,21 @@
     }
     
     return result;
+}
+
+-(NSString*)asParameterToParse
+{
+    return [self stringForKey:@"_parameter"];
+}
+
+-(NSString*)asParameterWithInstance:(NSDictionary*)instanceDefinition
+{
+    return [self asParameterWithInstanceName:[instanceDefinition instanceName] ];
+}
+
+-(NSString*)asParameterWithInstanceName:(NSString*)instanceName
+{
+    return [ [self asParameterToParse] stringByReplacingOccurrencesOfString:@"$instanceName$" withString:instanceName];
 }
 
 @end

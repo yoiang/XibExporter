@@ -15,4 +15,8 @@
 -(NSString*)className;
 -(BOOL)isValidClassMember:(NSString*)memberName;
 
+-(NSString*)asParameterToParse;
+-(NSString*)asParameterWithInstance:(NSDictionary*)instanceDefinition;
+-(NSString*)asParameterWithInstanceName:(NSString*)instanceName;
+
 @end
