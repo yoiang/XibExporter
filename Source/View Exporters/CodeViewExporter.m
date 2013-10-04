@@ -421,11 +421,7 @@ static NSMutableDictionary* instanceCounts = nil;
         instanceName = [instanceDefinition instanceName];
         if (!instanceName)
         {
-            if ( [classDefinition objectForKey:@"_variableName"] )
-            {
-                NSString* variableName = [classDefinition objectForKey:@"_variableName"];
-                instanceName = [variableName stringByReplacingOccurrencesOfString:@"#" withString:[NSString stringWithFormat:@"%@", [self getInstanceCount:variableName] ] ];
-            }
+            instanceName = [NSString stringWithFormat:@"generic%@%@", className, [self getInstanceCount:className] ];
         }
         isOutlet = [instanceDefinition isOutlet];
         

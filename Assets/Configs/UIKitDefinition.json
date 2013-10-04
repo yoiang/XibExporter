@@ -11,7 +11,6 @@
       "_inlineConstructor": "[ [UIActivityIndicatorView alloc] init]",
       "_parameter": "UIActivityIndicatorView** $instanceName$",
       "_super": "UIActivityIndicatorView",
-      "_variableName": "activityIndicator#",
       "_declaration": "UIActivityIndicatorView*",
       "hidesWhenStopped": "[$instanceName$ setHidesWhenStoppedAnimating:$hidesWhenStopped$]",
       "color": "[$instanceName$ setColor:$color$]",
@@ -22,7 +21,6 @@
       "_inlineConstructor": "[UIButton buttonWithType:$buttonType$]",
       "_parameter": "UIButton** $instanceName$",
       "_super": "UIButton",
-      "_variableName": "button#",
       "_declaration": "UIButton*",
       "backgroundImage": "[$instanceName$ setBackgroundImage:[UIImage imageNamed:$backgroundImage$] forState:UIControlStateNormal]",
       "backgroundDownImage": "[$instanceName$ setBackgroundImage:[UIImage imageNamed:$backgroundDownImage$] forState:UIControlStateHighlighted]",
@@ -51,7 +49,6 @@
       "_inlineConstructor": "[ [UIImageView alloc] init]",
       "_parameter": "UIImageView** $instanceName$",
       "_super": "UIImageView",
-      "_variableName": "*image#",
       "_declaration": "UIImageView*",
       "image": "[$instanceName$ setImage:[UIImage imageNamed:$image$] ]"
     },
@@ -60,7 +57,6 @@
       "_inlineConstructor": "[ [UILabel alloc] init]",
       "_parameter": "UILabel** $instanceName$",
       "_super": "UILabel",
-      "_variableName": "text#",
       "_declaration": "UILabel* $instanceName$",
       "font": "[$instanceName$ setFont:[UIFont fontWithName:$fontName$ size:$fontSize$] ]",
       "minimumFontSize": "[$instanceName$ setMinimumFontSize:$minimumFontSize$]",
@@ -80,7 +76,6 @@
       "_inlineConstructor": "ofxGenericScrollView::create( )",
       "_parameter": "ofPtr< ofxGenericScrollView > &$instanceName$",
       "_super": "UIView",
-      "_variableName": "scroll#",
       "_declaration": "ofPtr< ofxGenericScrollView >",
       "autoContentSizeToFit": "$instanceName$->setAutoContentSizeToFit( $autoContentSizeToFit$ )"
     },
@@ -89,7 +84,6 @@
       "_inlineConstructor": "ofxGenericTableView::create( )",
       "_parameter": "ofPtr< ofxGenericTableView > &$instanceName$",
       "_super": "UIScrollView",
-      "_variableName": "table#",
       "_declaration": "ofPtr< ofxGenericTableView >",
       "rootView": "$instanceName$->setDelegate( dynamic_pointer_cast< ofxGenericTableViewDelegate >( rootView ) )",
       "contentInsetBottom": "$instanceName$->setUsePaddedSeparator( $contentInsetBottom$ )"
@@ -99,7 +93,6 @@
       "_inlineConstructor": "ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), false )",
       "_parameter": "ofPtr< ofxGenericEditTextView > &$instanceName$",
       "_super": "UIView",
-      "_variableName": "editTextView#",
       "_declaration": "ofPtr< ofxGenericEditTextView >",
       "autocapitalizationType": "$instanceName$->setAutoCapitalization( $autocapitalizationType$ )",
       "autocorrection": "$instanceName$->setAutoCorrection( $autocorrection$ )",
@@ -121,7 +114,6 @@
       "_inlineConstructor": "ofxGenericEditTextView::create( ofRectangle(), ofPtrWeak< ofxGenericEditTextViewDelegate >(), true )",
       "_parameter": "ofPtr< ofxGenericEditTextView > &$instanceName$",
       "_super": "UIView",
-      "_variableName": "editTextView#",
       "_declaration": "ofPtr< ofxGenericEditTextView >",
       "autocapitalizationType": "$instanceName$->setAutoCapitalization( $autocapitalizationType$ )",
       "autocorrection": "$instanceName$->setAutoCorrection( $autocorrection$ )",
@@ -140,7 +132,6 @@
       "_constructor": "UIView* $instanceName$ = [ [UIView alloc] init];",
       "_inlineConstructor": "[ [UIView alloc] init]",
       "_parameter": "UIView** $instanceName$",
-      "_variableName": "view#",
       "_declaration": "UIView*",
       "alpha": "[$instanceName$ setAlpha:$alpha$]",
       "autoresizingMask": "[$instanceName$ setAutoresizingMask:$autoresizingMask$]",
@@ -155,7 +146,6 @@
       "_inlineConstructor": "ofxGenericPageControl::create()",
       "_parameter": "ofPtr< ofxGenericPageControl > &$instanceName$",
       "_super": "UIView",
-      "_variableName": "pageControl#",
       "_declaration": "ofPtr< ofxGenericPageControl >",
       "currentPage": "$instanceName$->setCurrentPage( $currentPage$ )",
       "numberOfPages": "$instanceName$->setPageCount( $numberOfPages$ )",
@@ -166,7 +156,6 @@
       "_inlineConstructor": "ofxGenericSwitchView::create()",
       "_parameter": "ofPtr< ofxGenericSwitchView > &$instanceName$",
       "_super": "UIView",
-      "_variableName": "switchView#",
       "_declaration": "ofPtr< ofxGenericSwitchView >",
       "on": "$instanceName$->setSwitched( $on$, false )",
       "onTintColor": "$instanceName$->setTintColor( $onTintColor$ )",
@@ -178,7 +167,6 @@
       "Every other key is what code will be added for a particular value. We can add keys as desired to match values exported from the xibs.": ""
     },
     "Reserved Replacement Characters": {
-      "#": "Only in the case of _variableName, this is replaced with the view ID # to assure unique autogenerated instance names.",
       "$xxxx$": "The string in between two $ signs is the key of the exported value that will be inserted there. To see keys, have a look at the exported .json version of the hierarchy.",
       "%": "This character is replaced with secondary instance names, that is the name of what's being added or referenced. In function definitions, this will NOT include a leading comma.",
       "$instanceName$": "Occurrences of this character are replaced with instance names - either a generated one or the name of an outlet.",
@@ -195,8 +183,7 @@
       "_include": "If this class needs to be included in the ExportedViews.h file, put the include statement here.",
       "_inlineConstructor": "When another function call requires an instance of this object to be created as a parameter (almost exclusively structs like rects and colors), this will be called. It is also called for outlets, except the outlet also prepends an = .",
       "_parameter": "If this is an outlet, this value will be placed into the main function as a parameter.",
-      "_super": "Specifies the super class for this object. If there is one, then all code definition values from the super class will be used also. Any like values naturally have the child classes taking precedence.",
-      "_variableName": "If no outlet is provided (Accessibility Label) or accessibility is turned off, all instance names will be autogenerated with this string."
+      "_super": "Specifies the super class for this object. If there is one, then all code definition values from the super class will be used also. Any like values naturally have the child classes taking precedence."
     },
     "Special Root Keys": {
       "_functionDefinitions": "An array of function definitions. All will be placed into the exported results, potentially with identical contents. Use $instanceName$ to represent the function name, % to represent the outlets, and ƒ to represent the function contents.",
