@@ -25,7 +25,7 @@
 #import "NSDictionary+Path.h"
 
 #import "NSDictionary+ClassDefinition.h"
-#import "NSDictionary+InstanceDefinition.h"
+#import "NSMutableDictionary+InstanceDefinition.h"
 
 static NSMutableDictionary* instanceCounts = nil;
 
@@ -237,7 +237,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return @"invalid";
 }
 
--(NSString*)codeForClassConstructor:(NSString*)class instanceName:(NSString*)instanceName instanceDefinition:(NSDictionary*)instanceDefinition properties:(NSMutableDictionary*)properties isInline:(BOOL)isInline isOutlet:(BOOL)isOutlet
+-(NSString*)codeForClassConstructor:(NSString*)class instanceDefinition:(NSDictionary*)instanceDefinition properties:(NSMutableDictionary*)properties isInline:(BOOL)isInline
 {
     NSString* constructor = nil;
     
@@ -246,19 +246,19 @@ static NSMutableDictionary* instanceCounts = nil;
     //if this is an inline call, simply return the inline constructor
     if (isInline)
     {
-        constructor = [self replaceCodeSymbols:[classDefinition asInlineConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
+        constructor = [self replaceCodeSymbols:[classDefinition asInlineConstructorToParse] instanceDefinition:instanceDefinition properties:properties];
     } else
     {
         //only put the constructor in if this is not the root view, because the root view should be handled by surrounding code
         if ( ![instanceDefinition isRootView] )
         {
-            if (isOutlet)
+            if ( [instanceDefinition isOutlet] )
             {
-                constructor = [NSString stringWithFormat:@"%@ = %@",[self.map variableReference:instanceName], [self codeForClassConstructor:class instanceName:instanceName instanceDefinition:instanceDefinition properties:properties isInline:YES isOutlet:YES] ];
+                constructor = [NSString stringWithFormat:@"%@ = %@",[self.map variableReference:[instanceDefinition instanceName] ], [self codeForClassConstructor:class instanceDefinition:instanceDefinition properties:properties isInline:YES] ];
             }
             else
             {
-                constructor = [self replaceCodeSymbols:[classDefinition asConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
+                constructor = [self replaceCodeSymbols:[classDefinition asConstructorToParse] instanceDefinition:instanceDefinition properties:properties];
             }
         }
     }
@@ -266,7 +266,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return constructor;
 }
 
--(NSString*)codeForInstanceSetup:(NSString*)instanceName instanceDefinition:(NSDictionary*)instanceDefinition properties:(NSMutableDictionary*)properties
+-(NSString*)codeForInstanceSetup:(NSDictionary*)instanceDefinition properties:(NSMutableDictionary*)properties
 {
     NSMutableString* objectSetup = [NSMutableString string];
     
@@ -277,7 +277,7 @@ static NSMutableDictionary* instanceCounts = nil;
         if ( [classDefinition isValidClassMember:classMember] && [instanceDefinition hasValueForMember:classMember] )
         {
             NSString *line = [classDefinition objectForKey:classMember];
-            NSString* lineFilledIn = [self replaceCodeSymbols:line instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
+            NSString* lineFilledIn = [self replaceCodeSymbols:line instanceDefinition:instanceDefinition properties:properties];
             if ( lineFilledIn && [ lineFilledIn length ] > 0 )
             {
                 [self appendToCode:objectSetup statement:lineFilledIn tabbed:YES];
@@ -321,14 +321,14 @@ static NSMutableDictionary* instanceCounts = nil;
     return result;
 }
 
-- (NSString *) replaceCodeSymbols:(NSString *)line instanceDefinition:(NSDictionary *)instanceDefinition instanceName:(NSString *)instanceName properties:(NSMutableDictionary *)properties
+- (NSString *) replaceCodeSymbols:(NSString *)line instanceDefinition:(NSDictionary *)instanceDefinition properties:(NSMutableDictionary *)properties
 {
     if (!line)
     {
         line = @"";
     }
     
-    NSString* output = [line stringByReplacingOccurrencesOfString:@"$instanceName$" withString:[self.map variableReference:instanceName] ];
+    NSString* output = [line stringByReplacingOccurrencesOfString:@"$instanceName$" withString:[self.map variableReference:[instanceDefinition instanceName] ] ];
     output = [self replace:output stringBetweenOccurencesOf:@"$" withStringRepresentationFromInstance:instanceDefinition properties:properties];
 
     NSRange foundMarker = [output rangeOfString:@"$" options:NSLiteralSearch];
@@ -356,7 +356,7 @@ static NSMutableDictionary* instanceCounts = nil;
 
 - (NSDictionary *) getCodeFor:(id)object isInline:(BOOL)isInline properties:(NSMutableDictionary *)properties
 {
-    NSDictionary* instanceDefinition = nil;
+    NSMutableDictionary* instanceDefinition = nil;
     if ( [object isKindOfClass:[ViewGraphData class] ] )
     {
         ViewGraphData* data = (ViewGraphData*)object;
@@ -367,8 +367,6 @@ static NSMutableDictionary* instanceCounts = nil;
     }
     
     NSMutableString *code = [NSMutableString string];
-    NSString *instanceName = nil;
-    BOOL isOutlet = NO;
     
     NSString* className = instanceDefinition.className;
     if (className)
@@ -393,14 +391,12 @@ static NSMutableDictionary* instanceCounts = nil;
             [[instanceDefinition objectForKey:@"frame"] setObject:[NSNumber numberWithFloat:20.0f] forKey:@"y"];
         }
         
-        instanceName = [instanceDefinition instanceName];
-        if (!instanceName)
+        if ( ![instanceDefinition instanceName] )
         {
-            instanceName = [NSString stringWithFormat:@"generic%@%@", className, [self getInstanceCount:className] ];
+            instanceDefinition.instanceName = [NSString stringWithFormat:@"generic%@%@", className, [self getInstanceCount:className] ];
         }
-        isOutlet = [instanceDefinition isOutlet];
         
-        if (isOutlet)
+        if ( [instanceDefinition isOutlet] )
         {
             [[properties objectForKey:@"outlets"] addObject:instanceDefinition];
         }
@@ -414,7 +410,7 @@ static NSMutableDictionary* instanceCounts = nil;
             }
         }
         
-        NSString* constructor = [self codeForClassConstructor:className instanceName:instanceName instanceDefinition:instanceDefinition properties:properties isInline:isInline isOutlet:isOutlet];
+        NSString* constructor = [self codeForClassConstructor:className instanceDefinition:instanceDefinition properties:properties isInline:isInline];
         
         if (isInline)
         {
@@ -426,7 +422,7 @@ static NSMutableDictionary* instanceCounts = nil;
         
         if (!isInline)
         {
-            NSString* setup = [self codeForInstanceSetup:instanceName instanceDefinition:instanceDefinition properties:properties];
+            NSString* setup = [self codeForInstanceSetup:instanceDefinition properties:properties];
             [code appendString:setup];
         }
         
@@ -438,7 +434,7 @@ static NSMutableDictionary* instanceCounts = nil;
             {
                 [code appendString:[subviewCode objectForKey:@"code"]];
                 
-                NSString* addSubviewStatement = [classDefinition asAddSubViewWithInstanceName:[self.map variableReference:instanceName] andSubviewInstanceName:[self.map variableReference:[subviewCode objectForKey:@"name"] ] ];
+                NSString* addSubviewStatement = [classDefinition asAddSubViewWithInstanceName:[self.map variableReference:[instanceDefinition instanceName] ] andSubviewInstanceName:[self.map variableReference:[subviewCode objectForKey:@"instanceName"] ] ];
                 [self appendToCode:code statement:addSubviewStatement tabbed:YES];
             }
         }
@@ -448,7 +444,7 @@ static NSMutableDictionary* instanceCounts = nil;
         NSLog(@"Warning: shouldn't be passing a instance definiton with no class into getCode.");
     }
     
-    return [NSMutableDictionary dictionaryWithObjectsAndKeys:code, @"code", instanceName, @"name", properties, @"properties", nil];
+    return [NSMutableDictionary dictionaryWithObjectsAndKeys:code, @"code", [instanceDefinition instanceName], @"instanceName", nil];
 }
 
 -(void)appendToCode:(NSMutableString*)code statement:(NSString*)statement tabbed:(BOOL)tabbed
