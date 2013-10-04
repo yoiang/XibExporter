@@ -89,11 +89,18 @@ static NSMutableDictionary* instanceCounts = nil;
                                        [NSMutableArray array], @"includes",
                                        nil];
     
-    NSDictionary* rootInstanceDefinition = [self getCodeFor:viewGraphData isInline:NO properties:properties];
+    NSDictionary* rootInstanceCodeDefinition = [self buildCodeFor:viewGraphData
+                                                         isInline:NO
+                                                       properties:properties
+                                                ];
 
     NSString* xibName = [viewGraphData xibName];
 
-    NSString *code = [self writeCodeTemplate:xibName viewGraphData:viewGraphData rootInstanceDefinition:rootInstanceDefinition properties:properties];
+    NSString *code = [self fillCodeTemplate:xibName
+                              viewGraphData:viewGraphData
+                 rootInstanceCodeDefinition:rootInstanceCodeDefinition
+                                 properties:properties
+                      ];
 
     NSString* exportFileNameFormat = [self multipleExportedFileNameFormat];
     
@@ -117,7 +124,7 @@ static NSMutableDictionary* instanceCounts = nil;
         result = [self stringValueForEnum:key valueObject:value];
     } else
     {
-        NSDictionary* codeInfo = [self getCodeFor:value isInline:YES properties:properties];
+        NSDictionary* codeInfo = [self buildCodeFor:value isInline:YES properties:properties];
         result = [codeInfo objectForKey:@"code"];
     }
     
@@ -354,7 +361,7 @@ static NSMutableDictionary* instanceCounts = nil;
     }
 }
 
-- (NSDictionary *) getCodeFor:(id)object isInline:(BOOL)isInline properties:(NSMutableDictionary *)properties
+- (NSDictionary *) buildCodeFor:(id)object isInline:(BOOL)isInline properties:(NSMutableDictionary *)properties
 {
     NSMutableDictionary* instanceDefinition = nil;
     if ( [object isKindOfClass:[ViewGraphData class] ] )
@@ -429,7 +436,7 @@ static NSMutableDictionary* instanceCounts = nil;
         
         for (NSDictionary* subViewDefinition in [instanceDefinition subviews] )
         {
-            NSDictionary *subviewCode = [self getCodeFor:subViewDefinition isInline:NO properties:properties];
+            NSDictionary *subviewCode = [self buildCodeFor:subViewDefinition isInline:NO properties:properties];
             if (subviewCode)
             {
                 [code appendString:[subviewCode objectForKey:@"code"]];
@@ -478,9 +485,9 @@ static NSMutableDictionary* instanceCounts = nil;
 
 #pragma mark Write selectors
 
--(NSString*)writeCodeTemplate:(NSString*)xibName
+-(NSString*)fillCodeTemplate:(NSString*)xibName
                 viewGraphData:(ViewGraphData*)viewGraphData
-       rootInstanceDefinition:(NSDictionary*)rootInstanceDefinition
+   rootInstanceCodeDefinition:(NSDictionary*)rootInstanceCodeDefinition
                    properties:(NSDictionary*)properties
 {
     NSMutableString* code = [NSMutableString string];
@@ -501,8 +508,7 @@ static NSMutableDictionary* instanceCounts = nil;
     NSDictionary* outlets = [properties objectForKey:@"outlets"];
     [self writeCodeTemplate:code forOutlets:outlets];
     
-    NSString* generatedBody = [rootInstanceDefinition objectForKey:@"code"];
-    [code replaceOccurrencesOfString:@"$GeneratedBody$" withString:generatedBody ];
+    [code replaceOccurrencesOfString:@"$GeneratedBody$" withString:[rootInstanceCodeDefinition objectForKey:@"code"] ];
     
     // TODO: change replace: to accept mutable string
     code = [NSMutableString stringWithString:[self replace:code stringBetweenOccurencesOf:@"∂" withStringRepresentationFromInstance:viewGraphData.rootViewInstanceDefinition properties:nil] ];
