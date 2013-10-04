@@ -109,13 +109,17 @@ static NSMutableDictionary* instanceCounts = nil;
 
 -(NSString*)getStringRepresentationForDictionaryValue:(NSDictionary*)value key:(NSString*)key outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
 {
+    NSString* result = nil;
     if ( [ExportUtility isDictionaryEnum:(NSDictionary*)value] )
     {
-        return [self valueForEnum:key valueObject:value];
+        result = [self stringValueForEnum:key valueObject:value];
     } else
     {
-        return [ [self getCodeFor:value isInline:YES outlets:outlets includes:includes properties:properties] objectForKey:@"code"];
+        NSDictionary* codeInfo = [self getCodeFor:value isInline:YES outlets:outlets includes:includes properties:properties];
+        result = [codeInfo objectForKey:@"code"];
     }
+    
+    return result;
 }
 
 -(NSString*)getStringRepresentationForArrayValue:(NSArray*)value key:( NSString* )key outlets:(NSMutableDictionary *)outlets includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
@@ -216,7 +220,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return result;
 }
 
--(NSString*)valueForEnum:(NSString*)valueKey valueObject:(NSObject*)valueObject
+-(NSString*)stringValueForEnum:(NSString*)valueKey valueObject:(NSObject*)valueObject
 {
     NSString* enumValueKey;
     NSRange prefix = [valueKey rangeOfString:@"." options:NSLiteralSearch];

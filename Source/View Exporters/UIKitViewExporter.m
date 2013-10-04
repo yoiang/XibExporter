@@ -25,7 +25,7 @@
     return @"%@.UIKit.h";
 }
 
--(NSString*)valueForEnum:(NSString*)valueKey valueObject:(NSObject*)valueObject
+-(NSString*)stringValueForEnum:(NSString*)valueKey valueObject:(NSObject*)valueObject
 {
     NSString* result = nil;
     if ( [valueObject isKindOfClass:[NSDictionary class] ] )
@@ -42,7 +42,7 @@
             enumValueKey = [valueKey substringFromIndex:prefix.location + prefix.length]; // TODO: think about subvalues, shouldn't these be processed in full like anything else?
         }
 
-        result = [self valueForEnum:enumValueKey valueObject:[valueDict objectForKey:enumValueKey] ];
+        result = [self stringValueForEnum:enumValueKey valueObject:[valueDict objectForKey:enumValueKey] ];
     } else if ( [valueObject isKindOfClass:[NSString class] ] )
     {
         result = (NSString*)valueObject;
