@@ -85,12 +85,12 @@ static NSMutableDictionary* instanceCounts = nil;
         [ instanceCounts removeAllObjects ];
     }
     
-    NSMutableArray* includes = [NSMutableArray array];
     NSMutableDictionary* properties = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                       [NSMutableArray array], @"outlets",
+                                       [NSMutableArray array], @"includes",
                                        nil];
     
-    NSDictionary* instanceDefinition = [self getCodeFor:viewGraphData isInline:NO includes:includes properties:properties];
+    NSDictionary* instanceDefinition = [self getCodeFor:viewGraphData isInline:NO properties:properties];
     
     NSString* exportFileNameFormat = [self multipleExportedFileNameFormat];
     
@@ -105,7 +105,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return exportedFileName;
 }
 
--(NSString*)getStringRepresentationForDictionaryValue:(NSDictionary*)value key:(NSString*)key includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
+-(NSString*)getStringRepresentationForDictionaryValue:(NSDictionary*)value key:(NSString*)key properties:(NSMutableDictionary *)properties
 {
     NSString* result = nil;
     if ( [ExportUtility isDictionaryEnum:(NSDictionary*)value] )
@@ -113,20 +113,20 @@ static NSMutableDictionary* instanceCounts = nil;
         result = [self stringValueForEnum:key valueObject:value];
     } else
     {
-        NSDictionary* codeInfo = [self getCodeFor:value isInline:YES includes:includes properties:properties];
+        NSDictionary* codeInfo = [self getCodeFor:value isInline:YES properties:properties];
         result = [codeInfo objectForKey:@"code"];
     }
     
     return result;
 }
 
--(NSString*)getStringRepresentationForArrayValue:(NSArray*)value key:( NSString* )key includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
+-(NSString*)getStringRepresentationForArrayValue:(NSArray*)value key:( NSString* )key properties:(NSMutableDictionary *)properties
 {
     NSMutableString* result = nil;
     
     for (id individualValue in value)
     {
-        NSString* parsedStringValue = [self getStringRepresentation:individualValue key:key includes:includes properties:properties];
+        NSString* parsedStringValue = [self getStringRepresentation:individualValue key:key properties:properties];
         
         // For now only used for masks
         if (!result)
@@ -175,16 +175,16 @@ static NSMutableDictionary* instanceCounts = nil;
     return result;
 }
 
-- (NSString *) getStringRepresentation:(id)v key:( NSString* )key includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
+- (NSString *) getStringRepresentation:(id)v key:( NSString* )key properties:(NSMutableDictionary *)properties
 {
     NSString *result = nil;
     
-    if ([v isKindOfClass:[NSDictionary class]] && includes && properties )
+    if ([v isKindOfClass:[NSDictionary class]] && properties )
     {
-        result = [self getStringRepresentationForDictionaryValue:v key:key includes:includes properties:properties];
+        result = [self getStringRepresentationForDictionaryValue:v key:key properties:properties];
     } else if ( [v isKindOfClass:[NSArray class] ] )
     {
-        result = [self getStringRepresentationForArrayValue:v key:key includes:includes properties:properties];
+        result = [self getStringRepresentationForArrayValue:v key:key properties:properties];
     } else if ([v isKindOfClass:[NSString class]])
     {
         result = [self getStringRepresentationForStringValue:v key:key];
@@ -240,7 +240,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return @"invalid";
 }
 
--(NSString*)codeForClassConstructor:(NSString*)class instanceName:(NSString*)instanceName includes:(NSMutableArray*)includes instanceDefinition:(NSDictionary*)instanceDefinition properties:(NSMutableDictionary*)properties isInline:(BOOL)isInline isOutlet:(BOOL)isOutlet
+-(NSString*)codeForClassConstructor:(NSString*)class instanceName:(NSString*)instanceName instanceDefinition:(NSDictionary*)instanceDefinition properties:(NSMutableDictionary*)properties isInline:(BOOL)isInline isOutlet:(BOOL)isOutlet
 {
     NSMutableString* constructor = nil;
     
@@ -250,7 +250,7 @@ static NSMutableDictionary* instanceCounts = nil;
     if (isInline)
     {
         NSString* constructorDef = [classDefinition objectForKey:@"_inlineConstructor"];
-        NSString* inl = [self replaceCodeSymbols:constructorDef instanceDefinition:instanceDefinition key:@"_inlineConstructor" name:instanceName includes:includes properties:properties];
+        NSString* inl = [self replaceCodeSymbols:constructorDef instanceDefinition:instanceDefinition key:@"_inlineConstructor" name:instanceName properties:properties];
         constructor = [NSMutableString stringWithString:[inl substringFromIndex:1] ]; //remove the leading tab for an inline
     } else
     {
@@ -260,12 +260,12 @@ static NSMutableDictionary* instanceCounts = nil;
         {
             if (isOutlet)
             {
-                constructorDef = [self replaceCodeSymbols:[classDefinition objectForKey:@"_inlineConstructor"] instanceDefinition:instanceDefinition key:@"_inlineConstructor" name:instanceName includes:includes properties:properties];
+                constructorDef = [self replaceCodeSymbols:[classDefinition objectForKey:@"_inlineConstructor"] instanceDefinition:instanceDefinition key:@"_inlineConstructor" name:instanceName properties:properties];
                 constructorDef = [NSString stringWithFormat:@"\t%@ = %@",[self.map variableReference:instanceName],[constructorDef substringFromIndex:1]];
             }
             else
             {
-                constructorDef = [self replaceCodeSymbols:constructorDef instanceDefinition:instanceDefinition key:@"_constructor" name:instanceName includes:includes properties:properties];
+                constructorDef = [self replaceCodeSymbols:constructorDef instanceDefinition:instanceDefinition key:@"_constructor" name:instanceName properties:properties];
             }
             
             constructor = [NSMutableString stringWithString:@"\n"];
@@ -292,7 +292,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return constructor;
 }
 
--(NSString*)codeForInstanceSetup:(NSString*)instanceName includes:(NSMutableArray*)includes instanceDefinition:(NSDictionary*)instanceDefinition properties:(NSMutableDictionary*)properties
+-(NSString*)codeForInstanceSetup:(NSString*)instanceName instanceDefinition:(NSDictionary*)instanceDefinition properties:(NSMutableDictionary*)properties
 {
     NSMutableString* objectSetup = [NSMutableString string];
     
@@ -303,7 +303,7 @@ static NSMutableDictionary* instanceCounts = nil;
         if ( [classDefinition isValidClassMember:classMember] && [instanceDefinition hasValueForMember:classMember] )
         {
             NSString *line = [classDefinition objectForKey:classMember];
-            NSString* lineFilledIn = [self replaceCodeSymbols:line instanceDefinition:instanceDefinition key:classMember name:instanceName includes:includes properties:properties];
+            NSString* lineFilledIn = [self replaceCodeSymbols:line instanceDefinition:instanceDefinition key:classMember name:instanceName properties:properties];
             if ( lineFilledIn && [ lineFilledIn length ] > 0 )
             {
                 [objectSetup appendFormat:@"%@%@\n", lineFilledIn, [self.map statementEnd] ];
@@ -322,7 +322,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return addsub;
 }
 
--(NSString*)replace:(NSString*)string stringBetweenOccurencesOf:(NSString*)find withStringRepresentationFromInstance:(NSDictionary*)instanceDefinition includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
+-(NSString*)replace:(NSString*)string stringBetweenOccurencesOf:(NSString*)find withStringRepresentationFromInstance:(NSDictionary*)instanceDefinition properties:(NSMutableDictionary *)properties
 {
     NSString* result = string;
     
@@ -336,7 +336,7 @@ static NSMutableDictionary* instanceCounts = nil;
         NSObject* valueObject = [instanceDefinition objectAtPath:valueKey withPathSeparator:@"."];
         if (valueObject)
         {
-            value = [self getStringRepresentation:valueObject key:valueKey includes:includes properties:properties];
+            value = [self getStringRepresentation:valueObject key:valueKey properties:properties];
         }
         
         if ( value && [ value length ] > 0 )
@@ -355,7 +355,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return result;
 }
 
-- (NSString *) replaceCodeSymbols:(NSString *)line instanceDefinition:(NSDictionary *)instanceDefinition key:(NSString *)key name:(NSString *)name includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
+- (NSString *) replaceCodeSymbols:(NSString *)line instanceDefinition:(NSDictionary *)instanceDefinition key:(NSString *)key name:(NSString *)name properties:(NSMutableDictionary *)properties
 {
     if (!line)
     {
@@ -363,7 +363,7 @@ static NSMutableDictionary* instanceCounts = nil;
     }
     
     NSString* output = [line stringByReplacingOccurrencesOfString:@"@" withString:[self.map variableReference:name] ];
-    output = [self replace:output stringBetweenOccurencesOf:@"$" withStringRepresentationFromInstance:instanceDefinition includes:includes properties:properties];
+    output = [self replace:output stringBetweenOccurencesOf:@"$" withStringRepresentationFromInstance:instanceDefinition properties:properties];
 
     NSRange foundMarker = [output rangeOfString:@"$" options:NSLiteralSearch];
     if (foundMarker.length != 0) // instance didn't contain all values the definition wanted
@@ -405,7 +405,7 @@ static NSMutableDictionary* instanceCounts = nil;
     }
 }
 
-- (NSDictionary *) getCodeFor:(id)object isInline:(BOOL)isInline includes:(NSMutableArray *)includes properties:(NSMutableDictionary *)properties
+- (NSDictionary *) getCodeFor:(id)object isInline:(BOOL)isInline properties:(NSMutableDictionary *)properties
 {
     NSDictionary* instanceDefinition = nil;
     if ( [object isKindOfClass:[ViewGraphData class] ] )
@@ -435,7 +435,7 @@ static NSMutableDictionary* instanceCounts = nil;
             return nil;
         }
 
-        [self addIncludes:includes forClass:className];
+        [self addIncludes:[properties objectForKey:@"includes"] forClass:className];
         
         // TODO: check if this is still necessary
         //this is an annoying hack because with a status bar iOS tells us the Y is 0 in app, whereas it's 20 in the XIB
@@ -460,13 +460,13 @@ static NSMutableDictionary* instanceCounts = nil;
             [[properties objectForKey:@"outlets"] addObject:instanceDefinition];
         }
         
-        NSString* constructor = [self codeForClassConstructor:className instanceName:instanceName includes:includes instanceDefinition:instanceDefinition properties:properties isInline:isInline isOutlet:isOutlet];
+        NSString* constructor = [self codeForClassConstructor:className instanceName:instanceName instanceDefinition:instanceDefinition properties:properties isInline:isInline isOutlet:isOutlet];
         
         [code appendString:constructor];
         
         if (!isInline)
         {
-            NSString* setup = [self codeForInstanceSetup:instanceName includes:includes instanceDefinition:instanceDefinition properties:properties];
+            NSString* setup = [self codeForInstanceSetup:instanceName instanceDefinition:instanceDefinition properties:properties];
             [code appendString:setup];
         }
         
@@ -474,7 +474,7 @@ static NSMutableDictionary* instanceCounts = nil;
         NSArray *subviews = [instanceDefinition objectForKey:@"subviews"];
         for (int i = 0; i < [subviews count]; i++)
         {
-            NSDictionary *subview = [self getCodeFor:[subviews objectAtIndex:i] isInline:NO includes:includes properties:properties];
+            NSDictionary *subview = [self getCodeFor:[subviews objectAtIndex:i] isInline:NO properties:properties];
             if (subview)
             {
                 [code appendString:[subview objectForKey:@"code"]];
@@ -490,7 +490,7 @@ static NSMutableDictionary* instanceCounts = nil;
         NSLog(@"Warning: shouldn't be passing a instance definiton with no class into getCode.");
     }
     
-    return [NSMutableDictionary dictionaryWithObjectsAndKeys:code, @"code", instanceName, @"name", includes, @"includes", properties, @"properties", nil];
+    return [NSMutableDictionary dictionaryWithObjectsAndKeys:code, @"code", instanceName, @"name", properties, @"properties", nil];
 }
 
 -(NSString*)exportCodeTemplate:(NSString*)xibName
@@ -508,7 +508,7 @@ static NSMutableDictionary* instanceCounts = nil;
     [code appendString:@"#pragma once\n\n"];
     
     //includes
-    NSDictionary* includes = [rootInstanceDefinition objectForKey:@"includes"];
+    NSDictionary* includes = [properties objectForKey:@"includes"];
     for (NSObject* include in includes)
     {
         [code appendFormat:@"%@\n", include];
@@ -564,7 +564,7 @@ static NSMutableDictionary* instanceCounts = nil;
     [code replaceOccurrencesOfString:@"$GeneratedBody$" withString:generatedBody options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
     
     // TODO: change replace: to accept mutable string
-    code = [NSMutableString stringWithString:[self replace:code stringBetweenOccurencesOf:@"∂" withStringRepresentationFromInstance:viewGraphData.rootViewInstanceDefinition includes:nil properties:nil] ];
+    code = [NSMutableString stringWithString:[self replace:code stringBetweenOccurencesOf:@"∂" withStringRepresentationFromInstance:viewGraphData.rootViewInstanceDefinition properties:nil] ];
 
     return code;
 }
