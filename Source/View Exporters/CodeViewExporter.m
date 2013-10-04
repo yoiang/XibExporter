@@ -246,8 +246,7 @@ static NSMutableDictionary* instanceCounts = nil;
     //if this is an inline call, simply return the inline constructor
     if (isInline)
     {
-        NSString* inl = [self replaceCodeSymbols:[classDefinition asInlineConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
-        constructor = [NSMutableString stringWithString:[inl substringFromIndex:1] ]; //remove the leading tab for an inline
+        constructor = [NSMutableString stringWithString:[self replaceCodeSymbols:[classDefinition asInlineConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties] ];
     } else
     {
         
@@ -257,7 +256,7 @@ static NSMutableDictionary* instanceCounts = nil;
             if (isOutlet)
             {
                 constructorDef = [self replaceCodeSymbols:[classDefinition asInlineConstructorToParse] instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
-                constructorDef = [NSString stringWithFormat:@"\t%@ = %@",[self.map variableReference:instanceName],[constructorDef substringFromIndex:1]];
+                constructorDef = [NSString stringWithFormat:@"%@ = %@",[self.map variableReference:instanceName], constructorDef];
             }
             else
             {
@@ -275,7 +274,7 @@ static NSMutableDictionary* instanceCounts = nil;
             //only put the constructor in if this is not the root view, because the root view should be handled by surrounding code
             if ( ![instanceDefinition isRootView] )
             {
-                [constructor appendString:[NSString stringWithFormat:@"%@%@\n", constructorDef,[self.map statementEnd] ] ];
+                [self appendToCode:constructor statement:constructorDef tabbed:YES];
             }
         }
         else
@@ -302,7 +301,7 @@ static NSMutableDictionary* instanceCounts = nil;
             NSString* lineFilledIn = [self replaceCodeSymbols:line instanceDefinition:instanceDefinition instanceName:instanceName properties:properties];
             if ( lineFilledIn && [ lineFilledIn length ] > 0 )
             {
-                [objectSetup appendFormat:@"%@%@\n", lineFilledIn, [self.map statementEnd] ];
+                [self appendToCode:objectSetup statement:lineFilledIn tabbed:YES];
             }
         }
     }
@@ -359,7 +358,7 @@ static NSMutableDictionary* instanceCounts = nil;
         output = nil;
     } else
     {
-        output = [NSString stringWithFormat:@"\t%@", output];
+        output = [NSString stringWithFormat:@"%@", output];
     }
     
     return output;

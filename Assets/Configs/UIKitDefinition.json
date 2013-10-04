@@ -129,7 +129,7 @@
     },
     "UIView": {
       "_addSubview": "[$instanceName$ addSubview:%]",
-      "_constructor": "UIView* $instanceName$ = [ [UIView alloc] init];",
+      "_constructor": "UIView* $instanceName$ = [ [UIView alloc] init]",
       "_inlineConstructor": "[ [UIView alloc] init]",
       "_parameter": "UIView** $instanceName$",
       "_declaration": "UIView*",

@@ -73,7 +73,7 @@ inline void populateGeneratedViewTemplates_Xcode5( UIView** rootView, UILabel** 
 	[(*variableNameView) addSubview:(*variableNameLabel2)];
 	[(*rootView) addSubview:(*variableNameView)];
 
-	UIView* (*genericUIView0) = [ [UIView alloc] init];;
+	UIView* (*genericUIView0) = [ [UIView alloc] init];
 	[(*genericUIView0) setHidden:NO];
 	[(*genericUIView0) setFrame:CGRectMake( 20.0f, 371.0f, 280.0f, 54.0f )];
 	[(*genericUIView0) setBackgroundColor:[UIColor colorWithRed:255 green:229 blue:179 alpha:255]];
