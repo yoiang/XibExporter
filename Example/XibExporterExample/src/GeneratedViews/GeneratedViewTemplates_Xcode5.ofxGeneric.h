@@ -126,6 +126,16 @@ inline void populateGeneratedViewTemplates_Xcode5( ofPtr< ofxGenericView > rootV
 	variableNameLabel2->setAutoresizingMask( ofxGenericViewAutoresizingRightMargin | ofxGenericViewAutoresizingBottomMargin );
 	variableNameView->addChildView( variableNameLabel2 );
 	rootView->addChildView( variableNameView );
+
+	ofPtr< ofxGenericView > genericUIView0 = ofxGenericView::create( );
+	genericUIView0->setContentMode( ofxGenericContentModeScaleToFill );
+	genericUIView0->setVisible( true );
+	genericUIView0->setFrame( ofRectangle( 20.0f, 371.0f, 280.0f, 54.0f ) );
+	genericUIView0->setBackgroundColor( ofColor( 255, 229, 179, 255 ) );
+	genericUIView0->setAutoresizingMask( ofxGenericViewAutoresizingRightMargin | ofxGenericViewAutoresizingBottomMargin );
+	genericUIView0->setAlpha( 1.0f );
+	genericUIView0->setClipSubviews( false );
+	rootView->addChildView( genericUIView0 );
 }
 
 inline void populatePreserveGeneratedViewTemplates_Xcode5( ofPtr< ofxGenericView > rootView, bool preserveTopLeft, bool preserveSize, ofPtr< ofxGenericTextView > &variableNameLabel, ofPtr< ofxGenericButtonView > &variableNameButton1, ofPtr< ofxGenericButtonView > &variableNameButton2, ofPtr< ofxGenericImageView > &variableNameImage, ofPtr< ofxGenericView > &variableNameView, ofPtr< ofxGenericTextView > &variableNameLabel2 )

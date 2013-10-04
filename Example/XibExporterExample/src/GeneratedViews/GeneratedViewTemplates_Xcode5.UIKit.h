@@ -72,6 +72,16 @@ inline void populateGeneratedViewTemplates_Xcode5( UIView** rootView, UILabel** 
 	[(*variableNameLabel2) setTextColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:255]];
 	[(*variableNameView) addSubview:(*variableNameLabel2)];
 	[(*rootView) addSubview:(*variableNameView)];
+
+	UIView* (*genericUIView0) = [ [UIView alloc] init];;
+	[(*genericUIView0) setHidden:NO];
+	[(*genericUIView0) setFrame:CGRectMake( 20.0f, 371.0f, 280.0f, 54.0f )];
+	[(*genericUIView0) setBackgroundColor:[UIColor colorWithRed:255 green:229 blue:179 alpha:255]];
+	[(*genericUIView0) setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin];
+	[(*genericUIView0) setAlpha:1.0f];
+	[(*genericUIView0) setClipsToBounds:NO];
+	[(*genericUIView0) setContentMode:UIViewContentModeScaleToFill];
+	[(*rootView) addSubview:(*genericUIView0)];
 }
 
 inline void populatePreserveGeneratedViewTemplates_Xcode5( UIView** rootView, bool preserveTopLeft, bool preserveSize, UILabel** variableNameLabel, UIButton** variableNameButton1, UIButton** variableNameButton2, UIImageView** variableNameImage, UIView** variableNameView, UILabel** variableNameLabel2 )
