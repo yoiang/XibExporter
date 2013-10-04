@@ -49,6 +49,19 @@
     return result;
 }
 
+-(NSNumber*)numberForKey:(NSString *)key
+{
+    NSNumber* result = nil;
+    
+    id object = [self objectForKey:key];
+    if ( [object isKindOfClass:[NSNumber class] ] )
+    {
+        result = (NSNumber*)object;
+    }
+    
+    return result;
+}
+
 -(BOOL)boolForKey:(NSString *)key withDefaultValue:(BOOL)defaultValue
 {
     BOOL result = defaultValue;
