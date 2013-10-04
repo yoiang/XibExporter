@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define NSDictionary_InstanceDefinition_InstanceNameKey @"instanceName"
+#define NSDictionary_InstanceDefinition_IsOutletKey @"isOutlet"
 
 #define NSDictionary_InstanceDefinition_CommentsKey @"comments"
 

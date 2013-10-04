@@ -40,6 +40,10 @@ static int viewId = 0;
     if ( self.Outlet )
     {
         dict.instanceName = self.Outlet;
+        dict.isOutlet = YES;
+    } else
+    {
+        dict.isOutlet = NO;
     }
     
     //UIView specific stuff

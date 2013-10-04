@@ -15,6 +15,11 @@
     [self setObject:instanceName forKey:NSDictionary_InstanceDefinition_InstanceNameKey];
 }
 
+-(void)setIsOutlet:(BOOL)isOutlet
+{
+    [self setObject:[NSNumber numberWithBool:isOutlet] forKey:NSDictionary_InstanceDefinition_IsOutletKey];
+}
+
 -(void)addComment:(NSString*)comment
 {
     NSMutableArray* comments = (NSMutableArray*)[self comments];

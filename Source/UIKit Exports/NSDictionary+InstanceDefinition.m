@@ -39,14 +39,7 @@
 
 -(BOOL)isOutlet
 {
-    BOOL result = NO;
-    
-    if ( [self stringForKey:NSDictionary_InstanceDefinition_InstanceNameKey] )
-    {
-        result = YES;
-    }
-    
-    return result;
+    return [self boolForKey:NSDictionary_InstanceDefinition_IsOutletKey withDefaultValue:NO];
 }
 
 -(BOOL)hasValueForMember:(NSString*)memberName

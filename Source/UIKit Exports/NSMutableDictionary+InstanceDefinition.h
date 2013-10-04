@@ -13,6 +13,7 @@
 @interface NSMutableDictionary (InstanceDefinition)
 
 -(void)setInstanceName:(NSString*)instanceName;
+-(void)setIsOutlet:(BOOL)isOutlet;
 
 -(void)addComment:(NSString*)comment;
 
