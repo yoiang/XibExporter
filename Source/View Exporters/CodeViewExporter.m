@@ -90,7 +90,7 @@ static NSMutableDictionary* instanceCounts = nil;
 
     NSString* xibName = [viewGraphData xibName];
 
-    NSString *code = [self exportCodeTemplate:xibName viewGraphData:viewGraphData rootInstanceDefinition:rootInstanceDefinition properties:properties];
+    NSString *code = [self writeCodeTemplate:xibName viewGraphData:viewGraphData rootInstanceDefinition:rootInstanceDefinition properties:properties];
 
     NSString* exportFileNameFormat = [self multipleExportedFileNameFormat];
     
@@ -494,10 +494,27 @@ static NSMutableDictionary* instanceCounts = nil;
     return [NSMutableDictionary dictionaryWithObjectsAndKeys:code, @"code", instanceName, @"name", properties, @"properties", nil];
 }
 
--(NSString*)exportCodeTemplate:(NSString*)xibName
-                    viewGraphData:(ViewGraphData*)viewGraphData
-                          rootInstanceDefinition:(NSDictionary*)rootInstanceDefinition
-                    properties:(NSDictionary*)properties
+-( NSNumber* )getInstanceCount:( NSString* )type
+{
+    unsigned int instanceCount = 0;
+    
+    NSNumber* storedInstanceCount = [ instanceCounts objectForKey:type ];
+    if ( storedInstanceCount )
+    {
+        instanceCount = [ storedInstanceCount unsignedIntValue ];
+    }
+    
+    [ instanceCounts setObject:[ NSNumber numberWithUnsignedInt:instanceCount + 1 ] forKey:type ];
+    
+    return [ NSNumber numberWithUnsignedInt:instanceCount ];
+}
+
+#pragma mark Write selectors
+
+-(NSString*)writeCodeTemplate:(NSString*)xibName
+                viewGraphData:(ViewGraphData*)viewGraphData
+       rootInstanceDefinition:(NSDictionary*)rootInstanceDefinition
+                   properties:(NSDictionary*)properties
 {
     NSMutableString* code = [NSMutableString string];
     
@@ -516,7 +533,7 @@ static NSMutableDictionary* instanceCounts = nil;
         [includesString appendFormat:@"%@\n", include];
     }
     [code replaceOccurrencesOfString:@"$includes$" withString:includesString options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
-
+    
     NSDictionary* outlets = [properties objectForKey:@"outlets"];
     
     //construct a string representing all the outlet parameters
@@ -554,7 +571,7 @@ static NSMutableDictionary* instanceCounts = nil;
     {
         strippedParamsComma = [NSString stringWithFormat:@", %@", strippedParams];
     }
-
+    
     [code replaceOccurrencesOfString:@"@" withString:xibName options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
     [code replaceOccurrencesOfString:@"%" withString:params options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
     [code replaceOccurrencesOfString:@"§" withString:strippedParams options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
@@ -566,23 +583,8 @@ static NSMutableDictionary* instanceCounts = nil;
     
     // TODO: change replace: to accept mutable string
     code = [NSMutableString stringWithString:[self replace:code stringBetweenOccurencesOf:@"∂" withStringRepresentationFromInstance:viewGraphData.rootViewInstanceDefinition properties:nil] ];
-
+    
     return code;
-}
-
--( NSNumber* )getInstanceCount:( NSString* )type
-{
-    unsigned int instanceCount = 0;
-    
-    NSNumber* storedInstanceCount = [ instanceCounts objectForKey:type ];
-    if ( storedInstanceCount )
-    {
-        instanceCount = [ storedInstanceCount unsignedIntValue ];
-    }
-    
-    [ instanceCounts setObject:[ NSNumber numberWithUnsignedInt:instanceCount + 1 ] forKey:type ];
-    
-    return [ NSNumber numberWithUnsignedInt:instanceCount ];
 }
 
 @end
