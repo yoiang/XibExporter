@@ -514,17 +514,31 @@ static NSMutableDictionary* instanceCounts = nil;
     
     [code appendString:[self.map combinedFunctionDefinitions] ];
     
+    [code replaceOccurrencesOfString:@"$instanceName$" withString:xibName ]; // TODO: Objective-C strings begin with @, change XibExporter matching @
+
     // TODO: exported by whom
     
     NSDate* now = [NSDate date];
-    [code replaceOccurrencesOfString:@"$exportTime$" withString:[NSString stringWithFormat:@"%@", now] options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
+    [code replaceOccurrencesOfString:@"$exportTime$" withString:[NSString stringWithFormat:@"%@", now] ];
     
     //includes
     NSArray* includes = [properties objectForKey:@"includes"];
-    [code replaceOccurrencesOfString:@"$includes$" withString:[includes componentsJoinedByString:@"\n"] options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
+    [code replaceOccurrencesOfString:@"$includes$" withString:[includes componentsJoinedByString:@"\n"] ];
     
     NSDictionary* outlets = [properties objectForKey:@"outlets"];
+    [self writeCodeTemplate:code forOutlets:outlets];
     
+    NSString* generatedBody = [rootInstanceDefinition objectForKey:@"code"];
+    [code replaceOccurrencesOfString:@"$GeneratedBody$" withString:generatedBody ];
+    
+    // TODO: change replace: to accept mutable string
+    code = [NSMutableString stringWithString:[self replace:code stringBetweenOccurencesOf:@"∂" withStringRepresentationFromInstance:viewGraphData.rootViewInstanceDefinition properties:nil] ];
+    
+    return code;
+}
+
+-(void)writeCodeTemplate:(NSMutableString*)code forOutlets:(NSDictionary*)outlets
+{
     //construct a string representing all the outlet parameters
     NSMutableString* params = [NSMutableString string];
     NSMutableString* strippedParams = [NSMutableString string];
@@ -553,19 +567,11 @@ static NSMutableDictionary* instanceCounts = nil;
         strippedParamsComma = [NSString stringWithFormat:@", %@", strippedParams];
     }
     
-    [code replaceOccurrencesOfString:@"$instanceName$" withString:xibName options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
-    [code replaceOccurrencesOfString:@"%" withString:params options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
-    [code replaceOccurrencesOfString:@"§" withString:strippedParams options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
-    [code replaceOccurrencesOfString:@"∞" withString:strippedParamsComma options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
-    [code replaceOccurrencesOfString:@"ﬁ" withString:paramsFollowingComma options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
     
-    NSString* generatedBody = [rootInstanceDefinition objectForKey:@"code"];
-    [code replaceOccurrencesOfString:@"$GeneratedBody$" withString:generatedBody options:NSLiteralSearch range:NSMakeRange(0, [code length] ) ];
-    
-    // TODO: change replace: to accept mutable string
-    code = [NSMutableString stringWithString:[self replace:code stringBetweenOccurencesOf:@"∂" withStringRepresentationFromInstance:viewGraphData.rootViewInstanceDefinition properties:nil] ];
-    
-    return code;
+    [code replaceOccurrencesOfString:@"%" withString:params];
+    [code replaceOccurrencesOfString:@"§" withString:strippedParams];
+    [code replaceOccurrencesOfString:@"∞" withString:strippedParamsComma];
+    [code replaceOccurrencesOfString:@"ﬁ" withString:paramsFollowingComma];
 }
 
 @end
