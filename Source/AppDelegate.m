@@ -96,7 +96,7 @@
                 if (exporter)
                 {
                     error = nil;
-                    NSString* exportedFileName = [exporter exportData:data atomically:NO error:&error];
+                    NSString* exportedFileName = [exporter exportData:data toPath:[AppSettings getFolderForExports] error:&error];
 
                     if (!error)
                     {

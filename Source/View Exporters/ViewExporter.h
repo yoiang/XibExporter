@@ -16,7 +16,7 @@
 @required
 
 @property (readonly) NSString* factoryKey;
--(NSString*)exportData:(ViewGraphData*)viewGraphData atomically:(BOOL)flag error:(NSError**)error;
+-(NSString*)exportData:(ViewGraphData*)viewGraphData toPath:(NSString*)path error:(NSError**)error;
 
 @end
 

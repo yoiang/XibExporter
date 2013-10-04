@@ -71,12 +71,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return self;
 }
 
-- (NSString *)exportData:(ViewGraphData*)viewGraphData atomically:(BOOL)flag error:(NSError**)error
-{
-    return [self exportData:viewGraphData toPath:[AppSettings getFolderForExports] atomically:flag error:error];
-}
-
--(NSString*)exportData:(ViewGraphData*)viewGraphData toPath:(NSString*)targetPath atomically:(BOOL)flag error:(NSError **)error
+-(NSString*)exportData:(ViewGraphData*)viewGraphData toPath:(NSString*)targetPath error:(NSError **)error
 {
     NSString* exportedFileName = nil;
     
@@ -107,7 +102,7 @@ static NSMutableDictionary* instanceCounts = nil;
     
     NSString* fileNamePath = [NSString stringWithFormat:@"%@/%@", targetPath, exportedFileName];
     
-    [self doCodeExport:viewGraphData toFileNamePath:fileNamePath instanceDefinition:output xibName:xibName atomically:flag error:error];
+    [self doCodeExport:viewGraphData toFileNamePath:fileNamePath instanceDefinition:output xibName:xibName error:error];
     
     return exportedFileName;
 }
@@ -520,7 +515,7 @@ static NSMutableDictionary* instanceCounts = nil;
     return func;
 }
 
-- (void) doCodeExport:(ViewGraphData*)viewGraphData toFileNamePath:(NSString *)fileNamePath instanceDefinition:(NSDictionary *)instanceDefinition xibName:(NSString *)xibName atomically:(BOOL)flag error:(NSError**)error
+- (void) doCodeExport:(ViewGraphData*)viewGraphData toFileNamePath:(NSString *)fileNamePath instanceDefinition:(NSDictionary *)instanceDefinition xibName:(NSString *)xibName error:(NSError**)error
 {
     NSMutableString *code = [NSMutableString string];
     
@@ -554,7 +549,7 @@ static NSMutableDictionary* instanceCounts = nil;
     
     [code appendString:[self exportFunctionCode:xibName viewGraphData:viewGraphData parameters:params instanceDefinition:instanceDefinition strippedParams:strippedParams strippedParamsComma:strippedParamsComma paramsComma:paramsComma] ];
     
-    [code writeToFile:fileNamePath atomically:flag encoding:NSUTF8StringEncoding error:error];
+    [code writeToFile:fileNamePath atomically:NO encoding:NSUTF8StringEncoding error:error];
 }
 
 -( NSNumber* )getInstanceCount:( NSString* )type
