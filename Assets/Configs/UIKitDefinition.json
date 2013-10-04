@@ -57,7 +57,7 @@
       "_inlineConstructor": "[ [UILabel alloc] init]",
       "_parameter": "UILabel** $instanceName$",
       "_super": "UILabel",
-      "_declaration": "UILabel* $instanceName$",
+      "_declaration": "UILabel*",
       "font": "[$instanceName$ setFont:[UIFont fontWithName:$fontName$ size:$fontSize$] ]",
       "minimumFontSize": "[$instanceName$ setMinimumFontSize:$minimumFontSize$]",
       "lineBreakMode": "[$instanceName$ setLineBreakMode:$lineBreakMode$]",
