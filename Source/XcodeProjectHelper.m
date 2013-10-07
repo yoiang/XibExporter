@@ -11,6 +11,7 @@
 #import "AppSettings.h"
 
 #import "NSArray+NSString.h"
+#import "NSMutableString+Parsing.h"
 
 const int HEX_LENGTH = 24;
 
@@ -60,15 +61,16 @@ const int HEX_LENGTH = 24;
 {
     NSString* lastKnownFileType = [ XcodeProjectHelper createLastKnownFileTypeForFileName:fileName ];
     
-    return [ NSString stringWithFormat:@"\t\t%@ /* %@ */ = {isa = PBXFileReference;%@ path = %@; sourceTree = \"<group>\"; };\n", hexId, fileName, lastKnownFileType, fileName ];
+    return [ NSString stringWithFormat:@"\t\t%@ /* %@ */ = {isa = PBXFileReference;%@ path = %@; sourceTree = \"<group>\"; };", hexId, fileName, lastKnownFileType, fileName ];
 }
 
 +( NSString* )createXcodeProjectGroupFileString:( NSString* )fileName id:( NSString* )hexId
 {
-    return [ NSString stringWithFormat:@"\t\t\t\t%@ /* %@ */,\n", hexId, fileName ];
+    return [ NSString stringWithFormat:@"\t\t\t\t%@ /* %@ */,", hexId, fileName ];
 }
 
-// TODO: more intimite parsing of project file format
+// TODO: findGroupLocation and findPBXBuildFileInsertLocation return conceptually different information, one points to beginning and one points to insert location, fix
+// TODO: more knowing parsing of project file format
 +( NSRange )findGroupLocation:( NSString* )groupName file:( NSString* )fileString
 {
     NSRange generatedViewsLocation = [ fileString rangeOfString:[ NSString stringWithFormat:@"/* %@ */ = {", groupName ] ];
@@ -103,47 +105,55 @@ const int HEX_LENGTH = 24;
         return;
     }
     
+    // TODO: add if it isn't already there
     NSRange searchRange = [ XcodeProjectHelper findGroupLocation:@"GeneratedViews" file:projectFile ];
-    int groupInsertLoc = searchRange.location;
     if( searchRange.location == NSNotFound )
     {
+        NSLog(@"Error: unable to find GeneratedViews group in project file, cannot add generated files");
         return;
     }
     
-    //locate an insert location for the views for the PBXBuildFile section
-    NSRange pbxBuildLoc = [ XcodeProjectHelper findPBXBuildFileInsertLocation:projectFile ];
+    NSMutableString* insertIntoPBXBuildFileSection = [NSMutableString string];
+    NSMutableString* insertIntoGroupFileSection = [NSMutableString string];
+    NSMutableArray* addedIds = [NSMutableArray array];
     
-    //create a new mutable string that represents the output
-    NSMutableString *newProjectFile = [NSMutableString stringWithString:projectFile];
-    
-    //store whether or not we needed to make any change. If not, don't write
-    BOOL madeChange = NO;
-    
-    for (int i = 0; i < [files count]; i++)
+    for (NSString* fileName in files)
     {
-        NSString *fileName = [files objectAtIndex:i];
-        
         //if this is not already in the XcodeProj, add it in
-        if ([projectFile rangeOfString:fileName options:NSLiteralSearch range:searchRange].location == NSNotFound)
+        if ( [projectFile rangeOfString:fileName options:NSLiteralSearch].location == NSNotFound ) // TODO: only search group range
         {
             //generate a hex key for this file
-            NSString *hex = [XcodeProjectHelper generateRandomHexID];
+            NSString* hex = [XcodeProjectHelper generateRandomHexID];
+            while ( [projectFile rangeOfString:hex options:NSLiteralSearch].location != NSNotFound &&
+                   [addedIds containsString:hex] == YES ) // make sure we have a unique identifier
+            {
+                hex = [XcodeProjectHelper generateRandomHexID];
+            }
             
-            //now put it into the PBXBuildFile section
-            NSString *pbxLine = [NSString stringWithFormat:@"\n%@", [XcodeProjectHelper createXcodeProjectPBXBuildFileString:fileName id:hex ] ];
-            [ newProjectFile insertString:pbxLine atIndex:pbxBuildLoc.location + pbxBuildLoc.length ];
-            
-            groupInsertLoc += [pbxLine length]; //increase group insert location, as this occurs after the pbx
-            
-            NSString *line = [NSString stringWithFormat:@"\n%@", [ XcodeProjectHelper createXcodeProjectGroupFileString:fileName id:hex ] ];
-            [newProjectFile insertString:line atIndex:groupInsertLoc];
-            
-            madeChange = YES;
+            [insertIntoPBXBuildFileSection appendString:[XcodeProjectHelper createXcodeProjectPBXBuildFileString:fileName id:hex ] withNonEmptySeparator:@"\n"];
+            [insertIntoGroupFileSection appendString:[XcodeProjectHelper createXcodeProjectGroupFileString:fileName id:hex] withNonEmptySeparator:@"\n"];
+            [addedIds addObject:hex];
         }
     }
+
+    BOOL updatedProjectFile = NO;
+    NSMutableString* newProjectFile = [NSMutableString stringWithString:projectFile];
+    if ( [insertIntoPBXBuildFileSection length] > 0 )
+    {
+        //locate an insert location for the views for the PBXBuildFile section
+        NSRange pbxBuildLoc = [ XcodeProjectHelper findPBXBuildFileInsertLocation:newProjectFile ];
+        [newProjectFile insertString:[NSString stringWithFormat:@"\n%@", insertIntoPBXBuildFileSection] atIndex:pbxBuildLoc.location + pbxBuildLoc.length];
+        
+        updatedProjectFile = YES;
+    }
+    if ( [insertIntoGroupFileSection length] > 0 )
+    {
+        NSRange groupLoc = [ XcodeProjectHelper findGroupLocation:@"GeneratedViews" file:newProjectFile ];
+        [newProjectFile insertString:[NSString stringWithFormat:@"\n%@", insertIntoGroupFileSection] atIndex:groupLoc.location];
+        updatedProjectFile = YES;
+    }
     
-    //now write the changes
-    if (madeChange)
+    if (updatedProjectFile)
     {
         [ XcodeProjectHelper setXcodeProjectFileContents:newProjectFile ];
     }
