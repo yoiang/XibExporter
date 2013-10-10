@@ -111,6 +111,7 @@ static NSMutableDictionary* instanceCounts = nil;
     
     NSString* fileNamePath = [NSString stringWithFormat:@"%@/%@", targetPath, exportedFileName];
     
+    [ [NSFileManager defaultManager] createDirectoryAtPath:targetPath withIntermediateDirectories:YES attributes:nil error:nil];
     [code writeToFile:fileNamePath atomically:NO encoding:NSUTF8StringEncoding error:error];
     
     return exportedFileName;
