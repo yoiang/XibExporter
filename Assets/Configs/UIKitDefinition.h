@@ -7,15 +7,15 @@
 
 $includes$
 
-inline CGRect getGenerated$instanceName$Frame()
+CGRect getGenerated$instanceName$Frame()
 {
     return CGRectMake(∂frame.x∂, ∂frame.y∂, ∂frame.width∂, ∂frame.height∂);
 }
 
-inline void populateGenerated$instanceName$( UIView** rootViewﬁ )
+void populateGenerated$instanceName$( UIView** rootViewﬁ )
 {$GeneratedBody$}
 
-inline void populatePreserveGenerated$instanceName$( UIView** rootView, bool preserveTopLeft, bool preserveSizeﬁ )
+void populatePreserveGenerated$instanceName$( UIView** rootView, bool preserveTopLeft, bool preserveSizeﬁ )
 {
     CGRect preservedFrame = [ (*rootView) frame];
 
@@ -46,7 +46,7 @@ inline void populatePreserveGenerated$instanceName$( UIView** rootView, bool pre
     }
 }
 
-inline UIView* constructGenerated$instanceName$( % )
+UIView* constructGenerated$instanceName$( % )
 {
     UIView* rootView = [ [UIView alloc] init];
     populateGenerated$instanceName$( &rootView∞ );

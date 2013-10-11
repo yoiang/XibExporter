@@ -7,12 +7,12 @@
 
 
 
-inline CGRect getGeneratedViewTemplates_Xcode5Frame()
+CGRect getGeneratedViewTemplates_Xcode5Frame()
 {
     return CGRectMake(0.0f, 0.0f, 320.0f, 568.0f);
 }
 
-inline void populateGeneratedViewTemplates_Xcode5( UIView** rootView, UILabel** variableNameLabel, UIButton** variableNameButton1, UIButton** variableNameButton2, UIImageView** variableNameImage, UIView** variableNameView, UILabel** variableNameLabel2 )
+void populateGeneratedViewTemplates_Xcode5( UIView** rootView, UILabel** variableNameLabel, UIButton** variableNameButton1, UIButton** variableNameButton2, UIImageView** variableNameImage, UIView** variableNameView, UILabel** variableNameLabel2 )
 {
 	[(*rootView) setHidden:NO];
 	[(*rootView) setFrame:CGRectMake( 0.0f, 0.0f, 320.0f, 568.0f )];
@@ -84,7 +84,7 @@ inline void populateGeneratedViewTemplates_Xcode5( UIView** rootView, UILabel** 
 	[(*rootView) addSubview:(*genericUIView0)];
 }
 
-inline void populatePreserveGeneratedViewTemplates_Xcode5( UIView** rootView, bool preserveTopLeft, bool preserveSize, UILabel** variableNameLabel, UIButton** variableNameButton1, UIButton** variableNameButton2, UIImageView** variableNameImage, UIView** variableNameView, UILabel** variableNameLabel2 )
+void populatePreserveGeneratedViewTemplates_Xcode5( UIView** rootView, bool preserveTopLeft, bool preserveSize, UILabel** variableNameLabel, UIButton** variableNameButton1, UIButton** variableNameButton2, UIImageView** variableNameImage, UIView** variableNameView, UILabel** variableNameLabel2 )
 {
     CGRect preservedFrame = [ (*rootView) frame];
 
@@ -115,7 +115,7 @@ inline void populatePreserveGeneratedViewTemplates_Xcode5( UIView** rootView, bo
     }
 }
 
-inline UIView* constructGeneratedViewTemplates_Xcode5( UILabel** variableNameLabel, UIButton** variableNameButton1, UIButton** variableNameButton2, UIImageView** variableNameImage, UIView** variableNameView, UILabel** variableNameLabel2 )
+UIView* constructGeneratedViewTemplates_Xcode5( UILabel** variableNameLabel, UIButton** variableNameButton1, UIButton** variableNameButton2, UIImageView** variableNameImage, UIView** variableNameView, UILabel** variableNameLabel2 )
 {
     UIView* rootView = [ [UIView alloc] init];
     populateGeneratedViewTemplates_Xcode5( &rootView, variableNameLabel, variableNameButton1, variableNameButton2, variableNameImage, variableNameView, variableNameLabel2 );
