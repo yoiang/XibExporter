@@ -29,7 +29,7 @@ void populateGeneratedViewTemplates_Xcode4( UIView** rootView, UILabel** variabl
 	[(*variableNameLabel) setAlpha:1.0f];
 	[(*variableNameLabel) setFont:[UIFont fontWithName:@".HelveticaNeueInterface-M3" size:17.0f] ];
 	[(*variableNameLabel) setTextColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:1.0f]];
-	[(*variableNameLabel) setText:NSLocalizedString( @"Label" ) ];
+	[(*variableNameLabel) setText:NSLocalizedString( @"Label", nil ) ];
 	[(*variableNameLabel) setBackgroundColor:[UIColor colorWithRed:0.820136f green:1.0f blue:0.788757f alpha:1.0f]];
 	[(*variableNameLabel) setLineBreakMode:NSLineBreakByTruncatingTail];
 	[(*variableNameLabel) setTextAlignment:NSTextAlignmentCenter];
@@ -44,7 +44,7 @@ void populateGeneratedViewTemplates_Xcode4( UIView** rootView, UILabel** variabl
 	[(*variableNameButton1) setFrame:CGRectMake( 124.0f, 49.0f, 73.0f, 29.0f )];
 	[(*variableNameButton1) setAlpha:1.0f];
 	[(*variableNameButton1) setTitleColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0f] forState:UIControlStateHighlighted];
-	[(*variableNameButton1) setText:NSLocalizedString( @"ButtonTitleLocalizationKey" ) ];
+	[(*variableNameButton1) setTitle:NSLocalizedString( @"ButtonTitleLocalizationKey", nil ) forState:UIControlStateNormal ];
 	[(*variableNameButton1).titleLabel setNumberOfLines:1];
 	[(*variableNameButton1).titleLabel setFont:[UIFont fontWithName:@".HelveticaNeueInterface-MediumP4" size:15.0f] ];
 	[(*variableNameButton1) setEnabled:YES];
@@ -61,7 +61,7 @@ void populateGeneratedViewTemplates_Xcode4( UIView** rootView, UILabel** variabl
 	[(*variableNameButton2) setFrame:CGRectMake( 124.0f, 85.0f, 73.0f, 62.0f )];
 	[(*variableNameButton2) setAlpha:1.0f];
 	[(*variableNameButton2) setTitleColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0f] forState:UIControlStateHighlighted];
-	[(*variableNameButton2) setText:NSLocalizedString( @"ButtonTitleLocalizationKey" ) ];
+	[(*variableNameButton2) setTitle:NSLocalizedString( @"ButtonTitleLocalizationKey", nil ) forState:UIControlStateNormal ];
 	[(*variableNameButton2).titleLabel setNumberOfLines:1];
 	[(*variableNameButton2).titleLabel setFont:[UIFont fontWithName:@".HelveticaNeueInterface-MediumP4" size:15.0f] ];
 	[(*variableNameButton2) setBackgroundImage:[UIImage imageNamed:@"Icon.png"] forState:UIControlStateNormal];
@@ -101,7 +101,7 @@ void populateGeneratedViewTemplates_Xcode4( UIView** rootView, UILabel** variabl
 	[(*variableNameLabel2) setAlpha:1.0f];
 	[(*variableNameLabel2) setFont:[UIFont fontWithName:@".HelveticaNeueInterface-M3" size:17.0f] ];
 	[(*variableNameLabel2) setTextColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:1.0f]];
-	[(*variableNameLabel2) setText:NSLocalizedString( @"Label within View" ) ];
+	[(*variableNameLabel2) setText:NSLocalizedString( @"Label within View", nil ) ];
 	[(*variableNameLabel2) setBackgroundColor:[UIColor colorWithRed:0.820136f green:1.0f blue:0.788757f alpha:1.0f]];
 	[(*variableNameLabel2) setLineBreakMode:NSLineBreakByTruncatingTail];
 	[(*variableNameLabel2) setTextAlignment:NSTextAlignmentCenter];
