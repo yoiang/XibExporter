@@ -8,15 +8,40 @@
 
 #import "AppDelegate.h"
 
+#import "UIView_Xcode4.h"
+#import "UIView_Xcode5.h"
+
+#import "CompareAllViewController.h"
+
+@interface AppDelegate()
+
+@property (nonatomic, strong) CompareAllViewController* compareAllViewController;
+
+@end
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    CGRect frame = [ [UIScreen mainScreen] bounds];
+    self.window = [[UIWindow alloc] initWithFrame:frame];
+    
+    NSArray* test = [ NSArray arrayWithObjects:
+                     [CompareAllViewController dictionaryForComparingNibName:@"ViewTemplates_Xcode4" inBundle:[NSBundle mainBundle] withView:[ [UIView_Xcode4 alloc] init] ],
+                     [CompareAllViewController dictionaryForComparingNibName:@"ViewTemplates_Xcode5" inBundle:[NSBundle mainBundle] withView:[ [UIView_Xcode5 alloc] init] ],
+                     nil];
+
+    self.compareAllViewController = [ [CompareAllViewController alloc] initWithNibName:@"CompareAllView" bundle:[NSBundle mainBundle] compareList:test];
+    
+    self.window.rootViewController = self.compareAllViewController;
+    self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+-(void)compareExportViewControllerFinished
+{
+    exit(0);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C110F1F1807B61F00D5FF4E /* UIView_Xcode4.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C110F1E1807B61F00D5FF4E /* UIView_Xcode4.m */; };
+		3C110F321807BB7500D5FF4E /* UIView_Xcode5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C110F311807BB7500D5FF4E /* UIView_Xcode5.m */; };
+		3C110F551808244700D5FF4E /* ViewTemplates_Xcode4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C110F2B1807B84600D5FF4E /* ViewTemplates_Xcode4.xib */; };
+		3C110F561808244700D5FF4E /* ViewTemplates_Xcode5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C110F2C1807B84600D5FF4E /* ViewTemplates_Xcode5.xib */; };
+		3C110F591808254F00D5FF4E /* CompareExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C110F581808254F00D5FF4E /* CompareExportViewController.m */; };
+		3C110F5D1808264000D5FF4E /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C110F5C1808264000D5FF4E /* Icon.png */; };
+		3C110F5F1808265800D5FF4E /* ComparePromptView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C110F5E1808265800D5FF4E /* ComparePromptView.xib */; };
+		3C110F6218082A1200D5FF4E /* UIView+XibExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C110F6118082A1200D5FF4E /* UIView+XibExporter.m */; };
+		3C110F651808311A00D5FF4E /* CompareAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C110F641808311A00D5FF4E /* CompareAllViewController.m */; };
+		3C110F671808366300D5FF4E /* CompareAllView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C110F661808366300D5FF4E /* CompareAllView.xib */; };
 		3CEA72B217D1119300F419A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CEA72B117D1119300F419A3 /* Foundation.framework */; };
 		3CEA72B417D1119300F419A3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CEA72B317D1119300F419A3 /* CoreGraphics.framework */; };
 		3CEA72B617D1119300F419A3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CEA72B517D1119300F419A3 /* UIKit.framework */; };
@@ -32,6 +42,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3C110F1D1807B61F00D5FF4E /* UIView_Xcode4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIView_Xcode4.h; sourceTree = "<group>"; };
+		3C110F1E1807B61F00D5FF4E /* UIView_Xcode4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIView_Xcode4.m; sourceTree = "<group>"; };
+		3C110F2B1807B84600D5FF4E /* ViewTemplates_Xcode4.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewTemplates_Xcode4.xib; sourceTree = "<group>"; };
+		3C110F2C1807B84600D5FF4E /* ViewTemplates_Xcode5.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewTemplates_Xcode5.xib; sourceTree = "<group>"; };
+		3C110F301807BB7500D5FF4E /* UIView_Xcode5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIView_Xcode5.h; sourceTree = "<group>"; };
+		3C110F311807BB7500D5FF4E /* UIView_Xcode5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIView_Xcode5.m; sourceTree = "<group>"; };
+		3C110F571808254F00D5FF4E /* CompareExportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareExportViewController.h; sourceTree = "<group>"; };
+		3C110F581808254F00D5FF4E /* CompareExportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompareExportViewController.m; sourceTree = "<group>"; };
+		3C110F5C1808264000D5FF4E /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		3C110F5E1808265800D5FF4E /* ComparePromptView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComparePromptView.xib; sourceTree = "<group>"; };
+		3C110F6018082A1200D5FF4E /* UIView+XibExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XibExporter.h"; sourceTree = "<group>"; };
+		3C110F6118082A1200D5FF4E /* UIView+XibExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XibExporter.m"; sourceTree = "<group>"; };
+		3C110F631808311A00D5FF4E /* CompareAllViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareAllViewController.h; sourceTree = "<group>"; };
+		3C110F641808311A00D5FF4E /* CompareAllViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompareAllViewController.m; sourceTree = "<group>"; };
+		3C110F661808366300D5FF4E /* CompareAllView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompareAllView.xib; sourceTree = "<group>"; };
 		3CEA72AE17D1119300F419A3 /* XibExporterExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XibExporterExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CEA72B117D1119300F419A3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3CEA72B317D1119300F419A3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -48,6 +73,10 @@
 		3CEA72D217D1119300F419A3 /* XibExporterExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "XibExporterExampleTests-Info.plist"; sourceTree = "<group>"; };
 		3CEA72D417D1119300F419A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3CEA72D617D1119300F419A3 /* XibExporterExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XibExporterExampleTests.m; sourceTree = "<group>"; };
+		4517823F6D9449B68FB6B92C /* GeneratedViewTemplates_Xcode5.ofxGeneric.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GeneratedViewTemplates_Xcode5.ofxGeneric.h; path = src/GeneratedViews/GeneratedViewTemplates_Xcode5.ofxGeneric.h; sourceTree = "<group>"; };
+		507F9ADB2002A04FB51E8B10 /* GeneratedViewTemplates_Xcode4.ofxGeneric.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GeneratedViewTemplates_Xcode4.ofxGeneric.h; path = src/GeneratedViews/GeneratedViewTemplates_Xcode4.ofxGeneric.h; sourceTree = "<group>"; };
+		9B79291218832F2513338F68 /* GeneratedViewTemplates_Xcode5.UIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GeneratedViewTemplates_Xcode5.UIKit.h; path = src/GeneratedViews/GeneratedViewTemplates_Xcode5.UIKit.h; sourceTree = "<group>"; };
+		EE03F5180119BDC73E5364E0 /* GeneratedViewTemplates_Xcode4.UIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GeneratedViewTemplates_Xcode4.UIKit.h; path = src/GeneratedViews/GeneratedViewTemplates_Xcode4.UIKit.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,9 +103,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C110F201807B84600D5FF4E /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				3C110F5B1808264000D5FF4E /* Images */,
+				3C110F5A1808263800D5FF4E /* Xibs */,
+				3C110F2A1807B84600D5FF4E /* Xibs for Export */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		3C110F2A1807B84600D5FF4E /* Xibs for Export */ = {
+			isa = PBXGroup;
+			children = (
+				3C110F2B1807B84600D5FF4E /* ViewTemplates_Xcode4.xib */,
+				3C110F2C1807B84600D5FF4E /* ViewTemplates_Xcode5.xib */,
+			);
+			path = "Xibs for Export";
+			sourceTree = "<group>";
+		};
+		3C110F5A1808263800D5FF4E /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				3C110F5E1808265800D5FF4E /* ComparePromptView.xib */,
+				3C110F661808366300D5FF4E /* CompareAllView.xib */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
+		3C110F5B1808264000D5FF4E /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				3C110F5C1808264000D5FF4E /* Icon.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		3CDA1AA617F1CEF800A80DEF /* GeneratedViews */ = {
 			isa = PBXGroup;
 			children = (
+				EE03F5180119BDC73E5364E0 /* GeneratedViewTemplates_Xcode4.UIKit.h */,
+				507F9ADB2002A04FB51E8B10 /* GeneratedViewTemplates_Xcode4.ofxGeneric.h */,
+				9B79291218832F2513338F68 /* GeneratedViewTemplates_Xcode5.UIKit.h */,
+				4517823F6D9449B68FB6B92C /* GeneratedViewTemplates_Xcode5.ofxGeneric.h */,
 			);
 			name = GeneratedViews;
 			sourceTree = "<group>";
@@ -86,6 +155,7 @@
 			children = (
 				3CDA1AA617F1CEF800A80DEF /* GeneratedViews */,
 				3CEA72B717D1119300F419A3 /* XibExporterExample */,
+				3C110F201807B84600D5FF4E /* Assets */,
 				3CEA72D017D1119300F419A3 /* XibExporterExampleTests */,
 				3CEA72B017D1119300F419A3 /* Frameworks */,
 				3CEA72AF17D1119300F419A3 /* Products */,
@@ -119,6 +189,16 @@
 				3CEA72C117D1119300F419A3 /* AppDelegate.m */,
 				3CEA72C317D1119300F419A3 /* Images.xcassets */,
 				3CEA72B817D1119300F419A3 /* Supporting Files */,
+				3C110F1D1807B61F00D5FF4E /* UIView_Xcode4.h */,
+				3C110F1E1807B61F00D5FF4E /* UIView_Xcode4.m */,
+				3C110F301807BB7500D5FF4E /* UIView_Xcode5.h */,
+				3C110F311807BB7500D5FF4E /* UIView_Xcode5.m */,
+				3C110F571808254F00D5FF4E /* CompareExportViewController.h */,
+				3C110F581808254F00D5FF4E /* CompareExportViewController.m */,
+				3C110F6018082A1200D5FF4E /* UIView+XibExporter.h */,
+				3C110F6118082A1200D5FF4E /* UIView+XibExporter.m */,
+				3C110F631808311A00D5FF4E /* CompareAllViewController.h */,
+				3C110F641808311A00D5FF4E /* CompareAllViewController.m */,
 			);
 			path = XibExporterExample;
 			sourceTree = "<group>";
@@ -226,8 +306,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C110F551808244700D5FF4E /* ViewTemplates_Xcode4.xib in Resources */,
+				3C110F671808366300D5FF4E /* CompareAllView.xib in Resources */,
 				3CEA72BC17D1119300F419A3 /* InfoPlist.strings in Resources */,
+				3C110F5D1808264000D5FF4E /* Icon.png in Resources */,
 				3CEA72C417D1119300F419A3 /* Images.xcassets in Resources */,
+				3C110F5F1808265800D5FF4E /* ComparePromptView.xib in Resources */,
+				3C110F561808244700D5FF4E /* ViewTemplates_Xcode5.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,7 +332,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CEA72C217D1119300F419A3 /* AppDelegate.m in Sources */,
+				3C110F6218082A1200D5FF4E /* UIView+XibExporter.m in Sources */,
 				3CEA72BE17D1119300F419A3 /* main.m in Sources */,
+				3C110F321807BB7500D5FF4E /* UIView_Xcode5.m in Sources */,
+				3C110F651808311A00D5FF4E /* CompareAllViewController.m in Sources */,
+				3C110F1F1807B61F00D5FF4E /* UIView_Xcode4.m in Sources */,
+				3C110F591808254F00D5FF4E /* CompareExportViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
