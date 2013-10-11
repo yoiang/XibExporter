@@ -184,7 +184,7 @@
       "_super": "UILabel"
     },
     "UIColor": {
-      "_inlineConstructor": "ofColor( $red$, $green$, $blue$, $alpha$ )"
+      "_inlineConstructor": "ofColor( (int)( $red$ * 255 ), (int)( $green$ * 255 ), (int)( $blue$ * 255 ), (int)( $alpha$ * 255 ) )"
     },
     "UIEdgeInsets": {
       "_inlineConstructor": ""

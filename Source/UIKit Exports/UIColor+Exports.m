@@ -14,6 +14,12 @@
 
 - (NSMutableDictionary *)exportToDictionary
 {
+/*
+    // in testing it returned negative results
+    CGFloat red, green, blue, alpha;
+    [self getRed:&red green:&green blue:&blue alpha:&alpha];
+ */
+    
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict.className = @"UIColor";
     
@@ -23,7 +29,6 @@
     float b = 0.0f;
     float a = CGColorGetAlpha(self.CGColor);
     
-    //WTF BS black and gray cause this crapola
     if (CGColorGetNumberOfComponents( self.CGColor ) == 2)
     {
         r = g = b = colors[0];
@@ -35,12 +40,10 @@
         b = colors[2];
     }
     
-    //NSLog(@"R %f G %f B %f A %f",r,g,b,a);
-    
-    [dict setObject:[NSNumber numberWithInt:(int)(r*255)] forKey:@"red"];
-    [dict setObject:[NSNumber numberWithInt:(int)(g*255)] forKey:@"green"];
-    [dict setObject:[NSNumber numberWithInt:(int)(b*255)] forKey:@"blue"];
-    [dict setObject:[NSNumber numberWithInt:(int)(a*255)] forKey:@"alpha"];
+    [dict setObject:[NSNumber numberWithFloat:r] forKey:@"red"];
+    [dict setObject:[NSNumber numberWithFloat:g] forKey:@"green"];
+    [dict setObject:[NSNumber numberWithFloat:b] forKey:@"blue"];
+    [dict setObject:[NSNumber numberWithFloat:a] forKey:@"alpha"];
     return dict;
 }
 

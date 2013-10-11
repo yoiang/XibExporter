@@ -22,7 +22,7 @@ inline void populateGeneratedViewTemplates_Xcode5( ofPtr< ofxGenericView > rootV
 	rootView->setContentMode( ofxGenericContentModeScaleToFill );
 	rootView->setVisible( true );
 	rootView->setFrame( ofRectangle( 0.0f, 0.0f, 320.0f, 568.0f ) );
-	rootView->setBackgroundColor( ofColor( 255, 255, 255, 255 ) );
+	rootView->setBackgroundColor( ofColor( (int)( 1.0f * 255 ), (int)( 1.0f * 255 ), (int)( 1.0f * 255 ), (int)( 1.0f * 255 ) ) );
 	rootView->setAutoresizingMask( ofxGenericViewAutoresizingFlexibleWidth | ofxGenericViewAutoresizingFlexibleHeight );
 	rootView->setAlpha( 1.0f );
 	rootView->setClipSubviews( false );
@@ -32,10 +32,10 @@ inline void populateGeneratedViewTemplates_Xcode5( ofPtr< ofxGenericView > rootV
 	variableNameLabel->setVisible( true );
 	variableNameLabel->setFrame( ofRectangle( 20.0f, 20.0f, 280.0f, 21.0f ) );
 	variableNameLabel->setAlpha( 1.0f );
-	variableNameLabel->setTextColor( ofColor( 0, 0, 0, 255 ) );
+	variableNameLabel->setTextColor( ofColor( (int)( 0.0f * 255 ), (int)( 0.0f * 255 ), (int)( 0.0f * 255 ), (int)( 1.0f * 255 ) ) );
 	variableNameLabel->setText( ofxGLocalized( "LabelTextLocalizationKey", "Label" ) );
 	variableNameLabel->setFont( ".HelveticaNeueInterface-M3", variableNameLabel->getFontSize() );
-	variableNameLabel->setBackgroundColor( ofColor( 209, 255, 201, 255 ) );
+	variableNameLabel->setBackgroundColor( ofColor( (int)( 0.820136f * 255 ), (int)( 1.0f * 255 ), (int)( 0.788757f * 255 ), (int)( 1.0f * 255 ) ) );
 	variableNameLabel->setLineBreakMode( ofxGenericTextLinebreakModeTailTruncation );
 	variableNameLabel->setTextAlignment( ofxGenericTextHorizontalAlignmentCenter );
 	variableNameLabel->setFont( variableNameLabel->getFontName(), 17.0f );
@@ -49,7 +49,7 @@ inline void populateGeneratedViewTemplates_Xcode5( ofPtr< ofxGenericView > rootV
 	variableNameButton1->setVisible( true );
 	variableNameButton1->setFrame( ofRectangle( 124.0f, 49.0f, 73.0f, 29.0f ) );
 	variableNameButton1->setAlpha( 1.0f );
-	variableNameButton1->setDownTextColor( ofColor( 0, 122, 255, 255 ) );
+	variableNameButton1->setDownTextColor( ofColor( (int)( 0.0f * 255 ), (int)( 0.478431f * 255 ), (int)( 1.0f * 255 ), (int)( 1.0f * 255 ) ) );
 	variableNameButton1->setFont( ".HelveticaNeueInterface-M3", variableNameButton1->getFontSize() );
 	variableNameButton1->setText( ofxGLocalized( "ButtonTitleLocalizationKey", "Button" ) );
 	variableNameButton1->setNumberOfLines( 1 );
@@ -57,9 +57,9 @@ inline void populateGeneratedViewTemplates_Xcode5( ofPtr< ofxGenericView > rootV
 	variableNameButton1->setEnabled( true );
 	variableNameButton1->setDownBackgroundImage( "backgroundImageDown.png" );
 	variableNameButton1->setLineBreakMode( ofxGenericTextLinebreakModeMiddleTruncation );
-	variableNameButton1->setTextColor( ofColor( 0, 122, 255, 255 ) );
+	variableNameButton1->setTextColor( ofColor( (int)( 0.0f * 255 ), (int)( 0.478431f * 255 ), (int)( 1.0f * 255 ), (int)( 1.0f * 255 ) ) );
 	variableNameButton1->setTextAlignment( ofxGenericTextHorizontalAlignmentLeft );
-	variableNameButton1->setBackgroundColor( ofColor( 246, 188, 255, 255 ) );
+	variableNameButton1->setBackgroundColor( ofColor( (int)( 0.964942f * 255 ), (int)( 0.739116f * 255 ), (int)( 1.0f * 255 ), (int)( 1.0f * 255 ) ) );
 	variableNameButton1->setDelegate( dynamic_pointer_cast< ofxGenericButtonViewDelegate >( rootView ) );
 	variableNameButton1->setContentMode( ofxGenericContentModeScaleToFill );
 	variableNameButton1->setClipSubviews( false );
@@ -70,7 +70,7 @@ inline void populateGeneratedViewTemplates_Xcode5( ofPtr< ofxGenericView > rootV
 	variableNameButton2->setVisible( true );
 	variableNameButton2->setFrame( ofRectangle( 124.0f, 85.0f, 73.0f, 62.0f ) );
 	variableNameButton2->setAlpha( 1.0f );
-	variableNameButton2->setDownTextColor( ofColor( 0, 122, 255, 255 ) );
+	variableNameButton2->setDownTextColor( ofColor( (int)( 0.0f * 255 ), (int)( 0.478431f * 255 ), (int)( 1.0f * 255 ), (int)( 1.0f * 255 ) ) );
 	variableNameButton2->setFont( ".HelveticaNeueInterface-M3", variableNameButton2->getFontSize() );
 	variableNameButton2->setText( ofxGLocalized( "ButtonTitleLocalizationKey", "Button with Image" ) );
 	variableNameButton2->setNumberOfLines( 1 );
@@ -79,9 +79,9 @@ inline void populateGeneratedViewTemplates_Xcode5( ofPtr< ofxGenericView > rootV
 	variableNameButton2->setEnabled( true );
 	variableNameButton2->setDownBackgroundImage( "backgroundImageDown.png" );
 	variableNameButton2->setLineBreakMode( ofxGenericTextLinebreakModeMiddleTruncation );
-	variableNameButton2->setTextColor( ofColor( 0, 122, 255, 255 ) );
+	variableNameButton2->setTextColor( ofColor( (int)( 0.0f * 255 ), (int)( 0.478431f * 255 ), (int)( 1.0f * 255 ), (int)( 1.0f * 255 ) ) );
 	variableNameButton2->setTextAlignment( ofxGenericTextHorizontalAlignmentLeft );
-	variableNameButton2->setBackgroundColor( ofColor( 251, 255, 190, 255 ) );
+	variableNameButton2->setBackgroundColor( ofColor( (int)( 0.988132f * 255 ), (int)( 1.0f * 255 ), (int)( 0.745925f * 255 ), (int)( 1.0f * 255 ) ) );
 	variableNameButton2->setDelegate( dynamic_pointer_cast< ofxGenericButtonViewDelegate >( rootView ) );
 	variableNameButton2->setContentMode( ofxGenericContentModeScaleToFill );
 	variableNameButton2->setClipSubviews( false );
@@ -92,7 +92,7 @@ inline void populateGeneratedViewTemplates_Xcode5( ofPtr< ofxGenericView > rootV
 	variableNameImage->setClipSubviews( false );
 	variableNameImage->setVisible( true );
 	variableNameImage->setFrame( ofRectangle( 96.0f, 155.0f, 128.0f, 128.0f ) );
-	variableNameImage->setBackgroundColor( ofColor( 0, 0, 0, 0 ) );
+	variableNameImage->setBackgroundColor( ofColor( (int)( 0.0f * 255 ), (int)( 0.0f * 255 ), (int)( 0.0f * 255 ), (int)( 0.0f * 255 ) ) );
 	variableNameImage->setImage( "Icon.png" );
 	variableNameImage->setContentMode( ofxGenericContentModeScaleToFill );
 	variableNameImage->setAutoresizingMask( ofxGenericViewAutoresizingRightMargin | ofxGenericViewAutoresizingBottomMargin );
@@ -103,7 +103,7 @@ inline void populateGeneratedViewTemplates_Xcode5( ofPtr< ofxGenericView > rootV
 	variableNameView->setContentMode( ofxGenericContentModeScaleToFill );
 	variableNameView->setVisible( true );
 	variableNameView->setFrame( ofRectangle( 20.0f, 291.0f, 280.0f, 72.0f ) );
-	variableNameView->setBackgroundColor( ofColor( 216, 204, 255, 255 ) );
+	variableNameView->setBackgroundColor( ofColor( (int)( 0.850851f * 255 ), (int)( 0.802459f * 255 ), (int)( 1.0f * 255 ), (int)( 1.0f * 255 ) ) );
 	variableNameView->setAutoresizingMask( ofxGenericViewAutoresizingRightMargin | ofxGenericViewAutoresizingBottomMargin );
 	variableNameView->setAlpha( 1.0f );
 	variableNameView->setClipSubviews( false );
@@ -113,10 +113,10 @@ inline void populateGeneratedViewTemplates_Xcode5( ofPtr< ofxGenericView > rootV
 	variableNameLabel2->setVisible( true );
 	variableNameLabel2->setFrame( ofRectangle( 0.0f, 26.0f, 280.0f, 21.0f ) );
 	variableNameLabel2->setAlpha( 1.0f );
-	variableNameLabel2->setTextColor( ofColor( 0, 0, 0, 255 ) );
+	variableNameLabel2->setTextColor( ofColor( (int)( 0.0f * 255 ), (int)( 0.0f * 255 ), (int)( 0.0f * 255 ), (int)( 1.0f * 255 ) ) );
 	variableNameLabel2->setText( ofxGLocalized( "LabelTextLocalizationKey", "Label within View" ) );
 	variableNameLabel2->setFont( ".HelveticaNeueInterface-M3", variableNameLabel2->getFontSize() );
-	variableNameLabel2->setBackgroundColor( ofColor( 209, 255, 201, 255 ) );
+	variableNameLabel2->setBackgroundColor( ofColor( (int)( 0.820136f * 255 ), (int)( 1.0f * 255 ), (int)( 0.788757f * 255 ), (int)( 1.0f * 255 ) ) );
 	variableNameLabel2->setLineBreakMode( ofxGenericTextLinebreakModeTailTruncation );
 	variableNameLabel2->setTextAlignment( ofxGenericTextHorizontalAlignmentCenter );
 	variableNameLabel2->setFont( variableNameLabel2->getFontName(), 17.0f );
@@ -131,7 +131,7 @@ inline void populateGeneratedViewTemplates_Xcode5( ofPtr< ofxGenericView > rootV
 	genericUIView0->setContentMode( ofxGenericContentModeScaleToFill );
 	genericUIView0->setVisible( true );
 	genericUIView0->setFrame( ofRectangle( 20.0f, 371.0f, 280.0f, 54.0f ) );
-	genericUIView0->setBackgroundColor( ofColor( 255, 229, 179, 255 ) );
+	genericUIView0->setBackgroundColor( ofColor( (int)( 1.0f * 255 ), (int)( 0.901406f * 255 ), (int)( 0.702651f * 255 ), (int)( 1.0f * 255 ) ) );
 	genericUIView0->setAutoresizingMask( ofxGenericViewAutoresizingRightMargin | ofxGenericViewAutoresizingBottomMargin );
 	genericUIView0->setAlpha( 1.0f );
 	genericUIView0->setClipSubviews( false );
