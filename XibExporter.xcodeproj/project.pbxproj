@@ -15,6 +15,7 @@
 		3C10DC8F17E2CE4300162DBC /* XibResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC8E17E2CE4300162DBC /* XibResources.m */; };
 		3C10DC9217E2DD9F00162DBC /* ViewGraphData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9117E2DD9F00162DBC /* ViewGraphData.m */; };
 		3C10DC9B17E7FD0E00162DBC /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10DC9A17E7FD0E00162DBC /* AppSettings.m */; };
+		3C110F1C1806E1EC00D5FF4E /* NSString+Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C110F1B1806E1EC00D5FF4E /* NSString+Path.m */; };
 		3C25012E17F84E830001C0EF /* CXMLElement+UIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C25012D17F84E830001C0EF /* CXMLElement+UIButton.m */; };
 		3C25013117F853FC0001C0EF /* CXMLElement+UIImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C25013017F853FC0001C0EF /* CXMLElement+UIImageView.m */; };
 		3C25013A17F96E0D0001C0EF /* NSDictionary+ClassDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C25013917F96E0D0001C0EF /* NSDictionary+ClassDefinition.m */; };
@@ -117,6 +118,8 @@
 		3C10DC9117E2DD9F00162DBC /* ViewGraphData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGraphData.m; sourceTree = "<group>"; };
 		3C10DC9917E7FD0E00162DBC /* AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSettings.h; sourceTree = "<group>"; };
 		3C10DC9A17E7FD0E00162DBC /* AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSettings.m; sourceTree = "<group>"; };
+		3C110F1A1806E1EC00D5FF4E /* NSString+Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Path.h"; sourceTree = "<group>"; };
+		3C110F1B1806E1EC00D5FF4E /* NSString+Path.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Path.m"; sourceTree = "<group>"; };
 		3C25012C17F84E830001C0EF /* CXMLElement+UIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CXMLElement+UIButton.h"; sourceTree = "<group>"; };
 		3C25012D17F84E830001C0EF /* CXMLElement+UIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CXMLElement+UIButton.m"; sourceTree = "<group>"; };
 		3C25012F17F853FC0001C0EF /* CXMLElement+UIImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CXMLElement+UIImageView.h"; sourceTree = "<group>"; };
@@ -466,6 +469,8 @@
 				3C25014217F983DA0001C0EF /* NSDictionary+Path.m */,
 				3C0C530117FE81FB0057BE15 /* NSMutableString+Parsing.h */,
 				3C0C530217FE81FB0057BE15 /* NSMutableString+Parsing.m */,
+				3C110F1A1806E1EC00D5FF4E /* NSString+Path.h */,
+				3C110F1B1806E1EC00D5FF4E /* NSString+Path.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -801,6 +806,7 @@
 				3CDA1A9B17F141F700A80DEF /* ViewExporter.m in Sources */,
 				3C25014317F983DA0001C0EF /* NSDictionary+Path.m in Sources */,
 				3C96F3CD17D0F4D5000FC446 /* UIView+Exports.m in Sources */,
+				3C110F1C1806E1EC00D5FF4E /* NSString+Path.m in Sources */,
 				3C96F3D117D0F4D5000FC446 /* CXMLElement+Xib.m in Sources */,
 				3CEA729B17D1093E00F419A3 /* SBJsonStreamWriterState.m in Sources */,
 				3CEA729317D1093E00F419A3 /* NSObject+SBJson.m in Sources */,
