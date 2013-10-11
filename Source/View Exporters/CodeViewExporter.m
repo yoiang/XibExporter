@@ -262,7 +262,7 @@ static NSMutableDictionary* instanceCounts = nil;
         {
             if ( [instanceDefinition isOutlet] )
             {
-                constructor = [NSString stringWithFormat:@"%@ = %@",[self.map variableReference:[instanceDefinition instanceName] ], [self codeForClassConstructor:class instanceDefinition:instanceDefinition properties:properties isInline:YES] ];
+                constructor = [NSString stringWithFormat:@"%@ = %@",[self.map variableReferenceForInstanceDefinitionUsage:instanceDefinition], [self codeForClassConstructor:class instanceDefinition:instanceDefinition properties:properties isInline:YES] ];
             }
             else
             {
@@ -336,7 +336,8 @@ static NSMutableDictionary* instanceCounts = nil;
         line = @"";
     }
     
-    NSString* output = [line stringByReplacingOccurrencesOfString:@"$instanceName$" withString:[self.map variableReference:[instanceDefinition instanceName] ] ];
+    NSString* instanceReference = [self.map variableReferenceForInstanceDefinitionUsage:instanceDefinition];
+    NSString* output = [line stringByReplacingOccurrencesOfString:@"$instanceName$" withString:instanceReference];
     output = [self replace:output stringBetweenOccurencesOf:@"$" withStringRepresentationFromInstance:instanceDefinition properties:properties];
 
     NSRange foundMarker = [output rangeOfString:@"$" options:NSLiteralSearch];
@@ -404,7 +405,7 @@ static NSMutableDictionary* instanceCounts = nil;
             instanceDefinition.instanceName = [NSString stringWithFormat:@"generic%@%@", className, [self getInstanceCount:className] ];
         }
         
-        if ( [instanceDefinition isOutlet] )
+        if ( [instanceDefinition isOutlet] && ![instanceDefinition isRootView] )
         {
             [[properties objectForKey:@"outlets"] addObject:instanceDefinition];
         }
@@ -442,7 +443,9 @@ static NSMutableDictionary* instanceCounts = nil;
             {
                 [code appendString:[subviewCode objectForKey:@"code"]];
                 
-                NSString* addSubviewStatement = [classDefinition asAddSubViewWithInstanceName:[self.map variableReference:[instanceDefinition instanceName] ] andSubviewInstanceName:[self.map variableReference:[subviewCode objectForKey:@"instanceName"] ] ];
+                NSString* instanceReference = [self.map variableReferenceForInstanceDefinitionUsage:instanceDefinition];
+                NSString* subviewInstanceReference = [self.map variableReferenceForInstanceDefinitionUsage:subViewDefinition];
+                NSString* addSubviewStatement = [classDefinition asAddSubViewWithInstanceName:instanceReference andSubviewInstanceName:subviewInstanceReference];
                 [self appendToCode:code statement:addSubviewStatement tabbed:YES];
             }
         }

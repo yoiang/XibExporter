@@ -37,9 +37,13 @@ static int viewId = 0;
         [dict setObject:[NSNumber numberWithInt:parentViewId] forKey:@"superview"];
     }
     
-    if ( self.Outlet )
+    if (self.Outlet)
     {
         dict.instanceName = self.Outlet;
+        dict.isOutlet = YES;
+    } else if (!self.superview)
+    {
+        dict.instanceName = @"rootView";
         dict.isOutlet = YES;
     } else
     {
