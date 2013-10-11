@@ -16,6 +16,9 @@
 // returns a string path to the generated folder, defined relative in plist // TODO: move to configuration
 +(NSString*)getFolderForExports;
 
+// returns a string path to the folder the Xcode project file is located in
++ (NSString *)getPathToAddExportsToProjectFile;
+
 // returns a string path to the Xcode project file, defined relative in plist // TODO: move to configuration
 +(NSString*)getAddExportsToProjectFile;
 

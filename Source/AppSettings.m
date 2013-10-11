@@ -32,8 +32,15 @@
     return [ [self getExportSettingsDictionary] stringForKey:@"Folder for Exports"];
 }
 
++ (NSString *)getPathToAddExportsToProjectFile
+{
+    // TODO: check if we were given an xcproj or what
+    return [ [ [self getAddExportsToProjectFile] stringByDeletingLastPathComponent] stringByDeletingLastPathComponent];
+}
+
 + (NSString *) getAddExportsToProjectFile
 {
+    // TODO: check if we were given an xcproj or what
     return [ [self getExportSettingsDictionary] stringForKey:@"Add Exports To Project" ];
 }
 
