@@ -63,7 +63,7 @@
 		<key>Process Only Xibs</key>
 		<array/>
 		<key>Process Xibs in Folder</key>
-		<string>${SRCROOT}/Example/XibExporterExample/Assets/Xibs for Export/</string>
+		<string>${SRCROOT}/Example/XibExporterExample/Assets/XibsForExport/</string>
 		<key>Skip Xibs</key>
 		<array>
 			<string>MainWindow</string>

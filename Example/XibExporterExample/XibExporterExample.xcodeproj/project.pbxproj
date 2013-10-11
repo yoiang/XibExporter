@@ -108,18 +108,18 @@
 			children = (
 				3C110F5B1808264000D5FF4E /* Images */,
 				3C110F5A1808263800D5FF4E /* Xibs */,
-				3C110F2A1807B84600D5FF4E /* Xibs for Export */,
+				3C110F2A1807B84600D5FF4E /* XibsForExport */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		3C110F2A1807B84600D5FF4E /* Xibs for Export */ = {
+		3C110F2A1807B84600D5FF4E /* XibsForExport */ = {
 			isa = PBXGroup;
 			children = (
 				3C110F2B1807B84600D5FF4E /* ViewTemplates_Xcode4.xib */,
 				3C110F2C1807B84600D5FF4E /* ViewTemplates_Xcode5.xib */,
 			);
-			path = "Xibs for Export";
+			path = XibsForExport;
 			sourceTree = "<group>";
 		};
 		3C110F5A1808263800D5FF4E /* Xibs */ = {
