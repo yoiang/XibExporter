@@ -28,6 +28,8 @@
 @property (nonatomic, readonly) NSDictionary* asIsStringKeys;
 
 -(NSString*)variableReference:(NSString*)name;
+-(NSString*)localVariableReference:(NSString*)name;
+-(NSString*)variableReferenceForInstanceDefinitionUsage:(NSDictionary*)instanceDefinition;
 
 -(NSString*)staticStringDefinition:(NSString*)contents;
 

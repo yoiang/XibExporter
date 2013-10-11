@@ -11,6 +11,7 @@
 #import "SBJson.h"
 
 #import "NSMutableDictionary+ClassDefinition.h"
+#import "NSMutableDictionary+InstanceDefinition.h"
 
 @interface CodeMap()
 
@@ -165,6 +166,30 @@
         variableReference = @"$instanceName$";
     }
     return [variableReference stringByReplacingOccurrencesOfString:@"$instanceName$" withString:name];
+}
+
+-(NSString*)localVariableReference:(NSString*)name;
+{
+    NSString* localVariableReference = [self.data objectForKey:@"_localVariableReference"];
+    if ( [localVariableReference length] == 0)
+    {
+        localVariableReference = @"$instanceName$";
+    }
+    return [localVariableReference stringByReplacingOccurrencesOfString:@"$instanceName$" withString:name];
+}
+
+-(NSString*)variableReferenceForInstanceDefinitionUsage:(NSDictionary*)instanceDefinition
+{
+    NSString* result = nil;
+    if ( [instanceDefinition isOutlet] )
+    {
+        result = [self variableReference:[instanceDefinition instanceName] ];
+    } else
+    {
+        result = [self localVariableReference:[instanceDefinition instanceName] ];
+    }
+    
+    return result;
 }
 
 -(NSString*)staticStringDefinition:(NSString*)contents

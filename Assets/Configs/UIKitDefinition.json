@@ -193,6 +193,7 @@
   },
   "_functionDefinitionFileName": "UIKitDefinition.h",
   "_variableReference": "(*$instanceName$)",
+  "_localVariableReference": "$instanceName$",
   "_staticStringDefinition": "@\"$\"",
   "_ignoredClasses": {
     "_UITableViewSeparatorView": true
