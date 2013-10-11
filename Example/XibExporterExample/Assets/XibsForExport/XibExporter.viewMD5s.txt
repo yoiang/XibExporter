@@ -1,0 +1,2 @@
+ViewTemplates_Xcode4=84af70945f956b445e3d83fc3394c3b5
+ViewTemplates_Xcode5=36e71ce1e69ef36da767d547df587fa2
