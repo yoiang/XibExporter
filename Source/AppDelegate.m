@@ -227,7 +227,7 @@
         }
         
         // TODO: renamed to clarify that this forces export over Unchanged files, not over Only Process and Skip
-        if ( !remove && ![AppSettings ForceProcessUnchangedXibs] )
+        if ( !remove )
         {
             NSString* xibFileNamePath = [NSString stringWithFormat:@"%@/%@.xib", [AppSettings getFolderContainingXibsToProcess], nibFileName];
             NSString* md5 = [NSData stringMD5OfContentsOfFile:xibFileNamePath];
@@ -235,7 +235,7 @@
             {
                 [self.xibUpdateStatus updateXib:nibFileName withMD5:md5];
             
-                if ( ![self.xibUpdateStatus hasXibChanged:nibFileName] )
+                if ( ![self.xibUpdateStatus hasXibChanged:nibFileName] && ![AppSettings ForceProcessUnchangedXibs] )
                 {
                     NSLog(@"Skipping unchanged Xib %@", nibFileName);
                     remove = YES;
