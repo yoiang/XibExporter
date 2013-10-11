@@ -13,6 +13,8 @@
 #import "NSArray+NSString.h"
 #import "NSMutableString+Parsing.h"
 
+#import "NSString+Path.h"
+
 const int HEX_LENGTH = 24;
 
 @implementation XcodeProjectHelper
@@ -57,11 +59,14 @@ const int HEX_LENGTH = 24;
     return lastKnownFileType;
 }
 
-+( NSString* )createXcodeProjectPBXBuildFileString:( NSString* )fileName id:( NSString* )hexId
++( NSString* )createXcodeProjectPBXBuildFileString:( NSString* )fileName id:( NSString* )hexId atPath:(NSString*)path
 {
     NSString* lastKnownFileType = [ XcodeProjectHelper createLastKnownFileTypeForFileName:fileName ];
     
-    return [ NSString stringWithFormat:@"\t\t%@ /* %@ */ = {isa = PBXFileReference;%@ path = %@; sourceTree = \"<group>\"; };", hexId, fileName, lastKnownFileType, fileName ];
+    NSString* relativePath = [NSString stringWithPath:path relativeTo:[AppSettings getPathToAddExportsToProjectFile] ];
+    NSString* relativeFileNamePath = [NSString stringWithFormat:@"%@/%@", relativePath, fileName];
+    
+    return [ NSString stringWithFormat:@"\t\t%@ /* %@ */ = {isa = PBXFileReference;%@ name = %@; path = %@; sourceTree = \"<group>\"; };", hexId, fileName, lastKnownFileType, fileName, relativeFileNamePath ];
 }
 
 +( NSString* )createXcodeProjectGroupFileString:( NSString* )fileName id:( NSString* )hexId
@@ -130,7 +135,7 @@ const int HEX_LENGTH = 24;
                 hex = [XcodeProjectHelper generateRandomHexID];
             }
             
-            [insertIntoPBXBuildFileSection appendString:[XcodeProjectHelper createXcodeProjectPBXBuildFileString:fileName id:hex ] withNonEmptySeparator:@"\n"];
+            [insertIntoPBXBuildFileSection appendString:[XcodeProjectHelper createXcodeProjectPBXBuildFileString:fileName id:hex atPath:[AppSettings getFolderForExports] ] withNonEmptySeparator:@"\n"];
             [insertIntoGroupFileSection appendString:[XcodeProjectHelper createXcodeProjectGroupFileString:fileName id:hex] withNonEmptySeparator:@"\n"];
             [addedIds addObject:hex];
         }
