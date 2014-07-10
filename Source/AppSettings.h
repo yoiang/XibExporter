@@ -10,6 +10,9 @@
 
 @interface AppSettings : NSObject
 
+// returns a string path to the location of the OSX Application Support folder, used for storing config files so we can get at them outside of the Simulator easily
++(NSString*)getOSXApplicationSupportPath;
+
 // returns a string path to the folder where we can find our valid nib files
 +(NSString*)getFolderContainingNibsToProcess;
 

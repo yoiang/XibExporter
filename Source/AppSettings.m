@@ -12,6 +12,25 @@
 
 @implementation AppSettings
 
++(NSString*)getOSXApplicationSupportPath
+{
+    // total hacktastic and could break when Apple moves this folder
+    NSError* error = nil;
+    
+    NSURL* directory = [ [NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory
+                                                               inDomain:NSUserDomainMask
+                                                      appropriateForURL:nil
+                                                                 create:YES
+                                                                  error:&error];
+    directory = [directory URLByDeletingLastPathComponent];
+    while ( ![ [directory lastPathComponent] isEqualToString:@"Application Support" ] && [ [directory path] length] > [@"Application Support" length] )
+    {
+        directory = [directory URLByDeletingLastPathComponent];
+    }
+    
+    return [directory path];
+}
+
 +(NSString*)getFolderContainingNibsToProcess
 {
     return [ [NSBundle mainBundle] bundlePath];
